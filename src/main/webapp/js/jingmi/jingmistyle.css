@@ -1,4 +1,6 @@
-﻿﻿/*
+﻿﻿
+
+/*
 	Theme Name: 静觅
 	Theme URL: http://cuiqingcai.com
 	Description: 静觅主题
@@ -1969,8 +1971,6 @@
     content: "\f1e2"
 }
 
-
-
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
     display: block
 }
@@ -2178,7 +2178,6 @@ ul.inline > li, ol.inline > li {
     padding-left: 5px;
     padding-right: 5px
 }
-
 
 code, pre {
     padding: 0 3px 2px;
@@ -4763,7 +4762,6 @@ a.label-inverse:hover .label-arrow, a.badge-inverse:hover .label-arrow {
     text-align: center;
 }
 
-
 .article-content {
     font-size: 15px;
     line-height: 26px;
@@ -4772,7 +4770,6 @@ a.label-inverse:hover .label-arrow, a.badge-inverse:hover .label-arrow {
     position: relative;
     background-color: #fff
 }
-
 
 .article-content h2 {
     font-size: 17px;
@@ -4960,39 +4957,39 @@ a.label-inverse:hover .label-arrow, a.badge-inverse:hover .label-arrow {
 }
 
 /*.article-content blockquote {*/
-    /*margin: 15px auto;*/
-    /*border: 1px solid #d6e9c6;*/
-    /*border-left-width: 3px;*/
-    /*padding: 5px 15px 10px;*/
-    /*background-color: #fafcf9;*/
-    /*font-size: 14px*/
+/*margin: 15px auto;*/
+/*border: 1px solid #d6e9c6;*/
+/*border-left-width: 3px;*/
+/*padding: 5px 15px 10px;*/
+/*background-color: #fafcf9;*/
+/*font-size: 14px*/
 /*}*/
 
 /*.article-content blockquote:before {*/
-    /*position: absolute;*/
-    /*left: 0;*/
-    /*padding-left: 36px;*/
-    /*display: inline-block;*/
-    /*font-family: FontAwesome;*/
-    /*font-style: normal;*/
-    /*font-weight: normal;*/
-    /*line-height: 1;*/
-    /*-webkit-font-smoothing: antialiased;*/
-    /*color: #c4c4c4;*/
-    /*text-indent: 0;*/
-    /*margin-top: 10px;*/
-    /*content: "\f10d"*/
+/*position: absolute;*/
+/*left: 0;*/
+/*padding-left: 36px;*/
+/*display: inline-block;*/
+/*font-family: FontAwesome;*/
+/*font-style: normal;*/
+/*font-weight: normal;*/
+/*line-height: 1;*/
+/*-webkit-font-smoothing: antialiased;*/
+/*color: #c4c4c4;*/
+/*text-indent: 0;*/
+/*margin-top: 10px;*/
+/*content: "\f10d"*/
 /*}*/
 
 /*.article-content blockquote p {*/
-    /*margin: 6px 0 5px 0;*/
-    /*padding: 0;*/
-    /*font-size: 14px*/
+/*margin: 6px 0 5px 0;*/
+/*padding: 0;*/
+/*font-size: 14px*/
 /*}*/
 
 /*.article-content blockquote li {*/
-    /*margin-bottom: 5px;*/
-    /*line-height: 25px*/
+/*margin-bottom: 5px;*/
+/*line-height: 25px*/
 /*}*/
 
 .article-navv {
@@ -5364,6 +5361,7 @@ a.label-inverse:hover .label-arrow, a.badge-inverse:hover .label-arrow {
 .widget_calendar {
     overflow: hidden
 }
+
 .article-nav {
     border-top: 1px solid #f2f2f2;
     background-color: #fbfbfb;
@@ -7552,4 +7550,19 @@ span .action-popover .popover-content .bds_more {
 
 .content #qrcodes .row {
     overflow: hidden;
+}
+.zhifubao{
+    margin:0px 700px 0px 170px;
+}
+.wechat{
+    margin: -318px 0px 0px 500px;
+}
+@media (max-width: 500px) {
+    .zhifubao {
+        margin: 0;
+    }
+
+    .wechat {
+        margin: 0;
+    }
 }

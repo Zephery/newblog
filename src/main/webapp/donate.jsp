@@ -68,15 +68,15 @@
                 <h2 style="line-height: 30px;text-align: center;margin: auto">
                     如果您喜欢我的文章，感觉我的文章对您有帮助，不妨动动您的金手指给予小额赞助，予人玫瑰，手有余香，不胜感激。</h2>
                 <p></p>
-                <div>
-                    <div style="margin:0px 700px 0px 170px">
+                <div class="donate">
+                    <div class="zhifubao">
                         <h3 style="text-align: center;">手机支付宝扫一扫</h3>
                         <img class="alignnone size-full wp-image-1100"
                              src="http://ohlrxdl4p.bkt.clouddn.com/zhifubao.jpg"
                              alt="1424922459123" width="270px" height="270px"
                              style="width: 270px;">
                     </div>
-                    <div style="margin: -318px 0px 0px 500px;">
+                    <div class="wechat">
                         <h3 style="text-align: center;">使用微信扫一扫</h3>
                         <img class="alignnone size-full wp-image-1100" src="http://ohlrxdl4p.bkt.clouddn.com/weixin.png"
                              alt="1424922459123" width="270px" height="270px"
