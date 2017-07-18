@@ -1,0 +1,795 @@
+/*
+ * Jquery Chroma Gallery
+ * author: casulworks
+ * Licensed under the MIT license
+ * Credits for easing classes: http://matthewlein.com/ceaser/
+ * Credits for jello animation: https://daneden.github.io/animate.css/;	
+ */
+
+@font-face {
+	font-family: 'chroma-ui';
+	src:url('../fonts/chroma-ui/chroma-ui.eot?-etc1qp');
+	src:url('../fonts/chroma-ui/chroma-ui.eot?#iefix-etc1qp') format('embedded-opentype'),
+		url('../fonts/chroma-ui/chroma-ui.ttf?-etc1qp') format('truetype'),
+		url('../fonts/chroma-ui/chroma-ui.woff?-etc1qp') format('woff'),
+		url('../fonts/chroma-ui/chroma-ui.svg?-etc1qp#chroma-ui') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="chrgi-"], [class*=" chrgi-"] {
+	font-family: 'chroma-ui';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.chrgi-download:before {
+	content: "\e069";
+}
+.chrgi-image:before {
+	content: "\e010";
+}
+.chrgi-zoom-in:before {
+	content: "\e037";
+}
+.chrgi-zoom-out:before {
+	content: "\e038";
+}
+.chrgi-return:before {
+	content: "\e039";
+}
+.chrgi-play:before {
+	content: "\e052";
+}
+.chrgi-pause:before {
+	content: "\e053";
+}
+.chrgi-repeat:before {
+	content: "\e058";
+}
+.chrgi-maximize:before {
+	content: "\e112";
+}
+.chrgi-minimize:before {
+	content: "\e113";
+}
+.chrgi-close:before {
+	content: "\e117";
+}
+.chrgi-open:before {
+	content: "\e128";
+}
+.chrgi-ellipsis:before {
+	content: "\e129";
+}
+.chrgi-next:before {
+	content: "\e600";
+}
+.chrgi-previous:before {
+	content: "\e601";
+}
+
+ /*=============================================
+	DEFAULT SETTINGS
+ ===============================================*/
+
+*:fullscreen
+*:-ms-fullscreen,
+*:-webkit-full-screen,
+*:-moz-full-screen {
+   overflow-y: hidden !important;
+}
+
+.chroma-gallery *, .chroma-screen *
+{
+	border: none;
+	padding: none;
+	outline: none;
+	margin: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.chrg-no-select 
+{
+	-webkit-tap-highlight-color:transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+ /*=============================================
+	CHROMA SCREEN
+ ===============================================*/
+
+.chroma-screen
+{
+	width: 100%;
+	height: 100%; 
+	display: none;
+	top:0;
+	left:0;
+	position: fixed;
+	touch-action:none;
+	z-index: 9999;
+	overflow: hidden;
+}
+
+.chrg-dof-body
+{
+	-webkit-filter: blur(0px);
+	-moz-filter: blur(0px);
+	-o-filter: blur(0px);
+	filter: blur(0px);
+	-webkit-transition: -webkit-filter 0.5s ease-in-out;
+	-moz-transition: -moz-filter 0.5s ease-in-out;
+	-o-transition: -o-filter 0.5s ease-in-out;
+	transition: filter 0.5s ease-in-out;
+}
+
+.chrg-dof-effect
+{
+	-webkit-filter: blur(10px);
+	-moz-filter: blur(10px);
+	-o-filter: blur(10px);
+	filter: blur(10px);	
+}
+
+.chroma-screen .chrg-bg, .chroma-screen .chrg-wrap, .chroma-screen .chrg-content
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.chroma-screen .chrg-bg
+{
+	opacity:0;
+	-webkit-transition: opacity .350s ease-in-out;
+	-moz-transition: opacity .350s ease-in-out;
+	-ms-transition: opacity .350s ease-in-out;
+	-o-transition: opacity .350s ease-in-out;
+	transition: opacity .350s ease-in-out;	
+	background-color: rgb(0,0,0);
+	will-change:opacity;
+	touch-action:none;
+}
+
+.chroma-screen .chrg-ui
+{
+	width: 100%;
+	position: absolute;
+	top:0;
+	left:0;
+	height: 40px;
+	opacity:0;
+	-webkit-transition: opacity .350s ease-in-out;
+	-moz-transition: opacity .350s ease-in-out;
+	-ms-transition: opacity .350s ease-in-out;
+	-o-transition: opacity .350s ease-in-out;
+	transition: opacity .350s ease-in-out;
+	background: -moz-linear-gradient(top,  rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+	will-change:opacity;
+	z-index: 2;
+}
+.chroma-screen .chrg-ui button
+{
+	width: 38px;
+	height: 38px;
+	float:right;
+	position: relative;
+	-webkit-border-radius:100%;
+	-moz-border-radius:100%;
+	-ms-border-radius:100%; 
+	-o-border-radius:100%;  
+	border-radius:100%;
+	display: block;
+	cursor: pointer;
+	color: rgba(255,255,255,0.7);
+	background-color: rgba(0,0,0,0);
+	text-align: center;
+	-webkit-transition: all 0.25s ease-in-out;
+	-moz-transition: all 0.25s ease-in-out;
+	-ms-transition: all 0.25s ease-in-out;
+	-o-transition: all 0.25s ease-in-out;
+	transition: all 0.25s ease-in-out;
+	text-shadow:0px 3px 4px rgba(0,0,0,0.4);
+	font-size:1.2em;
+	will-change:background-color;
+}
+
+.chroma-screen .chrg-ui button:hover
+{
+	-webkit-box-shadow: 0px 3px 8px 0px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0px 3px 8px 0px rgba(0,0,0,0.3);
+	box-shadow: 0px 3px 8px 0px rgba(0,0,0,0.3);
+	background: rgba(0,0,0,0.35);
+	color: rgba(255,255,255,1);
+}
+
+.chroma-screen .chrg-imgwrap
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	-webkit-transform-origin: 0 0;
+	-mos-transform-origin: 0 0;
+	-ms-transform-origin: 0 0;
+	-o-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-backface-visibility:hidden;
+	backface-visibility: hidden;
+	will-change:transform,-webkit-transform,-moz-transform,-ms-transform,-o-transform;
+	z-index: 1;
+}
+
+.chroma-screen .chrg-imgwrap img
+{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: block;
+	/*-webkit-box-shadow:0px 0px 13px 0px rgba(0,0,0,0.4);
+	-moz-box-shadow:0px 0px 13px 0px rgba(0,0,0,0.4);
+	box-shadow: 0px 0px 13px 0px rgba(0,0,0,0.4);*/
+	top: 0;
+	left: 0;
+	-webkit-backface-visibility:hidden;
+	backface-visibility: hidden;
+}
+
+.chrg-animation
+{
+	-webkit-transition: all .350s;
+	-moz-transition: all .350s;
+	-ms-transition: all .350s;
+	-o-transition: all .350s;
+	transition: all .350s;
+}
+
+ /*=============================================
+	GALLERY PRELOADER
+ ===============================================*/
+
+.chrg-loader
+{
+		bottom: 0;
+		height: 25px;
+		left: 0;
+		margin: auto;
+		display: none;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 42px;
+}
+
+.chrg-loader-line-wrap-wrap 
+{
+		animation: loader-spin 1800ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+		-o-animation: loader-spin 1800ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+		-ms-animation: loader-spin 1800ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+		-webkit-animation: loader-spin 1800ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+		-moz-animation: loader-spin 1800ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+		box-sizing: border-box;
+		-o-box-sizing: border-box;
+		-ms-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		height: 21px;
+		left: 0;
+		overflow: hidden;
+		position: absolute;
+		top: 0;
+		transform-origin: 50% 100%;
+		-o-transform-origin: 50% 100%;
+		-ms-transform-origin: 50% 100%;
+		-webkit-transform-origin: 50% 100%;
+		-moz-transform-origin: 50% 100%;
+		width: 42px;
+}
+
+.chrg-loader-line-wrap 
+{
+		border: 2px solid transparent;
+		border-radius: 100%;
+		-o-border-radius: 100%;
+		-ms-border-radius: 100%;
+		-webkit-border-radius: 100%;
+		-moz-border-radius: 100%;
+		box-sizing: border-box;
+		-o-box-sizing: border-box;
+		-ms-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		height: 42px;
+		left: 0;
+		margin: 0 auto;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 42px;
+}
+
+.chrg-loader-line-wrap-wrap:nth-child(1) 
+{ 
+		animation-delay: -45ms;
+		-o-animation-delay: -45ms;
+		-ms-animation-delay: -45ms;
+		-webkit-animation-delay: -45ms;
+		-moz-animation-delay: -45ms; 
+}
+
+.chrg-loader-line-wrap-wrap:nth-child(2) 
+{ 		animation-delay: -90ms;
+		-o-animation-delay: -90ms;
+		-ms-animation-delay: -90ms;
+		-webkit-animation-delay: -90ms;
+		-moz-animation-delay: -90ms; 
+}
+
+.chrg-loader-line-wrap-wrap:nth-child(3) 
+{ 
+		animation-delay: -135ms;
+		-o-animation-delay: -135ms;
+		-ms-animation-delay: -135ms;
+		-webkit-animation-delay: -135ms;
+		-moz-animation-delay: -135ms; 
+}
+
+.chrg-loader-line-wrap-wrap:nth-child(4) 
+{ 		animation-delay: -180ms;
+		-o-animation-delay: -180ms;
+		-ms-animation-delay: -180ms;
+		-webkit-animation-delay: -180ms;
+		-moz-animation-delay: -180ms; 
+}
+
+.chrg-loader-line-wrap-wrap:nth-child(5) 
+{ 		animation-delay: -225ms;
+		-o-animation-delay: -225ms;
+		-ms-animation-delay: -225ms;
+		-webkit-animation-delay: -225ms;
+		-moz-animation-delay: -225ms; 
+}
+
+.chrg-loader-line-wrap-wrap:nth-child(1) .chrg-loader-line-wrap 
+{
+		border-color: rgb(234,71,71);
+		height: 38px;
+		width: 38px;
+		top: 3px;
+}
+
+.chrg-loader-line-wrap-wrap:nth-child(2) .chrg-loader-line-wrap 
+{
+		border-color: rgb(234,234,71);
+		height: 32px;
+		width: 32px;
+		top: 6px;
+}
+
+.chrg-loader-line-wrap-wrap:nth-child(3) .chrg-loader-line-wrap 
+{
+		border-color: rgb(71,234,71);
+		height: 26px;
+		width: 26px;
+		top: 9px;
+}
+
+.chrg-loader-line-wrap-wrap:nth-child(4) .chrg-loader-line-wrap 
+{
+		border-color: rgb(71,234,234);
+		height: 20px;
+		width: 20px;
+		top: 12px;
+}
+
+.chrg-loader-line-wrap-wrap:nth-child(5) .chrg-loader-line-wrap 
+{
+		border-color: rgb(71,71,234);
+		height: 14px;
+		width: 14px;
+		top: 15px;
+}
+
+ /*=============================================
+	GALLERY GRID
+ ===============================================*/
+
+.chroma-gallery
+{
+	width: 100%;
+	min-width: 200px;
+	min-height: 200px;
+	display: none;
+}
+.chroma-gallery .chrg-loadicon {visibility: hidden;font-size:0;display: block;}
+.chroma-gallery img {display: none;}
+.chroma-gallery .chrg-grid:after {content: '';display: block;clear: both;}
+.chroma-gallery .chrg-item 
+{
+	opacity: 0;
+	cursor: pointer;
+	-webkit-transition: opacity 0.4s ease-in-out;
+	-moz-transition: opacity 0.4s ease-in-out;
+	-ms-transition: opacity 0.4s ease-in-out;
+	-o-transition: opacity 0.4s ease-in-out;
+	transition: opacity 0.4s ease-in-out;
+	will-change:opacity;
+}
+
+.chroma-gallery .chrg-item img 
+{
+	width: 100%;
+	display: block;
+}
+
+.chroma-gallery .chrg-item:hover img
+{
+	-webkit-filter: grayscale(1);
+	-moz-filter: grayscale(1);
+	-o-filter: grayscale(1);
+	filter: grayscale(1);	
+}
+
+.chroma-gallery .chrg-description 
+{
+	display: block;
+	background: rgba(0,0,0,0.4);
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom:0;
+	left: 0;
+	opacity: 0;
+	-webkit-transition: opacity 0.4s ease-in-out, -webkit-filter 0.4s ease-in-out;
+	-moz-transition: opacity 0.4s ease-in-out, -moz-filter 0.4s ease-in-out;
+	-ms-transition: opacity 0.4s ease-in-out, -ms-filter 0.4s ease-in-out;
+	-o-transition: opacity 0.4s ease-in-out, -o-filter 0.4s ease-in-out;
+	transition: opacity 0.4s ease-in-out, filter 0.4s ease-in-out;
+	text-align: center;
+	font-size: 17px;
+	will-change:opacity,filter,-webkit-filter,-moz-filter,-ms-filter,-o-filter;
+	color: white;
+}
+
+.chroma-gallery .chrg-description:hover{opacity: 1;}
+.chroma-gallery .chrg-description:before{content: '';height: 100%;}
+.chroma-gallery .chrg-description p {padding: 10px;line-height: 27px;}
+.chroma-gallery .chrg-description span {font-size: 50px;line-height: 20px;}
+.chroma-gallery .chrg-description:before, .chroma-gallery .chrg-description p 
+{display: inline-block;vertical-align: middle;}
+
+
+ /*=============================================
+	ANIMATION SETTINGS
+ ===============================================*/
+
+@keyframes loader-spin 
+{
+		0%, 15% {
+		transform: rotate(0);
+		transform: rotate(0);
+	}
+	100% {
+		transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+@-o-keyframes loader-spin 
+{
+		0%, 15% {
+		-o-transform: rotate(0);
+		transform: rotate(0);
+	}
+	100% {
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+@-ms-keyframes loader-spin 
+{
+		0%, 15% {
+		-ms-transform: rotate(0);
+		transform: rotate(0);
+	}
+	100% {
+		-ms-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+@-webkit-keyframes loader-spin 
+{
+		0%, 15% {
+		-webkit-transform: rotate(0);
+		transform: rotate(0);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+@-moz-keyframes loader-spin 
+{
+		0%, 15% {
+		-moz-transform: rotate(0);
+		transform: rotate(0);
+	}
+	100% {
+		-moz-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+/*====================================
+  EASING STYLE CLASSES
+ ====================================*/
+
+.chrg-easing-linear
+{
+	-webkit-transition-timing-function: linear !important; 
+	   -moz-transition-timing-function: linear !important; 
+	     -o-transition-timing-function: linear !important; 
+	        transition-timing-function: linear !important;	
+}
+
+.chrg-easing-ease
+{
+	-webkit-transition-timing-function: ease !important; 
+	   -moz-transition-timing-function: ease !important; 
+	     -o-transition-timing-function: ease !important; 
+	        transition-timing-function: ease !important;	
+}
+
+.chrg-easing-easeIn
+{
+	-webkit-transition-timing-function: ease-in !important; 
+	   -moz-transition-timing-function: ease-in !important; 
+	     -o-transition-timing-function: ease-in !important; 
+	        transition-timing-function: ease-in !important;	
+}
+
+.chrg-easing-easeOut
+{
+	-webkit-transition-timing-function: ease-out !important; 
+	   -moz-transition-timing-function: ease-out !important; 
+	     -o-transition-timing-function: ease-out !important; 
+	        transition-timing-function: ease-out !important;	
+}
+
+.chrg-easing-easeInOut
+{
+	-webkit-transition-timing-function: ease-in-out !important; 
+	   -moz-transition-timing-function: ease-in-out !important; 
+	     -o-transition-timing-function: ease-in-out !important; 
+	        transition-timing-function: ease-in-out !important;	
+}
+
+.chrg-easing-easeInQuad
+{
+	-webkit-transition-timing-function: cubic-bezier(0.550, 0.085, 0.680, 0.530) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.550, 0.085, 0.680, 0.530) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.550, 0.085, 0.680, 0.530) !important; 
+	        transition-timing-function: cubic-bezier(0.550, 0.085, 0.680, 0.530) !important;	
+}
+
+.chrg-easing-easeInCubic
+{
+	-webkit-transition-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190) !important; 
+	        transition-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190) !important;	
+}
+
+.chrg-easing-easeInQuart
+{
+	-webkit-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220) !important; 
+	        transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220) !important;
+}
+
+.chrg-easing-easeInQuint
+{
+	-webkit-transition-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060) !important; 
+	        transition-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060) !important;
+}
+
+.chrg-easing-easeInSine
+{
+	-webkit-transition-timing-function: cubic-bezier(0.470, 0.000, 0.745, 0.715) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.470, 0.000, 0.745, 0.715) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.470, 0.000, 0.745, 0.715) !important; 
+	        transition-timing-function: cubic-bezier(0.470, 0.000, 0.745, 0.715) !important;
+}
+
+.chrg-easing-easeInExpo
+{
+	-webkit-transition-timing-function: cubic-bezier(0.950, 0.050, 0.795, 0.035) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.950, 0.050, 0.795, 0.035) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.950, 0.050, 0.795, 0.035) !important; 
+	        transition-timing-function: cubic-bezier(0.950, 0.050, 0.795, 0.035) !important;
+}
+
+.chrg-easing-easeInCirc
+{
+	-webkit-transition-timing-function: cubic-bezier(0.600, 0.040, 0.980, 0.335) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.600, 0.040, 0.980, 0.335) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.600, 0.040, 0.980, 0.335) !important; 
+	        transition-timing-function: cubic-bezier(0.600, 0.040, 0.980, 0.335) !important;
+}
+
+.chrg-easing-easeInBack
+{
+	-webkit-transition-timing-function: cubic-bezier(0.600, 0, 0.735, 0.045) !important; /* older webkit */
+	-webkit-transition-timing-function: cubic-bezier(0.600, -0.280, 0.735, 0.045) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.600, -0.280, 0.735, 0.045) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.600, -0.280, 0.735, 0.045) !important; 
+	        transition-timing-function: cubic-bezier(0.600, -0.280, 0.735, 0.045) !important;
+}
+
+.chrg-easing-easeOutQuad
+{
+	-webkit-transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940) !important; 
+	        transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940) !important;
+}
+
+.chrg-easing-easeOutExpo
+{
+	-webkit-transition-timing-function: cubic-bezier(0.190, 1.000, 0.220, 1.000) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.190, 1.000, 0.220, 1.000) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.190, 1.000, 0.220, 1.000) !important; 
+	        transition-timing-function: cubic-bezier(0.190, 1.000, 0.220, 1.000) !important;
+}
+
+.chrg-easing-easeOutCubic
+{
+	-webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000) !important; 
+	        transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000) !important;	
+}
+
+.chrg-easing-easeOutQuart
+{
+	-webkit-transition-timing-function: cubic-bezier(0.165, 0.840, 0.440, 1.000) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.165, 0.840, 0.440, 1.000) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.165, 0.840, 0.440, 1.000) !important; 
+	        transition-timing-function: cubic-bezier(0.165, 0.840, 0.440, 1.000) !important;
+}
+
+.chrg-easing-easeOutQuint
+{
+	-webkit-transition-timing-function: cubic-bezier(0.230, 1.000, 0.320, 1.000) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.230, 1.000, 0.320, 1.000) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.230, 1.000, 0.320, 1.000) !important; 
+	        transition-timing-function: cubic-bezier(0.230, 1.000, 0.320, 1.000) !important;
+}
+
+.chrg-easing-easeOutSine
+{
+	-webkit-transition-timing-function: cubic-bezier(0.390, 0.575, 0.565, 1.000) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.390, 0.575, 0.565, 1.000) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.390, 0.575, 0.565, 1.000) !important; 
+	        transition-timing-function: cubic-bezier(0.390, 0.575, 0.565, 1.000) !important;
+}
+
+.chrg-easing-easeOutCirc
+{
+	-webkit-transition-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000) !important; 
+	        transition-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000) !important;
+}
+
+.chrg-easing-easeOutBack
+{
+	-webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1) !important; /* older webkit */
+	-webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.275) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.275) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.275) !important; 
+	        transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.275) !important;
+}
+
+.chrg-easing-easeInOutQuad
+{
+	-webkit-transition-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955) !important; 
+	        transition-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955) !important;	
+}
+
+.chrg-easing-easeInOutCubic
+{
+	-webkit-transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000) !important; 
+	        transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000) !important;
+}
+
+.chrg-easing-easeInOutQuart
+{
+	-webkit-transition-timing-function: cubic-bezier(0.770, 0.000, 0.175, 1.000) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.770, 0.000, 0.175, 1.000) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.770, 0.000, 0.175, 1.000) !important; 
+	        transition-timing-function: cubic-bezier(0.770, 0.000, 0.175, 1.000) !important;
+}
+
+.chrg-easing-easeInOutQuint
+{
+	-webkit-transition-timing-function: cubic-bezier(0.860, 0.000, 0.070, 1.000) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.860, 0.000, 0.070, 1.000) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.860, 0.000, 0.070, 1.000) !important; 
+	        transition-timing-function: cubic-bezier(0.860, 0.000, 0.070, 1.000) !important;
+}
+
+.chrg-easing-easeInOutSine
+{
+	-webkit-transition-timing-function: cubic-bezier(0.445, 0.050, 0.550, 0.950) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.445, 0.050, 0.550, 0.950) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.445, 0.050, 0.550, 0.950) !important; 
+	        transition-timing-function: cubic-bezier(0.445, 0.050, 0.550, 0.950) !important;	
+}
+
+.chrg-easing-easeInOutExpo
+{
+	-webkit-transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000) !important; 
+	   -moz-transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000) !important; 
+	     -o-transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000) !important; 
+	        transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000) !important;	
+}
+
+.chrg-easing-easeInOutCirc
+{
+	-webkit-transition-timing-function: cubic-bezier(0.785, 0.135, 0.150, 0.860) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.785, 0.135, 0.150, 0.860) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.785, 0.135, 0.150, 0.860) !important; 
+	        transition-timing-function: cubic-bezier(0.785, 0.135, 0.150, 0.860) !important; /* easeInOutCirc */	
+}
+
+.chrg-easing-easeInOutBack
+{
+	-webkit-transition-timing-function: cubic-bezier(0.680, 0, 0.265, 1) !important; /* older webkit */
+	-webkit-transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550) !important; 
+	   -moz-transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550) !important; 
+	     -o-transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550) !important; 
+	        transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550) !important;
+}
+
+.chrg-easing-chroma
+{
+	-webkit-transition-timing-function: cubic-bezier(1.000, 0.015, 0.440, 1.000) !important; 
+	   -moz-transition-timing-function: cubic-bezier(1.000, 0.015, 0.440, 1.000) !important; 
+	     -o-transition-timing-function: cubic-bezier(1.000, 0.015, 0.440, 1.000) !important; 
+	        transition-timing-function: cubic-bezier(1.000, 0.015, 0.440, 1.000) !important;
+}
