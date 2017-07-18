@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myblog.dao.CategoryMapper">
+    <resultMap id="BaseResultMap" type="com.myblog.model.Category">
+        <id column="c_id" property="cId" jdbcType="INTEGER"/>
+        <result column="c_name" property="cName" jdbcType="VARCHAR"/>
+        <result column="c_descrip" property="cDescrip" jdbcType="VARCHAR"/>
+        <result column="c_num" property="cNum" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    c_id, c_name, c_descrip, c_num
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from category
+        where c_id = #{cId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from category
+    where c_id = #{cId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.myblog.model.Category">
+    insert into category (c_id, c_name, c_descrip, 
+      c_num)
+    values (#{cId,jdbcType=INTEGER}, #{cName,jdbcType=VARCHAR}, #{cDescrip,jdbcType=VARCHAR}, 
+      #{cNum,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.myblog.model.Category">
+        insert into category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cId != null">
+                c_id,
+            </if>
+            <if test="cName != null">
+                c_name,
+            </if>
+            <if test="cDescrip != null">
+                c_descrip,
+            </if>
+            <if test="cNum != null">
+                c_num,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cId != null">
+                #{cId,jdbcType=INTEGER},
+            </if>
+            <if test="cName != null">
+                #{cName,jdbcType=VARCHAR},
+            </if>
+            <if test="cDescrip != null">
+                #{cDescrip,jdbcType=VARCHAR},
+            </if>
+            <if test="cNum != null">
+                #{cNum,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.myblog.model.Category">
+        update category
+        <set>
+            <if test="cName != null">
+                c_name = #{cName,jdbcType=VARCHAR},
+            </if>
+            <if test="cDescrip != null">
+                c_descrip = #{cDescrip,jdbcType=VARCHAR},
+            </if>
+            <if test="cNum != null">
+                c_num = #{cNum,jdbcType=INTEGER},
+            </if>
+        </set>
+        where c_id = #{cId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.myblog.model.Category">
+    update category
+    set c_name = #{cName,jdbcType=VARCHAR},
+      c_descrip = #{cDescrip,jdbcType=VARCHAR},
+      c_num = #{cNum,jdbcType=INTEGER}
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+    <select id="getAllCategory" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from category
+    </select>
+</mapper>

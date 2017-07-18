@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myblog.dao.TagMapper">
+    <resultMap id="BaseResultMap" type="com.myblog.model.Tag">
+        <id column="t_id" property="tId" jdbcType="INTEGER"/>
+        <result column="t_name" property="tName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="GetTag" type="com.myblog.model.Tag">
+        <id column="t_id" property="tId" jdbcType="INTEGER"/>
+        <result column="t_name" property="tName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    t_id, t_name
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from tag
+        where t_id = #{tId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tag
+    where t_id = #{tId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.myblog.model.Tag">
+    insert into tag (t_id, t_name)
+    values (#{tId,jdbcType=INTEGER}, #{tName,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.myblog.model.Tag">
+        insert into tag
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tId != null">
+                t_id,
+            </if>
+            <if test="tName != null">
+                t_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tId != null">
+                #{tId,jdbcType=INTEGER},
+            </if>
+            <if test="tName != null">
+                #{tName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.myblog.model.Tag">
+        update tag
+        <set>
+            <if test="tName != null">
+                t_name = #{tName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where t_id = #{tId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.myblog.model.Tag">
+    update tag
+    set t_name = #{tName,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+    <select id="getTagByBlogId" resultMap="GetTag">
+select tag.t_id,t_name from tag
+ where t_id in (select t_id from relation
+  where relation.blogid= #{blogid,jdbcType=INTEGER});
+</select>
+</mapper>

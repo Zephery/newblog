@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Highcharts 实例</title>
+  <link rel="icon" href="https://static.jianshukeji.com/highcharts/images/favicon.ico">
+  <style>
+  * {
+    font-family: Helvetica, Helvetica Neue, Luxi Sans, DejaVu Sans, Tahoma, Hiragino Sans GB, STHeiti, Microsoft YaHei
+  }
+  
+  body {
+    padding: 0 40px
+  }
+  
+  .menu {
+    position: fixed;
+    top: 50px;
+    left: 600px;
+    background: #efefef;
+    padding: 20px
+  }
+  
+  .menu ul {
+    margin: 0
+  }
+  </style>
+</head>
+
+<body>
+  <h1>Highcharts 实例</h1>
+  <div class="main">
+    <h4>线图（折线图及曲线图）</h4>
+    <ul>
+      <li><a href="examples/line/line-basic.html">基础折线图</a></li>
+      <li><a href="examples/line/line-ajax.html">通过 Ajax 加载数据</a></li>
+      <li><a href="examples/line/line-labels.html">显示点值的折线图</a></li>
+      <li><a href="examples/line/line-time-series.html">可缩放的时间轴</a></li>
+      <li><a href="examples/line/spline-inverted.html">坐标轴反转的曲线图</a></li>
+      <li><a href="examples/line/spline-symbols.html">带标识的曲线图</a></li>
+      <li><a href="examples/line/spline-plot-bands.html">带表示区域的曲线图</a></li>
+      <li><a href="examples/line/spline-irregular-time.html">时间不连续的曲线图</a></li>
+      <li><a href="examples/line/line-log-axis.html">对数折线图</a></li>
+    </ul>
+    <h4>面积图</h4>
+    <ul>
+      <li><a href="examples/area/area-basic.html">基础面积图</a></li>
+      <li><a href="examples/area/area-negative.html">包含负值的面积图</a></li>
+      <li><a href="examples/area/area-stacked.html">堆叠面积图</a></li>
+      <li><a href="examples/area/area-stacked-percent.html">百分比堆叠面积图</a></li>
+      <li><a href="examples/area/area-missing.html">断裂的面积图</a></li>
+      <li><a href="examples/area/area-inverted.html">坐标轴反转的面积图</a></li>
+      <li><a href="examples/area/areaspline.html">曲线面积图</a></li>
+      <li><a href="examples/area/arearange.html">面积范围图</a></li>
+      <li><a href="examples/area/arearange-line.html">面积范围均线图</a></li>
+      <li><a href="examples/area/sparkline.html">迷你图（小图）</a></li>
+    </ul>
+    <h4>柱形图（柱状图及条形图）</h4>
+    <ul>
+      <li><a href="examples/column/bar-basic.html">基础条形图</a></li>
+      <li><a href="examples/column/bar-stacked.html">堆叠条形图</a></li>
+      <li><a href="examples/column/bar-negative-stack.html">包含负值的条形图</a></li>
+      <li><a href="examples/column/column-basic.html">基础柱状图</a></li>
+      <li><a href="examples/column/column-negative.html">包含负值的柱状图</a></li>
+      <li><a href="examples/column/column-stacked.html">堆叠柱状图</a></li>
+      <li><a href="examples/column/column-stacked-and-grouped.html">分组堆叠柱状图</a></li>
+      <li><a href="examples/column/column-stacked-percent.html">百分比堆叠柱状图</a></li>
+      <li><a href="examples/column/column-rotated-labels.html">坐标轴标签旋转的柱状图</a></li>
+      <li><a href="examples/column/column-drilldown.html">可下钻的柱状图</a></li>
+      <li><a href="examples/column/column-placement.html">嵌套的柱状图</a></li>
+      <li><a href="examples/column/column-parsed.html">通过HTML表格数据创建的柱状图</a></li>
+      <li><a href="examples/column/columnrange.html">柱形范围图</a></li>
+    </ul>
+    <h4>饼形图（饼图及环形图）</h4>
+    <ul>
+      <li><a href="examples/pie/pie-basic.html">基础饼图</a></li>
+      <li><a href="examples/pie/pie-legend.html">带图例的饼图</a></li>
+      <li><a href="examples/pie/pie-donut.html">双饼图</a></li>
+      <li><a href="examples/pie/pie-semi-circle.html">扇形图</a></li>
+      <li><a href="examples/pie/pie-drilldown.html">可下钻的饼图</a></li>
+      <li><a href="examples/pie/pie-gradient.html">颜色渐变的饼图</a></li>
+      <li><a href="examples/pie/pie-monochrome.html">单色调饼图</a></li>
+      <li><a href="examples/pie/pie-donut-center-title.html">标题居中的环形图</a></li>
+    </ul>
+    <h4>散点图及气泡图</h4>
+    <ul>
+      <li><a href="examples/scatter-type/scatter.html">散点图</a></li>
+      <li><a href="examples/scatter-type/bubble.html">气泡图</a></li>
+      <li><a href="examples/scatter-type/bubble-3d.html">3D气泡图</a></li>
+      <li><a href="examples/scatter-type/bubble-with-plotline.html">带辅助线的气泡图</a></li>
+    </ul>
+    <h4>混合图</h4>
+    <ul>
+      <li><a href="examples/combo-type/synchronized-charts.html">多个图表共用一个提示框</a></li>
+      <li><a href="examples/combo-type/combo.html">柱形图、饼图、折线图混合</a></li>
+      <li><a href="examples/combo-type/combo-dual-axes.html">双坐标的折线图、柱状图混合图</a></li>
+      <li><a href="examples/combo-type/combo-multi-axes.html">多坐标轴混合图</a></li>
+      <li><a href="examples/combo-type/combo-regression.html">包含趋势线的散点图</a></li>
+      <li><a href="examples/combo-type/combo-meteogram.html">天气预报</a></li>
+      <li><a href="examples/combo-type/combo-timeline.html">高级时间线图</a></li>
+      <li><a href="examples/combo-type/combo-histogram.html">直方图</a></li>
+    </ul>
+    <h4>动态交互图</h4>
+    <ul>
+      <li><a href="examples/dynamic/dynamic-update.html">实时刷新的曲线图</a></li>
+      <li><a href="examples/dynamic/dynamic-click-to-add.html">点击添加点</a></li>
+      <li><a href="examples/dynamic/dynamic-master-detail.html">可调整数据范围的曲线图</a></li>
+      <li><a href="examples/dynamic/responsive.html">高级响应式图表</a></li>
+      <li><a href="examples/dynamic/responsive2.html">高级响应式图表2</a></li>
+      <li><a href="examples/dynamic/chart-update.html">高级更新</a></li>
+    </ul>
+    <h4>3D 图</h4>
+    <ul>
+      <li><a href="examples/3d/3d-column-interactive.html">交互性3D柱状图</a></li>
+      <li><a href="examples/3d/3d-column-null-values.html">包含空值的3D柱状图</a></li>
+      <li><a href="examples/3d/3d-column-stacking-grouping.html">堆叠3D柱状图</a></li>
+      <li><a href="examples/3d/3d-pie.html">3D饼图</a></li>
+      <li><a href="examples/3d/3d-pie-donut.html">3D环形图</a></li>
+      <li><a href="examples/3d/3d-scatter-draggable.html">3D散点图</a></li>
+    </ul>
+    <h4>仪表图</h4>
+    <ul>
+      <li><a href="examples/gauge/gauge-speedometer.html">速度仪</a></li>
+      <li><a href="examples/gauge/gauge-solid.html">仪表盘</a></li>
+      <li><a href="examples/gauge/gauge-activity.html">活动图</a></li>
+      <li><a href="examples/gauge/gauge-clock.html">时钟</a></li>
+      <li><a href="examples/gauge/gauge-dual.html">双刻度仪表图</a></li>
+      <li><a href="examples/gauge/gauge-vu-meter.html">伏压图</a></li>
+    </ul>
+    <h4>热力图（热力及矩形树图）</h4>
+    <ul>
+      <li><a href="examples/heatmap-treemap/heatmap.html">热力图</a></li>
+      <li><a href="examples/heatmap-treemap/heatmap-canvas.html">大型热力图</a></li>
+      <li><a href="examples/heatmap-treemap/treemap-coloraxis.html">矩形树图</a></li>
+      <li><a href="examples/heatmap-treemap/treemap-with-levels.html">包含等级的矩形树图</a></li>
+      <li><a href="examples/heatmap-treemap/treemap-large-dataset.html">大数量的矩形树图</a></li>
+    </ul>
+    <h4>更多图表类型</h4>
+    <ul>
+      <li><a href="examples/hc-others/polar.html">极地图</a></li>
+      <li><a href="examples/hc-others/polar-spider.html">蜘蛛图</a></li>
+      <li><a href="examples/hc-others/polar-wind-rose.html">玫瑰图</a></li>
+      <li><a href="examples/hc-others/box-plot.html">箱线图</a></li>
+      <li><a href="examples/hc-others/error-bar.html">误差图</a></li>
+      <li><a href="examples/hc-others/waterfall.html">瀑布图</a></li>
+      <li><a href="examples/hc-others/funnel.html">漏斗图</a></li>
+      <li><a href="examples/hc-others/pyramid.html">金字塔图</a></li>
+      <li><a href="examples/hc-others/polygon.html">多边形图</a></li>
+      <li><a href="examples/hc-others/renderer.html">普通绘画图</a></li>
+    </ul>
+  </div>
+  <div class="menu">
+    <ul>
+      <li><a href="https://www.hcharts.cn/demo/highcharts">更多在线实例</a></li>
+      <li><a href="https://www.hcharts.cn/docs">使用教程</a></li>
+      <li><a href="https://www.hcharts.cn/docs/changelog/highcharts">更新日志</a></li>
+      <li><a href="https://api.hcharts.cn/highcharts">API 文档</a></li>
+    </ul>
+  </div>
+</body>
+
+</html>
+<!-- Generated by Jianshu Cache Service at : 2017-04-14 10:04:56 -->

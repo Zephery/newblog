@@ -1,0 +1,80 @@
+@charset "utf-8";
+/* 代码整理：懒人之家 */
+
+.wrap a {
+	display:block;
+	width:auto;
+	height:auto;
+	text-decoration:none;
+	color:#000;
+}
+.wrap {
+	width:auto;
+	height:auto;
+	position:relative;
+	overflow:hidden;
+	font-family:arial, sans-serif;
+	border:0;
+	margin:0 10px;
+	float:left;
+	display:inline;
+}
+.wrap img {
+	border:0;
+}
+.wrap i {
+	display:block;
+	width:220px;
+	height:330px;
+	position:absolute;
+	left:0;
+	top:300px;
+	z-index:1;
+	background:#000;
+	filter: alpha(opacity=40);
+filter: progid:DXImageTransform.Microsoft.Alpha(opacity=40);
+	opacity:0.40;
+	-webkit-transition: all 0.6s ease-in-out;
+}
+.wrap p {
+	display:block;
+	width:220px;
+	height:330px;
+	position:absolute;
+	left:0;
+	top:300px;
+	z-index:1;
+	background:transparent;
+	font-size:12px;
+	color:#fff;
+	padding:0;
+	margin:0;
+	line-height:16px;
+	-webkit-transition: all 0.6s ease-in-out;
+}
+.wrap p b {
+	display:block;
+	font-size:22px;
+	color:#fc0;
+	text-align:center;
+	margin:0;
+	padding:0;
+	line-height:30px;
+}
+.wrap p span {
+	display:block;
+	padding:10px;
+	line-height:20px;
+}
+.wrap a:hover {
+	direction:ltr;
+}
+.wrap a:hover i {
+	top:0;
+}
+.wrap a:hover p {
+	top:0;
+}
+.clear {
+	clear:left;
+}

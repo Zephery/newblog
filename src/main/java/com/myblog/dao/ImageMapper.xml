@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myblog.dao.ImageMapper">
+    <resultMap id="BaseResultMap" type="com.myblog.model.Image">
+        <id column="imageid" property="imageid" jdbcType="INTEGER"/>
+        <result column="imagename" property="imagename" jdbcType="VARCHAR"/>
+        <result column="imagepath" property="imagepath" jdbcType="VARCHAR"/>
+        <result column="banner" property="banner" jdbcType="INTEGER"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="datetime" property="datetime" jdbcType="VARCHAR"/>
+        <result column="love" property="love" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    imageid, imagename, imagepath, banner, content, datetime, love
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from image
+        where imageid = #{imageid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from image
+    where imageid = #{imageid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.myblog.model.Image">
+    insert into image (imageid, imagename, imagepath, 
+      banner, content, datetime, 
+      love)
+    values (#{imageid,jdbcType=INTEGER}, #{imagename,jdbcType=VARCHAR}, #{imagepath,jdbcType=VARCHAR}, 
+      #{banner,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{datetime,jdbcType=VARCHAR}, 
+      #{love,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.myblog.model.Image">
+        insert into image
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="imageid != null">
+                imageid,
+            </if>
+            <if test="imagename != null">
+                imagename,
+            </if>
+            <if test="imagepath != null">
+                imagepath,
+            </if>
+            <if test="banner != null">
+                banner,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="datetime != null">
+                datetime,
+            </if>
+            <if test="love != null">
+                love,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="imageid != null">
+                #{imageid,jdbcType=INTEGER},
+            </if>
+            <if test="imagename != null">
+                #{imagename,jdbcType=VARCHAR},
+            </if>
+            <if test="imagepath != null">
+                #{imagepath,jdbcType=VARCHAR},
+            </if>
+            <if test="banner != null">
+                #{banner,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="datetime != null">
+                #{datetime,jdbcType=VARCHAR},
+            </if>
+            <if test="love != null">
+                #{love,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.myblog.model.Image">
+        update image
+        <set>
+            <if test="imagename != null">
+                imagename = #{imagename,jdbcType=VARCHAR},
+            </if>
+            <if test="imagepath != null">
+                imagepath = #{imagepath,jdbcType=VARCHAR},
+            </if>
+            <if test="banner != null">
+                banner = #{banner,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="datetime != null">
+                datetime = #{datetime,jdbcType=VARCHAR},
+            </if>
+            <if test="love != null">
+                love = #{love,jdbcType=INTEGER},
+            </if>
+        </set>
+        where imageid = #{imageid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.myblog.model.Image">
+    update image
+    set imagename = #{imagename,jdbcType=VARCHAR},
+      imagepath = #{imagepath,jdbcType=VARCHAR},
+      banner = #{banner,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      datetime = #{datetime,jdbcType=VARCHAR},
+      love = #{love,jdbcType=INTEGER}
+    where imageid = #{imageid,jdbcType=INTEGER}
+  </update>
+</mapper>

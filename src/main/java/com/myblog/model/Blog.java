@@ -1,0 +1,104 @@
+package com.myblog.model;
+
+import java.util.List;
+
+public class Blog {
+    private Integer blogid;
+
+    private String title;
+
+    private String summary;
+
+    private String content;
+
+    private String createAt;
+
+    private Integer categoryid;
+
+    private Integer hits;
+
+    private String imageurl;
+
+    private Category category;
+
+    private List<Tag> tags;
+    public Integer getBlogid() {
+        return blogid;
+    }
+
+    public void setBlogid(Integer blogid) {
+        this.blogid = blogid;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
+    }
+
+    public Integer getCategoryid() {
+        return categoryid;
+    }
+
+    public void setCategoryid(Integer categoryid) {
+        this.categoryid = categoryid;
+    }
+
+    public Integer getHits() {
+        return hits;
+    }
+
+    public void setHits(Integer hits) {
+        this.hits = hits;
+    }
+
+    public String getImageurl() {
+        return imageurl;
+    }
+
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+}

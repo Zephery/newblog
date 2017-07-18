@@ -1,0 +1,97 @@
+.social-share li {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.social-share li a {
+  color: #fff;
+  display: inline-block;
+  text-align: center;
+  transition: transform 0.5s;
+}
+
+.social-share li a:hover {
+  transform: rotate(360deg);
+}
+
+.social-share-lg li a {
+  font-size: 24px;
+  height: 64px;
+  width: 64px;
+  line-height: 64px;
+  border-radius: 32px;
+}
+
+.social-share-md li a {
+  font-size: 20px;
+  height: 48px;
+  width: 48px;
+  line-height: 48px;
+  border-radius: 24px;
+}
+
+.social-share-sm li a {
+  font-size: 16px;
+  height: 36px;
+  width: 36px;
+  line-height: 36px;
+  border-radius: 18px;
+}
+
+.social-share-xs li a {
+  font-size: 12px;
+  height: 24px;
+  width: 24px;
+  line-height: 24px;
+  border-radius: 12px;
+}
+
+.social-share :hover {
+  transform: rotate(360deg);
+}
+
+.social-share-dialog-bg{
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  transition: .5s background;
+}
+.social-share-dialog-bg.show{
+  background: rgba(0,0,0,0.8);
+}
+
+.social-share-dialog {
+  width: auto;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 286px;
+  height: 322px;
+  margin-top: -150px;
+  margin-left: -143px;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+  background: #fff;
+  transition: opacity 0.8s;
+}
+
+.social-share-dialog-bg.show .social-share-dialog{
+  opacity: 1;
+}
+
+.social-share-dialog .dialog-header{
+  padding: 15px 15px 5px;
+}
+
+.social-share-dialog .dialog-header .dismiss {
+  float: right;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.social-share-dialog .dialog-body {
+  padding: 10px 15px;
+}

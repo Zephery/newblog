@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* 代码整理：懒人之家 www.lanrenzhijia.com */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#wrap {
+    margin: 10px auto;
+    width: 640px;
+    overflow: hidden;
+}
+
+#wrap h1 {
+    margin: 20px 0;
+    text-align: center;
+    color: #006393;
+}
+
+/* 1 */
+.item1 img {
+    vertical-align: top;
+}
+
+.item1 li {
+    position: relative;
+    float: left;
+    margin-right: 3px;
+    width: 285px;
+    height: 200px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.item1 li img{
+    max-height:200px;
+    max-width:285px;
+    width: auto;
+    height: auto;
+}
+
+.item1 div {
+    position: absolute;
+    margin-top: 4px;
+    left: 0;
+    top: 120px;
+    width: 100%;
+    height: 0;
+    text-align: center;
+    background: url(../images/demo02.png) no-repeat;
+    background-size: 100% auto;
+    color: #FFF;
+    overflow: hidden;
+}
+
+.item1 p {
+    color: #ffffff;
+    display: none;
+    margin: 5px auto 0;
+    width: 285px;
+    line-height: 20px;
+    text-align: left;
+    text-indent: 2em;
+    font-size: 12px;
+}
+
+.item1 h3 {
+    margin: 11px 0;
+    height: 25px;
+    text-indent: -10000px;
+}

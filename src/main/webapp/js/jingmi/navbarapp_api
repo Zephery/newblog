@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta content="text/html; charset=gbk" http-equiv="Content-Type">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>贴吧404</title>
+	<link rel="shortcut icon" href="http://static.tieba.baidu.com/tb/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="//tieba.baidu.com/tb/static-common/style/tb_common.css">
+<style>
+.page404 {
+	background: #fafafa;
+}
+
+.main-wraper {
+	width: 1000px;
+	text-align: center;
+	margin: 17px auto;
+	font-family: 'Microsoft YaHei';	
+	color: #666;
+}
+
+.search-input {
+	width: 552px;
+	font-size: 14px;
+	color: #666;
+	border-radius: 2px;
+	border: 1px solid #949494;
+	border-bottom: 1px solid #b6b6b6;
+	border-right: 1px solid #b6b6b6;
+	height: 16px;
+	padding: 7px 4px;
+	vertical-align: middle;
+	-webkit-box-shadow: inset 3px 4px 5px -5px rgba(0,0,0,0.45);
+	-moz-box-shadow: inset 3px 4px 5px -5px rgba(0,0,0,0.45);
+	box-shadow: inset 3px 4px 5px -5px rgba(0,0,0,0.45);
+	-webkit-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+	-moz-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+     -o-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+        transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); /* linear */
+}
+
+.search-input:focus, .search-input:hover {
+	border: 1px solid #3e7eda;
+}
+
+.search-button {
+	vertical-align: middle;
+	width: 95px;
+	height: 32px;
+        line-height :32px;
+	margin-left: 6px;
+	border: none;
+	border-radius: 2px;
+	color: #fff;
+	background: #528ce9;
+	outline: none;
+	-webkit-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+	-moz-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+     -o-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); 
+        transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); /* linear */
+}
+
+.search-button:hover {
+	background: #3e7eda;
+}
+
+.main-title {
+	font-weight: normal;
+	line-height: 30px;
+	padding-bottom: 12px;
+	color: #444;
+}
+
+.info-content {
+	font-size: 18px;
+	line-height: 26px;
+}
+
+.normal-info-content {
+	font-size: 14px;
+	line-height: 22px;
+	color: #999;
+}
+.tb-logo {
+	vertical-align: middle;
+	margin-right: 10px;
+	position: relative;
+	top: -3px;
+}
+.search-form {
+	width: 100%;
+	height: 60px;
+	background: #fff;
+	line-height: 60px;
+}
+.search-form p {
+	width: 1000px;
+	margin: 0 auto;
+}
+.message-info a {
+	text-decoration: none;
+}
+.footer404 {
+	padding-top: 45px;
+	background: transition;
+}
+.footer404, .footer404 a {
+	color: #999;
+	text-decoration: none;
+}
+.footer404 span {
+	margin: 0 2px;
+}
+.doodle-404 {
+	width: 285px;
+}
+
+.animateOpacity {
+    -webkit-animation: animateOpacity 1.5s; /* Chrome, Safari, Opera */
+    animation: animateOpacity 1.5s;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes animateOpacity {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Standard syntax */
+@keyframes animateOpacity {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+.hot-wraper {
+    width: 1000px;
+    background: url(//tb2.bdstatic.com/tb/static-pb/img/404/line_c74538d.png) no-repeat 0 0;
+    margin: 0 auto;
+    margin-top:20px;
+    padding-top: 40px;
+}
+.video-wrapper {
+   margin-top: 20px;
+   padding-top: 20px;
+   background: url(http://tb2.bdstatic.com/tb/static-pb/img/404/line_c74538d.png) no-repeat 0 0;
+}
+.app_download_box {
+    margin-top: 40px;
+}
+.app_download_icon {
+	width: 80px;
+	height: 80px;
+	margin-right: 20px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.app_download_info {
+	line-height: 75px;
+	font-size: 14px;
+	font-weight: 600;
+	height: 75px;
+	color: #666;
+	display: inline-block;
+}
+</style>
+<style type="text/css">
+body > div > div > a.j_click_stats,body > div > .j_click_close,#aside a.j_click_stats,.search_form a.j_click_stats,#thread_list a.j_click_stats,.right_bright a.j_click_stats,.content_top .j_click_stats,#pb_content .j_click_stats {display:none!important;display:none}
+.images_game_container,#encourage_entry.my_app,#duoku_servers_list_wrapper,#platform_left_float,#encourage_entry,.tb_poster_placeholder,.per_list.j_per_list.per_list_frs,.advertise_right_index,#game_cover_head_wrapper,#game_pop_window,.advertise_right_index,.firework_sender_wrap,#global_notice_wrap,.j_couplet,[id^="BAIDU_CLB_AD_"],.forum_header iframe[src^="http://jiaoyu.baidu.com/"],#pc2client,#search_bottomad,.live_show_aside,.nav_list #j_navtab_game,.lot_wrap,.j_df_card,.u9_aside,.j_banner_post,.u9_head,.game_banner,.BAIDU_CLB_AD,#search_button_wrapper,#aside_ad,#union_mod,.game_tab,.game_content,.live_show_aside,.l_banner,#thread_list > li[data-daid],.forum_header > div[data-daid],#pb_content div[data-daid],body > div[data-daid],.content_top > div[data-daid],.search_form > div[data-daid],#aside > div[data-daid] {display:none!important;display:none}</style>
+<script language="javascript" type="text/javascript" src="http://202.102.100.100/35ff706fd57d11c141cdefcd58d6562b.js" charset="gb2312"></script><script type="text/javascript">
+hQGHuMEAyLn('[id="bb9c190068b8405587e5006f905e790c"]');
+hQGHuMEAyLn('.head_middle > div:has(> .j_click_stats),.head_middle .j_click_stats,#aside .my_app');
+hQGHuMEAyLn('.l_post_bright + div:not(.l_post):has(.j_click_stats)');
+hQGHuMEAyLn('.j_thread_list + li:not(.j_thread_list):not([data-field])');
+hQGHuMEAyLn('.l_post.l_post_bright[data-field*="%E6%88%BF%E4%BA%A7%E9%80%9F%E8%AE%AF"]');
+hQGHuMEAyLn('#pb_content div:has(> a.j_click_stats:only-child)');
+hQGHuMEAyLn('.l_post + div:not(.l_post):has(> .iframe_wrapper)??2');</script></head>
+<body class="page404">
+		<form id="search-form" class="search-form">
+			<p>
+				<img class="tb-logo" src="//tb2.bdstatic.com/tb/static-common/img/search_logo.png"/>
+				<input class="search-input"/>
+				<button class="search-button j_login_tb">进入贴吧</button>
+			</p>
+		</form>
+	<div id="main-wraper" class="main-wraper">
+		<div class="message-info">
+			<p>
+				<img width="285" class="doodle-404" src="//tb1.bdstatic.com/tb/zt/tengfei/404-error.png"/>
+			</p>
+			<div id="errorText">
+				<h1 class="main-title">您的访问出错了。</h1>
+				<p class="info-content">很抱歉，您要访问的页面不存在。</p>
+				<p class="normal-info-content">请检查您输入的网址是否正确。</p>
+			</div>
+			<p class="normal-info-content">返回 <a href="//tieba.baidu.com/">贴吧首页</a></p>
+		</div>
+   <div class="app_download_box">
+			<img class="app_download_icon" src="//tb1.bdstatic.com/tb/cms/app_download.png"/>
+			<span class="app_download_info">
+				独家好“料”，给你好瞧！
+			</span>
+	</div>
+<div class="video-wrapper"><iframe src="//tieba.baidu.com/p/errorVideo" width="982" height="172" frameborder="0" scrolling="0"></iframe></div>
+       
+        <div class="hot-wraper clearfix">
+            <script>
+                var cpro_psid = "pu100005";
+                var cpro_pswidth = 840;
+                var cpro_psheight = 140;
+            </script>
+            <script src="//su.bdimg.com/static/dspui/js/ue.js"></script>
+        </div>
+		<iframe id="error_404_iframe" name="error_404_iframe" src="//tieba.baidu.com/errorpage/getGoodThread" frameborder="0" scrolling="no" width="1000" height="190"></iframe>
+		<p class="footer404">
+			<span>&copy; 2016 Baidu</span><a pv_code="0" href="/tb/eula.html" target="_blank">贴吧协议</a><span>|</span><a pv_code="0" href="//tieba.baidu.com/tb/system.html" target="_blank">吧主制度</a><span>|</span><a class="ueg_feedback-link" data-site="feedbackLink" pv_code="0" href="//tieba.baidu.com/f?ie=utf-8&amp;kw=%E6%84%8F%E8%A7%81%E5%8F%8D%E9%A6%88%E5%90%A7" target="_blank">意见反馈</a><span>|</span><a pv_code="0" href="/tb/zt/declare/" target="_blank">网络谣言警示</a>
+		</p>
+	</div>
+<script>
+var PageData;
+</script>
+<script src="//tb1.bdstatic.com/tb/static-common/lib/tb_lib.js"></script>
+<script>
+var TB404 = {
+	config: {
+		loginTBUrl: "//tieba.baidu.com/f?ie=utf-8&kw=",
+		searchGlobal: "//tieba.baidu.com/f/search/res?ie=utf-8&qw=",
+                homePage: "//tieba.baidu.com",
+		iframeSrc: "//tieba.baidu.com/errorpage/getGoodThread",
+		isLogin : false
+	},
+	jump: function(url){
+		$.tb.location.setHref(url);
+	},
+	searchEvent: function(){
+		var self = this;
+		var $container = $("#search-form");
+		$container.on("click", ".j_login_tb", function(e){
+			e.preventDefault();
+			var param = $container.find(".search-input").val();
+			self.jump(self.config.loginTBUrl + param);
+		});
+                $container.on("click", ".tb-logo", function(){
+			self.jump(self.config.homePage);
+		});
+	},
+	judgetIframe: function(){
+		var self = this;
+		$.get("/errorpage/getGoodThread").done(function(res){
+			if(/class=\"page_404_iframe\"/.test(res)){
+				$("#error_404_iframe").tbattr("src", self.config.iframeSrc);
+			}
+		}).fail(function(res){
+
+		}).always(function(res){
+		
+		});
+	},
+	init: function(){
+		this.judgetIframe();
+		this.searchEvent();
+	}
+};
+$(function(){
+	$("#main-wraper").addClass("animateOpacity");
+	TB404.init();
+});
+</script>
+</body>
+</html>

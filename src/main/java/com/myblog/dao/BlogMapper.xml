@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myblog.dao.BlogMapper">
+    <resultMap id="BaseResultMap" type="com.myblog.model.Blog">
+        <id column="blogid" property="blogid" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="summary" property="summary" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="create_at" property="createAt" jdbcType="VARCHAR"/>
+        <result column="categoryid" property="categoryid" jdbcType="INTEGER"/>
+        <result column="hits" property="hits" jdbcType="INTEGER"/>
+        <result column="imageurl" property="imageurl" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    blogid, title, summary, content, create_at, categoryid, hits, imageurl
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from blog
+        where blogid = #{blogid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog
+    where blogid = #{blogid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.myblog.model.Blog">
+    insert into blog (blogid, title, summary, 
+      content, create_at, categoryid, 
+      hits, imageurl)
+    values (#{blogid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{createAt,jdbcType=VARCHAR}, #{categoryid,jdbcType=INTEGER}, 
+      #{hits,jdbcType=INTEGER}, #{imageurl,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.myblog.model.Blog">
+        insert into blog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="blogid != null">
+                blogid,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="summary != null">
+                summary,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="createAt != null">
+                create_at,
+            </if>
+            <if test="categoryid != null">
+                categoryid,
+            </if>
+            <if test="hits != null">
+                hits,
+            </if>
+            <if test="imageurl != null">
+                imageurl,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="blogid != null">
+                #{blogid,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="summary != null">
+                #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="createAt != null">
+                #{createAt,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryid != null">
+                #{categoryid,jdbcType=INTEGER},
+            </if>
+            <if test="hits != null">
+                #{hits,jdbcType=INTEGER},
+            </if>
+            <if test="imageurl != null">
+                #{imageurl,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.myblog.model.Blog">
+        update blog
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="summary != null">
+                summary = #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryid != null">
+                categoryid = #{categoryid,jdbcType=INTEGER},
+            </if>
+            <if test="hits != null">
+                hits = #{hits,jdbcType=INTEGER},
+            </if>
+            <if test="imageurl != null">
+                imageurl = #{imageurl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where blogid = #{blogid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.myblog.model.Blog">
+    update blog
+    set title = #{title,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=VARCHAR},
+      categoryid = #{categoryid,jdbcType=INTEGER},
+      hits = #{hits,jdbcType=INTEGER},
+      imageurl = #{imageurl,jdbcType=VARCHAR}
+    where blogid = #{blogid,jdbcType=INTEGER}
+  </update>
+    <select id="getAllBlog" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from blog
+        order by create_at desc
+    </select>
+    <select id="getByCategoryId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from blog
+        where categoryid = #{categoryid,jdbcType=INTEGER}
+        ORDER BY create_at desc
+    </select>
+    <select id="getBlogByTagId" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM myblog.blog
+    where blogid in (
+        select blogid from
+        relation
+        where relation.t_id = #{tId,jdbcType=INTEGER})
+  </select>
+    <select id="getBanner" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from blog
+        order by create_at desc
+        limit 5
+    </select>
+    <select id="getHits" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from blog
+        WHERE DATE_SUB(CURDATE(), INTERVAL 60 DAY) &lt;= date(create_at)
+        order by hits desc
+        limit 5
+    </select>
+    <update id="updatehits" parameterType="java.lang.Integer">
+    update blog
+    set hits=hits+1
+    where blogid = #{blogid,jdbcType=INTEGER}
+  </update>
+    <select id="getLife" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM blog
+        WHERE categoryid=0
+        order by create_at desc
+    </select>
+    <select id="getAllTechBlog" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from blog
+        WHERE categoryid!=0
+        order by create_at desc
+    </select>
+</mapper>

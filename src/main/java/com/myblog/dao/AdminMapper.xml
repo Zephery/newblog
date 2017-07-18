@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myblog.dao.AdminMapper">
+    <resultMap id="BaseResultMap" type="com.myblog.model.Admin">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="adminname" property="adminname" jdbcType="VARCHAR"/>
+        <result column="adminpasswd" property="adminpasswd" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, adminname, adminpasswd
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from admin
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from admin
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.myblog.model.Admin">
+    insert into admin (id, adminname, adminpasswd
+      )
+    values (#{id,jdbcType=INTEGER}, #{adminname,jdbcType=VARCHAR}, #{adminpasswd,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.myblog.model.Admin">
+        insert into admin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="adminname != null">
+                adminname,
+            </if>
+            <if test="adminpasswd != null">
+                adminpasswd,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="adminname != null">
+                #{adminname,jdbcType=VARCHAR},
+            </if>
+            <if test="adminpasswd != null">
+                #{adminpasswd,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.myblog.model.Admin">
+        update admin
+        <set>
+            <if test="adminname != null">
+                adminname = #{adminname,jdbcType=VARCHAR},
+            </if>
+            <if test="adminpasswd != null">
+                adminpasswd = #{adminpasswd,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.myblog.model.Admin">
+    update admin
+    set adminname = #{adminname,jdbcType=VARCHAR},
+      adminpasswd = #{adminpasswd,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

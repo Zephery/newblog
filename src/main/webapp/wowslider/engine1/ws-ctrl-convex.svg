@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2015 by original authors @ fontello.com</metadata>
+<defs>
+<font id="ws-ctrl-convex" horiz-adv-x="1000" >
+<font-face font-family="ws-ctrl-convex" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="play" unicode="&#xe800;" d="m0 11v677q0 39 22 52t53-8l564-349q20-14 20-33 0-9-5-18t-10-12l-5-4-564-349q-31-20-53-7t-22 51z" horiz-adv-x="658.7" />
+<glyph glyph-name="pause" unicode="&#xe801;" d="m0 5q0-27 19-46t45-19h127q27 0 45 19t19 46v691q0 27-19 45t-45 19h-127q-27 0-45-19t-19-45v-691z m480 0q0-27 19-46t45-19h127q26 0 45 19t19 46v691q0 27-19 45t-45 19h-127q-27 0-45-19t-19-45v-691z" horiz-adv-x="735.4" />
+<glyph glyph-name="left" unicode="&#xe802;" d="m0 353l390 391q19 18 44 18 25 0 43-18t18-44-18-43l-243-243h642q25 0 43-18t18-43-18-43-43-18h-642l243-243q18-18 18-44t-18-43-43-18-44 18z" horiz-adv-x="938" />
+<glyph glyph-name="right" unicode="&#xe803;" d="m0 347q0 26 18 43t43 17h642l-242 244q-19 18-19 44t19 42q17 19 42 19t44-19l390-390-390-391q-20-18-44-18t-42 18-19 44 19 43l242 242h-642q-25 0-43 18t-18 44z" horiz-adv-x="938" />
+</font>
+</defs>
+</svg>
