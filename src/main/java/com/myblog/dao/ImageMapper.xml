@@ -114,4 +114,9 @@
       love = #{love,jdbcType=INTEGER}
     where imageid = #{imageid,jdbcType=INTEGER}
   </update>
+    <select id="getAllImage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from image
+    </select>
 </mapper>
