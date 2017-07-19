@@ -33,8 +33,6 @@
             });
         });
     </script>
-    <meta charset="UTF-8">
-    <script src="js/jingmi/hm.js"></script>
     <script src="js/jingmi/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
     <link rel="stylesheet" id="style-css" href="js/jingmi/jingmistyle.css" type="text/css" media="all">
 </head>
@@ -135,7 +133,49 @@
             screenOpacity:0.8
         });
     });
-
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var html="<!--畅言-->\n" +
+            "            <!--PC和WAP自适应版-->\n" +
+            "            <div id=\"SOHUCS\" sid=\"8888888888888\"></div>\n" +
+            "            <script type=\"text/javascript\">\n" +
+            "                (function () {\n" +
+            "                    var appid = 'cyt4SnwiG';\n" +
+            "                    var conf = '9c120d8118078b7ea3a728dc120a28da';\n" +
+            "                    var width = window.innerWidth || document.documentElement.clientWidth;\n" +
+            "                    if (width < 960) {\n" +
+            "                        window.document.write('<script id=\"changyan_mobile_js\" charset=\"utf-8\" type=\"text/javascript\" src=\"https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '\"><\\/script>');\n" +
+            "                    } else {\n" +
+            "                        var loadJs = function (d, a) {\n" +
+            "                            var c = document.getElementsByTagName(\"head\")[0] || document.head || document.documentElement;\n" +
+            "                            var b = document.createElement(\"script\");\n" +
+            "                            b.setAttribute(\"type\", \"text/javascript\");\n" +
+            "                            b.setAttribute(\"charset\", \"UTF-8\");\n" +
+            "                            b.setAttribute(\"src\", d);\n" +
+            "                            if (typeof a === \"function\") {\n" +
+            "                                if (window.attachEvent) {\n" +
+            "                                    b.onreadystatechange = function () {\n" +
+            "                                        var e = b.readyState;\n" +
+            "                                        if (e === \"loaded\" || e === \"complete\") {\n" +
+            "                                            b.onreadystatechange = null;\n" +
+            "                                            a()\n" +
+            "                                        }\n" +
+            "                                    }\n" +
+            "                                } else {\n" +
+            "                                    b.onload = a\n" +
+            "                                }\n" +
+            "                            }\n" +
+            "                            c.appendChild(b)\n" +
+            "                        };\n" +
+            "                        loadJs(\"https://changyan.sohu.com/upload/changyan.js\", function () {\n" +
+            "                            window.changyan.api.config({appid: appid, conf: conf})\n" +
+            "                        });\n" +
+            "                    }\n" +
+            "                })();\n" +
+            "            <\/script>";
+        $(".chrg-content").append(html)
+    });
 </script>
 </body>
 </html>
