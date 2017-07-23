@@ -1,0 +1,8 @@
+/*
+@说明：特殊列单元块的样式重写，激活特殊列 此css 才有意义，此文件完全可以不使用。
+*/
+
+.my-pic .woo-spcol{width:324px;padding:0;background:none;}
+.my-pic .woo-spcol .j{width:auto;border:1px solid #2386d8;}
+.my-pic .woo-spcol .mbpho{width:auto;margin-left:0;}
+.my-pic .woo-spcol li p{width:265px;}

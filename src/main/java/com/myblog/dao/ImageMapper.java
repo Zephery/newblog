@@ -20,4 +20,6 @@ public interface ImageMapper {
     int updateByPrimaryKey(Image record);
 
     List<Image> getAllImage();
+
+    int updateiht(Image image);
 }

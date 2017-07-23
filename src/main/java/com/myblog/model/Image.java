@@ -15,6 +15,8 @@ public class Image {
 
     private Integer love;
 
+    private Integer iht;
+
     public Integer getImageid() {
         return imageid;
     }
@@ -69,5 +71,13 @@ public class Image {
 
     public void setLove(Integer love) {
         this.love = love;
+    }
+
+    public Integer getIht() {
+        return iht;
+    }
+
+    public void setIht(Integer iht) {
+        this.iht = iht;
     }
 }

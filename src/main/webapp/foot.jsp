@@ -10,6 +10,7 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
+    <link rel="stylesheet" id="style-css" href="js/jingmi/jingmistyle.css" type="text/css" media="all">
 </head>
 <body>
 <footer class="footer">

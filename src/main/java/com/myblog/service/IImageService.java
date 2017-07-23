@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface IImageService {
     public List<Image> getAllImage();
+    public Integer updateiht(Image image);
+    public Image getImagebyId(Integer imageid);
 }

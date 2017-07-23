@@ -697,27 +697,7 @@
             init: function () {
                 $body.append
                 (
-                    "<div class='chroma-screen'><div class='chrg-bg'></div>" +
-                    "<div class='chrg-wrap'>" +
-                    "<div class='chrg-content'><div class='chrg-imgwrap'></div></div>" +
-                    "<div class='chrg-ui'>" +
-                    "<button class='chrgi-close chrg-no-select'></button>" +
-                    "<button class='chrg-fullscreen chrgi-maximize chrg-no-select'></button>" +
-                    "<button class='chrgi-next chrg-no-select'></button>" +
-                    "<button class='chrgi-previous chrg-no-select'></button>" +
-                    "<div class='chrg-loader'>" +
-                    "<div class='chrg-loader-line-wrap-wrap'>" +
-                    "<div class='chrg-loader-line-wrap'></div></div>" +
-                    "<div class='chrg-loader-line-wrap-wrap'>" +
-                    "<div class='chrg-loader-line-wrap'></div></div>" +
-                    "<div class='chrg-loader-line-wrap-wrap'>" +
-                    "<div class='chrg-loader-line-wrap'></div></div>" +
-                    "<div class='chrg-loader-line-wrap-wrap'>" +
-                    "<div class='chrg-loader-line-wrap'></div></div>" +
-                    "<div class='chrg-loader-line-wrap-wrap'>" +
-                    "<div class='chrg-loader-line-wrap'></div>" +
-                    "</div></div>" +
-                    "</div></div></div>"
+
                 );
 
                 //Cache some important elements

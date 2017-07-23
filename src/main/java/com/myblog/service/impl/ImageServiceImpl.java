@@ -20,4 +20,14 @@ public class ImageServiceImpl implements IImageService {
     public List<Image> getAllImage() {
         return imageMapper.getAllImage();
     }
+
+    @Override
+    public Integer updateiht(Image image) {
+        return imageMapper.updateiht(image);
+    }
+
+    @Override
+    public Image getImagebyId(Integer imageid) {
+        return imageMapper.selectByPrimaryKey(imageid);
+    }
 }

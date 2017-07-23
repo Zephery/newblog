@@ -1,0 +1,60 @@
+/*
+@说明：mobile.html 相关样式，非Woo 主体部分。移动版页面模拟。
+*/
+
+html,body{background-color:#f8f4f0;}
+#header{background-color:#fff;}
+#header h1 a{height:72px;}
+
+/* 移动版宽度设置 */
+#content{width:320px;margin:12px auto 0;}
+
+/* 瀑布流基本单元 unit */
+.my-pic .woo{overflow:hidden;width:96px;background-color:#fff;}
+.my-pic .woo img{display:block;}
+.my-pic .woo .j{position:relative;overflow:hidden;}
+
+/* 隐藏切换区域 */
+.woo-swa{display:none;}
+/* 隐藏不需要的完整翻页器 */
+.woo-pager .woo-pbr{display:none !important;}
+
+/* mask 遮罩 */
+.my-pic .woo .j > .mask{position:absolute;bottom:0;left:0;width:100%;height:40px;background:url(http://cdn.duitang.com/uploads/people/201310/14/20131014014444_YyPBG.png) repeat-x;background-size:3px 40px;}
+
+
+
+
+/* 缩小loading 图标 */
+.woo-loading{background-size:54px 20px;}
+
+/* 下一页大按钮 */
+#gonext{display:block;width:304px;margin:12px auto 16px;padding:10px 0;border:1px solid #ebebeb;text-align:center;font-size:14px;background-color:#fff;border-radius:3px;box-shadow:0px 2px 2px 0px rgba(0,0,0,0.05);}
+
+
+
+
+/* 以下为其它样式 */
+
+/* 堆糖 logo */
+h1 a{display:block;width:140px;height:96px;text-indent:-9999px;background:url(http://img4.duitang.com/uploads/files/201309/25/20130925232523_YSTKT.gif) center 12px no-repeat;}
+#footer{display:none;height:40px;padding:16px 0 0 16px;margin:0 0 0;}
+
+/* 链接引导 */
+.lattern{float:right;}
+.lattern a{margin:0 8px;}
+
+/* 文本说明 */
+#preserve{display:none;}
+#preserve h2{line-height:31px;margin:16px 0 0;padding:0 0 0 16px;font-weight:bold;font-family:'\5FAE\8F6F\96C5\9ED1';font-size:16px;}
+#preserve ul{margin:8px 0 0;}
+#preserve li{zoom:1;line-height:31px;padding:0 16px;}
+#preserve li:after{content:"\0020";display:block;height:0;overflow:hidden;clear:both;}
+#preserve li:nth-child(2n-1){background-color:#f7f7f7;}
+#preserve li p{float:left;}
+#preserve li u{float:left;width:200px;}
+
+
+
+
+

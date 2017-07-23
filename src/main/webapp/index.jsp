@@ -15,8 +15,6 @@
           href="${pageContext.request.contextPath}/wowslider/engine1/style.css"/>
     <script src="${pageContext.request.contextPath}/js/responsiveslides.min.js"></script>
     <meta charset="UTF-8">
-    <script src="js/jingmi/hm.js"></script>
-    <script src="js/jingmi/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
     <link rel="stylesheet" id="style-css" href="js/jingmi/jingmistyle.css" type="text/css" media="all">
     <!-- Start WOWSlider.com HEAD section -->
     <link rel="stylesheet" type="text/css" href="wowslider/engine1/style.css"/>

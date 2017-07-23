@@ -9,9 +9,10 @@
         <result column="content" property="content" jdbcType="VARCHAR"/>
         <result column="datetime" property="datetime" jdbcType="VARCHAR"/>
         <result column="love" property="love" jdbcType="INTEGER"/>
+        <result column="iht" property="iht" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-    imageid, imagename, imagepath, banner, content, datetime, love
+    imageid, imagename, imagepath, banner, content, datetime, love, iht
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -26,10 +27,10 @@
     <insert id="insert" parameterType="com.myblog.model.Image">
     insert into image (imageid, imagename, imagepath, 
       banner, content, datetime, 
-      love)
+      love, iht)
     values (#{imageid,jdbcType=INTEGER}, #{imagename,jdbcType=VARCHAR}, #{imagepath,jdbcType=VARCHAR}, 
       #{banner,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{datetime,jdbcType=VARCHAR}, 
-      #{love,jdbcType=INTEGER})
+      #{love,jdbcType=INTEGER}, #{iht,jdbcType=INTEGER})
   </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.Image">
         insert into image
@@ -55,6 +56,9 @@
             <if test="love != null">
                 love,
             </if>
+            <if test="iht != null">
+                iht,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="imageid != null">
@@ -77,6 +81,9 @@
             </if>
             <if test="love != null">
                 #{love,jdbcType=INTEGER},
+            </if>
+            <if test="iht != null">
+                iht,
             </if>
         </trim>
     </insert>
@@ -101,6 +108,9 @@
             <if test="love != null">
                 love = #{love,jdbcType=INTEGER},
             </if>
+            <if test="iht != null">
+                iht = #{banner,jdbcType=INTEGER},
+            </if>
         </set>
         where imageid = #{imageid,jdbcType=INTEGER}
     </update>
@@ -111,12 +121,18 @@
       banner = #{banner,jdbcType=INTEGER},
       content = #{content,jdbcType=VARCHAR},
       datetime = #{datetime,jdbcType=VARCHAR},
-      love = #{love,jdbcType=INTEGER}
-    where imageid = #{imageid,jdbcType=INTEGER}
+      love = #{love,jdbcType=INTEGER},
+      iht = #{iht,jdbcType=INTEGER}
+      where imageid = #{imageid,jdbcType=INTEGER}
   </update>
     <select id="getAllImage" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from image
     </select>
+    <update id="updateiht" parameterType="com.myblog.model.Image">
+        update image
+        set iht = #{iht,jdbcType=INTEGER}
+        where imageid = #{imageid,jdbcType=INTEGER}
+    </update>
 </mapper>

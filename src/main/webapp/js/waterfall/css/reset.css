@@ -1,0 +1,20 @@
+/*
+@说明：reset.css 可根据个人喜好，更换你的 reset.css 全局文件
+*/
+
+html,body{min-height:101%}
+body,input,button,select,textarea,th,td{font-size:12px;line-height:1.5;font-family:tahoma,arial,sans-serif;color:#666}
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0}
+
+dl,ul{list-style:none}
+li{vertical-align:middle;}
+img{border:0px}
+h1,h2,h3,h4,h5,h6{font-size:14px;font-weight:normal}
+em,i,u{font-style:normal;text-decoration:none}
+
+:focus{outline:0}
+q:before,q:after{content:''}
+
+a:link,a:visited{color:#5678a0;text-decoration:none}
+a:hover{color:#f14382}

@@ -1,0 +1,495 @@
+/*
+@说明：main.html 相关样式，非Woo 主体部分。可删除此文件运行 main.html 体验效果
+*/
+
+/* 标红链接 */
+.redlk:link,
+.redlk:visited,
+.redlk a:link,
+.redlk a:visited {
+    color: #e65592;
+    text-decoration: none;
+}
+
+.redlk:hover,
+.redlk a:hover {
+    color: #e65592;
+    text-decoration: underline;
+}
+
+/* 瀑布流基本单元 unit */
+.my-pic .woo {
+    float: left;
++ display: inline;
+    height: auto;
+    margin: 0 21px 20px 0;
+    border-top: 0 none;
+    background-color: #fff;
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+}
+
+/* .woo-f 插入节点设置背景为none */
+.my-pic .woo-f {
+    background: none
+}
+
+.my-pic .woo .blog-ppcount {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background-color: red;
+    height: 16px;
+    color: #fff;
+}
+
+.my-pic .woo .j {
+    border: 1px solid #E5E5E5;
+    width: 222px;
+    padding: 11px 0 0 0;
+    box-shadow: 1px 1px 1px rgba(240, 240, 240, .3);
+    -moz-box-shadow: 1px 1px 1px rgba(240, 240, 240, .3);
+    -webkit-box-shadow: 1px 1px 1px rgba(240, 240, 240, .3);
+    border-radius: 2px 2px 0 0;
+    -moz-border-radius: 2px 2px 0 0;
+    -webkit-border-radius: 2px 2px 0 0;
+}
+
+.my-pic .woo .mbpho {
+    margin-left: 11px;
+}
+
+.my-pic .o {
+    width: auto;
+    height: auto;
+    padding: 14px 16px 8px 15px;
+    border: 1px solid #f7f7f7;
+    border-right: 1px solid #f7f7f7;
+    border-bottom: 1px solid #f7f7f7;
+    background-color: #f7f7f7;
+}
+
+.my-pic .g {
+    clear: both;
+    overflow: hidden;
+    line-height: 1.5;
+    padding: 8px 11px 6px 11px;
+    margin: 0;
+    background-color: #f8f8f8;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+div.my-pic .mbpho {
+    float: none;
+    overflow: hidden;
+    width: 200px;
+    height: auto;
+    margin: 0 0 8px;
+}
+
+div.my-pic .mbpho img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    _width: 200px;
+    max-width: 200px;
+}
+
+/* it's important to set .a */
+.my-pic .a {
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+.my-pic .a u {
+    position: relative;
+    display: block;
+    _display: none !important;
+    width: 100%;
+    height: 80px;
+    margin-top: -80px;
+    background: url(http://cdn.duitang.com/img/0/cover.png) 0 bottom repeat-x;
+}
+
+div.my-pic .mbpho .k {
+    width: 208px;
+    background: url(http://cdn.duitang.com/uploads/people/201207/06/20120706224429_3JzGy.png) no-repeat;
+}
+
+div.my-pic .mbpho .k img {
+    float: left;
++ display: inline;
+    margin: 0 4px 4px 0;
+}
+
+/* 分享者信息 收集数 回复数 */
+.my-pic .w {
+    clear: both;
+    height: 18px;
+    overflow: hidden;
+    padding: 0 11px 12px 11px;
+    margin: 0;
+    background-color: #f8f8f8;
+}
+
+/* list 页面结合 42px 高度的区域 */
+.my-pic div.d {
+    overflow: hidden;
+    height: 28px;
+    padding: 0 11px 0 11px;
+    background-color: #fff;
+    margin: 0;
+    border-bottom: 1px solid #efeeed;
+}
+
+.my-pic .d span {
+    float: left;
++ display: inline;
+    line-height: 19px;
+    padding: 0 0 0 22px;
+    margin: 0 12px 0 0;
+    background-image: url("http://cdn.duitang.com/uploads/files/201211/26/20121126121246_VXE8F.png");
+    _background-image: url("http://cdn.duitang.com/uploads/files/201211/30/20121130160101_ePSJe.png");
+    background-repeat: no-repeat;
+    font-size: 14px;
+    color: #b4b4b4;
+}
+
+.my-pic .d .d1 {
+    background-position: -220px 0;
+}
+
+.my-pic .d .d1-done {
+    background-position: -320px 0;
+}
+
+.my-pic .d .d2 {
+    background-position: -220px -20px;
+}
+
+.my-pic .d .d2-done {
+    background-position: -320px -20px;
+}
+
+.my-pic .d .d3 {
+    background-position: -220px -40px;
+}
+
+.my-pic .d .d4 {
+    background-position: -220px -60px;
+}
+
+.my-pic .d .d5 {
+    background-position: -220px -80px;
+}
+
+/* 回复列表 */
+.my-pic ul {
+    zoom: 1;
+    display: block;
+    padding: 0 0 8px 0;
+    background-color: #f8f8f8;
+}
+
+.my-pic li {
+    zoom: 1;
+    padding: 8px 0 7px 0;
+    margin: 0 11px 0 11px;
+    border-top: 1px solid #efeeed;
+}
+
+.my-pic li:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    clear: both;
+}
+
+.my-pic li img {
+    float: left;
++ display: inline;
+    margin: 0 8px 0 0;
+}
+
+.my-pic li p {
+    float: left;
++ display: inline;
+    width: 165px;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+}
+
+.my-pic li i {
+    font-size: 10px;
+    color: #bbb;
+    margin-left: 4px
+}
+
+/*###################################################*/
+
+/* 专辑单元 */
+div div.my-album {
+    visibility: visible
+}
+
+.my-album .woo {
+    float: left;
+    width: 230px;
+    height: 308px;
+    padding: 0 0 0 1px;
+    overflow: hidden;
+    margin: 0 19px 18px 0;
+}
+
+.my-album .albbigimg {
+    position: relative;
+    height: 208px;
+}
+
+.my-album .lev0, .my-album .lev1, .my-album .lev2 {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    padding: 1px;
+    border: 1px solid #d8d8d8;
+    background-color: #fff;
+}
+
+.my-album a.lev0:link, .my-album a.lev0:visited {
+}
+
+.my-album a.lev0:hover {
+    opacity: .9;
+    filter: alpha(opacity=90);
+}
+
+.my-album p.lev1 {
+    top: 2px;
+    left: 2px;
+}
+
+.my-album p.lev2 {
+    top: 0;
+    left: 4px;
+}
+
+.my-album .lev3, .my-album .albbigimg div {
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    line-height: 28px;
+    color: #fff;
+}
+
+.my-album .lev3 {
+    width: 200px;
+    height: 28px;
+    background-color: #000;
+    opacity: .3;
+    filter: alpha(opacity=30);
+}
+
+.my-album .albbigimg div {
+    padding: 0 0 0 8px;
+}
+
+.my-album li {
+    width: 208px;
+    padding: 4px 0;
+    color: #666;
+}
+
+.my-album li span {
+    color: #bbb;
+}
+
+.my-album li.clr {
+    height: 24px;
+    overflow: hidden;
+    line-height: 28px;
+}
+
+.my-album li.clr img {
+    float: left;
++ display: inline;
+    width: 24px;
+    height: 24px;
+    margin: 0 6px 0 0;
+    vertical-align: middle;
+}
+
+.my-album li.clr a:link, .my-album li.clr a:visited {
+}
+
+/*###################################################*/
+
+/* 以下为其它样式 */
+
+/* 让翻页器居中 */
+.woo-pager {
+    text-align: center;
+}
+
+/* switch holder */
+#switchholder {
+    zoom: 1;
+    margin: 0 0 16px;
+    padding-left: 100px;
+    border-bottom: 1px solid #ebebeb;
+}
+@media (max-width: 800px) {
+    #switchholder {
+        zoom: 1;
+        margin: 0 auto 16px auto;
+        text-align: center;
+        padding-left: 20px;
+        border-bottom: 1px solid #ebebeb;
+    }
+}
+
+#switchholder:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    clear: both;
+}
+
+#switchholder li {
+    float: left;
+    margin: 0 4px 0 0;
+    list-style: none;
+}
+
+#switchholder li a {
+    float: left;
+    line-height: 19px;
+    padding: 5px 16px 4px;
++ padding: 6 px 16 px 3 px;
+    margin-top: 2px;
+    background-color: #f7f7f7;
+}
+
+#switchholder li.woo-cur a:link,
+#switchholder li.woo-cur a:visited {
+    position: relative;
+    bottom: -1px;
+    margin-top: 0;
+    border: 1px solid #ebebeb;
+    border-bottom: 1px solid #fff;
+    background-color: #e6db74;
+}
+
+/* 网页背景 */
+html, body {
+    background-color: #fff;
+}
+
+/* 堆糖 logo */
+h1 a {
+    display: block;
+    width: 140px;
+    height: 96px;
+    text-indent: -9999px;
+    background: url(http://img4.duitang.com/uploads/files/201309/25/20130925232523_YSTKT.gif) center 12px no-repeat;
+}
+
+#footer {
+    display: none;
+    height: 40px;
+    padding: 16px 0 0 16px;
+    margin: 0 0 0;
+    border-top: 1px solid #f7f7f7
+}
+
+/* 链接引导 */
+.lattern {
+    float: right;
+}
+
+.lattern a {
+    margin: 0 8px;
+}
+
+/* 文本说明 */
+#preserve {
+    display: none;
+}
+
+#preserve h2 {
+    line-height: 31px;
+    margin: 16px 0 0;
+    padding: 0 0 0 16px;
+    font-weight: bold;
+    font-family: '\5FAE\8F6F\96C5\9ED1';
+    font-size: 16px;
+}
+
+#preserve ul {
+    margin: 8px 0 0;
+}
+
+#preserve li {
+    zoom: 1;
+    line-height: 31px;
+    padding: 0 16px;
+}
+
+#preserve li:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    clear: both;
+}
+
+#preserve li:nth-child(2n-1) {
+    background-color: #f7f7f7;
+}
+
+#preserve li p {
+    float: left;
+}
+
+#preserve li u {
+    float: left;
+    width: 200px;
+}
+
+/* 外部插入进瀑布流区块 标签词 */
+#mytags {
+    padding: 8px 4px 4px 8px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    border: 1px solid #E5E5E5;
+}
+
+#mytags a {
+    display: inline-block;
+    display: -moz-inline-box;
+    -moz-box-align: stretch;
++ display: inline-block;
+    line-height: 21px;
+    padding: 2px 8px 0;
+    margin: 0 2px 4px 0;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #fff;
+    font-family: '\5B8B\4F53';
+}
+
+#mytags a {
++ display: inline
+}
+

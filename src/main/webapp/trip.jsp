@@ -5,188 +5,227 @@
     <jsp:param name="tripactive" value="active"/>
     <jsp:param name="title" value="旅行|多出门走走"/>
 </jsp:include>
-<!doctype html>
-<html lang="zh">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/chromagallery.css">
-    <style type="text/css">
-        .mygallery {
-            margin: 0 auto;
-        }
-
-        .post img {
-            display: block;
-            max-width: 100%;
-        }
-
-        .page-load-status {
-            display: none; /* hidden by default */
-            padding-top: 20px;
-            border-top: 1px solid #DDD;
-            text-align: center;
-            color: #777;
-        }
-    </style>
-    <script src="js/jquery.waterfall.js"></script>
-    <link href="${pageContext.request.contextPath}/js/mousepicture/css/lanrenzhijia.css" type="text/css"
-          rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/wowslider/engine1/style.css"/>
-    <script src="${pageContext.request.contextPath}/js/responsiveslides.min.js"></script>
+    <meta charset="utf-8"/>
+    <link href="js/waterfall/css/reset.css" rel="stylesheet"/>
+    <link href="js/waterfall/css/main.css" rel="stylesheet"/>
+    <link href="js/waterfall/css/woo.css" rel="stylesheet"/>
+    <link href="js/waterfall/css/gotop.css" rel="stylesheet"/>
+    <link href="js/waterfall/css/pagine.css" rel="stylesheet"/>
+    <link href="js/waterfall/css/resize.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="js/mymodel/jquery.my-modal.1.1.winStyle.css"/>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/waterfall/js/browser.js"></script>
+    <script src="js/waterfall/js/history.js"></script>
+    <script src="js/waterfall/js/template.min.js"></script>
+    <script src="js/waterfall/js/tabswitch.js"></script>
+    <script src="js/waterfall/js/woo.js"></script>
+    <script src="js/waterfall/js/masnunit.js"></script>
     <script type="text/javascript">
-        $(function () {
-            $("#slider").responsiveSlides({
-                auto: true,
-                nav: true,
-                speed: 500,
-                namespace: "callbacks",
-                pager: false
-            });
+        $(function(){
+            $.Woo();
         });
     </script>
-    <script src="js/jingmi/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
-    <link rel="stylesheet" id="style-css" href="js/jingmi/jingmistyle.css" type="text/css" media="all">
 </head>
 <body>
-<article style="margin-left: 13px">
-    <div class="content" style="margin: 0 auto;width: 90%">
-        <div class="chroma-gallery mygallery">
-            <article class="post">
+<div id="content">
+    <div id="woo-holder">
+        <!-- When gotop button is clicked, scrollbar will be positioned where the anchor is. -->
+        <ul id="switchholder">
+            <li class="woo-swa woo-cur"><a href="javascript:;">2017</a></li>
+            <li class="woo-swa"><a href="javascript:;">2016</a></li>
+            <li class="woo-swa"><a href="javascript:;">2015</a></li>
+            <li class="woo-swa"><a href="javascript:;">2014</a></li>
+        </ul>
+        <div class="woo-swb">
+            <!-- data-totalunits is set here, then pager nums would be fixed -->
+            <!-- It would have been Hasnext Mode if you didn't do it -->
+            <div class="woo-pcont woo-masned my-pic" data-totalunits="440">
 
-                <img src="images/thumbs/2.jpg" alt="Pic 2" data-largesrc="images/2.jpg">
-                <img src="images/thumbs/3.jpg" alt="Pic 3" data-largesrc="images/3.jpg">
-                <img src="images/thumbs/4.jpg" alt="Pic 4" data-largesrc="images/4.jpg">
-                <img src="images/thumbs/5.jpg" alt="Pic 5" data-largesrc="images/5.jpg">
-                <img src="images/thumbs/6.jpg" alt="Pic 6" data-largesrc="images/6.jpg">
-                <img src="images/thumbs/7.jpg" alt="Pic 7" data-largesrc="images/7.jpg">
-                <img src="images/thumbs/8.jpg" alt="Pic 8" data-largesrc="images/8.jpg">
-                <img src="images/thumbs/9.jpg" alt="Pic 9" data-largesrc="images/9.jpg">
-                <img src="images/thumbs/2.jpg" alt="Pic 2" data-largesrc="images/2.jpg">
-                <img src="images/thumbs/3.jpg" alt="Pic 3" data-largesrc="images/3.jpg">
-                <img src="images/thumbs/4.jpg" alt="Pic 4" data-largesrc="images/4.jpg">
-                <img src="images/thumbs/5.jpg" alt="Pic 5" data-largesrc="images/5.jpg">
-                <img src="images/thumbs/6.jpg" alt="Pic 6" data-largesrc="images/6.jpg">
-                <img src="images/thumbs/7.jpg" alt="Pic 7" data-largesrc="images/7.jpg">
-                <img src="images/thumbs/8.jpg" alt="Pic 8" data-largesrc="images/8.jpg">
-                <img src="images/thumbs/9.jpg" alt="Pic 9" data-largesrc="images/9.jpg">
-                <img src="images/thumbs/2.jpg" alt="Pic 2" data-largesrc="images/2.jpg">
-                <img src="images/thumbs/3.jpg" alt="Pic 3" data-largesrc="images/3.jpg">
-                <img src="images/thumbs/4.jpg" alt="Pic 4" data-largesrc="images/4.jpg">
-                <img src="images/thumbs/5.jpg" alt="Pic 5" data-largesrc="images/5.jpg">
-                <img src="images/thumbs/6.jpg" alt="Pic 6" data-largesrc="images/6.jpg">
-                <img src="images/thumbs/7.jpg" alt="Pic 7" data-largesrc="images/7.jpg">
-                <img src="images/thumbs/8.jpg" alt="Pic 8" data-largesrc="images/8.jpg">
-                <img src="images/thumbs/9.jpg" alt="Pic 9" data-largesrc="images/9.jpg">
-                <img src="images/thumbs/2.jpg" alt="Pic 2" data-largesrc="images/2.jpg">
-                <img src="images/thumbs/3.jpg" alt="Pic 3" data-largesrc="images/3.jpg">
-                <img src="images/thumbs/4.jpg" alt="Pic 4" data-largesrc="images/4.jpg">
-                <img src="images/thumbs/5.jpg" alt="Pic 5" data-largesrc="images/5.jpg">
-                <img src="images/thumbs/6.jpg" alt="Pic 6" data-largesrc="images/6.jpg">
-                <img src="images/thumbs/7.jpg" alt="Pic 7" data-largesrc="images/7.jpg">
-                <img src="images/thumbs/8.jpg" alt="Pic 8" data-largesrc="images/8.jpg">
-                <img src="images/thumbs/9.jpg" alt="Pic 9" data-largesrc="images/9.jpg">
-                <c:forEach var="image" items="${images}">
-                    <img src="${image.imagepath}" alt="${image.imagename}" data-largesrc="${image.imagepath}">
-                </c:forEach>
-            </article>
-        </div>
-        <div class="page-load-status">
-            <div class="loader-ellips infinite-scroll-request">
-                <span class="loader-ellips__dot"></span>
-                <span class="loader-ellips__dot"></span>
-                <span class="loader-ellips__dot"></span>
-                <span class="loader-ellips__dot"></span>
+
             </div>
-            <p class="infinite-scroll-last">End of content</p>
-            <p class="infinite-scroll-error">No more pages to load</p>
+            <div class="woo-pager"></div>
         </div>
     </div>
-</article>
+    <!-- Woo holder over -->
+</div>
+<style>
+    /* invisible holder for the page */
+    #win-holder {
+        overflow: hidden;
+        height: 0px;
+    }
+</style>
+<div id="win-holder">
+    <form action="${pageContext.request.contextPath}/ajaxpic.html?page=" id="woo-form-album">
+        <input name="user_id" type="hidden" value="48"/>
+        <input name="pic" type="hidden" value="1"/>
+    </form>
+</div>
+<script type="text/javascript" src="js/jQuery.autoIMG.js"></script>
+<script>
+    $(function () {
+        var conf = {
+            // Prefix of form id. Each form represents a subpage data request.
+            "formprefix": '#woo-form-',
 
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/chromagallery.pkgd.min.js"></script>
-<script src="js/infinite-scroll.pkgd.js"></script>
-<script type="text/javascript">
-    // $(document).ready(function()
-    // {
-    //     $(".mygallery").chromaGallery();
-    // });
-    $(document).ready(function () {
-        $(".mygallery").chromaGallery
-        ({
-            color: '#000',
-            gridMargin: 15,
-            maxColumns: 5,
-            dof: true,
-            screenOpacity: 0.8
-        });
+            // Identification of a single waterfall. There are 4 waterfalls in main.html.
+            // You can get the form in #win-holder by putting formprefix and one identification together.
+            // <form id="woo-form-(collect|original|album|favalbum)">
+            "arrform": ['album'],
+            unitsnum: 15,
+            // arrsplit, the last part of the url which has been split by page number.
+            // The first part of the url has already been put in the action attribute of the proper form.
+            // Page number can be seen neighther in the first part nor the last part.
+            // Why and how we do this? Think a simple url like '/message/list/1/tail/?type=hot'
+            // First, we put '/message/list/' in form action.
+            // Then, we can make a hidden input in this form <input type="hidden" name="type" value="hot"/>.
+            // Finally, we put '/tail/' into arrsplit.
+            // Or, we could choose no hidden input and '/tail/?type=hot' into arrsplit.
+            // Nevertheless, we put them together and get the entire url.
+            "arrsplit": ['/?type=hot', '', '', ''],
+
+            // The extend width of each common column including margin between two cols.
+            "arrmasnw": [245, 250, 250, 245],
+
+            // The margin between two cols.
+            // In this example, visible column width is 245-21=224.
+            "arrmargin": [21, 42, 42, 21],
+
+            // Diff value of special column width, default 0.
+            // Why the value is 0, not [0,0,0,0]?
+            // We simplified params by converting equal-value array [0,0,0,0] to single value 0.
+            // Params arrsplit, arrmasnw, arrmargin and arrgap can be treated on the same principle.
+            // But, param arrform is out of the principle.
+            "arrfmasnw": 0,
+
+            // The gap between units in one column.
+            "arrgap": 0,
+
+            "subpagenum": 4,
+            // Install $gopre $gonext $gotop as you like.
+            "gopre": '#gopre',
+            "gonext": '#gonext',
+            "gotop": '#gotop',
+
+            // Footer selctor, any node below the pager can be treated as footer.
+            "footer": '#footer,#preserve',
+
+            // Open resize mode.
+            // If you open it, every time window resizes, waterfall will be repainted.
+            // Not recommend in ie.
+            "resize": true,
+            "lbias": 400   // 400px load a new page
+            // Sth you do during scrolling, say, pop out a login confirm.
+//            "onScroll": function (tp) {
+            // tp current scrolltop
+//			if( (typeof ALREADYNOTICED === 'undefined' || !ALREADYNOTICED) && tp >= 1000 ){
+//				ALREADYNOTICED = true;
+//				alert("login");
+//			}
+//            }
+        };
+
+        // Let's go.
+        $.Woo(conf);
+    });
+    $(function () {
     });
 </script>
-<script>
-    function getPenPath() {
-        return '${pageContext.request.contextPath}/trip.html?page=2';
-    }
 
-    $(document).ready(function () {               //别忘了加这句，除非你没学Jquery
-        $('.mygallery').infiniteScroll({
-            path: getPenPath,
-            append: ".post",
-            status: '.page-load-status',
-            animate: true,
-            loading: {
-                finishedMsg: 'No more pages to load.',
-                msgText: "<em>Loading more products...</em>",
-                img: 'image/loading_infinite.gif'
+<div class="m-modal">
+    <div class="m-modal-dialog">
+        <div class="m-top">
+            <h4 class="m-modal-title"></h4>
+            <span class="m-modal-close">&times;</span>
+        </div>
+        <div class="m-left">
+            <img src="" id="imgId"/>
+        </div>
+        <div class="m-right">
+            <div style="width: 90%;margin: 0 auto">
+                <!--畅言-->
+                <!--PC和WAP自适应版-->
+                <div id="SOHUCS" sid=""></div>
+                <script type="text/javascript">
+                    (function () {
+                        var appid = 'cyt4SnwiG';
+                        var conf = '9c120d8118078b7ea3a728dc120a28da';
+                        var width = window.innerWidth || document.documentElement.clientWidth;
+                        if (width < 960) {
+                            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+                        } else {
+                            var loadJs = function (d, a) {
+                                var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+                                var b = document.createElement("script");
+                                b.setAttribute("type", "text/javascript");
+                                b.setAttribute("charset", "UTF-8");
+                                b.setAttribute("src", d);
+                                if (typeof a === "function") {
+                                    if (window.attachEvent) {
+                                        b.onreadystatechange = function () {
+                                            var e = b.readyState;
+                                            if (e === "loaded" || e === "complete") {
+                                                b.onreadystatechange = null;
+                                                a()
+                                            }
+                                        }
+                                    } else {
+                                        b.onload = a
+                                    }
+                                }
+                                c.appendChild(b)
+                            };
+                            loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+                                window.changyan.api.config({appid: appid, conf: conf})
+                            });
+                        }
+                    })(); </script>
+                <!--畅言end-->
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/mymodel/jquery.my-modal.1.1.js"></script>
+<script>
+    function show(a) {
+        var m1 = new MyModal.modal(function () {
+        });
+        $.ajax({
+            type: 'GET',
+            url: '${pageContext.request.contextPath}/imagedetail.html?imageid=' + a,
+            timeout: 20000,
+            success: function (data) {
+                var data = $.parseJSON(data);
+                $("#imgId").attr('src', data.imagepath);
+                $('.m-modal-title').html(data.imagename);
+                $(".m-left").autoIMG();
+                $("#SOHUCS").attr('sid', data.imageid);
+            },
+            error: function (data) {
+                alert(data)
             }
         });
-    });
+        m1.show();
+    }
 </script>
-<%--<script type="text/javascript">--%>
-<%--$(document).ready(function () {--%>
-<%--var html = "<!--畅言-->\n" +--%>
-<%--"            <!--PC和WAP自适应版-->\n" +--%>
-<%--"            <div id=\"SOHUCS\" sid=\"8888888888888\"></div>\n" +--%>
-<%--"            <script type=\"text/javascript\">\n" +--%>
-<%--"                (function () {\n" +--%>
-<%--"                    var appid = 'cyt4SnwiG';\n" +--%>
-<%--"                    var conf = '9c120d8118078b7ea3a728dc120a28da';\n" +--%>
-<%--"                    var width = window.innerWidth || document.documentElement.clientWidth;\n" +--%>
-<%--"                    if (width < 960) {\n" +--%>
-<%--"                        window.document.write('<script id=\"changyan_mobile_js\" charset=\"utf-8\" type=\"text/javascript\" src=\"https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '\"><\\/script>');\n" +--%>
-<%--"                    } else {\n" +--%>
-<%--"                        var loadJs = function (d, a) {\n" +--%>
-<%--"                            var c = document.getElementsByTagName(\"head\")[0] || document.head || document.documentElement;\n" +--%>
-<%--"                            var b = document.createElement(\"script\");\n" +--%>
-<%--"                            b.setAttribute(\"type\", \"text/javascript\");\n" +--%>
-<%--"                            b.setAttribute(\"charset\", \"UTF-8\");\n" +--%>
-<%--"                            b.setAttribute(\"src\", d);\n" +--%>
-<%--"                            if (typeof a === \"function\") {\n" +--%>
-<%--"                                if (window.attachEvent) {\n" +--%>
-<%--"                                    b.onreadystatechange = function () {\n" +--%>
-<%--"                                        var e = b.readyState;\n" +--%>
-<%--"                                        if (e === \"loaded\" || e === \"complete\") {\n" +--%>
-<%--"                                            b.onreadystatechange = null;\n" +--%>
-<%--"                                            a()\n" +--%>
-<%--"                                        }\n" +--%>
-<%--"                                    }\n" +--%>
-<%--"                                } else {\n" +--%>
-<%--"                                    b.onload = a\n" +--%>
-<%--"                                }\n" +--%>
-<%--"                            }\n" +--%>
-<%--"                            c.appendChild(b)\n" +--%>
-<%--"                        };\n" +--%>
-<%--"                        loadJs(\"https://changyan.sohu.com/upload/changyan.js\", function () {\n" +--%>
-<%--"                            window.changyan.api.config({appid: appid, conf: conf})\n" +--%>
-<%--"                        });\n" +--%>
-<%--"                    }\n" +--%>
-<%--"                })();\n" +--%>
-<%--"            <\/script>";--%>
-<%--$(".chrg-content").append(html)--%>
-<%--});--%>
-<%--//</script>--%>
+<script src="js/center.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            var win_width = $(window).width();
+            var mleft=$(".m-left");
+            if (win_width < 500) {
+                console.log(win_width);
+                mleft.autoIMG();
+            } else {
+                mleft.center();
+            }
+        });
+    })(jQuery);
+</script>
 </body>
 </html>
 <jsp:include page="foot.jsp"/>

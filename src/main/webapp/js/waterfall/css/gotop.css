@@ -1,0 +1,26 @@
+/*
+@说明：回到顶部按钮，下翻页、上翻页按钮
+*/
+
+
+
+
+/* 回到顶部 */
+#gotop{position:fixed;z-index:99999;width:50px;height:50px;bottom:8px;right:8px;;visibility:hidden;background-image:url(http://cdn.duitang.com/uploads/people/201303/08/20130308184024_8taKv.png);background-repeat:no-repeat;text-indent:-9999px;}
+#gotop:link,
+#gotop:visited{background-position:0 0;}
+#gotop:hover{background-position:0 -50px;text-decoration:none;}
+
+
+/* goto nextpage and prepage */
+#gopre,
+#gonext{visibility:hidden;position:fixed;z-index:99999;width:50px;height:100px;right:0;bottom:100px;background-image:url(http://img4.duitang.com/uploads/files/201309/25/20130925233847_PYtKS.gif);background-repeat:no-repeat;}
+
+#gonext:link,
+#gonext:visited{display:block;}
+
+#gopre:link,
+#gopre:visited{display:none;right:50px;background-position:-130px -250px;}
+
+#gonext:hover,
+#gopre:hover{background-color:rgba(230,240,250,.4);}

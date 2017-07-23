@@ -1,0 +1,28 @@
+/*
+@说明：底部翻页器
+*/
+
+
+.woo-pbr{height:60px;overflow:hidden;padding-top:16px;line-height:1;text-align:center;}
+.woo-pbr .woo-dib{height:100%}
+.woo-pbr li.woo-cur,
+.woo-pbr a:link,
+.woo-pbr a:visited{float:left;+display:inline;min-width:20px;height:20px;padding:1px 4px 0;+height:22px;+padding-top:4px;white-space:no-wrap;word-break:keep-all;text-align:center;border:1px solid #e3e2e1;border-radius:2px;background-color:#fff;color:#0052aa;font-size:14px;}
+.woo-pbr a:hover{text-decoration:none;background-color:#f6f6f6;color:#0052aa;}
+.woo-pbr li{height:40px;float:left\9;display:inline\9;margin:0 4px 0 0;}
+.woo-pbr li.woo-cur{font-weight:bold;color:#fff;border-color:#ce0149;background-color:#f14382;}
+.woo-pbr li.woo-ell{margin:10px 8px 0 6px;font-size:10px;font-weight:bold;+font-size:12px;+font-weight:normal;}
+@media all and (min-width: 0px){ .woo-pbr a{display:inline-block;float:none}.woo-pbr li{float:left}}{}
+.woo-pbr a.woo-pre,
+.woo-pbr a.woo-nxt{width:56px;text-indent:-9999px;font-weight:normal;background-image:url(http://cdn.duitang.com/uploads/item/201307/19/20130719140023_YrJaZ.png);background-repeat:no-repeat;}
+.woo-pbr a.woo-pre:link,
+.woo-pbr a.woo-pre:visited{background-position:-1px -1px;}
+.woo-pbr a.woo-pre:hover{background-position:-1px -31px;}
+.woo-pbr a.woo-nxt:link,
+.woo-pbr a.woo-nxt:visited{background-position:-71px -1px;}
+.woo-pbr a.woo-nxt:hover{background-position:-71px -31px;}
+
+
+.woo-pbr .woo-dib{float:none !important;display:inline-block;display:-moz-inline-box;-moz-box-align:stretch;+display:inline-block;vertical-align:middle}
+.woo-pbr .woo-dib{+display:inline}
+@media all and (min-width: 0px){ .woo-pbr .woo-dib{display:inline-block} }{}

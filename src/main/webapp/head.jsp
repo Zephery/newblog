@@ -119,7 +119,7 @@
                     <li><a href="${pageContext.request.contextPath}/trip.html" class="<%=request.getParameter("tripactive")%>">旅行</a></li>
                     <li><a href="${pageContext.request.contextPath}/log.html" class="<%=request.getParameter("logactive")%>">日志系统</a></li>
                     <li><a href="${pageContext.request.contextPath}/board.html" class="<%=request.getParameter("boardactive")%>">留言板</a></li>
-                    <li><a href="${pageContext.request.contextPath}/contact.jsp" class="<%=request.getParameter("contactactive")%>">关于</a></li>
+                    <li><a href="${pageContext.request.contextPath}/aboutme.jsp" class="<%=request.getParameter("aboutmeactive")%>">关于</a></li>
                     <li><a href="${pageContext.request.contextPath}/donate.jsp" class="<%=request.getParameter("donateactive")%>">捐赠</a></li>
                     <li><a href="test.jsp" class="<%=request.getParameter("testactive")%>">Test</a></li>
                 </ul>
