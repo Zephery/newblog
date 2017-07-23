@@ -51,7 +51,7 @@
     </div>
     <!-- Woo holder over -->
 </div>
-<style>
+<style type="text/css">
     /* invisible holder for the page */
     #win-holder {
         overflow: hidden;
