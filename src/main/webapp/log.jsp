@@ -23,9 +23,10 @@
     <div id="page-inner">
         <div class="row">
             <div class="col-md-5">
-                <div class="panel panel-default">
+                <div class="panel panel-default" style="margin-bottom: 0px">
                     <div class="panel-heading" style="background-color: #ffffff;width: 1178px">
-                        <a style="font-size: 20px">您的IP:${ip} ${yourcity} 统计时间范围：${daterange.get(0)} ${daterange.get(daterange.size()-1)}</a>
+                        <a style="font-size: 20px">您的IP:${ip} ${yourcity}
+                            统计时间范围：${daterange.get(0)} ${daterange.get(daterange.size()-1)}</a>
                     </div>
                 </div>
             </div>
@@ -33,9 +34,9 @@
         <div class="row">
             <div class="col-sm-6 col-xs-12">
                 <div class="panel panel-default chartJs">
-                    <div class="panel-heading">
+                    <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
                         <div class="card-title">
-                            <div>PV和UV折线图</div>
+                            <strong>PV和UV折线图</strong>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -92,9 +93,9 @@
             </div>
             <div class="col-sm-6 col-xs-12">
                 <div class="panel panel-default chartJs">
-                    <div class="panel-heading">
+                    <div class="panel-heading"  style="background-color: rgba(187,255,255,0.7)">
                         <div class="card-title">
-                            <div>平均访问时长和跳出率</div>
+                            <strong>平均访问时长和跳出率</strong>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -157,8 +158,8 @@
         <div class="row">
             <div class="col-md-5">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        来源
+                    <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
+                        <strong>来源</strong>
                     </div>
                     <div class="panel-body">
                         <div id="eeecontainer" style="width: auto;height: 421px;"></div>
@@ -210,17 +211,19 @@
             </div>
             <div class="col-md-7">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        地域
+                    <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
+                        <strong>地域</strong>
                     </div>
                     <div class="panel-body">
                         <div id="diyu" style="width: 100%;height: 421px"></div>
                         <script type="text/javascript">
                             // 基于准备好的dom，初始化echarts实例
                             var myChart = echarts.init(document.getElementById('diyu'));
+
                             function randomData() {
                                 return Math.round(Math.random() * 1000);
                             }
+
                             option = {
                                 tooltip: {
                                     trigger: 'item'
@@ -279,12 +282,12 @@
         <div class="row">
             <div class="col-md-9 col-sm-12 col-xs-12" style="width: 100%">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        前${topTens.size()}受访页面
+                    <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
+                        <strong>前${topTens.size()}受访页面</strong>
                     </div>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" style="width: 100%">
                         <tr>
-                            <th>链接</th>
+                            <th style="width: 60%">链接</th>
                             <th style="text-align: center">PV</th>
                             <th style="text-align: center">UV</th>
                             <th style="text-align: center">平均停留时长(单位:s)</th>
@@ -306,8 +309,8 @@
         <div class="row">
             <div class="col-md-9 col-sm-12 col-xs-12" style="width: 100%">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        前${rukou.size()}入口页面
+                    <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
+                        <strong> 前${rukou.size()}入口页面</strong>
                     </div>
                     <table class="table table-bordered">
                         <tr>

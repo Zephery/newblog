@@ -7552,11 +7552,11 @@ span .action-popover .popover-content .bds_more {
     overflow: hidden;
 }
 .zhifubao{
-    margin-left: 200px;
+    margin-left: 20%;
     float:left;
 }
 .wechat{
-    margin-right:200px;
+    margin-right:20%;
     float: right;
 }
 @media (max-width: 500px) {
