@@ -87,7 +87,7 @@
             <a name="comments"></a>
             <!--畅言-->
             <!--PC和WAP自适应版-->
-            <div id="SOHUCS" sid="8888888888888"></div>
+            <div id="SOHUCS" sid="8888888888888" style="margin-top: 40px"></div>
             <script type="text/javascript">
                 (function () {
                     var appid = 'cyt4SnwiG';

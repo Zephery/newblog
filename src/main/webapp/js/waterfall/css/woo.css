@@ -1,5 +1,5 @@
 /* loading */
-.woo-loading{height:40px;background:url(http://cdn.duitang.com/uploads/people/201307/30/20130730175612_KU2dF.gif) center 12px no-repeat;}
+.woo-loading{height:40px;background:url(http://ohlrxdl4p.bkt.clouddn.com/20130730175612_KU2dF.gif) center 12px no-repeat;}
 
 /* woo-pcont 为空节点时，ie6 ie7下，节点的高度不为0 */
 .woo-pcont{+height:0}
