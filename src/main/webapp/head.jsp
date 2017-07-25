@@ -157,7 +157,7 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="index.jsp"><img src="images/logo.png" alt=""></a>
         </div>
-        <form action="${pageContext.request.contextPath}/search.html"
+        <form action="${pageContext.request.contextPath}/search.html" method="post"
               class="navbar-form navbar-right" role="search" onsubmit="return checkData()">
             <div class="form-group">
                 <input type="text" id="q" name="keyword" value="${keyword}" class="form-control" placeholder="Search...">

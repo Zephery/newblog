@@ -40,7 +40,7 @@
             <c:forEach var="blog" items="${blogs}">
                 <article class="excerpt">
                     <header>
-                        <a class="label label-important"
+                        <a class="label label-important" style="padding-bottom: 5px;"
                            href="${pageContext.request.contextPath}/getcategory.html?categoryid=${blog.categoryid}">${blog.category.cName}<i
                                 class="label-arrow"></i></a>
                         <h2><a href="${pageContext.request.contextPath}/getblogdetail.html?blogid=${blog.blogid}"

@@ -32,7 +32,6 @@ public class BlogController {
     @Resource
     private ICategoryService categoryService;
 
-    private BlogIndex blogIndex = new BlogIndex();
 
     @RequestMapping("tech")
     public ModelAndView to_show_article(HttpServletRequest request) {       //博客主页
@@ -114,16 +113,16 @@ public class BlogController {
         return modelAndView;
     }
 
-    @RequestMapping("/search")
+    @RequestMapping(value = "/search")
     public ModelAndView search(
             @RequestParam(value = "keyword", required = false) String keyword,
             @RequestParam(value = "pagenum", required = false) Integer pagenum) {
         ModelAndView modelAndView = new ModelAndView();
         try {
-            List<Blog> lists = blogIndex.searchBlog(keyword);
             if (pagenum == null) {
                 pagenum = 1;
             }
+            List<Blog> lists = blogService.getLuceneBlog(pagenum,keyword,10);
             PageHelper.startPage(pagenum, 10);
             List<Category> categories = categoryService.getAllCategory();
             modelAndView.addObject("categories", categories);
@@ -148,7 +147,7 @@ public class BlogController {
             modelAndView.addObject("endpage", endpage);
             modelAndView.addObject("blogs", blogs.getList());
             modelAndView.addObject("totalpages", blogs.getPages());
-            modelAndView.addObject("pageNum", blogs.getPageNum());
+            modelAndView.addObject("pageNum", pagenum);
             modelAndView.addObject("keyword", keyword);
             modelAndView.setViewName("searchresult");
         } catch (Exception e) {

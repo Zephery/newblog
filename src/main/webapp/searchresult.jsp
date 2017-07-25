@@ -48,7 +48,7 @@
             <c:forEach var="blog" items="${blogs}">
                 <article class="excerpt">
                     <header>
-                        <a class="label label-important"
+                        <a class="label label-important"  style="padding-bottom: 5px;"
                            href="getcategory.html?categoryid=${blog.categoryid}">${blog.category.cName}<i
                                 class="label-arrow"></i></a>
                         <h2><a href="getblogdetail.html?blogid=${blog.blogid}"
@@ -77,10 +77,10 @@
                 <div class="pagination" style="background: transparent">
                     <ul>
                         <li>
-                            <a href="${pageContext.request.contextPath}/index.html?pagenum=1">首页</a>
+                            <a href="${pageContext.request.contextPath}/search.html?keyword=${keyword}&pagenum=1">首页</a>
                         </li>
                         <li class="prev-page"><a
-                                href="${pageContext.request.contextPath}/index.html?pagenum=${pageNum - 1}">上一页</a>
+                                href="${pageContext.request.contextPath}/search.html?keyword=${keyword}&pagenum=${pageNum - 1}">上一页</a>
                         </li>
                         <c:forEach var="pageIndex" begin="${startpage}" end="${endpage}">
                             <c:choose>
@@ -89,18 +89,18 @@
                                 </c:when>
                                 <c:otherwise>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/index.html?pagenum=${pageIndex}">${pageIndex}</a>
+                                        <a href="${pageContext.request.contextPath}/search.html?keyword=${keyword}&pagenum=${pageIndex}">${pageIndex}</a>
                                     </li>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
                         <c:if test="${pageNum != totalpages}">
                             <li class="next-page"><a
-                                    href="${pageContext.request.contextPath}/index.html?pagenum=${pageNum+1}">下一页</a>
+                                    href="${pageContext.request.contextPath}/search.html?keyword=${keyword}&pagenum=${pageNum+1}">下一页</a>
                             </li>
                         </c:if>
                         <li>
-                            <a href="${pageContext.request.contextPath}/index.html?pagenum=${totalpages}">末页</a>
+                            <a href="${pageContext.request.contextPath}/search.html?keyword=${keyword}&pagenum=${totalpages}">末页</a>
                         </li>
                         <li>
                             <a>共${totalpages}页</a>

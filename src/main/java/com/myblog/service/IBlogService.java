@@ -18,4 +18,5 @@ public interface IBlogService {
     public List<Blog> getByHits();
     public List<Blog> getLife();
     public List<Blog> getAllTechBlog();
+    public List<Blog> getLuceneBlog(Integer pageStart,String keyword,Integer pagehits);
 }

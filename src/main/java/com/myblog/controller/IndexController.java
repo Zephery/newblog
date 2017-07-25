@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.myblog.lucene.BlogIndex;
 import com.myblog.model.Blog;
 import com.myblog.model.Category;
 import com.myblog.model.KeyAndValue;
@@ -17,14 +18,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by Zephery on 2016/8/5.
@@ -37,7 +39,7 @@ public class IndexController {
     private IBlogService blogService;
     @Resource
     private ICategoryService categoryService;
-
+    private BlogIndex blogIndex = new BlogIndex();
 
     @RequestMapping("index")
     public ModelAndView index(@RequestParam(value = "typeId", required = false) String typeId,
@@ -107,43 +109,16 @@ public class IndexController {
     }
 
 
-    @RequestMapping("mark2")
-    public ModelAndView mark() {
-        ModelAndView modelAndView = new ModelAndView();
-        String str = "[TOC]\n" +
-                "\n" +
-                "#### Disabled options\n" +
-                "\n" +
-                "- TeX (Based on KaTeX);\n" +
-                "- Emoji;\n" +
-                "- Task lists;\n" +
-                "- HTML tags decode;\n" +
-                "- Flowchart and Sequence Diagram;\n" +
-                "\n" +
-                "#### Editor.md directory\n" +
-                "\n" +
-                "    editor.md/\n" +
-                "            lib/\n" +
-                "            css/\n" +
-                "            scss/\n" +
-                "            tests/\n" +
-                "            fonts/\n" +
-                "            images/\n" +
-                "            plugins/\n" +
-                "            examples/\n" +
-                "            languages/     \n" +
-                "            editormd.js\n" +
-                "            ...\n" +
-                "\n" +
-                "```html\n" +
-                "<!-- English -->\n" +
-                "<script src=\"../dist/js/languages/en.js\"></script>\n" +
-                "\n" +
-                "<!-- 繁體中文 -->\n" +
-                "<script src=\"../dist/js/languages/zh-tw.js\"></script>\n" +
-                "```\n";
-        modelAndView.addObject("str", str);
-        modelAndView.setViewName("mark2");
-        return modelAndView;
+    @RequestMapping(value = "lucene")
+    public String jfoe() throws Exception {
+        List<Blog> blogs = blogService.getAllBlog();
+        for (Blog blog : blogs) {
+            try{
+                blogIndex.addIndex(blog);
+            }catch (IOException e){
+                logger.error("jofijo",e);
+            }
+        }
+        return "success";
     }
 }

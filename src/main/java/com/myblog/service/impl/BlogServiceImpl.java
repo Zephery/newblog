@@ -4,6 +4,7 @@ import com.myblog.dao.BlogMapper;
 import com.myblog.dao.CategoryMapper;
 import com.myblog.dao.RelationMapper;
 import com.myblog.dao.TagMapper;
+import com.myblog.lucene.BlogIndex;
 import com.myblog.model.Blog;
 import com.myblog.model.Category;
 import com.myblog.model.Tag;
@@ -13,7 +14,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,12 +26,13 @@ import java.util.List;
 public class BlogServiceImpl implements IBlogService {
     private static final Logger logger = LoggerFactory.getLogger(BlogServiceImpl.class);
     private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-    @Autowired
+    @Resource
     private BlogMapper blogMapper;
-    @Autowired
+    @Resource
     private CategoryMapper categoryMapper;
-    @Autowired
+    @Resource
     private TagMapper tagMapper;
+    private BlogIndex blogIndex = new BlogIndex();
 
     @Override
     public List<Blog> getAllBlog() {
@@ -146,6 +150,21 @@ public class BlogServiceImpl implements IBlogService {
             } catch (Exception e) {
                 logger.error("转换格式错误", e);
             }
+        }
+        return blogs;
+    }
+
+    @Override
+    public List<Blog> getLuceneBlog(Integer pageStart,String keyword,Integer pagehits) {
+        List<Blog> blogs = new ArrayList<>();
+        try {
+            blogs = blogIndex.searchBlog(pageStart,keyword,pagehits);
+            for (Blog blog : blogs) {
+                blog.setCategory(categoryMapper.selectByPrimaryKey(blog.getCategoryid()));
+                blog.setTags(tagMapper.getTagByBlogId(blog.getBlogid()));
+            }
+        } catch (Exception e) {
+            logger.error("搜索錯誤", e);
         }
         return blogs;
     }
