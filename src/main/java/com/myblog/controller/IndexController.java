@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -110,7 +111,7 @@ public class IndexController {
 
 
     @RequestMapping(value = "lucene")
-    public String jfoe() throws Exception {
+    public void jfoe(HttpServletResponse response) throws Exception {
         List<Blog> blogs = blogService.getAllBlog();
         for (Blog blog : blogs) {
             try{
@@ -119,6 +120,6 @@ public class IndexController {
                 logger.error("jofijo",e);
             }
         }
-        return "success";
+        response.getWriter().write("success");
     }
 }

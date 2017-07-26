@@ -57,6 +57,7 @@ public class BlogIndex {
         doc.add(new TextField("content", Jsoup.parse(blog.getContent()).text(), Field.Store.YES));
         doc.add(new StringField("categoryid", blog.getCategory().getcId().toString(), Field.Store.YES));
         doc.add(new TextField("imageurl", blog.getImageurl(), Field.Store.YES));
+        doc.add(new StringField("hits",String.valueOf(blog.getHits()),Field.Store.YES));
         writer.addDocument(doc);
         writer.close();
     }
@@ -108,6 +109,7 @@ public class BlogIndex {
             blog.setCreateAt(DateTime.parse(doc.get("create_at")).toString());
             blog.setImageurl(doc.get("imageurl"));
             blog.setCategoryid(Integer.parseInt(doc.get("categoryid")));
+            blog.setHits(Integer.parseInt(doc.get("hits")));
             String title = doc.get("title");
             String content = doc.get("content");
             if (title != null) {

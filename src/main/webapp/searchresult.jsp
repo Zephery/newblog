@@ -13,22 +13,13 @@
     <jsp:param name="title" value="主页"/>
 </jsp:include>
 <!DOCTYPE html>
-<!-- saved from url=(0022)http://cuiqingcai.com/ -->
 <html>
 <head>
     <link href="${pageContext.request.contextPath}/js/mousepicture/css/lanrenzhijia.css" type="text/css"
           rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/wowslider/engine1/style.css"/>
     <script src="${pageContext.request.contextPath}/js/responsiveslides.min.js"></script>
     <meta charset="UTF-8">
-    <script src="js/jingmi/hm.js"></script>
-    <script src="js/jingmi/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
     <link rel="stylesheet" id="style-css" href="js/jingmi/jingmistyle.css" type="text/css" media="all">
-    <!-- Start WOWSlider.com HEAD section -->
-    <link rel="stylesheet" type="text/css" href="wowslider/engine1/style.css"/>
-    <script type="text/javascript" src="wowslider/engine1/jquery.js"></script>
-    <!-- End WOWSlider.com HEAD section -->
     <script type="text/javascript">
         $(function () {
             $("#slider").responsiveSlides({
@@ -45,10 +36,23 @@
 <section class="contentcontainer">
     <div class="content-wrap">
         <div class="content">
+            <div class="breadcrumbs" style="margin-bottom: 10px;">
+                <a title="返回首页" href="${pageContext.request.contextPath}">
+                    <i class="fa fa-home fa-2x"></i>
+                </a>
+                <small>&gt;</small>
+                <a href="${pageContext.request.contextPath}/search.html?keyword=${keyword}&pagenum=1"
+                   style="font-size: 18px">搜索结果</a>
+                <c:if test="${keyword!=null}">
+                    <small>&gt;</small>
+                    <a href="${pageContext.request.contextPath}/search.html?keyword=${keyword}pagenum=1"
+                       style="font-size: 18px">${keyword}</a>
+                </c:if>
+            </div>
             <c:forEach var="blog" items="${blogs}">
                 <article class="excerpt">
                     <header>
-                        <a class="label label-important"  style="padding-bottom: 5px;"
+                        <a class="label label-important" style="padding-bottom: 5px;"
                            href="getcategory.html?categoryid=${blog.categoryid}">${blog.category.cName}<i
                                 class="label-arrow"></i></a>
                         <h2><a href="getblogdetail.html?blogid=${blog.blogid}"
