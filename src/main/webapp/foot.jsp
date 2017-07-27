@@ -21,7 +21,7 @@
             <a rel="nofollow" target="_blank" href="https://www.qcloud.com/">腾讯云主机</a>
             &amp; <a rel="nofollow"
                      target="_blank"
-                     href="http://www.qiniu.com/">七牛云存储 </a>丨鲁ICP备14030596号
+                     href="http://www.qiniu.com/">七牛云存储 </a>丨粤ICP备17092242号
         </div>
     </div>
 </footer>

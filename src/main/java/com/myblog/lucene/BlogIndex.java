@@ -1,18 +1,9 @@
 package com.myblog.lucene;
 
-import java.io.File;
-import java.io.StringReader;
-import java.nio.file.Paths;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.myblog.model.Blog;
-import com.myblog.model.Category;
 import com.myblog.util.DateUtil;
 import com.myblog.util.StringUtil;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
 import org.apache.lucene.document.Document;
@@ -29,6 +20,13 @@ import org.joda.time.DateTime;
 import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.StringReader;
+import java.nio.file.Paths;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -140,6 +138,10 @@ public class BlogIndex {
         return blogIndexList;
     }
 
+    /**
+     * refresh lucene
+     * @param blogs
+     */
     public static void refreshlucene(List<Blog> blogs) {
         try {
             BlogIndex blogIndex = new BlogIndex();

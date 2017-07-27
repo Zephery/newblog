@@ -10,13 +10,26 @@ import java.util.List;
  */
 public interface IBlogService {
     public List<Blog> getAllBlog();
+
     public List<Blog> getByCategoryId(int categoryid);
+
     public Blog getBlogDetail(Integer blogid);
+
     public Tag getTagByTid(Integer t_id);
+
     public List<Blog> getBlogByTagId(Integer tId);
+
     public List<Blog> getBanner();
+
     public List<Blog> getByHits();
+
     public List<Blog> getLife();
+
     public List<Blog> getAllTechBlog();
-    public List<Blog> getLuceneBlog(Integer pageStart,String keyword,Integer pagehits);
+
+    public List<Blog> getLuceneBlog(Integer pageStart, String keyword, Integer pagehits);
+
+    public void ajaxbuild();
+
+    public List<String> ajaxsearch(String keyword);
 }
