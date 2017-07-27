@@ -3,9 +3,6 @@ package com.myblog.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.myblog.lucene.BlogIndex;
 import com.myblog.model.Blog;
 import com.myblog.model.Category;
 import com.myblog.model.Tag;
@@ -25,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Zephery on 2016/8/5.
@@ -192,8 +190,11 @@ public class BlogController {
     @RequestMapping("ajaxsearch")
     public void ajaxsearch(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String keyword = request.getParameter("keyword");
-        List<String> list = blogService.ajaxsearch(keyword);
+        if (StringUtils.isEmpty(keyword)) {
+            return;
+        }
+        Set<String> set = blogService.ajaxsearch(keyword);
         Gson gson = new Gson();
-        response.getWriter().write(gson.toJson(list));
+        response.getWriter().write(gson.toJson(set));
     }
 }

@@ -1,8 +1,9 @@
 package com.myblog.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,15 +12,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 public class BoardController {
-//    @RequestMapping("board")
-//    public ModelAndView modelAndView(){
-//        ModelAndView modelAndView=new ModelAndView();
-//        modelAndView.setViewName("board");
-//        return modelAndView;
-//    }
+    /**
+     * logger
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(BoardController.class);
+
     @RequestMapping("board")
-    public String modelAndView(HttpServletResponse response){
-        response.setHeader("Content-Encoding","gzip");
+    public String modelAndView(HttpServletResponse response) {
+        response.setHeader("Content-Encoding", "gzip");
         return "board";
     }
 }
