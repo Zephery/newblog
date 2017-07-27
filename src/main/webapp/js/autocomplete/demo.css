@@ -1,0 +1,25 @@
+body{
+font-family: 'Open Sans', sans-serif;
+}
+h1,h2,h3{
+font-family: 'Roboto Slab', serif;
+color:#333;
+}
+code, kbd, pre, samp {
+font-family: monospace, monospace;
+font-size: 1em;
+}
+h3 {
+font-family: 'Roboto Slab', serif;
+font-weight: 300;
+line-height: 1;
+margin: 0 0 10px;
+}
+input[type=text].form-control{
+	border: 1px solid #8EA1B6;
+	border-radius:0px;
+}
+#first_example{
+	margin:50px auto;
+	max-width:350px;
+}
