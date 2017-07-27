@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -24,9 +25,9 @@ import java.util.List;
 @Controller
 public class LifeController {
     private final static Logger logger = LoggerFactory.getLogger(LifeController.class);
-    @Autowired
+    @Resource
     private IBlogService blogService;
-    @Autowired
+    @Resource
     private ICategoryService categoryService;
 
     @RequestMapping("life")
