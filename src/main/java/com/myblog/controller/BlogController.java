@@ -192,6 +192,9 @@ public class BlogController {
     @RequestMapping("ajaxsearch")
     public void ajaxsearch(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String keyword = request.getParameter("keyword");
+        if (StringUtils.isEmpty(keyword)) {
+            return;
+        }
         List<String> list = blogService.ajaxsearch(keyword);
         Gson gson = new Gson();
         response.getWriter().write(gson.toJson(list));
