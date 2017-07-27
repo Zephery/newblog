@@ -19,9 +19,8 @@
             <a href="${pageContext.request.contextPath}" title="Zephery">Zephery</a> 版权所有丨采用<a
                 href="http://yusi123.com/"> 欲思 </a>主题丨基于 Spring Spring MVC Mybatis 构建 © 2017丨托管于
             <a rel="nofollow" target="_blank" href="https://www.qcloud.com/">腾讯云主机</a>
-            &amp; <a rel="nofollow"
-                     target="_blank"
-                     href="http://www.qiniu.com/">七牛云存储 </a>丨粤ICP备17092242号
+            &amp; <a rel="nofollow" target="_blank" href="http://www.qiniu.com/">七牛云存储 </a>丨
+            <a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn">粤ICP备17092242号-1</a>
         </div>
     </div>
 </footer>
