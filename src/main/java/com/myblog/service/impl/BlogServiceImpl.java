@@ -1,5 +1,7 @@
 package com.myblog.service.impl;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.myblog.dao.BlogMapper;
 import com.myblog.dao.CategoryMapper;
 import com.myblog.dao.TagMapper;
@@ -10,8 +12,8 @@ import com.myblog.model.Blog;
 import com.myblog.model.Category;
 import com.myblog.model.Tag;
 import com.myblog.service.IBlogService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.search.suggest.Lookup.LookupResult;
 import org.apache.lucene.search.suggest.analyzing.AnalyzingInfixSuggester;
 import org.apache.lucene.store.Directory;
@@ -27,9 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Zephery on 2017/1/18.
@@ -166,6 +166,14 @@ public class BlogServiceImpl implements IBlogService {
         return blogs;
     }
 
+    /**
+     * 根据lucene搜索blog
+     *
+     * @param pageStart
+     * @param keyword
+     * @param pagehits
+     * @return
+     */
     @Override
     public List<Blog> getLuceneBlog(Integer pageStart, String keyword, Integer pagehits) {
         List<Blog> blogs = new ArrayList<>();
@@ -181,6 +189,9 @@ public class BlogServiceImpl implements IBlogService {
         return blogs;
     }
 
+    /**
+     * ajax简历索引
+     */
     @Override
     public void ajaxbuild() {
         try {
@@ -196,18 +207,52 @@ public class BlogServiceImpl implements IBlogService {
         }
     }
 
+    /**
+     * 根据关键词查找
+     *
+     * @param keyword
+     * @return
+     */
     @Override
-    public List<String> ajaxsearch(String keyword) {
+    public Set<String> ajaxsearch(String keyword) {
         try {
             Directory dir = FSDirectory.open(Paths.get("autocomplete"));
             SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
             AnalyzingInfixSuggester suggester = new AnalyzingInfixSuggester(dir, analyzer);
             List<String> list = lookup(suggester, keyword);
-            return list;
+            list.sort(new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    if (o1.length() > o2.length()) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                }
+            });
+            Set<String> set = new LinkedHashSet<>();
+            for (String string : list) {
+                set.add(string);
+            }
+            ssubSet(set, 7);
+            return set;
         } catch (IOException e) {
             System.err.println("Error!");
             return null;
         }
+    }
+
+    /**
+     * Set截取
+     *
+     * @param objSet
+     * @param size
+     */
+    private static void ssubSet(Set<String> objSet, int size) {
+        if (CollectionUtils.isEmpty(objSet)) {
+            Collections.emptySet();
+        }
+        ImmutableSet.copyOf(Iterables.limit(objSet, size));
     }
 
     /**
@@ -221,15 +266,15 @@ public class BlogServiceImpl implements IBlogService {
     ) throws IOException {
         //先以contexts为过滤条件进行过滤，再以title为关键字进行筛选，根据weight值排序返回前2条
         //第3个布尔值即是否每个Term都要匹配，第4个参数表示是否需要关键字高亮
-        List<LookupResult> results = suggester.lookup(keyword, 10, true, true);
+        List<LookupResult> results = suggester.lookup(keyword, 20, true, true);
         System.out.println(keyword);
         List<String> list = new ArrayList<>();
         for (LookupResult result : results) {
             list.add(result.key.toString());
             //从payload中反序列化出Blog对象
-            BytesRef bytesRef = result.payload;
-            InputStream is = Tools.bytes2InputStream(bytesRef.bytes);
-            Blog blog = (Blog) Tools.deSerialize(is);
+//            BytesRef bytesRef = result.payload;
+//            InputStream is = Tools.bytes2InputStream(bytesRef.bytes);
+//            Blog blog = (Blog) Tools.deSerialize(is);
 //            System.out.println("blog-Name:" + blog.getTitle());
 //            System.out.println("blog-Content:" + blog.getContent());
 //            System.out.println("blog-image:" + blog.getImageurl());

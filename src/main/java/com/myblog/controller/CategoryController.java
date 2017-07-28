@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -20,7 +21,7 @@ import java.util.List;
 @Controller
 public class CategoryController {
     private final static Logger logger= LoggerFactory.getLogger(CategoryController.class);
-    @Autowired
+    @Resource
     private IBlogService blogService;
 
     @RequestMapping("getbytagid")
