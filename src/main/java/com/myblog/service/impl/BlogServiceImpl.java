@@ -196,7 +196,6 @@ public class BlogServiceImpl implements IBlogService {
     public void ajaxbuild() {
         try {
             Directory dir = FSDirectory.open(Paths.get("autocomplete"));
-            RAMDirectory indexDir = new RAMDirectory();   //   RAM
             SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
             AnalyzingInfixSuggester suggester = new AnalyzingInfixSuggester(dir, analyzer);
             //创建Blog测试数据
@@ -267,7 +266,6 @@ public class BlogServiceImpl implements IBlogService {
         //先以contexts为过滤条件进行过滤，再以title为关键字进行筛选，根据weight值排序返回前2条
         //第3个布尔值即是否每个Term都要匹配，第4个参数表示是否需要关键字高亮
         List<LookupResult> results = suggester.lookup(keyword, 20, true, true);
-        System.out.println(keyword);
         List<String> list = new ArrayList<>();
         for (LookupResult result : results) {
             list.add(result.key.toString());

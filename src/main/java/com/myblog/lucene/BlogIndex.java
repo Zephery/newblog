@@ -55,7 +55,7 @@ public class BlogIndex {
         doc.add(new TextField("content", Jsoup.parse(blog.getContent()).text(), Field.Store.YES));
         doc.add(new StringField("categoryid", blog.getCategory().getcId().toString(), Field.Store.YES));
         doc.add(new TextField("imageurl", blog.getImageurl(), Field.Store.YES));
-        doc.add(new StringField("hits",String.valueOf(blog.getHits()),Field.Store.YES));
+        doc.add(new StringField("hits", String.valueOf(blog.getHits()), Field.Store.YES));
         writer.addDocument(doc);
         writer.close();
     }
@@ -78,6 +78,14 @@ public class BlogIndex {
         writer.close();
     }
 
+    /**
+     * 首先是对标题进行查找，然后对文章内容进行查找
+     * @param pageStart
+     * @param q
+     * @param pagehits
+     * @return
+     * @throws Exception
+     */
     public List<Blog> searchBlog(Integer pageStart, String q, Integer pagehits) throws Exception {
         dir = FSDirectory.open(Paths.get("blog_index"));
         IndexReader reader = DirectoryReader.open(dir);
@@ -85,15 +93,13 @@ public class BlogIndex {
         ScoreDoc lastBottom = null;//相当于pageSize
         BooleanQuery.Builder booleanQuery = new BooleanQuery.Builder();
         SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
-        QueryParser parser1 = new QueryParser("title", analyzer);
+        QueryParser parser1 = new QueryParser("title", analyzer);//对文章标题进行搜索
         Query query1 = parser1.parse(q);
-        QueryParser parser2 = new QueryParser("content", analyzer);
+        QueryParser parser2 = new QueryParser("content", analyzer);//对文章内容进行搜索
         Query query2 = parser2.parse(q);
         booleanQuery.add(query1, BooleanClause.Occur.SHOULD);
         booleanQuery.add(query2, BooleanClause.Occur.SHOULD);
-        TopDocs hits = search.searchAfter(lastBottom, booleanQuery.build(), pagehits);
-        pageStart += hits.scoreDocs.length;//下一次分页总在上一次分页的基础上
-        lastBottom = hits.scoreDocs[hits.scoreDocs.length - 1];
+        TopDocs hits = search.searchAfter(lastBottom, booleanQuery.build(), pagehits);  //lastBottom（pageSize），pagehits（pagenum）
         QueryScorer scorer = new QueryScorer(query1);         //
         Fragmenter fragmenter = new SimpleSpanFragmenter(scorer);
         SimpleHTMLFormatter simpleHTMLFormatter = new SimpleHTMLFormatter("<b><font color='red'>", "</font></b>");
@@ -122,9 +128,8 @@ public class BlogIndex {
             if (content != null) {
                 TokenStream tokenStream = analyzer.tokenStream("content", new StringReader(content));
                 String hContent = highlighter.getBestFragment(tokenStream, content);
-                System.out.println(hContent);
                 if (StringUtil.isEmpty(hContent)) {
-                    if (content.length() <= 400) {
+                    if (content.length() <= 400) {//对结果进行截取
                         blog.setSummary(content);
                     } else {
                         blog.setSummary(content.substring(0, 400));
@@ -140,6 +145,7 @@ public class BlogIndex {
 
     /**
      * refresh lucene
+     *
      * @param blogs
      */
     public static void refreshlucene(List<Blog> blogs) {

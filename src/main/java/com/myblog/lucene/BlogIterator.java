@@ -27,11 +27,11 @@ public class BlogIterator implements InputIterator {
      * logger
      */
     private static final Logger logger = LoggerFactory.getLogger(BlogIterator.class);
-    private Iterator<Blog> productIterator;
+    private Iterator<Blog> blogIterator;
     private Blog currentBlog;
 
-    public BlogIterator(Iterator<Blog> productIterator) {
-        this.productIterator = productIterator;
+    public BlogIterator(Iterator<Blog> blogIterator) {
+        this.blogIterator = blogIterator;
     }
 
     public boolean hasContexts() {
@@ -48,10 +48,10 @@ public class BlogIterator implements InputIterator {
     }
 
     public BytesRef next() {
-        if (productIterator.hasNext()) {
-            currentBlog = productIterator.next();
+        if (blogIterator.hasNext()) {
+            currentBlog = blogIterator.next();
             try {
-                //返回当前Project的name值，把product类的name属性值作为key
+                //返回当前Project的name值，把blog类的name属性值作为key
                 return new BytesRef(Jsoup.parse(currentBlog.getTitle()).text().getBytes("utf8"));
             } catch (Exception e) {
                 e.printStackTrace();
@@ -64,7 +64,7 @@ public class BlogIterator implements InputIterator {
 
     /**
      * 将Blog对象序列化存入payload
-     * [这里仅仅是个示例，其实这种做法不可取,一般不会把整个对象存入payload,这样索引体积会很大，浪费硬盘空间]
+     * 可以只将所需要的字段存入payload，这里对整个实体类进行序列化，方便以后需求，不建议采用这种方法
      */
     public BytesRef payload() {
         try {
@@ -81,9 +81,7 @@ public class BlogIterator implements InputIterator {
     }
 
     /**
-     * 把产品的销售区域存入context，context里可以是任意的自定义数据，一般用于数据过滤
-     * Set集合里的每一个元素都会被创建一个TermQuery，你只是提供一个Set集合，至于new TermQuery
-     * Lucene底层API去做了，但你必须要了解底层干了些什么
+     * 文章标题
      */
     public Set<BytesRef> contexts() {
         try {
@@ -98,7 +96,6 @@ public class BlogIterator implements InputIterator {
     /**
      * 返回权重值，这个值会影响排序
      * 这里以产品的销售量作为权重值，weight值即最终返回的热词列表里每个热词的权重值
-     * 怎么设计返回这个权重值，发挥你们的想象力吧
      */
     public long weight() {
         return currentBlog.getHits();   //change to hits
