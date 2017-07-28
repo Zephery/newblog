@@ -99,6 +99,25 @@
     </script>
     <!--百度站内搜索验证-->
     <meta name="baidu-site-verification" content="me5PEgngG6"/>
+    <!--百度链接提交，自动推送-->
+    <script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    <!--360搜索-->
+    <meta name="360-site-verification" content="db160af16a61f74e2657c0540f4ccd0d"/>
+    <!--搜狗-->
+    <meta name="sogou_site_verification" content="ASSLaoFirg"/>
 </head>
 <body>
 <!--navigation-->
