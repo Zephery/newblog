@@ -45,17 +45,6 @@
         });
     </script>
     <script>
-        (function (socialShare) {
-            socialShare.plugin('weixin', function (args) {
-                return {
-                    url: '${pageContext.request.contextPath}/images/weixin.png',
-                    background: '#33b54c',
-                    title: '我的微信',
-                    icon: 'fa-wechat',
-                    target: "_qrcode"
-                };
-            });
-        })(window.socialShare);
         $(function () {
             var el = document.getElementById('share-area');
             var links = [{
@@ -65,7 +54,10 @@
                 plugin: 'weibo',
                 url: 'http://weibo.com/1925306000'
             }, {
-                plugin: 'weixin'
+                plugin: 'facebook',
+                args: {
+                    id: 'zephery.wen'           // Your facebook ID
+                }
             }];
             var options = {
                 size: 'sm'

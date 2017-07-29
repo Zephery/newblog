@@ -9,10 +9,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <aside class="sidebar">
-    <div class="widget widget_text" style="height: 105px;margin-bottom: 0px">
-            <iframe src="//www.seniverse.com/weather/weather.aspx?uid=U35799536E&cid=CHBJ000000&l=&p=SMART&
-            a=1&u=C&s=13&m=2&x=1&d=0&fc=&bgc=2E93D9&bc=&ti=0&in=0&li="
-                    frameborder="0" scrolling="no" width="330" height="105" allowTransparency="true"></iframe>
+    <div class="widget widget_text" style="height: 115px;margin-bottom: 0px">
+        <iframe src="//www.seniverse.com/weather/weather.aspx?uid=U35799536E&cid=CHBJ000000&l=&p=SMART&a=1&u=C&s=13&m=
+        0&x=1&d=0&fc=&bgc=2E93D9&bc=&ti=0&in=1&li=" frameborder="0" scrolling="no" width="330" height="115"
+                allowTransparency="true"></iframe>
     </div>
     <div class="widget d_postlist">
         <div class="title"><h2>猜你喜欢</h2></div>
