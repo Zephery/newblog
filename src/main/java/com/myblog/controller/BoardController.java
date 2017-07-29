@@ -12,11 +12,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 public class BoardController {
-    /**
-     * logger
-     */
-    private static final Logger LOGGER = LoggerFactory.getLogger(BoardController.class);
-
+    //logger
+    private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
     @RequestMapping("board")
     public String modelAndView(HttpServletResponse response) {
         response.setHeader("Content-Encoding", "gzip");
