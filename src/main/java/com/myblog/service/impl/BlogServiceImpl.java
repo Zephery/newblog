@@ -37,7 +37,6 @@ import java.util.*;
 @Service("blogService")
 public class BlogServiceImpl implements IBlogService {
     private static final Logger logger = LoggerFactory.getLogger(BlogServiceImpl.class);
-    private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     @Resource
     private BlogMapper blogMapper;
     @Resource
@@ -51,11 +50,6 @@ public class BlogServiceImpl implements IBlogService {
         List<Blog> blogs = blogMapper.getAllBlog();
         for (Blog blog : blogs) {
             blog.setCategory(categoryMapper.selectByPrimaryKey(blog.getCategoryid()));
-            try {
-                blog.setCreateAt(df.format(df.parse(blog.getCreateAt())));
-            } catch (Exception e) {
-                logger.error("转换格式错误", e);
-            }
         }
         return blogs;
     }
@@ -63,13 +57,6 @@ public class BlogServiceImpl implements IBlogService {
     @Override
     public List<Blog> getByCategoryId(int categoryid) {
         List<Blog> blogs = blogMapper.getByCategoryId(categoryid);
-        for (Blog blog : blogs) {
-            try {
-                blog.setCreateAt(df.format(df.parse(blog.getCreateAt())));
-            } catch (Exception e) {
-                logger.error("转换格式错误", e);
-            }
-        }
         return blogs;
     }
 
@@ -101,11 +88,6 @@ public class BlogServiceImpl implements IBlogService {
         List<Blog> blogs = blogMapper.getBlogByTagId(tId);
         for (Blog blog : blogs) {
             blog.setCategory(categoryMapper.selectByPrimaryKey(blog.getCategoryid()));
-            try {
-                blog.setCreateAt(df.format(df.parse(blog.getCreateAt())));
-            } catch (Exception e) {
-                logger.error("转换格式错误", e);
-            }
         }
         return blogs;
     }
@@ -115,11 +97,6 @@ public class BlogServiceImpl implements IBlogService {
         List<Blog> blogs = blogMapper.getBanner();
         for (Blog blog : blogs) {
             blog.setCategory(categoryMapper.selectByPrimaryKey(blog.getCategoryid()));
-            try {
-                blog.setCreateAt(df.format(df.parse(blog.getCreateAt())));
-            } catch (Exception e) {
-                logger.error("转换格式错误", e);
-            }
         }
         return blogs;
     }
@@ -129,11 +106,6 @@ public class BlogServiceImpl implements IBlogService {
         List<Blog> blogs = blogMapper.getHits();
         for (Blog blog : blogs) {
             blog.setCategory(categoryMapper.selectByPrimaryKey(blog.getCategoryid()));
-            try {
-                blog.setCreateAt(df.format(df.parse(blog.getCreateAt())));
-            } catch (Exception e) {
-                logger.error("转换格式错误", e);
-            }
         }
         return blogs;
     }
@@ -143,11 +115,6 @@ public class BlogServiceImpl implements IBlogService {
         List<Blog> blogs = blogMapper.getLife();
         for (Blog blog : blogs) {
             blog.setCategory(categoryMapper.selectByPrimaryKey(blog.getCategoryid()));
-            try {
-                blog.setCreateAt(df.format(df.parse(blog.getCreateAt())));
-            } catch (Exception e) {
-                logger.error("转换格式错误", e);
-            }
         }
         return blogs;
     }
@@ -157,11 +124,6 @@ public class BlogServiceImpl implements IBlogService {
         List<Blog> blogs = blogMapper.getAllTechBlog();
         for (Blog blog : blogs) {
             blog.setCategory(categoryMapper.selectByPrimaryKey(blog.getCategoryid()));
-            try {
-                blog.setCreateAt(df.format(df.parse(blog.getCreateAt())));
-            } catch (Exception e) {
-                logger.error("转换格式错误", e);
-            }
         }
         return blogs;
     }
