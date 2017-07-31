@@ -79,6 +79,7 @@
     <!--//end-smoth-scrolling-->
     <meta name="keywords" content="温志怀,wenzhihuai,java,机器学习,python,博客"/>
     <meta name="description" content="温志怀的个人网站"/>
+    <meta name="author" content="温志怀"/>
     <!--百度统计-->
     <script type="text/javascript">
         var _hmt = _hmt || [];
