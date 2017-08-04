@@ -364,6 +364,12 @@
             <artifactId>cglib</artifactId>
             <version>3.2.5</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.activiti/activiti-engine -->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-engine</artifactId>
+            <version>6.0.0</version>
+        </dependency>
 
     </dependencies>
     <build>
