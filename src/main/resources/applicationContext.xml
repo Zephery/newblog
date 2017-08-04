@@ -64,7 +64,7 @@
     <bean id="myTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="jobDetail"/>
         <!-- cron表达式 -->
-        <property name="cronExpression" value="0/30 * * ? * *" />
+        <property name="cronExpression" value="0 59 2 ? * FRI" />
     </bean>
     <!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
     <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
