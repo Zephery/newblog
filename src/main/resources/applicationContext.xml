@@ -52,6 +52,30 @@
             </array>
         </property>
     </bean>
+
+
+    <!-- 数据库定时备份服务  start-->
+    <!-- 定义调用对象和调用对象的方法 -->
+    <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="mysqlService"/>
+        <property name="targetMethod" value="exportDataBase"/>
+    </bean>
+    <!--定义触发时间  -->
+    <bean id="myTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="jobDetail"/>
+        <!-- cron表达式 -->
+        <property name="cronExpression" value="0/30 * * ? * *" />
+    </bean>
+    <!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="myTrigger"/>
+            </list>
+        </property>
+    </bean>
+    <!-- 数据库定时备份服务  end -->
+
     <!-- 事务管理（transaction manager） -->
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

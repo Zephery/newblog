@@ -2,6 +2,7 @@ package com.myblog.util;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.joda.time.DateTime;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,14 +25,18 @@ public class TestUtil {
                 result.append(line);
             }
             reader.close();
-            JsonParser parser=new JsonParser();
-            JsonObject object=parser.parse(result.toString()).getAsJsonObject();
+            JsonParser parser = new JsonParser();
+            JsonObject object = parser.parse(result.toString()).getAsJsonObject();
             return object.get("city").toString();
         } catch (IOException e) {
             return "读取失败";
         }
     }
-    public static void main(String args[]){
-        System.out.println(getAddressByIP("223.73.168.248"));
+
+    public static void main(String args[]) {
+        String file_path = System.getProperty("user.dir") + "/sql/";//保存的路径
+        System.out.println(file_path);
+        String file_name = "myblog" + DateTime.now().toString("yyyyMMddHHmmss") + ".sql";
+        System.out.println(file_path + file_name);
     }
 }
