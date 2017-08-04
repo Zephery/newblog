@@ -29,7 +29,6 @@
         <!-- Web -->
         <jsp.version>2.2</jsp.version>
         <jstl.version>1.2</jstl.version>
-        <servlet.version>3.0.1</servlet.version>
         <!-- Spring -->
         <spring-framework.version>4.2.3.RELEASE</spring-framework.version>
         <!-- Logging -->
@@ -337,12 +336,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
-            <type>jar</type>
         </dependency>
+
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
@@ -378,12 +378,13 @@
             <artifactId>cglib</artifactId>
             <version>3.2.5</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.activiti/activiti-engine -->
-        <dependency>
-            <groupId>org.activiti</groupId>
-            <artifactId>activiti-engine</artifactId>
-            <version>6.0.0</version>
-        </dependency>
+        <!--导致网站打开错误-->
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.activiti/activiti-engine &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.activiti</groupId>-->
+            <!--<artifactId>activiti-engine</artifactId>-->
+            <!--<version>6.0.0</version>-->
+        <!--</dependency>-->
         <!--mysql定时器，自动备份-->
         <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
         <dependency>

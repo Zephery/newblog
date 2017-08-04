@@ -66,6 +66,8 @@ public class MysqlUtil {
             }
             session.close();
             connection.close();
+            stdout.close();
+            br.close();
             logger.info("backup finish");
         } catch (Exception e) {
             logger.error("error", e);
