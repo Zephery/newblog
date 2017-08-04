@@ -34,9 +34,15 @@ public class TestUtil {
     }
 
     public static void main(String args[]) {
-        String file_path = System.getProperty("user.dir") + "/sql/";//保存的路径
-        System.out.println(file_path);
+        String os = System.getProperty("os.name");
+        String file_path = null;
+        if (os.toLowerCase().startsWith("win")) {
+            file_path = System.getProperty("user.dir") + "\\sql\\";
+        } else {
+            file_path = System.getProperty("user.dir") + "/sql/";//保存的路径
+        }
         String file_name = "myblog" + DateTime.now().toString("yyyyMMddHHmmss") + ".sql";
-        System.out.println(file_path + file_name);
+        String file = file_path + file_name;
+        System.out.println(file);
     }
 }
