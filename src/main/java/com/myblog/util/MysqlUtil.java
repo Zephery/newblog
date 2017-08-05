@@ -17,7 +17,7 @@ import java.io.InputStreamReader;
  * Created with IntelliJ IDEA.
  * User: Zephery
  * Time: 2017/8/4 10:50
- * Description:
+ * Description: MySql使用Quartz自动备份
  */
 @Component("mysqlService")
 public class MysqlUtil {
