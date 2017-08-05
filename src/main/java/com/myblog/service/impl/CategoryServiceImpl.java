@@ -3,9 +3,9 @@ package com.myblog.service.impl;
 import com.myblog.dao.CategoryMapper;
 import com.myblog.model.Category;
 import com.myblog.service.ICategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Service("categoryService")
 public class CategoryServiceImpl implements ICategoryService {
-    @Autowired
+    @Resource
     private CategoryMapper categoryMapper;
 
     @Override
