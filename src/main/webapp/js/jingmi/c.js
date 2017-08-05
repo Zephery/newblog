@@ -1,1 +1,0 @@
-;window.onerror=function(){return!0};

@@ -33,8 +33,6 @@
         });
     </script>
     <meta charset="UTF-8">
-    <script src="js/jingmi/hm.js"></script>
-    <script src="js/jingmi/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
     <link rel="stylesheet" id="style-css" href="js/jingmi/jingmistyle.css" type="text/css" media="all">
 </head>
 <body class="home blog hPC">
