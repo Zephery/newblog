@@ -15,7 +15,7 @@
     <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
     <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
     <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
-    <script type="text/javascript" src="js/echarts.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
     <script type="text/javascript" src="js/china.js"></script>
 </head>
 <body class="home blog hPC">
