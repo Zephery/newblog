@@ -314,6 +314,146 @@ public class IpLogExample {
             addCriterion("ip_time not between", value1, value2, "ipTime");
             return (Criteria) this;
         }
+
+        public Criteria andAreaIsNull() {
+            addCriterion("area is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAreaIsNotNull() {
+            addCriterion("area is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAreaEqualTo(String value) {
+            addCriterion("area =", value, "area");
+            return (Criteria) this;
+        }
+
+        public Criteria andAreaNotEqualTo(String value) {
+            addCriterion("area <>", value, "area");
+            return (Criteria) this;
+        }
+
+        public Criteria andAreaGreaterThan(String value) {
+            addCriterion("area >", value, "area");
+            return (Criteria) this;
+        }
+
+        public Criteria andAreaGreaterThanOrEqualTo(String value) {
+            addCriterion("area >=", value, "area");
+            return (Criteria) this;
+        }
+
+        public Criteria andAreaLessThan(String value) {
+            addCriterion("area <", value, "area");
+            return (Criteria) this;
+        }
+
+        public Criteria andAreaLessThanOrEqualTo(String value) {
+            addCriterion("area <=", value, "area");
+            return (Criteria) this;
+        }
+
+        public Criteria andAreaLike(String value) {
+            addCriterion("area like", value, "area");
+            return (Criteria) this;
+        }
+
+        public Criteria andAreaNotLike(String value) {
+            addCriterion("area not like", value, "area");
+            return (Criteria) this;
+        }
+
+        public Criteria andAreaIn(List<String> values) {
+            addCriterion("area in", values, "area");
+            return (Criteria) this;
+        }
+
+        public Criteria andAreaNotIn(List<String> values) {
+            addCriterion("area not in", values, "area");
+            return (Criteria) this;
+        }
+
+        public Criteria andAreaBetween(String value1, String value2) {
+            addCriterion("area between", value1, value2, "area");
+            return (Criteria) this;
+        }
+
+        public Criteria andAreaNotBetween(String value1, String value2) {
+            addCriterion("area not between", value1, value2, "area");
+            return (Criteria) this;
+        }
+
+        public Criteria andUriIsNull() {
+            addCriterion("uri is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUriIsNotNull() {
+            addCriterion("uri is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUriEqualTo(String value) {
+            addCriterion("uri =", value, "uri");
+            return (Criteria) this;
+        }
+
+        public Criteria andUriNotEqualTo(String value) {
+            addCriterion("uri <>", value, "uri");
+            return (Criteria) this;
+        }
+
+        public Criteria andUriGreaterThan(String value) {
+            addCriterion("uri >", value, "uri");
+            return (Criteria) this;
+        }
+
+        public Criteria andUriGreaterThanOrEqualTo(String value) {
+            addCriterion("uri >=", value, "uri");
+            return (Criteria) this;
+        }
+
+        public Criteria andUriLessThan(String value) {
+            addCriterion("uri <", value, "uri");
+            return (Criteria) this;
+        }
+
+        public Criteria andUriLessThanOrEqualTo(String value) {
+            addCriterion("uri <=", value, "uri");
+            return (Criteria) this;
+        }
+
+        public Criteria andUriLike(String value) {
+            addCriterion("uri like", value, "uri");
+            return (Criteria) this;
+        }
+
+        public Criteria andUriNotLike(String value) {
+            addCriterion("uri not like", value, "uri");
+            return (Criteria) this;
+        }
+
+        public Criteria andUriIn(List<String> values) {
+            addCriterion("uri in", values, "uri");
+            return (Criteria) this;
+        }
+
+        public Criteria andUriNotIn(List<String> values) {
+            addCriterion("uri not in", values, "uri");
+            return (Criteria) this;
+        }
+
+        public Criteria andUriBetween(String value1, String value2) {
+            addCriterion("uri between", value1, value2, "uri");
+            return (Criteria) this;
+        }
+
+        public Criteria andUriNotBetween(String value1, String value2) {
+            addCriterion("uri not between", value1, value2, "uri");
+            return (Criteria) this;
+        }
     }
 
     /**

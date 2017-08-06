@@ -3,6 +3,7 @@ package com.myblog.filter;
 import com.myblog.dao.IpLogMapper;
 import com.myblog.model.IpLog;
 import com.myblog.util.IPUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,11 @@ public class BaseInterceptor implements HandlerInterceptor {
     @Resource
     private IpLogMapper ipLogMapper;
 
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) {
+        return true;
+    }
+
     /**
      * 获取一个新的session，并将它的ip地址存入数据库中
      *
@@ -37,25 +43,27 @@ public class BaseInterceptor implements HandlerInterceptor {
      * @return
      */
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) {
+    public void postHandle(HttpServletRequest request,
+                           HttpServletResponse response,
+                           Object o, ModelAndView modelAndView) throws Exception {
         try {
+            logger.info("start record ip");
+            String uri = request.getRequestURI();
+            if (StringUtils.isEmpty(uri) || uri.equals("/")) {
+                return;
+            }
             if (request.getSession().isNew()) {     //判断是不是新的一个session
                 String real_ip = IPUtils.getIpAddr(request);
                 IpLog ipLog = new IpLog();
                 ipLog.setIp(real_ip);
                 ipLog.setIpTime(DateTime.now().toDate());
+                ipLog.setArea(IPUtils.getAddressByIP(real_ip));
+                ipLog.setUri(uri);
                 ipLogMapper.insert(ipLog);
             }
         } catch (Exception e) {
             logger.error("preHandle error", e);
         }
-        return true;
-    }
-
-    @Override
-    public void postHandle(HttpServletRequest httpServletRequest,
-                           HttpServletResponse httpServletResponse,
-                           Object o, ModelAndView modelAndView) throws Exception {
     }
 
     @Override

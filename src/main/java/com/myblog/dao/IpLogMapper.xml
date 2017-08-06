@@ -5,6 +5,8 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="ip_time" jdbcType="TIMESTAMP" property="ipTime" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="uri" jdbcType="VARCHAR" property="uri" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, ip, ip_time
+    id, ip, ip_time, area, uri
   </sql>
   <select id="selectByExample" parameterType="com.myblog.model.IpLogExample" resultMap="BaseResultMap">
     select
@@ -106,10 +108,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.myblog.model.IpLog">
-    insert into ip_log (id, ip, ip_time
-      )
-    values (#{id,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{ipTime,jdbcType=TIMESTAMP}
-      )
+    insert into ip_log (id, ip, ip_time, 
+      area, uri)
+    values (#{id,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{ipTime,jdbcType=TIMESTAMP}, 
+      #{area,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.myblog.model.IpLog">
     insert into ip_log
@@ -123,6 +125,12 @@
       <if test="ipTime != null">
         ip_time,
       </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="uri != null">
+        uri,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -133,6 +141,12 @@
       </if>
       <if test="ipTime != null">
         #{ipTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="uri != null">
+        #{uri,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -154,6 +168,12 @@
       <if test="record.ipTime != null">
         ip_time = #{record.ipTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uri != null">
+        uri = #{record.uri,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -163,7 +183,9 @@
     update ip_log
     set id = #{record.id,jdbcType=INTEGER},
       ip = #{record.ip,jdbcType=VARCHAR},
-      ip_time = #{record.ipTime,jdbcType=TIMESTAMP}
+      ip_time = #{record.ipTime,jdbcType=TIMESTAMP},
+      area = #{record.area,jdbcType=VARCHAR},
+      uri = #{record.uri,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -177,13 +199,21 @@
       <if test="ipTime != null">
         ip_time = #{ipTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="uri != null">
+        uri = #{uri,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.myblog.model.IpLog">
     update ip_log
     set ip = #{ip,jdbcType=VARCHAR},
-      ip_time = #{ipTime,jdbcType=TIMESTAMP}
+      ip_time = #{ipTime,jdbcType=TIMESTAMP},
+      area = #{area,jdbcType=VARCHAR},
+      uri = #{uri,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
