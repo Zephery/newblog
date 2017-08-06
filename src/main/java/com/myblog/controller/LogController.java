@@ -28,7 +28,7 @@ public class LogController {
 
     @RequestMapping("log")
     public ModelAndView log(HttpServletRequest request) {
-        JedisUtil jedis=JedisUtil.getInstance();    //remember not to close
+        JedisUtil jedis = JedisUtil.getInstance();    //remember not to close
         String temp = jedis.get("daterange");
         String pv_count = jedis.get("pv_count");
         String visitor_count = jedis.get("visitor_count");
@@ -39,6 +39,8 @@ public class LogController {
         String source = jedis.get("source");
         String rukou_str = jedis.get("rukouyemian");
         String diyu_str = jedis.get("diyu");
+        String pv_sum = jedis.get("pv_sum");
+        String uv_sum = jedis.get("uv_sum");
         Gson gson = new Gson();
         JsonParser parser = new JsonParser();
         //前十访问页面
@@ -105,6 +107,8 @@ public class LogController {
         modelAndView.addObject("avg_visit_time", avg_visit_time);
         modelAndView.addObject("diyu", diyu);
         modelAndView.addObject("diyumax", diyu.get(0).getPv_count());
+        modelAndView.addObject("pv_sum", pv_sum);
+        modelAndView.addObject("uv_sum", uv_sum);
         modelAndView.setViewName("log");
         return modelAndView;
     }

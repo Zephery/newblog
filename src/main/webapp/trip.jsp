@@ -16,7 +16,6 @@
     <link href="js/waterfall/css/pagine.css" rel="stylesheet"/>
     <link href="js/waterfall/css/resize.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="js/mymodel/jquery.my-modal.1.1.winStyle.css"/>
-    <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/waterfall/js/browser.js"></script>
     <script src="js/waterfall/js/history.js"></script>
     <script src="js/waterfall/js/template.min.js"></script>

@@ -29,7 +29,6 @@
             src="http://assets.changyan.sohu.com/upload/plugins/plugins.count.js">
     </script>
     <link rel="stylesheet" href="js/mdeditor/css/editormd.preview.css"/>
-    <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/mdeditor/lib/marked.min.js"></script>
     <script src="js/mdeditor/lib/prettify.min.js"></script>
     <script src="js/mdeditor/lib/raphael.min.js"></script>

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page isELIgnored="false" %>
 <jsp:include page="head.jsp">
     <jsp:param name="logactive" value="active"/>
@@ -10,24 +11,46 @@
 <head>
     <meta charset="utf-8"/>
     <title>日志系统</title>
-    <script src="js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" id="style-css" href="js/jingmi/jingmistyle.css" type="text/css" media="all">
     <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
     <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
     <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
-    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/3.6.2/echarts.min.js"></script>
     <script type="text/javascript" src="js/china.js"></script>
+    <style>
+        th {
+            text-align: center;
+        }
+
+        td {
+            text-align: center;
+        }
+    </style>
 </head>
 <body class="home blog hPC">
 <section class="container">
     <div id="page-inner">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-5" style="width: 100%;padding-bottom: 20px">
                 <div class="panel panel-default" style="margin-bottom: 0px">
-                    <div class="panel-heading" style="background-color: #ffffff;width: 1178px">
-                        <a style="font-size: 20px">您的IP:${ip} ${yourcity}
-                            统计时间范围：${daterange.get(0)} ${daterange.get(daterange.size()-1)}</a>
-                    </div>
+                    <table class="table table-bordered">
+                        <tr style="background-color: rgba(187,255,255,0.7)">
+                            <th>您的IP</th>
+                            <th style="text-align: center">您的地址</th>
+                            <th style="text-align: center">统计时间范围</th>
+                            <th style="text-align: center">本站上周总PV</th>
+                            <th style="text-align: center">本站上周总UV</th>
+                        </tr>
+                        <tbody>
+                        <tr>
+                            <td>${ip}</td>
+                            <td>${yourcity}</td>
+                            <td>${fn:replace(daterange.get(0),"\"","")}至${fn:replace(daterange.get(daterange.size()-1),"\"","")}</td>
+                            <td>${pv_sum}</td>
+                            <td>${uv_sum}</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -93,7 +116,7 @@
             </div>
             <div class="col-sm-6 col-xs-12">
                 <div class="panel panel-default chartJs">
-                    <div class="panel-heading"  style="background-color: rgba(187,255,255,0.7)">
+                    <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
                         <div class="card-title">
                             <strong>平均访问时长和跳出率</strong>
                         </div>
@@ -287,7 +310,7 @@
                     </div>
                     <table class="table table-bordered" style="width: 100%">
                         <tr>
-                            <th style="width: 60%">链接</th>
+                            <th style="width: 60%;text-align: left">链接</th>
                             <th style="text-align: center">PV</th>
                             <th style="text-align: center">UV</th>
                             <th style="text-align: center">平均停留时长(单位:s)</th>
@@ -295,10 +318,10 @@
                         <tbody>
                         <c:forEach var="topten" items="${topTens}">
                             <tr>
-                                <td>${topten.name}</td>
-                                <td style="text-align: center">${topten.pv_count}</td>
-                                <td style="text-align: center">${topten.visitor_count}</td>
-                                <td style="text-align: center">${topten.average_stay_time}</td>
+                                <td style="text-align: left">${topten.name}</td>
+                                <td>${topten.pv_count}</td>
+                                <td>${topten.visitor_count}</td>
+                                <td>${topten.average_stay_time}</td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -314,18 +337,18 @@
                     </div>
                     <table class="table table-bordered">
                         <tr>
-                            <th>链接</th>
-                            <th style="text-align: center">PV</th>
-                            <th style="text-align: center">UV</th>
-                            <th style="text-align: center">平均停留时长(单位:s)</th>
+                            <th style="text-align: left">链接</th>
+                            <th>PV</th>
+                            <th>UV</th>
+                            <th>平均停留时长(单位:s)</th>
                         </tr>
                         <tbody>
                         <c:forEach var="topten" items="${rukou}">
                             <tr>
-                                <td>${topten.name}</td>
-                                <td style="text-align: center">${topten.pv_count}</td>
-                                <td style="text-align: center">${topten.visitor_count}</td>
-                                <td style="text-align: center">${topten.average_stay_time}</td>
+                                <td style="text-align: left">${topten.name}</td>
+                                <td>${topten.pv_count}</td>
+                                <td>${topten.visitor_count}</td>
+                                <td>${topten.average_stay_time}</td>
                             </tr>
                         </c:forEach>
                         </tbody>
