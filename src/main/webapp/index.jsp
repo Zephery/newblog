@@ -18,7 +18,6 @@
     <link rel="stylesheet" id="style-css" href="js/jingmi/jingmistyle.css" type="text/css" media="all">
     <!-- Start WOWSlider.com HEAD section -->
     <link rel="stylesheet" type="text/css" href="wowslider/engine1/style.css"/>
-    <script type="text/javascript" src="wowslider/engine1/jquery.js"></script>
     <!-- End WOWSlider.com HEAD section -->
     <script type="text/javascript">
         $(function () {
