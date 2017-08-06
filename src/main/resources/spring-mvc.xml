@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:beans="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
         http://www.springframework.org/schema/mvc   
@@ -21,7 +21,10 @@
     <mvc:resources location="/fonts/" mapping="/fonts/**"/>
     <mvc:resources location="/images/" mapping="/images/**"/>
     <mvc:resources location="/js/" mapping="/js/**"/>
-    <!-- 视图解析器 -->
+    <!--自定义拦截器-->
+    <mvc:interceptors>
+        <bean class="com.myblog.filter.BaseInterceptor"/>
+    </mvc:interceptors>
     <!--扫描自动依赖注入的包名 -->
     <context:component-scan base-package="com.myblog">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>

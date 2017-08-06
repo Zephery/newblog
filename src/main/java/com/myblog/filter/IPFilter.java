@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 这种方法无法导致ipLogMapper无法注入，有时间再自行修改，其中包括web.xml中的修改。
+ */
 @Component
 public class IPFilter implements Filter {
     //logger
