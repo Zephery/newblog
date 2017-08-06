@@ -22,6 +22,7 @@
         <typeAlias alias="Blog" type="com.myblog.model.Blog"/>
         <typeAlias alias="Catalog" type="com.myblog.model.Category"/>
         <typeAlias alias="Image" type="com.myblog.model.Image"/>
+        <typeAlias alias="IpLog" type="com.myblog.model.IpLog"/>
     </typeAliases>
     <!--mybatis分页插件   -->
     <plugins>

@@ -72,6 +72,11 @@
             <param-value>true</param-value>
         </init-param>
     </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!--缓存-->
     <filter>
         <filter-name>cacheControlFilter</filter-name>
         <filter-class>com.myblog.filter.CacheControlFilter</filter-class>
@@ -80,8 +85,21 @@
         <filter-name>cacheControlFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <filter-mapping>
-        <filter-name>encodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    <!-- ip过滤器 -->
+    <!--<filter>-->
+        <!--<filter-name>ipFilter</filter-name>-->
+        <!--<filter-class>com.myblog.filter.IPFilter</filter-class>-->
+        <!--<init-param>-->
+            <!--<param-name>forbidIps</param-name>-->
+            <!--<param-value>192.168.1.108,192.168.6.89,192.168.6.99</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>ipFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.jsp</location>
+    </error-page>
 </web-app>
