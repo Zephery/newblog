@@ -18,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,8 +25,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Zephery on 2016/8/5.
@@ -81,7 +81,6 @@ public class IndexController {
         mav.addObject("pageNum", blogs.getPageNum());
         mav.addObject("banners", banners);
         mav.setViewName("index");
-        logger.info("index");
         return mav;
     }
 
@@ -91,7 +90,6 @@ public class IndexController {
         ModelAndView modelAndView = new ModelAndView();
         JsonParser parser = new JsonParser();
         String str = jedis.get("biaoqian");
-        logger.info("redis biaoqian:" + str);
         JsonArray jsonArray = (JsonArray) parser.parse(str);
         Iterator iterator = jsonArray.iterator();
         List<KeyAndValue> biaoqian = new ArrayList<>();

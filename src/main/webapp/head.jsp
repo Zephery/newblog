@@ -13,7 +13,7 @@
 <head>
     <title><%=request.getParameter("title")%>
     </title>
-    <link type="image/x-icon" rel="shortcut icon" href="${pageContext.request.contextPath}/images/66.jpg"/>
+    <link type="image/x-icon" rel="shortcut icon" href="http://ohlrxdl4p.bkt.clouddn.com/66.jpg"/>
     <link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
     <link href="css/style.css" type="text/css" rel="stylesheet" media="all">
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
