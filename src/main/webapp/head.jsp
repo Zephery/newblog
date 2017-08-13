@@ -77,6 +77,7 @@
         });
     </script>
     <!--//end-smoth-scrolling-->
+    <!--SEO-->
     <meta name="title" content="Zephery | 温志怀的个人网站">
     <meta name="keywords" content="温志怀,wenzhihuai,java,机器学习,python,博客"/>
     <meta name="description" content="温志怀的个人网站"/>
