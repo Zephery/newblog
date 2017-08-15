@@ -399,6 +399,30 @@
             <artifactId>ganymed-ssh2</artifactId>
             <version>262</version>
         </dependency>
+        <!-- http缓存 -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient-cache</artifactId>
+            <version>4.5.3</version>
+        </dependency>
+        <!--http的mime类型都在这里面-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.5.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore-nio -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore-nio</artifactId>
+            <version>4.4.6</version>
+        </dependency>
+
         <!--java执行python-->
         <!--<dependency>-->
             <!--<groupId>org.python</groupId>-->

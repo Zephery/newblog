@@ -1,4 +1,4 @@
-package com.myblog.util;
+package com.myblog.JMX;
 
 import com.sun.management.OperatingSystemMXBean;
 
@@ -17,14 +17,15 @@ import java.util.concurrent.TimeUnit;
  * Created with IntelliJ IDEA.
  * User: Zephery
  * Time: 2017/8/12 13:50
- * Description: 远程连接的时候，在服务器上用hostname -i查看是否为127.0.0.1，如果是，则要配置-Djava.rmi.server.hostname=your ip address。
+ * Description: 远程连接的时候，在服务器上用hostname -i查看是否为127.0.0.1，如果是，则要
+ * 配置-Djava.rmi.server.hostname=your ip address。
  * 在catalina.sh前面配置
  * JAVA_OPTS="$JAVA_OPTS -Djava.rmi.server.hostname=123.206.28.24
  * -Dcom.sun.management.jmxremote.port=8888
  * -Dcom.sun.management.jmxremote.ssl=false
  * -Dcom.sun.management.jmxremote.authenticate=false"
  */
-public class JMXClient {
+public class JmxCC {
     public static void main(String[] args) {
         try {
 
@@ -85,7 +86,7 @@ public class JMXClient {
             System.out.println("启动时间:" + df.format(starttime));
 
             Long timespan = (Long) mbsc.getAttribute(runtimeObjName, "Uptime");
-            System.out.println("连续工作时间:" + JMXClient.formatTimeSpan(timespan));
+            System.out.println("连续工作时间:" + JmxCC.formatTimeSpan(timespan));
             // ------------------------ JVM -------------------------
             // 堆使用率
             ObjectName heapObjName = new ObjectName("java.lang:type=Memory");
@@ -167,9 +168,9 @@ public class JMXClient {
             long freePhysicalMemorySize = opMXbean.getFreePhysicalMemorySize();
             // 已使用的物理内存
             long usedMemorya = (opMXbean.getTotalPhysicalMemorySize() - opMXbean.getFreePhysicalMemorySize());
-            System.out.println(totalMemorySize/1024/1024);
-            System.out.println(freePhysicalMemorySize/1024/1024);
-            System.out.println(usedMemorya/1024/1024);
+            System.out.println(totalMemorySize / 1024 / 1024);
+            System.out.println(freePhysicalMemorySize / 1024 / 1024);
+            System.out.println(usedMemorya / 1024 / 1024);
         } catch (Exception e) {
             e.printStackTrace();
         }
