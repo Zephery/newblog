@@ -1,20 +1,22 @@
 package com.myblog.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
+import com.myblog.JMX.JMXClient;
 import com.myblog.model.FanPie;
 import com.myblog.model.TopTen;
 import com.myblog.util.IPUtils;
 import com.myblog.util.JedisUtil;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -111,5 +113,17 @@ public class LogController {
         modelAndView.addObject("uv_sum", uv_sum);
         modelAndView.setViewName("log");
         return modelAndView;
+    }
+
+    @RequestMapping("/jmx")
+    @ResponseBody
+    public void jmx(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int aa = Integer.parseInt(JMXClient.getInstance().getJVMUsage().toString());
+        JsonObject object = new JsonObject();
+        object.addProperty("name", DateTime.now().toString("HH:mm:ss"));
+        object.addProperty("value", aa / 1024);
+        JsonArray array = new JsonArray();
+        array.add(object);
+        response.getWriter().write(array.toString());
     }
 }

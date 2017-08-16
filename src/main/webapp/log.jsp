@@ -357,7 +357,176 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-sm-6 col-xs-12">
+                <div class="panel panel-default chartJs">
+                    <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
+                        <div class="card-title">
+                            <strong>JVM</strong>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="jvm" style="width: auto;height: 330px"></div>
+                        <!--JVM-->
+                        <script type="text/javascript">
+                            var myChart = echarts.init(document.getElementById('jvm'));
+
+                            function randomData() {
+                                now = new Date(+now + oneDay);
+                                value = value + Math.random() * 21 - 10;
+                                return {
+                                    name: now.toString(),
+                                    value: [
+                                        [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+                                        Math.round(value)
+                                    ]
+                                }
+                            }
+
+                            function getjmxdatajvm() {
+                                now = new Date(+now + oneDay);
+                                value = value + Math.random() * 21 - 10;
+                                $.ajax({
+                                    type: "GET",  //提交方式
+                                    url: "${pageContext.request.contextPath}/jmx.do",//路径
+                                    success: function (result) {//返回数据根据结果进行相应的处理
+                                        return {
+                                            name: now.toString(),
+                                            value: [
+                                                [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+                                                result.value
+                                            ]
+                                        }
+                                    },
+                                    dataType: 'json'
+                                });
+                            }
+
+
+                            var data = [];
+                            var now = +new Date(1997, 9, 3);
+                            var oneDay = 24 * 3600 * 1000;
+                            var value = Math.random() * 1000;
+                            for (var i = 0; i < 10; i++) {
+                                console.log(getjmxdatajvm());
+                                data.push(randomData());
+                            }
+                            option = {
+                                title: {
+                                    text: '动态数据 + 时间坐标轴'
+                                },
+                                tooltip: {
+                                    trigger: 'axis',
+                                    formatter: function (params) {
+                                        params = params[0];
+                                        var date = new Date(params.name);
+                                        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
+                                    },
+                                    axisPointer: {
+                                        animation: false
+                                    }
+                                },
+                                xAxis: {
+                                    type: 'time',
+                                    splitLine: {
+                                        show: false
+                                    }
+                                },
+                                yAxis: {
+                                    type: 'value',
+                                    boundaryGap: [0, '100%'],
+                                    splitLine: {
+                                        show: false
+                                    }
+                                },
+                                series: [{
+                                    name: '模拟数据',
+                                    type: 'line',
+                                    showSymbol: false,
+                                    hoverAnimation: false,
+                                    data: data
+                                }]
+                            };
+
+                            setInterval(function () {
+
+                                for (var i = 0; i < 5; i++) {
+                                    data.shift();
+                                    data.push(randomData());
+                                }
+
+                                myChart.setOption({
+                                    series: [{
+                                        data: data
+                                    }]
+                                });
+                            }, 1000);
+                            myChart.setOption(option);
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+                <div class="panel panel-default chartJs">
+                    <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
+                        <div class="card-title">
+                            <strong>平均访问时长和跳出率</strong>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="fwefawe" style="width: auto;height: 330px"></div>
+                        <script>
+                            /**
+                             * Highcharts 在 4.2.0 开始已经不依赖 jQuery 了，直接用其构造函数既可创建图表
+                             **/
+                            var chart = new Highcharts.Chart('fwefawe', {
+                                title: {
+                                    text: null
+                                },
+                                chart: {
+                                    marginRight: 80 // like left
+                                },
+                                credits: {
+                                    enabled: false
+                                },
+                                xAxis: {
+                                    categories: ${daterange}
+                                },
+                                yAxis: [{
+                                    lineWidth: 1,
+                                    title: {
+                                        text: '时长(单位:s)'
+                                    }
+
+                                }, {
+                                    lineWidth: 1,
+                                    opposite: true,
+                                    title: {
+                                        text: '跳出率'
+                                    }
+                                }],
+                                tooltip: {
+                                    valueSuffix: ''
+                                },
+                                legend: {
+                                    borderWidth: 0,
+                                    align: "center", //程度标的目标地位
+                                    verticalAlign: "top", //垂直标的目标地位
+                                    x: 0, //间隔x轴的间隔
+                                    y: 0 //间隔Y轴的间隔
+                                },
+                                series: [{
+                                    name: '平均访问时长',
+                                    data:${avg_visit_time}
+                                }, {
+                                    name: '跳出率',
+                                    data:${bounce_ratio},
+                                    yAxis: 1
+                                }
+                                ]
+                            })
+                        </script>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

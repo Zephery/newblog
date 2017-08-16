@@ -3,6 +3,7 @@ package com.myblog.JMX;
 import com.myblog.common.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
@@ -11,6 +12,8 @@ import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryMXBean;
+import java.lang.management.MemoryUsage;
 import java.lang.management.RuntimeMXBean;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,14 +70,17 @@ public class JMXClient {
         }
     }
 
-    public void get() {
+    public Long getJVMUsage() {
         try {
-            RuntimeMXBean runtimeMXBean =
-                    ManagementFactory.newPlatformMXBeanProxy(mbsconnector, ManagementFactory.RUNTIME_MXBEAN_NAME, RuntimeMXBean.class);
-            System.out.println(runtimeMXBean.getClassPath());
-            System.out.println(runtimeMXBean.getVmName());
+            MemoryMXBean memBean = ManagementFactory.newPlatformMXBeanProxy
+                    (mbsconnector, ManagementFactory.MEMORY_MXBEAN_NAME, MemoryMXBean.class);
+            System.out.println(memBean.getHeapMemoryUsage());
+            System.out.println(memBean.getNonHeapMemoryUsage());
+            MemoryUsage heap = memBean.getHeapMemoryUsage();
+            return heap.getUsed();
         } catch (IOException e) {
             logger.error("", e);
+            return 0L;
         }
     }
 
@@ -83,19 +89,23 @@ public class JMXClient {
 
         try {
             RuntimeMXBean runtimeMXBean =
-                    ManagementFactory.newPlatformMXBeanProxy(mbsconnector, ManagementFactory.RUNTIME_MXBEAN_NAME, RuntimeMXBean.class);
+                    ManagementFactory.newPlatformMXBeanProxy(mbsconnector, ManagementFactory.RUNTIME_MXBEAN_NAME,
+                            RuntimeMXBean.class);
             ObjectName operateObjectName = new ObjectName("java.lang:type=OperatingSystem");
             ObjectName runtimeObjName = new ObjectName("java.lang:type=Runtime");
-            long processCpuTime = Long.parseLong(mbsconnector.getAttribute(operateObjectName, "ProcessCpuTime").toString());
+            long processCpuTime = Long.parseLong(mbsconnector.getAttribute(operateObjectName,
+                    "ProcessCpuTime").toString());
 
-            int availableProcessors = Integer.parseInt(mbsconnector.getAttribute(operateObjectName, "AvailableProcessors").toString());
+            int availableProcessors = Integer.parseInt(mbsconnector.getAttribute(operateObjectName,
+                    "AvailableProcessors").toString());
 
             long upTime = Long.parseLong(mbsconnector.getAttribute(runtimeObjName, "Uptime").toString());
 
             logger.info("===2======processCpuTime: " + processCpuTime);
             logger.info("===2=====upTime: " + upTime);
             Long prevUpTime = runtimeMXBean.getUptime();
-            long prevProcessCpuTime = Long.parseLong(mbsconnector.getAttribute(operateObjectName, "ProcessCpuTime").toString());
+            long prevProcessCpuTime = Long.parseLong(mbsconnector.getAttribute(operateObjectName,
+                    "ProcessCpuTime").toString());
             if (prevUpTime > 0L && upTime > prevUpTime) {
                 logger.info("===3=======");
                 long elapsedCpu = processCpuTime - prevProcessCpuTime;
@@ -118,6 +128,6 @@ public class JMXClient {
     }
 
     public static void main(String[] args) {
-        System.out.println(JMXClient.getInstance().getCpuUsage());
+        System.out.println(JMXClient.getInstance().getJVMUsage());
     }
 }
