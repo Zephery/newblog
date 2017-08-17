@@ -17,6 +17,7 @@
     <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
     <script src="https://cdn.bootcss.com/echarts/3.6.2/echarts.min.js"></script>
     <script type="text/javascript" src="js/china.js"></script>
+    <!--不要导入jquery，扇形图有冲突-->
     <style>
         th {
             text-align: center;
@@ -368,99 +369,99 @@
                         <div id="jvm" style="width: auto;height: 330px"></div>
                         <!--JVM-->
                         <script type="text/javascript">
-                            var myChart = echarts.init(document.getElementById('jvm'));
-
-                            function randomData() {
-                                now = new Date(+now + oneDay);
-                                value = value + Math.random() * 21 - 10;
-                                return {
-                                    name: now.toString(),
-                                    value: [
-                                        [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
-                                        Math.round(value)
-                                    ]
+                            Highcharts.setOptions({
+                                global: {
+                                    useUTC: false
                                 }
+                            });
+
+                            function activeLastPointToolip(chart) {
+                                var points = chart.series[0].points;
+                                chart.tooltip.refresh(points[points.length - 1]);
                             }
 
-                            function getjmxdatajvm() {
-                                now = new Date(+now + oneDay);
-                                value = value + Math.random() * 21 - 10;
-                                $.ajax({
-                                    type: "GET",  //提交方式
-                                    url: "${pageContext.request.contextPath}/jmx.do",//路径
-                                    success: function (result) {//返回数据根据结果进行相应的处理
-                                        return {
-                                            name: now.toString(),
-                                            value: [
-                                                [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
-                                                result.value
-                                            ]
+                            $('#jvm').highcharts({
+                                chart: {
+                                    type: 'spline',
+                                    animation: Highcharts.svg, // don't animate in old IE
+                                    marginRight: 10,
+                                    events: {
+                                        load: function () {
+                                            // set up the updating of the chart each second
+                                            var series = this.series[0],
+                                                chart = this;
+                                            setInterval(function () {
+                                                $.ajax({
+                                                    type: "GET",  //提交方式
+                                                    url: "${pageContext.request.contextPath}/jmx.do?" + (new Date).getTime(),//路径
+                                                    success: function (result) {//返回数据根据结果进行相应的处理
+                                                        var x = (new Date()).getTime(); // current time
+                                                        var y = result;
+                                                        console.log([x, y]);
+                                                        series.addPoint([x, y], true, true);
+                                                        activeLastPointToolip(chart)
+                                                    },
+                                                    dataType: 'json'
+                                                });
+
+                                            }, 1000);
                                         }
-                                    },
-                                    dataType: 'json'
-                                });
-                            }
-
-
-                            var data = [];
-                            var now = +new Date(1997, 9, 3);
-                            var oneDay = 24 * 3600 * 1000;
-                            var value = Math.random() * 1000;
-                            for (var i = 0; i < 10; i++) {
-                                console.log(getjmxdatajvm());
-                                data.push(randomData());
-                            }
-                            option = {
-                                title: {
-                                    text: '动态数据 + 时间坐标轴'
-                                },
-                                tooltip: {
-                                    trigger: 'axis',
-                                    formatter: function (params) {
-                                        params = params[0];
-                                        var date = new Date(params.name);
-                                        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
-                                    },
-                                    axisPointer: {
-                                        animation: false
                                     }
+                                },
+                                title: {
+                                    text: null
                                 },
                                 xAxis: {
-                                    type: 'time',
-                                    splitLine: {
-                                        show: false
-                                    }
+                                    type: 'datetime',
+                                    tickPixelInterval: 150
+                                },
+                                credits: {
+                                    enabled: false
                                 },
                                 yAxis: {
-                                    type: 'value',
-                                    boundaryGap: [0, '100%'],
-                                    splitLine: {
-                                        show: false
+                                    title: {
+                                        text: '值'
+                                    },
+                                    plotLines: [{
+                                        value: 0,
+                                        width: 1,
+                                        color: '#808080'
+                                    }]
+                                },
+                                tooltip: {
+                                    formatter: function () {
+                                        return '<b>' + this.series.name + '</b><br/>' +
+                                            Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                                            Highcharts.numberFormat(this.y, 2);
                                     }
                                 },
+                                legend: {
+                                    enabled: false
+                                },
+                                exporting: {
+                                    enabled: false
+                                },
                                 series: [{
-                                    name: '模拟数据',
-                                    type: 'line',
-                                    showSymbol: false,
-                                    hoverAnimation: false,
-                                    data: data
+                                    name: 'JVM',
+                                    data: (function () {
+                                        // generate an array of random data
+                                        var data = [],
+                                            time = (new Date()).getTime(),
+                                            i = -15;
+                                        <c:forEach var="jmx" items="${jmx_memory_use}">
+                                        data.push({
+                                            x: time + i * 1000,
+                                            y: ${jmx}
+                                        });
+                                        i++;
+                                        </c:forEach>
+                                        return data;
+                                    }())
                                 }]
-                            };
+                            }, function (c) {
+                                activeLastPointToolip(c)
+                            });
 
-                            setInterval(function () {
-
-                                for (var i = 0; i < 5; i++) {
-                                    data.shift();
-                                    data.push(randomData());
-                                }
-
-                                myChart.setOption({
-                                    series: [{
-                                        data: data
-                                    }]
-                                });
-                            }, 1000);
-                            myChart.setOption(option);
                         </script>
                     </div>
                 </div>

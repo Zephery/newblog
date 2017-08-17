@@ -1,6 +1,8 @@
 package com.myblog.JMX;
 
 import com.myblog.common.Config;
+import com.myblog.util.JedisUtil;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,10 @@ import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryUsage;
 import java.lang.management.RuntimeMXBean;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,6 +35,7 @@ import java.util.Map;
  * -Dcom.sun.management.jmxremote.ssl=false
  * -Dcom.sun.management.jmxremote.authenticate=false"
  */
+@Service("jmxclient")
 public class JMXClient {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(JMXClient.class);
@@ -71,12 +77,22 @@ public class JMXClient {
     }
 
     public Long getJVMUsage() {
+        MemoryMXBean memBean = null;
         try {
-            MemoryMXBean memBean = ManagementFactory.newPlatformMXBeanProxy
+            memBean = ManagementFactory.newPlatformMXBeanProxy
                     (mbsconnector, ManagementFactory.MEMORY_MXBEAN_NAME, MemoryMXBean.class);
-            System.out.println(memBean.getHeapMemoryUsage());
-            System.out.println(memBean.getNonHeapMemoryUsage());
             MemoryUsage heap = memBean.getHeapMemoryUsage();
+            ReentrantLock lock = new ReentrantLock();
+            lock.lock();
+            Long jmx_memory_use_length = JedisUtil.getInstance().llen("jmx_memory_use");
+            JedisUtil.getInstance().lpush("jmx_memory_use", String.valueOf(heap.getUsed() / 1048576));
+            JedisUtil.getInstance().lpush("jmx_memory_time", DateTime.now().toString("HH:mm:ss"));
+            logger.info(String.valueOf(heap.getUsed()/1048576)+DateTime.now().toString("HH:mm:ss"));
+            if (jmx_memory_use_length > 15) {
+                JedisUtil.getInstance().rpop("jmx_memory_use");
+                JedisUtil.getInstance().rpop("jmx_memory_time");
+            }
+            lock.unlock();
             return heap.getUsed();
         } catch (IOException e) {
             logger.error("", e);

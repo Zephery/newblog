@@ -6,6 +6,7 @@ import com.myblog.model.FanPie;
 import com.myblog.model.TopTen;
 import com.myblog.util.IPUtils;
 import com.myblog.util.JedisUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,37 +94,49 @@ public class LogController {
                 }
             }
         });
-        ModelAndView modelAndView = new ModelAndView();
+        List<String> jmx_memory_use = JedisUtil.getInstance().lrange("jmx_memory_use");
+        List<String> jmx_memory_time = JedisUtil.getInstance().lrange("jmx_memory_time");
+        JsonArray array1 = new JsonArray();
+        for (int i = 0; i < jmx_memory_time.size(); i++) {
+            JsonObject object = new JsonObject();
+            object.addProperty("x", jmx_memory_time.get(i));
+            object.addProperty("y", Integer.parseInt(jmx_memory_use.get(i)));
+            array1.add(object);
+        }
+        ModelAndView mv = new ModelAndView();
         String ip = IPUtils.getIpAddr(request);
         String yourcity = IPUtils.getAddressByIP(ip);
-        modelAndView.addObject("ip", ip);
-        modelAndView.addObject("yourcity", yourcity);
-        modelAndView.addObject("daterange", parser.parse(temp).getAsJsonArray());
-        modelAndView.addObject("topTens", topTens);
-        modelAndView.addObject("pv_count", pv_count);
-        modelAndView.addObject("visitor_count", visitor_count);
-        modelAndView.addObject("ip_count", ip_count);
-        modelAndView.addObject("bounce_ratio", bounce_ratio);
-        modelAndView.addObject("sourcelist", sourcelist);
-        modelAndView.addObject("rukou", rukou.subList(0, rukou.size() > 5 ? 5 : rukou.size()));
-        modelAndView.addObject("avg_visit_time", avg_visit_time);
-        modelAndView.addObject("diyu", diyu);
-        modelAndView.addObject("diyumax", diyu.get(0).getPv_count());
-        modelAndView.addObject("pv_sum", pv_sum);
-        modelAndView.addObject("uv_sum", uv_sum);
-        modelAndView.setViewName("log");
-        return modelAndView;
+        mv.addObject("ip", ip);
+        mv.addObject("yourcity", yourcity);
+        mv.addObject("daterange", parser.parse(temp).getAsJsonArray());
+        mv.addObject("topTens", topTens);
+        mv.addObject("pv_count", pv_count);
+        mv.addObject("visitor_count", visitor_count);
+        mv.addObject("ip_count", ip_count);
+        mv.addObject("bounce_ratio", bounce_ratio);
+        mv.addObject("sourcelist", sourcelist);
+        mv.addObject("rukou", rukou.subList(0, rukou.size() > 5 ? 5 : rukou.size()));
+        mv.addObject("avg_visit_time", avg_visit_time);
+        mv.addObject("diyu", diyu);
+        mv.addObject("diyumax", diyu.get(0).getPv_count());
+        mv.addObject("pv_sum", pv_sum);
+        mv.addObject("uv_sum", uv_sum);
+        mv.addObject("jmx_data", array1);
+        mv.addObject("jmx_memory_use", jmx_memory_use);
+        mv.setViewName("log");
+        return mv;
     }
 
     @RequestMapping("/jmx")
     @ResponseBody
     public void jmx(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String time = request.getParameter("time");
         int aa = Integer.parseInt(JMXClient.getInstance().getJVMUsage().toString());
-        JsonObject object = new JsonObject();
-        object.addProperty("name", DateTime.now().toString("HH:mm:ss"));
-        object.addProperty("value", aa / 1024);
-        JsonArray array = new JsonArray();
-        array.add(object);
-        response.getWriter().write(array.toString());
+        Integer bb = aa / 1048576;
+        List<String> jmx_memory_use = JedisUtil.getInstance().lrange("jmx_memory_use");
+        List<String> jmx_memory_time = JedisUtil.getInstance().lrange("jmx_memory_time");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        response.getWriter().write(bb.toString());
     }
 }
