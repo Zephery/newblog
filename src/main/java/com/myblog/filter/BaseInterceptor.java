@@ -47,7 +47,6 @@ public class BaseInterceptor implements HandlerInterceptor {
                            HttpServletResponse response,
                            Object o, ModelAndView modelAndView) throws Exception {
         try {
-            logger.info("start record ip");
             String uri = request.getRequestURI();
             if (StringUtils.isEmpty(uri) || uri.equals("/")) {
                 return;

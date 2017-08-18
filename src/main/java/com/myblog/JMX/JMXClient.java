@@ -1,6 +1,8 @@
 package com.myblog.JMX;
 
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.myblog.common.Config;
 import com.myblog.util.JedisUtil;
 import com.sun.management.GarbageCollectorMXBean;
@@ -182,8 +184,8 @@ public class JMXClient {
         List<MemoryPoolMXBean> mps = ManagementFactory.getMemoryPoolMXBeans();
         JsonArray array = new JsonArray();
         for (MemoryPoolMXBean mp : mps) {
-            System.out.println(mp.getCollectionUsage());
-            if (mp.getName().equals("PS Eden Space") || mp.getName().equals("PS Survivor Space") || mp.getName().equals("PS Old Gen")) {
+            if (mp.getName().contains("Eden") || mp.getName().contains("Survivor")  //win与linux上的不同，顾使用contains
+                    || mp.getName().contains("Tenured")) {
                 array.add(getMpJsonObject(mp));
             }
         }

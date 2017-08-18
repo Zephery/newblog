@@ -522,6 +522,9 @@
                                     title: {
                                         text: null
                                     },
+                                    credits: {
+                                        enabled: false
+                                    },
                                     xAxis: {
                                         categories: [
                                             'init',
@@ -565,7 +568,7 @@
                 <div class="panel panel-default chartJs">
                     <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
                         <div class="card-title">
-                            <strong>JVM</strong>
+                            <strong>CPU</strong>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -681,60 +684,63 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-xs-12">
-                <div class="panel panel-default chartJs">
-                    <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
-                        <div class="card-title">
-                            <strong>内存管理</strong>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div id="memoryPoolJsonn" style="width: auto;height: 330px"></div>
-                        <script>
-                            $(function () {
-                                $('#memoryPoolJsonn').highcharts({
-                                    chart: {
-                                        type: 'column'
-                                    },
-                                    title: {
-                                        text: null
-                                    },
-                                    xAxis: {
-                                        categories: [
-                                            'init',
-                                            'use',
-                                            'commited',
-                                            'max'
-                                        ],
-                                        crosshair: true
-                                    },
-                                    yAxis: {
-                                        min: 0,
-                                        title: {
-                                            text: null
-                                        }
-                                    },
-                                    tooltip: {
-                                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                                        '<td style="padding:0"><b>{point.y:.1f} MB</b></td></tr>',
-                                        footerFormat: '</table>',
-                                        shared: true,
-                                        useHTML: true
-                                    },
-                                    plotOptions: {
-                                        column: {
-                                            pointPadding: 0.2,
-                                            borderWidth: 0
-                                        }
-                                    },
-                                    series:${memoryPoolJson}
-                                });
-                            });
+            <%--<div class="col-sm-6 col-xs-12">--%>
+                <%--<div class="panel panel-default chartJs">--%>
+                    <%--<div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">--%>
+                        <%--<div class="card-title">--%>
+                            <%--<strong>内存管理</strong>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                    <%--<div class="panel-body">--%>
+                        <%--<div id="memoryPoolJsonn" style="width: auto;height: 330px"></div>--%>
+                        <%--<script>--%>
+                            <%--$(function () {--%>
+                                <%--$('#memoryPoolJsonn').highcharts({--%>
+                                    <%--chart: {--%>
+                                        <%--type: 'column'--%>
+                                    <%--},--%>
+                                    <%--title: {--%>
+                                        <%--text: null--%>
+                                    <%--},--%>
+                                    <%--credits: {--%>
+                                        <%--enabled: false--%>
+                                    <%--},--%>
+                                    <%--xAxis: {--%>
+                                        <%--categories: [--%>
+                                            <%--'init',--%>
+                                            <%--'use',--%>
+                                            <%--'commited',--%>
+                                            <%--'max'--%>
+                                        <%--],--%>
+                                        <%--crosshair: true--%>
+                                    <%--},--%>
+                                    <%--yAxis: {--%>
+                                        <%--min: 0,--%>
+                                        <%--title: {--%>
+                                            <%--text: null--%>
+                                        <%--}--%>
+                                    <%--},--%>
+                                    <%--tooltip: {--%>
+                                        <%--headerFormat: '<span style="font-size:10px">{point.key}</span><table>',--%>
+                                        <%--pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +--%>
+                                        <%--'<td style="padding:0"><b>{point.y:.1f} MB</b></td></tr>',--%>
+                                        <%--footerFormat: '</table>',--%>
+                                        <%--shared: true,--%>
+                                        <%--useHTML: true--%>
+                                    <%--},--%>
+                                    <%--plotOptions: {--%>
+                                        <%--column: {--%>
+                                            <%--pointPadding: 0.2,--%>
+                                            <%--borderWidth: 0--%>
+                                        <%--}--%>
+                                    <%--},--%>
+                                    <%--series:${memoryPoolJson}--%>
+                                <%--});--%>
+                            <%--});--%>
 
-                        </script>
-                    </div>
-                </div>
+                        <%--</script>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
             </div>
         </div>
     </div>
