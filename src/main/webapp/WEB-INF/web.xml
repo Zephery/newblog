@@ -45,6 +45,16 @@
     <servlet>
         <servlet-name>DruidStatView</servlet-name>
         <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+        <init-param>
+            <!-- 用户名 -->
+            <param-name>loginUsername</param-name>
+            <param-value>root</param-value>
+        </init-param>
+        <init-param>
+            <!-- 密码 -->
+            <param-name>loginPassword</param-name>
+            <param-value>helloroot</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>DruidStatView</servlet-name>
@@ -64,17 +74,17 @@
     </filter-mapping>
     <!--添加shiro过滤器 -->
     <!--<filter>-->
-        <!--<filter-name>shiroFilter</filter-name>-->
-        <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
-        <!--<init-param>-->
-            <!--&lt;!&ndash; 该值缺省为false，表示声明周期由SpringApplicationContext管理，设置为true表示ServletContainer管理 &ndash;&gt;-->
-            <!--<param-name>targetFilterLifecycle</param-name>-->
-            <!--<param-value>true</param-value>-->
-        <!--</init-param>-->
+    <!--<filter-name>shiroFilter</filter-name>-->
+    <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+    <!--<init-param>-->
+    <!--&lt;!&ndash; 该值缺省为false，表示声明周期由SpringApplicationContext管理，设置为true表示ServletContainer管理 &ndash;&gt;-->
+    <!--<param-name>targetFilterLifecycle</param-name>-->
+    <!--<param-value>true</param-value>-->
+    <!--</init-param>-->
     <!--</filter>-->
     <!--<filter-mapping>-->
-        <!--<filter-name>shiroFilter</filter-name>-->
-        <!--<url-pattern>/*</url-pattern>-->
+    <!--<filter-name>shiroFilter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
     <!--</filter-mapping>-->
 
     <!--编码过滤器 -->
@@ -106,16 +116,16 @@
     </filter-mapping>
     <!-- ip过滤器 -->
     <!--<filter>-->
-        <!--<filter-name>ipFilter</filter-name>-->
-        <!--<filter-class>com.myblog.filter.IPFilter</filter-class>-->
-        <!--<init-param>-->
-            <!--<param-name>forbidIps</param-name>-->
-            <!--<param-value>192.168.1.108,192.168.6.89,192.168.6.99</param-value>-->
-        <!--</init-param>-->
+    <!--<filter-name>ipFilter</filter-name>-->
+    <!--<filter-class>com.myblog.filter.IPFilter</filter-class>-->
+    <!--<init-param>-->
+    <!--<param-name>forbidIps</param-name>-->
+    <!--<param-value>192.168.1.108,192.168.6.89,192.168.6.99</param-value>-->
+    <!--</init-param>-->
     <!--</filter>-->
     <!--<filter-mapping>-->
-        <!--<filter-name>ipFilter</filter-name>-->
-        <!--<url-pattern>/*</url-pattern>-->
+    <!--<filter-name>ipFilter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
     <!--</filter-mapping>-->
     <error-page>
         <error-code>404</error-code>
