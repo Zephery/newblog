@@ -170,9 +170,12 @@ public class JMXClient {
     public float gc() {
         try {
             ObjectName gcName = new ObjectName(ManagementFactory.GARBAGE_COLLECTOR_MXBEAN_DOMAIN_TYPE + ",*");
-
+            Long ttt = 0L;
             for (ObjectName name : mbsconnector.queryNames(gcName, null)) {
                 GarbageCollectorMXBean gc = ManagementFactory.newPlatformMXBeanProxy(mbsconnector, name.getCanonicalName(), GarbageCollectorMXBean.class);
+//                System.out.println(gc.getName());
+//                ttt += gc.getCollectionTime();
+                System.out.println(gc.getLastGcInfo());
             }
         } catch (Exception e) {
             logger.error("", e);
@@ -207,7 +210,7 @@ public class JMXClient {
 
     public static void main(String[] args) {
 //        for (int i = 0; i < 100; i++) {
-        JMXClient.getInstance().getMemoryPoolDetail();
+        JMXClient.getInstance().gc();
 //        }
     }
 }
