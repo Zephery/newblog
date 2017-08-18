@@ -431,7 +431,7 @@ public class JedisUtil {
             if (jedis == null) {
                 logger.error("get jedis fail");
             }
-            List<String> list = jedis.lrange(key, 0, 15);
+            List<String> list = jedis.lrange(key, 0, 50);
             return list;
         } catch (JedisConnectionException e) {
             if (jedis != null) {

@@ -397,7 +397,6 @@
                                                     success: function (result) {//返回数据根据结果进行相应的处理
                                                         var x = (new Date()).getTime(); // current time
                                                         var y = result;
-                                                        console.log([x, y]);
                                                         series.addPoint([x, y], true, true);
                                                         activeLastPointToolip(chart)
                                                     },
@@ -405,6 +404,15 @@
                                                 });
 
                                             }, 1000);
+                                            var series1 = this.series[1],
+                                                chart1 = this;
+                                            setInterval(function () {
+                                                var x = (new Date()).getTime(), // current time
+                                                    yy = ${jmx_memory_committed};
+                                                series1.addPoint([x, yy], true, true);
+                                                activeLastPointToolip(chart1)
+                                            }, 1000);
+
                                         }
                                     }
                                 },
@@ -418,16 +426,25 @@
                                 credits: {
                                     enabled: false
                                 },
-                                yAxis: {
+                                yAxis: [{
                                     title: {
-                                        text: '值'
+                                        text: null
                                     },
                                     plotLines: [{
                                         value: 0,
                                         width: 1,
                                         color: '#808080'
                                     }]
-                                },
+                                }, {
+                                    title: {
+                                        text: null
+                                    },
+                                    plotLines: [{
+                                        value: 0,
+                                        width: 1,
+                                        color: '#808080'
+                                    }]
+                                }],
                                 tooltip: {
                                     formatter: function () {
                                         return '<b>' + this.series.name + '</b><br/>' +
@@ -442,16 +459,214 @@
                                     enabled: false
                                 },
                                 series: [{
-                                    name: 'JVM',
+                                    name: '已使用',
+                                    marker: {
+                                        enabled: false
+                                    },
                                     data: (function () {
                                         // generate an array of random data
                                         var data = [],
                                             time = (new Date()).getTime(),
-                                            i = -15;
+                                            i = -50;
                                         <c:forEach var="jmx" items="${jmx_memory_use}">
                                         data.push({
                                             x: time + i * 1000,
                                             y: ${jmx}
+                                        });
+                                        i++;
+                                        </c:forEach>
+                                        return data;
+                                    }())
+                                }, {
+                                    name: '大小',
+                                    marker: {
+                                        enabled: false
+                                    },
+                                    data: (function () {
+                                        // generate an array of random data
+                                        var data = [],
+                                            time = (new Date()).getTime(),
+                                            i;
+                                        for (i = -50; i <= 0; i += 1) {
+                                            data.push({
+                                                x: time + i * 1000,
+                                                y: ${jmx_memory_committed}
+                                            });
+                                        }
+                                        return data;
+                                    }())
+                                }]
+                            }, function (c) {
+                                activeLastPointToolip(c)
+                            });
+
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+                <div class="panel panel-default chartJs">
+                    <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
+                        <div class="card-title">
+                            <strong>内存管理</strong>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="memoryPoolJson" style="width: auto;height: 330px"></div>
+                        <script>
+                            $(function () {
+                                $('#memoryPoolJson').highcharts({
+                                    chart: {
+                                        type: 'column'
+                                    },
+                                    title: {
+                                        text: null
+                                    },
+                                    xAxis: {
+                                        categories: [
+                                            'init',
+                                            'use',
+                                            'commited',
+                                            'max'
+                                        ],
+                                        crosshair: true
+                                    },
+                                    yAxis: {
+                                        min: 0,
+                                        title: {
+                                            text: null
+                                        }
+                                    },
+                                    tooltip: {
+                                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                        '<td style="padding:0"><b>{point.y:.1f} MB</b></td></tr>',
+                                        footerFormat: '</table>',
+                                        shared: true,
+                                        useHTML: true
+                                    },
+                                    plotOptions: {
+                                        column: {
+                                            pointPadding: 0.2,
+                                            borderWidth: 0
+                                        }
+                                    },
+                                    series:${memoryPoolJson}
+                                });
+                            });
+
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-xs-12">
+                <div class="panel panel-default chartJs">
+                    <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
+                        <div class="card-title">
+                            <strong>JVM</strong>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="cpu" style="width: auto;height: 330px"></div>
+                        <!--JVM-->
+                        <script type="text/javascript">
+                            Highcharts.setOptions({
+                                global: {
+                                    useUTC: false
+                                }
+                            });
+
+                            function activeLastPointToolip(chart) {
+                                var points = chart.series[0].points;
+                                chart.tooltip.refresh(points[points.length - 1]);
+                            }
+
+                            $('#cpu').highcharts({
+                                chart: {
+                                    type: 'spline',
+                                    animation: Highcharts.svg, // don't animate in old IE
+                                    marginRight: 10,
+                                    events: {
+                                        load: function () {
+                                            // set up the updating of the chart each second
+                                            var series = this.series[0],
+                                                chart = this;
+                                            setInterval(function () {
+                                                $.ajax({
+                                                    type: "GET",  //提交方式
+                                                    url: "${pageContext.request.contextPath}/cpu.do?" + (new Date).getTime(),//路径
+                                                    success: function (result) {//返回数据根据结果进行相应的处理
+                                                        var x = (new Date()).getTime(); // current time
+                                                        var yyy = result;
+                                                        series.addPoint([x, yyy], true, true);
+                                                        activeLastPointToolip(chart)
+                                                    },
+                                                    dataType: 'json'
+                                                });
+
+                                            }, 1000);
+
+                                        }
+                                    }
+                                },
+                                title: {
+                                    text: null
+                                },
+                                xAxis: {
+                                    type: 'datetime',
+                                    tickPixelInterval: 150
+                                },
+                                credits: {
+                                    enabled: false
+                                },
+                                yAxis: [{
+                                    title: {
+                                        text: null
+                                    },
+                                    plotLines: [{
+                                        value: 0,
+                                        width: 1,
+                                        color: '#808080'
+                                    }]
+                                }, {
+                                    title: {
+                                        text: null
+                                    },
+                                    plotLines: [{
+                                        value: 0,
+                                        width: 1,
+                                        color: '#808080'
+                                    }]
+                                }],
+                                tooltip: {
+                                    formatter: function () {
+                                        return '<b>' + this.series.name + '</b><br/>' +
+                                            Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                                            Highcharts.numberFormat(this.y, 2)+'%';
+                                    }
+                                },
+                                legend: {
+                                    enabled: false
+                                },
+                                exporting: {
+                                    enabled: false
+                                },
+                                series: [{
+                                    name: '已使用',
+                                    marker: {
+                                        enabled: false
+                                    },
+                                    data: (function () {
+                                        // generate an array of random data
+                                        var data = [],
+                                            time = (new Date()).getTime(),
+                                            i = -50;
+                                        <c:forEach var="cpu" items="${cpu_usage}">
+                                        data.push({
+                                            x: time + i * 1000,
+                                            y: ${cpu}
                                         });
                                         i++;
                                         </c:forEach>
@@ -470,61 +685,53 @@
                 <div class="panel panel-default chartJs">
                     <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
                         <div class="card-title">
-                            <strong>平均访问时长和跳出率</strong>
+                            <strong>内存管理</strong>
                         </div>
                     </div>
                     <div class="panel-body">
-                        <div id="fwefawe" style="width: auto;height: 330px"></div>
+                        <div id="memoryPoolJsonn" style="width: auto;height: 330px"></div>
                         <script>
-                            /**
-                             * Highcharts 在 4.2.0 开始已经不依赖 jQuery 了，直接用其构造函数既可创建图表
-                             **/
-                            var chart = new Highcharts.Chart('fwefawe', {
-                                title: {
-                                    text: null
-                                },
-                                chart: {
-                                    marginRight: 80 // like left
-                                },
-                                credits: {
-                                    enabled: false
-                                },
-                                xAxis: {
-                                    categories: ${daterange}
-                                },
-                                yAxis: [{
-                                    lineWidth: 1,
+                            $(function () {
+                                $('#memoryPoolJsonn').highcharts({
+                                    chart: {
+                                        type: 'column'
+                                    },
                                     title: {
-                                        text: '时长(单位:s)'
-                                    }
+                                        text: null
+                                    },
+                                    xAxis: {
+                                        categories: [
+                                            'init',
+                                            'use',
+                                            'commited',
+                                            'max'
+                                        ],
+                                        crosshair: true
+                                    },
+                                    yAxis: {
+                                        min: 0,
+                                        title: {
+                                            text: null
+                                        }
+                                    },
+                                    tooltip: {
+                                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                        '<td style="padding:0"><b>{point.y:.1f} MB</b></td></tr>',
+                                        footerFormat: '</table>',
+                                        shared: true,
+                                        useHTML: true
+                                    },
+                                    plotOptions: {
+                                        column: {
+                                            pointPadding: 0.2,
+                                            borderWidth: 0
+                                        }
+                                    },
+                                    series:${memoryPoolJson}
+                                });
+                            });
 
-                                }, {
-                                    lineWidth: 1,
-                                    opposite: true,
-                                    title: {
-                                        text: '跳出率'
-                                    }
-                                }],
-                                tooltip: {
-                                    valueSuffix: ''
-                                },
-                                legend: {
-                                    borderWidth: 0,
-                                    align: "center", //程度标的目标地位
-                                    verticalAlign: "top", //垂直标的目标地位
-                                    x: 0, //间隔x轴的间隔
-                                    y: 0 //间隔Y轴的间隔
-                                },
-                                series: [{
-                                    name: '平均访问时长',
-                                    data:${avg_visit_time}
-                                }, {
-                                    name: '跳出率',
-                                    data:${bounce_ratio},
-                                    yAxis: 1
-                                }
-                                ]
-                            })
                         </script>
                     </div>
                 </div>

@@ -1,7 +1,10 @@
 package com.myblog.JMX;
 
+import com.google.gson.*;
 import com.myblog.common.Config;
 import com.myblog.util.JedisUtil;
+import com.sun.management.GarbageCollectorMXBean;
+import com.sun.management.OperatingSystemMXBean;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +18,14 @@ import javax.management.remote.JMXServiceURL;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
+import java.lang.management.MemoryPoolMXBean;
 import java.lang.management.MemoryUsage;
-import java.lang.management.RuntimeMXBean;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -82,17 +87,6 @@ public class JMXClient {
             memBean = ManagementFactory.newPlatformMXBeanProxy
                     (mbsconnector, ManagementFactory.MEMORY_MXBEAN_NAME, MemoryMXBean.class);
             MemoryUsage heap = memBean.getHeapMemoryUsage();
-            ReentrantLock lock = new ReentrantLock();
-            lock.lock();
-            Long jmx_memory_use_length = JedisUtil.getInstance().llen("jmx_memory_use");
-            JedisUtil.getInstance().lpush("jmx_memory_use", String.valueOf(heap.getUsed() / 1048576));
-            JedisUtil.getInstance().lpush("jmx_memory_time", DateTime.now().toString("HH:mm:ss"));
-            logger.info(String.valueOf(heap.getUsed()/1048576)+DateTime.now().toString("HH:mm:ss"));
-            if (jmx_memory_use_length > 15) {
-                JedisUtil.getInstance().rpop("jmx_memory_use");
-                JedisUtil.getInstance().rpop("jmx_memory_time");
-            }
-            lock.unlock();
             return heap.getUsed();
         } catch (IOException e) {
             logger.error("", e);
@@ -100,50 +94,118 @@ public class JMXClient {
         }
     }
 
-    private float getCpuUsage() {
-        float cpuUsage = 0;
+    public String getCpuUsage() {
+        double ratio = 0;
+        DecimalFormat df = new java.text.DecimalFormat("#.00");
 
         try {
-            RuntimeMXBean runtimeMXBean =
-                    ManagementFactory.newPlatformMXBeanProxy(mbsconnector, ManagementFactory.RUNTIME_MXBEAN_NAME,
-                            RuntimeMXBean.class);
-            ObjectName operateObjectName = new ObjectName("java.lang:type=OperatingSystem");
-            ObjectName runtimeObjName = new ObjectName("java.lang:type=Runtime");
-            long processCpuTime = Long.parseLong(mbsconnector.getAttribute(operateObjectName,
-                    "ProcessCpuTime").toString());
-
-            int availableProcessors = Integer.parseInt(mbsconnector.getAttribute(operateObjectName,
-                    "AvailableProcessors").toString());
-
-            long upTime = Long.parseLong(mbsconnector.getAttribute(runtimeObjName, "Uptime").toString());
-
-            logger.info("===2======processCpuTime: " + processCpuTime);
-            logger.info("===2=====upTime: " + upTime);
-            Long prevUpTime = runtimeMXBean.getUptime();
-            long prevProcessCpuTime = Long.parseLong(mbsconnector.getAttribute(operateObjectName,
-                    "ProcessCpuTime").toString());
-            if (prevUpTime > 0L && upTime > prevUpTime) {
-                logger.info("===3=======");
-                long elapsedCpu = processCpuTime - prevProcessCpuTime;
-                long elapsedTime = upTime - prevUpTime;
-
-                // cpuUsage could go higher than 100% because elapsedTime
-                // and elapsedCpu are not fetched simultaneously. Limit to
-                // 99% to avoid Plotter showing a scale from 0% to 200%.
-                cpuUsage = Math.min(99F, elapsedCpu / (elapsedTime * 10000F * availableProcessors));
-                logger.info("===2=====cpuUsage: " + cpuUsage);
+            OperatingSystemMXBean opMXbean = ManagementFactory.newPlatformMXBeanProxy(mbsconnector,
+                    ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME, OperatingSystemMXBean.class);
+            Long start = System.currentTimeMillis();
+            long startT = opMXbean.getProcessCpuTime();
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                logger.error("InterruptedException occurred while MemoryCollector sleeping...");
             }
-            logger.info("===4=======");
-            prevUpTime = upTime;
-            prevProcessCpuTime = processCpuTime;
+            Long end = System.currentTimeMillis();
+            long endT = opMXbean.getProcessCpuTime();
+            ratio = (endT - startT) / 1000000.0 / (end - start) / opMXbean.getAvailableProcessors();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return df.format(ratio * 100);
+    }
 
-        return cpuUsage;
+    /**
+     * 定时任务
+     */
+    public void quartzjob() {
+        try {
+            DecimalFormat df = new java.text.DecimalFormat("#.00");
+            //cpu usage
+            double ratio = 0;
+            OperatingSystemMXBean opMXbean = ManagementFactory.newPlatformMXBeanProxy(mbsconnector,
+                    ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME, OperatingSystemMXBean.class);
+            Long start = System.currentTimeMillis();
+            long startT = opMXbean.getProcessCpuTime();
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                logger.error("InterruptedException occurred while MemoryCollector sleeping...");
+            }
+            Long end = System.currentTimeMillis();
+            long endT = opMXbean.getProcessCpuTime();
+            ratio = (endT - startT) / 1000000.0 / (end - start) / opMXbean.getAvailableProcessors();
+            ReentrantLock lock = new ReentrantLock();
+            lock.lock();
+            Long cpu_length = JedisUtil.getInstance().llen("cpu_usage");
+            JedisUtil.getInstance().lpush("cpu_usage", df.format(ratio * 100));
+            if (cpu_length > 50) {
+                JedisUtil.getInstance().rpop("cpu_usage");
+            }
+            lock.unlock();
+            //jvm usage
+            MemoryMXBean memBean = ManagementFactory.newPlatformMXBeanProxy
+                    (mbsconnector, ManagementFactory.MEMORY_MXBEAN_NAME, MemoryMXBean.class);
+            MemoryUsage heap = memBean.getHeapMemoryUsage();
+            ReentrantLock lock2 = new ReentrantLock();
+            lock2.lock();
+            Long jmx_memory_use_length = JedisUtil.getInstance().llen("jmx_memory_use");
+            JedisUtil.getInstance().lpush("jmx_memory_use", String.valueOf(heap.getUsed() / 1048576));
+            JedisUtil.getInstance().lpush("jmx_memory_time", DateTime.now().toString("HH:mm:ss"));
+            if (jmx_memory_use_length > 50) {
+                JedisUtil.getInstance().rpop("jmx_memory_use");
+                JedisUtil.getInstance().rpop("jmx_memory_time");
+            }
+            JedisUtil.getInstance().set("jmx_memory_committed", String.valueOf(heap.getCommitted() / 1048576));
+            lock2.unlock();
+        } catch (Exception e) {
+            logger.error("quartzjob error", e);
+        }
+    }
+
+    public float gc() {
+        try {
+            ObjectName gcName = new ObjectName(ManagementFactory.GARBAGE_COLLECTOR_MXBEAN_DOMAIN_TYPE + ",*");
+
+            for (ObjectName name : mbsconnector.queryNames(gcName, null)) {
+                GarbageCollectorMXBean gc = ManagementFactory.newPlatformMXBeanProxy(mbsconnector, name.getCanonicalName(), GarbageCollectorMXBean.class);
+            }
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+        return 1.1F;
+    }
+
+    public JsonArray getMemoryPoolDetail() {
+        List<MemoryPoolMXBean> mps = ManagementFactory.getMemoryPoolMXBeans();
+        JsonArray array = new JsonArray();
+        for (MemoryPoolMXBean mp : mps) {
+            System.out.println(mp.getCollectionUsage());
+            if (mp.getName().equals("PS Eden Space") || mp.getName().equals("PS Survivor Space") || mp.getName().equals("PS Old Gen")) {
+                array.add(getMpJsonObject(mp));
+            }
+        }
+        return array;
+    }
+
+    private JsonObject getMpJsonObject(MemoryPoolMXBean mp) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("name", mp.getName().replaceAll("PS ", ""));
+        List<Long> array = new ArrayList<>();
+        JsonParser parser = new JsonParser();
+        array.add(mp.getCollectionUsage().getInit() / 1048576);
+        array.add(mp.getCollectionUsage().getUsed() / 1048576);
+        array.add(mp.getCollectionUsage().getCommitted() / 1048576);
+        array.add(mp.getCollectionUsage().getMax() / 1048576);
+        jsonObject.add("data", parser.parse(array.toString()));
+        return jsonObject;
     }
 
     public static void main(String[] args) {
-        System.out.println(JMXClient.getInstance().getJVMUsage());
+//        for (int i = 0; i < 100; i++) {
+        JMXClient.getInstance().getMemoryPoolDetail();
+//        }
     }
 }

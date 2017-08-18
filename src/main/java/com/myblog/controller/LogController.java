@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.management.MemoryPoolMXBean;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -95,14 +96,9 @@ public class LogController {
             }
         });
         List<String> jmx_memory_use = JedisUtil.getInstance().lrange("jmx_memory_use");
-        List<String> jmx_memory_time = JedisUtil.getInstance().lrange("jmx_memory_time");
-        JsonArray array1 = new JsonArray();
-        for (int i = 0; i < jmx_memory_time.size(); i++) {
-            JsonObject object = new JsonObject();
-            object.addProperty("x", jmx_memory_time.get(i));
-            object.addProperty("y", Integer.parseInt(jmx_memory_use.get(i)));
-            array1.add(object);
-        }
+        List<String> cpu_usage = JedisUtil.getInstance().lrange("cpu_usage");
+        Integer jmx_memory_committed = Integer.parseInt(JedisUtil.getInstance().get("jmx_memory_committed"));
+        JsonArray memoryPoolJson = JMXClient.getInstance().getMemoryPoolDetail();
         ModelAndView mv = new ModelAndView();
         String ip = IPUtils.getIpAddr(request);
         String yourcity = IPUtils.getAddressByIP(ip);
@@ -121,8 +117,10 @@ public class LogController {
         mv.addObject("diyumax", diyu.get(0).getPv_count());
         mv.addObject("pv_sum", pv_sum);
         mv.addObject("uv_sum", uv_sum);
-        mv.addObject("jmx_data", array1);
         mv.addObject("jmx_memory_use", jmx_memory_use);
+        mv.addObject("cpu_usage", cpu_usage);
+        mv.addObject("jmx_memory_committed", jmx_memory_committed);
+        mv.addObject("memoryPoolJson", memoryPoolJson);
         mv.setViewName("log");
         return mv;
     }
@@ -133,10 +131,18 @@ public class LogController {
         String time = request.getParameter("time");
         int aa = Integer.parseInt(JMXClient.getInstance().getJVMUsage().toString());
         Integer bb = aa / 1048576;
-        List<String> jmx_memory_use = JedisUtil.getInstance().lrange("jmx_memory_use");
-        List<String> jmx_memory_time = JedisUtil.getInstance().lrange("jmx_memory_time");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         response.getWriter().write(bb.toString());
+    }
+
+    @RequestMapping("/cpu")
+    @ResponseBody
+    public void cpu(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String time = request.getParameter("time");
+        String aa = JMXClient.getInstance().getCpuUsage();
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        response.getWriter().write(aa);
     }
 }

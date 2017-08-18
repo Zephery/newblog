@@ -60,9 +60,9 @@
         <property name="targetObject" ref="mysqlService"/>
         <property name="targetMethod" value="exportDataBase"/>
     </bean>
-    <bean id="jmxmemoryuse" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <bean id="quartzjob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="jmxclient"/>
-        <property name="targetMethod" value="getJVMUsage"/>
+        <property name="targetMethod" value="quartzjob"/>
     </bean>
     <!--定义触发时间  -->
     <bean id="myTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
@@ -70,8 +70,8 @@
         <!-- cron表达式 -->
         <property name="cronExpression" value="0 59 2 ? * FRI"/>
     </bean>
-    <bean id="jmx_trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="jmxmemoryuse"/>
+    <bean id="quartz_trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="quartzjob"/>
         <property name="cronExpression" value="* * * * * ?"/>
     </bean>
     <!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
@@ -79,7 +79,7 @@
         <property name="triggers">
             <list>
                 <ref bean="myTrigger"/>
-                <ref bean="jmx_trigger"/>
+                <ref bean="quartz_trigger"/>
             </list>
         </property>
     </bean>
