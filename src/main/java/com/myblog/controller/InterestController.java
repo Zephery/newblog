@@ -25,4 +25,11 @@ public class InterestController {
         mv.setViewName("interest");
         return mv;
     }
+
+    @RequestMapping("weibonlp")
+    public ModelAndView weibonlp() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("weibonlp");
+        return mv;
+    }
 }
