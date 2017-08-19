@@ -71,7 +71,6 @@ public class BlogServiceImpl implements IBlogService {
         List<Tag> tags = tagMapper.getTagByBlogId(blog.getBlogid());
         blog.setTags(tags.size() > 0 ? tags : null);
         if (blogMapper.updatehits(blogid)) {
-            logger.info("read count success");
         } else {
             logger.info("read count failure");
         }

@@ -46,8 +46,12 @@ import java.util.concurrent.locks.ReentrantLock;
 public class JMXClient {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(JMXClient.class);
-    private MBeanServerConnection mbsconnector = null;
+    private static MBeanServerConnection mbsconnector = null;
     private static JMXClient jmxUtil = null;
+
+    static {
+        mbsconnector = initMBeanServerConnection();
+    }
 
     public static JMXClient getInstance() {
         if (jmxUtil == null) {
@@ -67,7 +71,7 @@ public class JMXClient {
         initMBeanServerConnection();
     }
 
-    private void initMBeanServerConnection() {
+    private static MBeanServerConnection initMBeanServerConnection() {
         try {
             String ip = Config.getProperty("jmx_ip");
             String port = Config.getProperty("jmx_port");
@@ -81,6 +85,7 @@ public class JMXClient {
         } catch (IOException e) {
             logger.error("get connector error" + e);
         }
+        return mbsconnector;
     }
 
     public Long getJVMUsage() {
@@ -188,7 +193,7 @@ public class JMXClient {
         JsonArray array = new JsonArray();
         for (MemoryPoolMXBean mp : mps) {
             if (mp.getName().contains("Eden") || mp.getName().contains("Survivor")  //win与linux上的不同，顾使用contains
-                    || mp.getName().contains("Tenured")) {
+                    || mp.getName().contains("Tenured") || mp.getName().contains("Old")) {
                 array.add(getMpJsonObject(mp));
             }
         }
@@ -210,7 +215,7 @@ public class JMXClient {
 
     public static void main(String[] args) {
 //        for (int i = 0; i < 100; i++) {
-        JMXClient.getInstance().gc();
+        JMXClient.getInstance().initMBeanServerConnection();
 //        }
     }
 }
