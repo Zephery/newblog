@@ -34,6 +34,9 @@
     <script src="js/mdeditor/lib/flowchart.min.js"></script>
     <script src="js/mdeditor/lib/jquery.flowchart.min.js"></script>
     <script src="js/mdeditor/editormd.js"></script>
+    <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+    <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+    <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
     <script type="text/javascript">
         $(function () {
             editormd.markdownToHTML("test-editormd-view2", {
@@ -54,6 +57,12 @@
             background-color: #fbfbfb
         }
     </style>
+    <script type="text/javascript">
+        function submitword() {
+            var sentence = $("#sentence").val();
+            window.location.href = '${pageContext.request.contextPath}/weibonlpdetail.html?weibo=' + sentence;
+        }
+    </script>
 </head>
 <body class="home blog hPC">
 <section class="contentcontainer" style="background-color: #FFFFFF">
@@ -62,9 +71,57 @@
     </div>
     <div class="input-group"
          style="width: 85%;margin: -5% auto 3% auto;">
-        <input type="text" class="form-control input-lg">
-        <span class="input-group-addon btn btn-primary">情感分类</span>
+        <input type="text" class="form-control input-lg" name="sentence" id="sentence">
+        <span class="input-group-addon btn btn-primary" onclick="submitword()">情感分类</span>
     </div>
+    <c:if test="${kvs!=null}">
+        <div>
+            <div id="eeecontainer" style="width: auto;height: 421px;"></div>
+            <script>
+                $(function () {
+                    $('#eeecontainer').highcharts({
+                        chart: {
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        title: {
+                            text: '情感属性'
+                        },
+                        tooltip: {
+                            headerFormat: '{series.name}<br>',
+                            pointFormat: '{point.name}: <b>{point.percentage:.2f}%</b>'
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '<b>{point.name}</b>: {point.percentage:.2f} %',
+                                    style: {
+                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                    }
+                                }
+                            }
+                        },
+                        series: [{
+                            type: 'pie',
+                            name: '浏览器访问量占比',
+                            data: [
+                                <c:forEach var="kv" items="${kvs}">
+                                ['${kv.key}', ${kv.value}],
+                                </c:forEach>
+                            ]
+                        }]
+                    });
+                });
+            </script>
+        </div>
+    </c:if>
     <table class="table table-bordered" style="width: 90%;margin: 0 auto">
         <thead>
         <tr>
@@ -80,7 +137,7 @@
                 <td>${weibo.id}</td>
                 <td>${weibo.name}</td>
                 <td>${weibo.text}</td>
-                <td>${weibo.type}</td>
+                <td>${weibo.typename}</td>
             </tr>
         </c:forEach>
         </tbody>

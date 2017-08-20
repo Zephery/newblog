@@ -22,6 +22,8 @@ public class Weibo implements Serializable {
 
     private String text;
 
+    private String typename;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -86,5 +88,13 @@ public class Weibo implements Serializable {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getTypename() {
+        return typename;
+    }
+
+    public void setTypename(String typename) {
+        this.typename = typename;
     }
 }

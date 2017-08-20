@@ -422,7 +422,11 @@
             <artifactId>httpcore-nio</artifactId>
             <version>4.4.6</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.hoverruan</groupId>
+            <artifactId>weiboclient4j</artifactId>
+            <version>0.4.16</version>
+        </dependency>
         <!--java执行python-->
         <!--<dependency>-->
             <!--<groupId>org.python</groupId>-->

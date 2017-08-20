@@ -1,5 +1,6 @@
 package com.myblog.service;
 
+import com.google.gson.JsonObject;
 import com.myblog.model.Weibo;
 
 import java.util.List;
@@ -12,4 +13,6 @@ import java.util.List;
  */
 public interface IWeiboService {
     public List<Weibo> getAllWeibo();
+
+    public JsonObject getWeiboDetail(String sentence);
 }
