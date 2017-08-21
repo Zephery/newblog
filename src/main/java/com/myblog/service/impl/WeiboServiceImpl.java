@@ -1,6 +1,5 @@
 package com.myblog.service.impl;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.myblog.dao.WeiboMapper;
@@ -8,7 +7,6 @@ import com.myblog.model.Weibo;
 import com.myblog.service.IWeiboService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -72,7 +70,7 @@ public class WeiboServiceImpl implements IWeiboService {
         try {
             CloseableHttpResponse response = null;
             HttpClientContext context = HttpClientContext.create();
-            HttpGet httpGet = new HttpGet("http://127.0.0.1:5000/helloscore/" + sentence);
+            HttpGet httpGet = new HttpGet("http://123.206.28.24:5000/helloscore/" + sentence);
             response = httpClient.execute(httpGet, context);
             HttpEntity entity = response.getEntity();
             JsonParser parser = new JsonParser();

@@ -8,6 +8,7 @@ import com.myblog.model.KeyAndValue;
 import com.myblog.model.TopTen;
 import com.myblog.model.Weibo;
 import com.myblog.service.IWeiboService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -40,18 +41,15 @@ public class InterestController {
     }
 
     @RequestMapping("weibonlp")
-    public ModelAndView weibonlp() {
-        ModelAndView mv = new ModelAndView();
-        List<Weibo> weibos = weiboService.getAllWeibo();
-        mv.addObject("weibos", weibos);
-        mv.setViewName("weibonlp");
-        return mv;
-    }
-
-    @RequestMapping("weibonlpdetail")
     public ModelAndView weibonlpdetail(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         String weibo = request.getParameter("weibo");
+        if (StringUtils.isEmpty(weibo)) {
+            List<Weibo> weibos = weiboService.getAllWeibo();
+            mv.addObject("weibos", weibos);
+            mv.setViewName("weibonlp");
+            return mv;
+        }
         try {
             JsonObject object = weiboService.getWeiboDetail(weibo);
             mv.addObject("type", object.get("type"));
