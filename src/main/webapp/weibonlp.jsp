@@ -116,10 +116,10 @@
     <table class="table table-bordered" style="width: 90%;margin: 0 auto">
         <thead>
         <tr>
-            <th>名称</th>
-            <th>城市</th>
-            <th>邮编</th>
-            <th>type</th>
+            <th>序号</th>
+            <th>博主</th>
+            <th>微博内容</th>
+            <th>类型</th>
         </tr>
         </thead>
         <tbody>

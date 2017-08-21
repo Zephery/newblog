@@ -70,7 +70,7 @@ public class WeiboServiceImpl implements IWeiboService {
         try {
             CloseableHttpResponse response = null;
             HttpClientContext context = HttpClientContext.create();
-            HttpGet httpGet = new HttpGet("http://123.206.28.24:5000/helloscore/" + sentence);
+            HttpGet httpGet = new HttpGet("http://127.0.0.1:5000/helloscore/" + sentence);
             response = httpClient.execute(httpGet, context);
             HttpEntity entity = response.getEntity();
             JsonParser parser = new JsonParser();
