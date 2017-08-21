@@ -52,8 +52,8 @@ public class WeiboServiceImpl implements IWeiboService {
     }
 
     @Override
-    public List<Weibo> getAllWeibo() {
-        List<Weibo> weibos = weiboMapper.getAllWeibo();
+    public List<Weibo> getAllWeiboToday() {
+        List<Weibo> weibos = weiboMapper.getAllWeiboToday();
         for (Weibo weibo : weibos) {
             try {
                 weibo.setTypename(TYPE.get(weibo.getType()));

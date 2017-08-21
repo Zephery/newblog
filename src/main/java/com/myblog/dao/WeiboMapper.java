@@ -21,5 +21,5 @@ public interface WeiboMapper {
 
     int updateByPrimaryKey(Weibo record);
 
-    List<Weibo> getAllWeibo();
+    List<Weibo> getAllWeiboToday();
 }

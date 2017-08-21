@@ -67,7 +67,7 @@
     </div>
     <c:if test="${kvs!=null}">
         <div>
-            <div id="eeecontainer" style="width: auto;height: 421px;"></div>
+            <div id="eeecontainer" style="height: 421px;width: 50%;float: left"></div>
             <script>
                 $(function () {
                     $('#eeecontainer').highcharts({
@@ -111,24 +111,40 @@
                     });
                 });
             </script>
+            <div style="float: right;width: 30%;margin: 10% 10%">
+                <table class="table table-responsive">
+                    <tbody>
+                    <tr>
+                        <th style="text-align: center">所属类别：</th>
+                        <td style="text-align: center">${kvs.get(0).key}</td>
+                    </tr>
+                    <c:forEach var="kv" items="${kvs}">
+                        <tr>
+                            <th style="text-align: center">${kv.key}</th>
+                            <td style="text-align: center">${kv.value}</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </c:if>
     <table class="table table-bordered" style="width: 90%;margin: 0 auto">
         <thead>
         <tr>
-            <th style="width: 5%">序号</th>
-            <th>博主</th>
-            <th>微博内容</th>
-            <th style="width: 5%">类型</th>
+            <th style="width: 5%;text-align: center">序号</th>
+            <th style="text-align: center">博主</th>
+            <th style="text-align: center">微博内容</th>
+            <th style="width: 5%;text-align: center">类型</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach var="weibo" items="${weibos}">
             <tr>
-                <td>${weibo.id}</td>
+                <td style="text-align: center">${weibo.id}</td>
                 <td>${weibo.name}</td>
                 <td>${weibo.text}</td>
-                <td>${weibo.typename}</td>
+                <td style="text-align: center">${weibo.typename}</td>
             </tr>
         </c:forEach>
         </tbody>
