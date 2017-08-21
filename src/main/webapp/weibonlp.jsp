@@ -62,7 +62,7 @@
     </div>
     <div class="input-group"
          style="width: 85%;margin: -5% auto 3% auto;">
-        <input type="text" class="form-control input-lg" name="sentence" id="sentence">
+        <input type="text" class="form-control input-lg" name="sentence" id="sentence" value="${sentence}">
         <span class="input-group-addon btn btn-primary" onclick="submitword()">情感分类</span>
     </div>
     <c:if test="${kvs!=null}">
@@ -116,10 +116,10 @@
     <table class="table table-bordered" style="width: 90%;margin: 0 auto">
         <thead>
         <tr>
-            <th>序号</th>
+            <th style="width: 5%">序号</th>
             <th>博主</th>
             <th>微博内容</th>
-            <th>类型</th>
+            <th style="width: 5%">类型</th>
         </tr>
         </thead>
         <tbody>

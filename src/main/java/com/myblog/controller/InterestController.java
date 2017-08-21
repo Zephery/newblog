@@ -60,6 +60,7 @@ public class InterestController {
                 KeyAndValue keyAndValue = gson.fromJson(element, KeyAndValue.class);
                 kvlist.add(keyAndValue);
             }
+            mv.addObject("sentence",weibo);
             mv.addObject("kvs", kvlist);
         } catch (Exception e) {
             e.printStackTrace();
