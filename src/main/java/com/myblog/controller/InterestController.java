@@ -8,6 +8,7 @@ import com.myblog.model.KeyAndValue;
 import com.myblog.model.TopTen;
 import com.myblog.model.Weibo;
 import com.myblog.service.IWeiboService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -40,31 +42,39 @@ public class InterestController {
     }
 
     @RequestMapping("weibonlp")
-    public ModelAndView weibonlp() {
-        ModelAndView mv = new ModelAndView();
-        List<Weibo> weibos = weiboService.getAllWeibo();
-        mv.addObject("weibos", weibos);
-        mv.setViewName("weibonlp");
-        return mv;
-    }
-
-    @RequestMapping("weibonlpdetail")
     public ModelAndView weibonlpdetail(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         String weibo = request.getParameter("weibo");
-        try {
-            JsonObject object = weiboService.getWeiboDetail(weibo);
-            mv.addObject("type", object.get("type"));
-            JsonArray array = object.get("data").getAsJsonArray();
-            Gson gson = new Gson();
-            List<KeyAndValue> kvlist = new ArrayList<>();
-            for (JsonElement element : array) {
-                KeyAndValue keyAndValue = gson.fromJson(element, KeyAndValue.class);
-                kvlist.add(keyAndValue);
+        List<Weibo> weibos = weiboService.getAllWeiboToday();
+        mv.addObject("weibos", weibos);
+        if (StringUtils.isNotEmpty(weibo)) {
+            try {
+                JsonObject object = weiboService.getWeiboDetail(weibo);
+                mv.addObject("type", object.get("type"));
+                JsonArray array = object.get("data").getAsJsonArray();
+                Gson gson = new Gson();
+                List<KeyAndValue> kvlist = new ArrayList<>();
+                for (JsonElement element : array) {
+                    KeyAndValue keyAndValue = gson.fromJson(element, KeyAndValue.class);
+                    kvlist.add(keyAndValue);
+                }
+                if (kvlist.size() > 0) {
+                    kvlist.sort(new Comparator<KeyAndValue>() {
+                        @Override
+                        public int compare(KeyAndValue o1, KeyAndValue o2) {
+                            if (Float.parseFloat(o1.getValue()) > Float.parseFloat(o2.getValue())) {
+                                return -1;
+                            } else {
+                                return 1;
+                            }
+                        }
+                    });
+                }
+                mv.addObject("sentence", weibo);
+                mv.addObject("kvs", kvlist);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            mv.addObject("kvs", kvlist);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         mv.setViewName("weibonlp");
         return mv;

@@ -1,6 +1,5 @@
 package com.myblog.service.impl;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.myblog.dao.WeiboMapper;
@@ -8,7 +7,6 @@ import com.myblog.model.Weibo;
 import com.myblog.service.IWeiboService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -54,8 +52,8 @@ public class WeiboServiceImpl implements IWeiboService {
     }
 
     @Override
-    public List<Weibo> getAllWeibo() {
-        List<Weibo> weibos = weiboMapper.getAllWeibo();
+    public List<Weibo> getAllWeiboToday() {
+        List<Weibo> weibos = weiboMapper.getAllWeiboToday();
         for (Weibo weibo : weibos) {
             try {
                 weibo.setTypename(TYPE.get(weibo.getType()));

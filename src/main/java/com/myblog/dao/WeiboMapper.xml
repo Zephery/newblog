@@ -142,11 +142,12 @@
       type = #{type,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-    <select id="getAllWeibo" resultMap="ResultMapWithBLOBs">
+    <select id="getAllWeiboToday" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
         from weibo
+        WHERE date_format(now(), '%m-%d-%Y') - date_format(created_at, '%m-%d-%Y') = 0
     </select>
 </mapper>

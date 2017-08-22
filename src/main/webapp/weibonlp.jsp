@@ -25,15 +25,6 @@
     <script type="text/javascript"
             src="http://assets.changyan.sohu.com/upload/plugins/plugins.count.js">
     </script>
-    <link rel="stylesheet" href="js/mdeditor/css/editormd.preview.css"/>
-    <script src="js/mdeditor/lib/marked.min.js"></script>
-    <script src="js/mdeditor/lib/prettify.min.js"></script>
-    <script src="js/mdeditor/lib/raphael.min.js"></script>
-    <script src="js/mdeditor/lib/underscore.min.js"></script>
-    <script src="js/mdeditor/lib/sequence-diagram.min.js"></script>
-    <script src="js/mdeditor/lib/flowchart.min.js"></script>
-    <script src="js/mdeditor/lib/jquery.flowchart.min.js"></script>
-    <script src="js/mdeditor/editormd.js"></script>
     <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
     <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
     <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
@@ -60,23 +51,23 @@
     <script type="text/javascript">
         function submitword() {
             var sentence = $("#sentence").val();
-            window.location.href = '${pageContext.request.contextPath}/weibonlpdetail.html?weibo=' + sentence;
+            window.location.href = '${pageContext.request.contextPath}/weibonlp.html?weibo=' + sentence;
         }
     </script>
 </head>
 <body class="home blog hPC">
 <section class="contentcontainer" style="background-color: #FFFFFF">
     <div style="text-align: center">
-        <img src="http://img.sootuu.com/Exchange/2015-10/201510914124865365367.jpg" style="padding: 0 auto"/>
+        <img src="http://ohlrxdl4p.bkt.clouddn.com/201510914124865365367.jpg" style="padding: 0 auto"/>
     </div>
     <div class="input-group"
          style="width: 85%;margin: -5% auto 3% auto;">
-        <input type="text" class="form-control input-lg" name="sentence" id="sentence">
+        <input type="text" class="form-control input-lg" name="sentence" id="sentence" value="${sentence}">
         <span class="input-group-addon btn btn-primary" onclick="submitword()">情感分类</span>
     </div>
     <c:if test="${kvs!=null}">
         <div>
-            <div id="eeecontainer" style="width: auto;height: 421px;"></div>
+            <div id="eeecontainer" style="height: 421px;width: 50%;float: left"></div>
             <script>
                 $(function () {
                     $('#eeecontainer').highcharts({
@@ -120,24 +111,40 @@
                     });
                 });
             </script>
+            <div style="float: right;width: 30%;margin: 10% 10%">
+                <table class="table table-responsive">
+                    <tbody>
+                    <tr>
+                        <th style="text-align: center">所属类别：</th>
+                        <td style="text-align: center">${kvs.get(0).key}</td>
+                    </tr>
+                    <c:forEach var="kv" items="${kvs}">
+                        <tr>
+                            <th style="text-align: center">${kv.key}</th>
+                            <td style="text-align: center">${kv.value}</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </c:if>
     <table class="table table-bordered" style="width: 90%;margin: 0 auto">
         <thead>
         <tr>
-            <th>名称</th>
-            <th>城市</th>
-            <th>邮编</th>
-            <th>type</th>
+            <th style="width: 5%;text-align: center">序号</th>
+            <th style="text-align: center">博主</th>
+            <th style="text-align: center">微博内容</th>
+            <th style="width: 5%;text-align: center">类型</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach var="weibo" items="${weibos}">
             <tr>
-                <td>${weibo.id}</td>
+                <td style="text-align: center">${weibo.id}</td>
                 <td>${weibo.name}</td>
                 <td>${weibo.text}</td>
-                <td>${weibo.typename}</td>
+                <td style="text-align: center">${weibo.typename}</td>
             </tr>
         </c:forEach>
         </tbody>

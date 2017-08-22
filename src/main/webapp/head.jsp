@@ -147,7 +147,7 @@
                            class="<%=request.getParameter("aboutmeactive")%>">关于</a></li>
                     <li><a href="${pageContext.request.contextPath}/donate.jsp"
                            class="<%=request.getParameter("donateactive")%>">捐赠</a></li>
-                    <li><a href="${pageContext.request.contextPath}/interest.html"
+                    <li><a href="${pageContext.request.contextPath}/weibonlp.html"
                            class="<%=request.getParameter("interestactive")%>">有点意思</a></li>
                     <li><a href="test.jsp" class="<%=request.getParameter("testactive")%>">Test</a></li>
                 </ul>

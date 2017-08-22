@@ -12,7 +12,7 @@ import java.util.List;
  * Description:
  */
 public interface IWeiboService {
-    public List<Weibo> getAllWeibo();
+    public List<Weibo> getAllWeiboToday();
 
     public JsonObject getWeiboDetail(String sentence);
 }
