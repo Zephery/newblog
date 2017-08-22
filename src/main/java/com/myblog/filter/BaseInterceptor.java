@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.NamedThreadLocal;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,18 +20,21 @@ import javax.servlet.http.HttpServletResponse;
  * Created with IntelliJ IDEA.
  * User: Zephery
  * Time: 2017/8/6 19:04
- * Description: 自定义拦截器，目前只是增加IP记录的功能
+ * Description: 自定义拦截器，目前只是增加IP记录的功能，并记录后台反应的时长
  */
 @Component
 public class BaseInterceptor implements HandlerInterceptor {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(BaseInterceptor.class);
-
+    private NamedThreadLocal<Long> startTimeThreadLocal =
+            new NamedThreadLocal<Long>("StopWatch-StartTime");
     @Resource
     private IpLogMapper ipLogMapper;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) {
+        long beginTime = System.currentTimeMillis();//1、开始时间
+        startTimeThreadLocal.set(beginTime);//线程绑定变量（该数据只有当前请求的线程可见）
         return true;
     }
 
@@ -47,6 +51,9 @@ public class BaseInterceptor implements HandlerInterceptor {
                            HttpServletResponse response,
                            Object o, ModelAndView modelAndView) throws Exception {
         try {
+            long endTime = System.currentTimeMillis();//2、结束时间
+            long beginTime = startTimeThreadLocal.get();//得到线程绑定的局部变量（开始时间）
+            long consumeTime = endTime - beginTime;//3、消耗的时间
             String uri = request.getRequestURI();
             if (StringUtils.isEmpty(uri) || uri.equals("/")) {
                 return;
@@ -58,6 +65,7 @@ public class BaseInterceptor implements HandlerInterceptor {
                 ipLog.setIpTime(DateTime.now().toDate());
                 ipLog.setArea(IPUtils.getAddressByIP(real_ip));
                 ipLog.setUri(uri);
+                ipLog.setResponseTime(consumeTime);
                 ipLogMapper.insert(ipLog);
             }
         } catch (Exception e) {
