@@ -40,8 +40,17 @@
         <shiro.version>1.3.2</shiro.version>
         <jedis.version>2.9.0</jedis.version>
         <mysql.version>5.1.34</mysql.version>
+        <ehcache.version>2.10.4</ehcache.version>
+        <netty.version>4.1.14.Final</netty.version>
     </properties>
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -119,16 +128,20 @@
             <artifactId>mybatis</artifactId>
             <version>3.2.8</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mybatis.caches/mybatis-ehcache -->
         <dependency>
-            <groupId>org.mybatis</groupId>
+            <groupId>org.mybatis.caches</groupId>
             <artifactId>mybatis-ehcache</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/net.sf.ehcache/ehcache -->
         <dependency>
-            <groupId>org.ehcache</groupId>
+            <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
-            <version>3.0.0.m3</version>
+            <version>${ehcache.version}</version>
         </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -144,7 +157,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
-            <scope>test</scope>
         </dependency>
         <!-- File Upload -->
 

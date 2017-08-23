@@ -81,20 +81,6 @@ public class BlogServiceImpl implements IBlogService {
         return list;
     }
 
-    public static void main(String[] args) {
-        try {
-            Directory dir = FSDirectory.open(Paths.get("autocomplete"));
-            RAMDirectory indexDir = new RAMDirectory();
-            SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
-            AnalyzingInfixSuggester suggester = new AnalyzingInfixSuggester(dir, analyzer);
-            IBlogService blogService = new BlogServiceImpl();
-            lookup(suggester, "jav");
-//            new BlogServiceImpl().ajaxsearch("北京");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public List<Blog> getAllBlog() {
         List<Blog> blogs = blogMapper.getAllBlog();
@@ -249,6 +235,19 @@ public class BlogServiceImpl implements IBlogService {
         } catch (IOException e) {
             System.err.println("Error!");
             return null;
+        }
+    }
+    public static void main(String[] args) {
+        try {
+            Directory dir = FSDirectory.open(Paths.get("autocomplete"));
+            RAMDirectory indexDir = new RAMDirectory();
+            SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
+            AnalyzingInfixSuggester suggester = new AnalyzingInfixSuggester(dir, analyzer);
+            IBlogService blogService = new BlogServiceImpl();
+            lookup(suggester, "jav");
+//            new BlogServiceImpl().ajaxsearch("北京");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
