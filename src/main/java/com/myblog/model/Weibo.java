@@ -3,28 +3,19 @@ package com.myblog.model;
 import java.io.Serializable;
 
 /**
- * @author 
+ * @author
  */
 public class Weibo implements Serializable {
-    private Integer id;
-
-    private String uid;
-
-    private String name;
-
-    private String location;
-
-    private String url;
-
-    private String createdAt;
-
-    private Integer type;
-
-    private String text;
-
-    private String typename;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private String uid;
+    private String name;
+    private String location;
+    private String url;
+    private String createdAt;
+    private Integer type;
+    private String text;
+    private String typename;
 
     public Integer getId() {
         return id;

@@ -9,7 +9,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     c_id, c_name, c_descrip, c_num
-  </sql>
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -19,13 +19,13 @@
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from category
     where c_id = #{cId,jdbcType=INTEGER}
-  </delete>
+    </delete>
     <insert id="insert" parameterType="com.myblog.model.Category">
     insert into category (c_id, c_name, c_descrip, 
       c_num)
     values (#{cId,jdbcType=INTEGER}, #{cName,jdbcType=VARCHAR}, #{cDescrip,jdbcType=VARCHAR}, 
       #{cNum,jdbcType=INTEGER})
-  </insert>
+    </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.Category">
         insert into category
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -78,7 +78,7 @@
       c_descrip = #{cDescrip,jdbcType=VARCHAR},
       c_num = #{cNum,jdbcType=INTEGER}
     where c_id = #{cId,jdbcType=INTEGER}
-  </update>
+    </update>
     <select id="getAllCategory" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

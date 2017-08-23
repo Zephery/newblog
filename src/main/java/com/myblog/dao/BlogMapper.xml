@@ -139,14 +139,14 @@
         ORDER BY create_at desc
     </select>
     <select id="getBlogByTagId" resultMap="BaseResultMap">
-    SELECT
-    <include refid="Base_Column_List"/>
-    FROM myblog.blog
-    where blogid in (
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM myblog.blog
+        where blogid in (
         select blogid from
         relation
         where relation.t_id = #{tId,jdbcType=INTEGER})
-  </select>
+    </select>
     <select id="getBanner" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

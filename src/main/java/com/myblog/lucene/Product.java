@@ -9,13 +9,21 @@ import java.io.Serializable;
  * Description:
  */
 public class Product implements Serializable {
-    /** 产品名称 */
+    /**
+     * 产品名称
+     */
     private String name;
-    /** 产品图片 */
+    /**
+     * 产品图片
+     */
     private String image;
-    /** 产品销售地区 */
+    /**
+     * 产品销售地区
+     */
     private String[] regions;
-    /** 产品销售量 */
+    /**
+     * 产品销售量
+     */
     private int numberSold;
 
     public Product(String name, String image, String[] regions, int numberSold) {

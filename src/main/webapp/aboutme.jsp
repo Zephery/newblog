@@ -49,7 +49,14 @@
 </head>
 <body class="home blog hPC">
 <section class="contentcontainer">
+    <div align=center>
 
+    </div>
+<h1>
+
+    建设中
+
+</h1>
 </section>
 </body>
 </html>

@@ -7,11 +7,11 @@
         <result column="ip_time" jdbcType="TIMESTAMP" property="ipTime"/>
         <result column="area" jdbcType="VARCHAR" property="area"/>
         <result column="uri" jdbcType="VARCHAR" property="uri"/>
-        <result column="response_time" jdbcType="LONG" property="responseTime"/>
+        <result column="response_time" jdbcType="BIGINT" property="responseTime"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, ip, ip_time, area, uri, response_time
-  </sql>
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -21,15 +21,15 @@
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from ip_log
     where id = #{id,jdbcType=INTEGER}
-  </delete>
+    </delete>
     <insert id="insert" parameterType="com.myblog.model.IpLog">
     insert into ip_log (id, ip, ip_time, 
       area, uri, response_time
       )
     values (#{id,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{ipTime,jdbcType=TIMESTAMP}, 
-      #{area,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, #{responseTime,jdbcType=LONG}
+      #{area,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, #{responseTime,jdbcType=BIGINT}
       )
-  </insert>
+    </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.IpLog">
         insert into ip_log
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -89,7 +89,7 @@
                 uri = #{uri,jdbcType=VARCHAR},
             </if>
             <if test="responseTime != null">
-                response_time = #{responseTime,jdbcType=LONG},
+                response_time = #{responseTime,jdbcType=BIGINT},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -100,7 +100,7 @@
       ip_time = #{ipTime,jdbcType=TIMESTAMP},
       area = #{area,jdbcType=VARCHAR},
       uri = #{uri,jdbcType=VARCHAR},
-      response_time = #{responseTime,jdbcType=LONG}
+      response_time = #{responseTime,jdbcType=BIGINT}
     where id = #{id,jdbcType=INTEGER}
-  </update>
+    </update>
 </mapper>

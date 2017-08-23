@@ -7,7 +7,6 @@ import com.myblog.dao.CategoryMapper;
 import com.myblog.dao.TagMapper;
 import com.myblog.lucene.BlogIndex;
 import com.myblog.lucene.BlogIterator;
-import com.myblog.lucene.Tools;
 import com.myblog.model.Blog;
 import com.myblog.model.Category;
 import com.myblog.model.Tag;
@@ -19,16 +18,13 @@ import org.apache.lucene.search.suggest.analyzing.AnalyzingInfixSuggester;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.RAMDirectory;
-import org.apache.lucene.util.BytesRef;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -44,6 +40,60 @@ public class BlogServiceImpl implements IBlogService {
     @Resource
     private TagMapper tagMapper;
     private BlogIndex blogIndex = new BlogIndex();
+
+    /**
+     * Set截取
+     *
+     * @param objSet
+     * @param size
+     */
+    private static void ssubSet(Set<String> objSet, int size) {
+        if (CollectionUtils.isEmpty(objSet)) {
+            Collections.emptySet();
+        }
+        ImmutableSet.copyOf(Iterables.limit(objSet, size));
+    }
+
+    /**
+     * lookup
+     *
+     * @param suggester
+     * @param keyword
+     * @throws IOException
+     */
+    private static List<String> lookup(AnalyzingInfixSuggester suggester, String keyword
+    ) throws IOException {
+        //先以contexts为过滤条件进行过滤，再以title为关键字进行筛选，根据weight值排序返回前2条
+        //第3个布尔值即是否每个Term都要匹配，第4个参数表示是否需要关键字高亮
+        List<LookupResult> results = suggester.lookup(keyword, 20, true, true);
+        List<String> list = new ArrayList<>();
+        for (LookupResult result : results) {
+            list.add(result.key.toString());
+            //从payload中反序列化出Blog对象
+//            BytesRef bytesRef = result.payload;
+//            InputStream is = Tools.bytes2InputStream(bytesRef.bytes);
+//            Blog blog = (Blog) Tools.deSerialize(is);
+//            System.out.println("blog-Name:" + blog.getTitle());
+//            System.out.println("blog-Content:" + blog.getContent());
+//            System.out.println("blog-image:" + blog.getImageurl());
+//            System.out.println("blog-numberSold:" + blog.getHits());
+        }
+        return list;
+    }
+
+    public static void main(String[] args) {
+        try {
+            Directory dir = FSDirectory.open(Paths.get("autocomplete"));
+            RAMDirectory indexDir = new RAMDirectory();
+            SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
+            AnalyzingInfixSuggester suggester = new AnalyzingInfixSuggester(dir, analyzer);
+            IBlogService blogService = new BlogServiceImpl();
+            lookup(suggester, "jav");
+//            new BlogServiceImpl().ajaxsearch("北京");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public List<Blog> getAllBlog() {
@@ -199,60 +249,6 @@ public class BlogServiceImpl implements IBlogService {
         } catch (IOException e) {
             System.err.println("Error!");
             return null;
-        }
-    }
-
-    /**
-     * Set截取
-     *
-     * @param objSet
-     * @param size
-     */
-    private static void ssubSet(Set<String> objSet, int size) {
-        if (CollectionUtils.isEmpty(objSet)) {
-            Collections.emptySet();
-        }
-        ImmutableSet.copyOf(Iterables.limit(objSet, size));
-    }
-
-    /**
-     * lookup
-     *
-     * @param suggester
-     * @param keyword
-     * @throws IOException
-     */
-    private static List<String> lookup(AnalyzingInfixSuggester suggester, String keyword
-    ) throws IOException {
-        //先以contexts为过滤条件进行过滤，再以title为关键字进行筛选，根据weight值排序返回前2条
-        //第3个布尔值即是否每个Term都要匹配，第4个参数表示是否需要关键字高亮
-        List<LookupResult> results = suggester.lookup(keyword, 20, true, true);
-        List<String> list = new ArrayList<>();
-        for (LookupResult result : results) {
-            list.add(result.key.toString());
-            //从payload中反序列化出Blog对象
-//            BytesRef bytesRef = result.payload;
-//            InputStream is = Tools.bytes2InputStream(bytesRef.bytes);
-//            Blog blog = (Blog) Tools.deSerialize(is);
-//            System.out.println("blog-Name:" + blog.getTitle());
-//            System.out.println("blog-Content:" + blog.getContent());
-//            System.out.println("blog-image:" + blog.getImageurl());
-//            System.out.println("blog-numberSold:" + blog.getHits());
-        }
-        return list;
-    }
-
-    public static void main(String[] args) {
-        try {
-            Directory dir = FSDirectory.open(Paths.get("autocomplete"));
-            RAMDirectory indexDir = new RAMDirectory();
-            SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
-            AnalyzingInfixSuggester suggester = new AnalyzingInfixSuggester(dir, analyzer);
-            IBlogService blogService = new BlogServiceImpl();
-            lookup(suggester, "jav");
-//            new BlogServiceImpl().ajaxsearch("北京");
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

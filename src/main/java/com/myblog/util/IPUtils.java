@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -20,6 +19,9 @@ public class IPUtils {
 
     public static String ipRegix = "((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
     public static Pattern ipPattern = Pattern.compile(ipRegix);
+    private static long[][] intranet_ip_ranges = new long[][]{{ipToInt("10.0.0.0"), ipToInt("10.255.255.255")},
+            {ipToInt("172.16.0.0"), ipToInt("172.31.255.255")},
+            {ipToInt("192.168.0.0"), ipToInt("192.168.255.255")}};
 
     public static boolean isIp(String in) {
         if (in == null) {
@@ -99,10 +101,6 @@ public class IPUtils {
         return ipToInt(addr, false);
     }
 
-    private static long[][] intranet_ip_ranges = new long[][]{{ipToInt("10.0.0.0"), ipToInt("10.255.255.255")},
-            {ipToInt("172.16.0.0"), ipToInt("172.31.255.255")},
-            {ipToInt("192.168.0.0"), ipToInt("192.168.255.255")}};
-
     /**
      * 是否为内网ip A类 10.0.0.0-10.255.255.255 B类 172.16.0.0-172.31.255.255 C类
      * 192.168.0.0-192.168.255.255 不包括回环ip
@@ -134,9 +132,9 @@ public class IPUtils {
                 result.append(line);
             }
             reader.close();
-            JsonParser parser=new JsonParser();
-            JsonObject object=parser.parse(result.toString()).getAsJsonObject();
-            return object.get("city").toString().replaceAll("\"","");
+            JsonParser parser = new JsonParser();
+            JsonObject object = parser.parse(result.toString()).getAsJsonObject();
+            return object.get("city").toString().replaceAll("\"", "");
         } catch (Exception e) {
             return "Address Error";
         }

@@ -69,7 +69,7 @@ public class BaseInterceptor implements HandlerInterceptor {
                 ipLogMapper.insert(ipLog);
             }
         } catch (Exception e) {
-            logger.error("preHandle error", e);
+            logger.error("Handle error", e);
         }
     }
 

@@ -10,18 +10,13 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class JedisUtil {
 
     private static Logger logger = LoggerFactory.getLogger(JedisUtil.class);
-
-    private JedisPool jedisPool = null;
-
     private static JedisUtil jedisUtil = null;
-
     private static Configuration configuration;
 
     static {
@@ -30,6 +25,12 @@ public class JedisUtil {
         } catch (ConfigurationException e) {
             logger.error("读取配置文件错误", e);
         }
+    }
+
+    private JedisPool jedisPool = null;
+
+    public JedisUtil() {
+        initJedisPool();
     }
 
     public static JedisUtil getInstance() {
@@ -44,10 +45,6 @@ public class JedisUtil {
             jedisUtil = new JedisUtil();
         }
         return jedisUtil;
-    }
-
-    public JedisUtil() {
-        initJedisPool();
     }
 
     private void initJedisPool() {

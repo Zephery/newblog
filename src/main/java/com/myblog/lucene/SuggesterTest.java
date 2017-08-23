@@ -32,7 +32,7 @@ public class SuggesterTest {
             //从payload中反序列化出Product对象
             BytesRef bytesRef = result.payload;
             InputStream is = Tools.bytes2InputStream(bytesRef.bytes);
-            Product product = (Product)Tools.deSerialize(is);
+            Product product = (Product) Tools.deSerialize(is);
             System.out.println("product-Name:" + product.getName());
             System.out.println("product-regions:" + product.getRegions());
             System.out.println("product-image:" + product.getImage());
@@ -50,17 +50,17 @@ public class SuggesterTest {
             //创建Product测试数据
             ArrayList<Product> products = new ArrayList<Product>();
             products.add(new Product("Electric Guitar",
-                    "http://images.example/electric-guitar.jpg", new String[] {
-                    "US", "CA" }, 100));
+                    "http://images.example/electric-guitar.jpg", new String[]{
+                    "US", "CA"}, 100));
             products.add(new Product("Electric Train",
-                    "http://images.example/train.jpg", new String[] { "US",
-                    "CA" }, 100));
+                    "http://images.example/train.jpg", new String[]{"US",
+                    "CA"}, 100));
             products.add(new Product("Acoustic Guitar",
-                    "http://images.example/acoustic-guitar.jpg", new String[] {
-                    "US", "ZA" }, 80));
+                    "http://images.example/acoustic-guitar.jpg", new String[]{
+                    "US", "ZA"}, 80));
             products.add(new Product("Guarana Soda",
                     "http://images.example/soda.jpg",
-                    new String[] { "ZA", "IE" }, 130));
+                    new String[]{"ZA", "IE"}, 130));
 
             // 创建测试索引
             suggester.build(new ProductIterator(products.iterator()));

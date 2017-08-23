@@ -8,7 +8,10 @@ import java.io.Serializable;
 public class KeyAndValue implements Serializable {
     private String key;
     private String value;
-    public KeyAndValue(){}
+
+    public KeyAndValue() {
+    }
+
     public String getKey() {
         return key;
     }

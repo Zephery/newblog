@@ -10,9 +10,9 @@ import java.util.HashMap;
  * Created by Zephery on 2017/1/23.
  */
 public class ForTest {
-    public static void main(String args[]){
-        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    public static void main(String args[]) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         System.out.println(DateTime.now().toDate());
-        HashMap<String,String> map=new HashMap<>();
+        HashMap<String, String> map = new HashMap<>();
     }
 }

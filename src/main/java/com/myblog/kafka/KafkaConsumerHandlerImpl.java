@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class KafkaConsumerHandlerImpl implements KafkaConsumerHandler {
-    private final static Logger logger= LoggerFactory.getLogger(KafkaConsumerHandlerImpl.class);
+    private final static Logger logger = LoggerFactory.getLogger(KafkaConsumerHandlerImpl.class);
 
     @Override
     public void consume(ConsumerRecords<String, String> records) {

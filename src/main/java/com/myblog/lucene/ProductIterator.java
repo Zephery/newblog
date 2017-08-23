@@ -48,7 +48,7 @@ public class ProductIterator implements InputIterator {
                 //返回当前Project的name值，把product类的name属性值作为key
                 return new BytesRef(currentProduct.getName().getBytes("UTF8"));
             } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException("Couldn't convert to UTF-8",e);
+                throw new RuntimeException("Couldn't convert to UTF-8", e);
             }
         } else {
             return null;

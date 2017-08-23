@@ -69,7 +69,7 @@ public class DateUtil {
     }
 
     public static void main(String args[]) {
-        List<String> date=findDates("20170610","20170625");
+        List<String> date = findDates("20170610", "20170625");
         System.out.println();
     }
 }

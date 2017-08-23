@@ -1,11 +1,6 @@
 package com.myblog.util;
 
 import com.myblog.common.Config;
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -13,26 +8,20 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BufferedHeader;
 import weiboclient4j.StatusService;
 import weiboclient4j.WeiboClient;
 import weiboclient4j.WeiboClientException;
-import weiboclient4j.examples.OAuth2CommandLine;
-import weiboclient4j.model.Status;
 import weiboclient4j.model.Timeline;
 import weiboclient4j.oauth2.DisplayType;
 import weiboclient4j.oauth2.ResponseType;
 import weiboclient4j.oauth2.SinaWeibo2AccessToken;
 import weiboclient4j.utils.JsonUtils;
-import weiboclient4j.utils.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.List;
-import java.util.prefs.Preferences;
 
 /**
  * Created with IntelliJ IDEA.
@@ -47,8 +36,6 @@ public class WeiboUtil {
     private static final long STATUS_ID = 3436240135184587L;
     private static final long ANOTHER_STATUS_ID = 3436255091659029L;
     private static final long UID = 1834561765L;
-    private WeiboClient client;
-    private BufferedReader in;
     public static String USER_AGENT = Config.getProperty("user_agent");
     private static final CloseableHttpClient httpClient = HttpClients
             .custom()
@@ -57,6 +44,8 @@ public class WeiboUtil {
                     RequestConfig.custom()
                             .setCookieSpec(CookieSpecs.BROWSER_COMPATIBILITY)
                             .build()).build();
+    private WeiboClient client;
+    private BufferedReader in;
 
     public static void main(String[] args) throws Exception {
         WeiboClient client = new WeiboClient(APP_KEY, APP_SECRET);

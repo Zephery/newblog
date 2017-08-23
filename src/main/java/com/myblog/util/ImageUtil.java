@@ -13,10 +13,10 @@ import java.io.File;
 public class ImageUtil {
     private final static Logger logger = LoggerFactory.getLogger(ImageUtil.class);
 
-    public  static File thimage(File file) {
+    public static File thimage(File file) {
         try {
             System.out.println(FileUtils.sizeOf(file));
-            if (FileUtils.sizeOf(file) < 2000*1000) {
+            if (FileUtils.sizeOf(file) < 2000 * 1000) {
                 return file;
             }
             Thumbnails.of(file).scale(1f).outputQuality(0.25f).toFile(file);

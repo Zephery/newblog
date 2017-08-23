@@ -53,6 +53,10 @@ public class JMXClient {
         mbsconnector = initMBeanServerConnection();
     }
 
+    public JMXClient() {
+        initMBeanServerConnection();
+    }
+
     public static JMXClient getInstance() {
         if (jmxUtil == null) {
             jmxUtil = createInstance();
@@ -65,10 +69,6 @@ public class JMXClient {
             jmxUtil = new JMXClient();
         }
         return jmxUtil;
-    }
-
-    public JMXClient() {
-        initMBeanServerConnection();
     }
 
     private static MBeanServerConnection initMBeanServerConnection() {
@@ -86,6 +86,12 @@ public class JMXClient {
             logger.error("get connector error" + e);
         }
         return mbsconnector;
+    }
+
+    public static void main(String[] args) {
+//        for (int i = 0; i < 100; i++) {
+        JMXClient.getInstance().initMBeanServerConnection();
+//        }
     }
 
     public Long getJVMUsage() {
@@ -211,11 +217,5 @@ public class JMXClient {
         array.add(mp.getCollectionUsage().getMax() / 1048576);
         jsonObject.add("data", parser.parse(array.toString()));
         return jsonObject;
-    }
-
-    public static void main(String[] args) {
-//        for (int i = 0; i < 100; i++) {
-        JMXClient.getInstance().initMBeanServerConnection();
-//        }
     }
 }

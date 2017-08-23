@@ -35,8 +35,36 @@ import java.util.List;
  * Description: lucene默认使用log4j库，运行中会提示
  */
 public class BlogIndex {
-    private Directory dir;
     private final static Logger logger = LoggerFactory.getLogger(BlogIndex.class);
+    private Directory dir;
+
+    /**
+     * refresh lucene
+     *
+     * @param blogs
+     */
+    public static void refreshlucene(List<Blog> blogs) {
+        try {
+            BlogIndex blogIndex = new BlogIndex();
+            FileUtils.deleteDirectory(new File("blog_index"));
+            for (Blog blog : blogs) {
+                blogIndex.addIndex(blog);
+            }
+        } catch (Exception e) {
+            logger.error("refreshlucene error" + e);
+        }
+    }
+
+    public static void main(String args[]) {
+        try {
+            String str = " 根据我的经验，我总结了下，<b><font color='red'>大学</font></b>里掌握以下两种，" +
+                    "毕业的时候，用人单位比较喜欢； 第一种能力，自学能力； 所谓自学能力，顾名思义，就是自我" +
+                    "学习知识，技术的能力，这种能力，人与人之间的差距有大，就像有的";
+            System.out.println(str.length());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private IndexWriter getWriter() throws Exception {
         dir = FSDirectory.open(Paths.get("blog_index"));
@@ -80,6 +108,7 @@ public class BlogIndex {
 
     /**
      * 首先是对标题进行查找，然后对文章内容进行查找
+     *
      * @param pageStart
      * @param q
      * @param pagehits
@@ -141,33 +170,5 @@ public class BlogIndex {
             blogIndexList.add(blog);
         }
         return blogIndexList;
-    }
-
-    /**
-     * refresh lucene
-     *
-     * @param blogs
-     */
-    public static void refreshlucene(List<Blog> blogs) {
-        try {
-            BlogIndex blogIndex = new BlogIndex();
-            FileUtils.deleteDirectory(new File("blog_index"));
-            for (Blog blog : blogs) {
-                blogIndex.addIndex(blog);
-            }
-        } catch (Exception e) {
-            logger.error("refreshlucene error" + e);
-        }
-    }
-
-    public static void main(String args[]) {
-        try {
-            String str = " 根据我的经验，我总结了下，<b><font color='red'>大学</font></b>里掌握以下两种，" +
-                    "毕业的时候，用人单位比较喜欢； 第一种能力，自学能力； 所谓自学能力，顾名思义，就是自我" +
-                    "学习知识，技术的能力，这种能力，人与人之间的差距有大，就像有的";
-            System.out.println(str.length());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

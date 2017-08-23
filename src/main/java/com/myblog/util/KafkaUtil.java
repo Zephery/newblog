@@ -30,7 +30,8 @@ public class KafkaUtil {
     }
 
     private static Properties getKafkaProp() {
-        Properties props = new Properties();;
+        Properties props = new Properties();
+        ;
         final InputStream input = Config.class
                 .getResourceAsStream(KAFKA_CONFIG);
         if (input == null) {
@@ -54,7 +55,7 @@ public class KafkaUtil {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
                 try {
-                    if(runner != null) {
+                    if (runner != null) {
                         runner.shutdown();
                         Thread.sleep(10000); // wait for output finish.
                     }

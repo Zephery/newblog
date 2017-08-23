@@ -13,7 +13,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     imageid, imagename, imagepath, banner, content, datetime, love, iht
-  </sql>
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -23,7 +23,7 @@
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from image
     where imageid = #{imageid,jdbcType=INTEGER}
-  </delete>
+    </delete>
     <insert id="insert" parameterType="com.myblog.model.Image">
     insert into image (imageid, imagename, imagepath, 
       banner, content, datetime, 
@@ -31,7 +31,7 @@
     values (#{imageid,jdbcType=INTEGER}, #{imagename,jdbcType=VARCHAR}, #{imagepath,jdbcType=VARCHAR}, 
       #{banner,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{datetime,jdbcType=VARCHAR}, 
       #{love,jdbcType=INTEGER}, #{iht,jdbcType=INTEGER})
-  </insert>
+    </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.Image">
         insert into image
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -124,7 +124,7 @@
       love = #{love,jdbcType=INTEGER},
       iht = #{iht,jdbcType=INTEGER}
       where imageid = #{imageid,jdbcType=INTEGER}
-  </update>
+    </update>
     <select id="getAllImage" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

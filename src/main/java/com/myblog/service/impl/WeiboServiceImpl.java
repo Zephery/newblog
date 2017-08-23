@@ -33,8 +33,6 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Service("weiboService")
 public class WeiboServiceImpl implements IWeiboService {
-    @Resource
-    private WeiboMapper weiboMapper;
     //logger
     private static final Logger logger = LoggerFactory.getLogger(WeiboServiceImpl.class);
     private static final Map<Integer, String> TYPE = new ConcurrentHashMap<>();
@@ -50,6 +48,9 @@ public class WeiboServiceImpl implements IWeiboService {
         TYPE.put(2, "负向");
         TYPE.put(3, "客观");
     }
+
+    @Resource
+    private WeiboMapper weiboMapper;
 
     @Override
     public List<Weibo> getAllWeiboToday() {

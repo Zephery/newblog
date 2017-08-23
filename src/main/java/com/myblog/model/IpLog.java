@@ -4,22 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author 
+ * @author
  */
 public class IpLog implements Serializable {
-    private Integer id;
-
-    private String ip;
-
-    private Date ipTime;
-
-    private String area;
-
-    private String uri;
-
-    private Long responseTime;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private String ip;
+    private Date ipTime;
+    private String area;
+    private String uri;
+    private Long responseTime;
 
     public Integer getId() {
         return id;
@@ -82,11 +76,11 @@ public class IpLog implements Serializable {
         }
         IpLog other = (IpLog) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getIp() == null ? other.getIp() == null : this.getIp().equals(other.getIp()))
-            && (this.getIpTime() == null ? other.getIpTime() == null : this.getIpTime().equals(other.getIpTime()))
-            && (this.getArea() == null ? other.getArea() == null : this.getArea().equals(other.getArea()))
-            && (this.getUri() == null ? other.getUri() == null : this.getUri().equals(other.getUri()))
-            && (this.getResponseTime() == null ? other.getResponseTime() == null : this.getResponseTime().equals(other.getResponseTime()));
+                && (this.getIp() == null ? other.getIp() == null : this.getIp().equals(other.getIp()))
+                && (this.getIpTime() == null ? other.getIpTime() == null : this.getIpTime().equals(other.getIpTime()))
+                && (this.getArea() == null ? other.getArea() == null : this.getArea().equals(other.getArea()))
+                && (this.getUri() == null ? other.getUri() == null : this.getUri().equals(other.getUri()))
+                && (this.getResponseTime() == null ? other.getResponseTime() == null : this.getResponseTime().equals(other.getResponseTime()));
     }
 
     @Override

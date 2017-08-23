@@ -1,6 +1,5 @@
 package com.myblog.dao;
 
-import com.myblog.model.Blog;
 import com.myblog.model.Relation;
 import com.myblog.model.Tag;
 import org.springframework.stereotype.Repository;

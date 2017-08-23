@@ -10,8 +10,8 @@
         <result column="t_name" property="tName" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    t_id, t_name
-  </sql>
+        t_id, t_name
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -19,13 +19,13 @@
         where t_id = #{tId,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tag
-    where t_id = #{tId,jdbcType=INTEGER}
-  </delete>
+        delete from tag
+        where t_id = #{tId,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="com.myblog.model.Tag">
-    insert into tag (t_id, t_name)
-    values (#{tId,jdbcType=INTEGER}, #{tName,jdbcType=VARCHAR})
-  </insert>
+        insert into tag (t_id, t_name)
+        values (#{tId,jdbcType=INTEGER}, #{tName,jdbcType=VARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.Tag">
         insert into tag
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -55,13 +55,13 @@
         where t_id = #{tId,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.myblog.model.Tag">
-    update tag
-    set t_name = #{tName,jdbcType=VARCHAR}
-    where t_id = #{tId,jdbcType=INTEGER}
-  </update>
+        update tag
+        set t_name = #{tName,jdbcType=VARCHAR}
+        where t_id = #{tId,jdbcType=INTEGER}
+    </update>
     <select id="getTagByBlogId" resultMap="GetTag">
-select tag.t_id,t_name from tag
- where t_id in (select t_id from relation
-  where relation.blogid= #{blogid,jdbcType=INTEGER});
-</select>
+        select tag.t_id,t_name from tag
+        where t_id in (select t_id from relation
+        where relation.blogid= #{blogid,jdbcType=INTEGER});
+    </select>
 </mapper>

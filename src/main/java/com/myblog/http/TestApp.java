@@ -38,7 +38,7 @@ public class TestApp {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        HttpClient client= new DefaultHttpClient();
+        HttpClient client = new DefaultHttpClient();
 
 
     }

@@ -112,10 +112,10 @@ public class IndexController {
     public void jfoe(HttpServletResponse response) throws Exception {
         List<Blog> blogs = blogService.getAllBlog();
         for (Blog blog : blogs) {
-            try{
+            try {
                 blogIndex.addIndex(blog);
-            }catch (IOException e){
-                logger.error("jofijo",e);
+            } catch (IOException e) {
+                logger.error("jofijo", e);
             }
         }
         response.getWriter().write("success");

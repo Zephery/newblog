@@ -8,7 +8,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, adminname, adminpasswd
-  </sql>
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -18,13 +18,13 @@
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from admin
     where id = #{id,jdbcType=INTEGER}
-  </delete>
+    </delete>
     <insert id="insert" parameterType="com.myblog.model.Admin">
     insert into admin (id, adminname, adminpasswd
       )
     values (#{id,jdbcType=INTEGER}, #{adminname,jdbcType=VARCHAR}, #{adminpasswd,jdbcType=VARCHAR}
       )
-  </insert>
+    </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.Admin">
         insert into admin
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -67,5 +67,5 @@
     set adminname = #{adminname,jdbcType=VARCHAR},
       adminpasswd = #{adminpasswd,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
-  </update>
+    </update>
 </mapper>
