@@ -1,4 +1,4 @@
-package com.myblog.JMX;
+package com.myblog.jmx;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

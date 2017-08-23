@@ -24,8 +24,10 @@
     <!-- enable transaction demarcation with annotations -->
 
     <tx:annotation-driven/>
+    <bean id="myStatLogger" class="com.myblog.druid.MyStatLogger">
+    </bean>
     <!-- 配置数据源，使用阿里巴巴连接池Druid -->
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
@@ -54,6 +56,8 @@
 
         <!-- 配置监控统计拦截的filters -->
         <property name="filters" value="stat"/>
+        <!--保存Druid的监控记录-->
+        <property name="statLogger" ref="myStatLogger" />
     </bean>
 
     <!-- 扫描mapper接口（即dao），Spring会自动查找其下的类 -->
@@ -123,6 +127,7 @@
         </property>
     </bean>
     <aop:config>
+        <!--pointcut-ref="druid-stat-pointcut"在idea中报Cannot resolve Spring Pointcut ‘druid-stat-pointcut‘  不用管它-->
         <aop:advisor advice-ref="druid-stat-interceptor"
                      pointcut-ref="druid-stat-pointcut"/>
     </aop:config>

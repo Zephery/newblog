@@ -1,4 +1,4 @@
-package com.myblog.JMX;
+package com.myblog.jmx;
 
 import com.sun.management.OperatingSystemMXBean;
 

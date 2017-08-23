@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.myblog.JMX.JMXClient;
+import com.myblog.jmx.JMXClient;
 import com.myblog.model.FanPie;
 import com.myblog.model.TopTen;
 import com.myblog.util.IPUtils;

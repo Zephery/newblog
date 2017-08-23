@@ -1,4 +1,4 @@
-package com.myblog.JMX;
+package com.myblog.jmx;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
