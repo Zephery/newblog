@@ -149,7 +149,6 @@
                            class="<%=request.getParameter("donateactive")%>">捐赠</a></li>
                     <li><a href="${pageContext.request.contextPath}/weibonlp.html"
                            class="<%=request.getParameter("interestactive")%>">有点意思</a></li>
-                    <li><a href="test.jsp" class="<%=request.getParameter("testactive")%>">Test</a></li>
                 </ul>
                 <div class="social-icons">
                     <div id="share-area" style="margin-top: -5px"></div>
@@ -181,7 +180,7 @@
 <div class="header">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.jsp"><img src="images/logo.png" alt=""></a>
+            <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt=""></a>
         </div>
         <form action="${pageContext.request.contextPath}/search.html" method="post"
               class="navbar-form navbar-right" role="search">

@@ -17,7 +17,7 @@
     <div class="footer-inner">
         <div class="copyright pull-left">
             <a href="${pageContext.request.contextPath}" title="Zephery">Zephery</a> 版权所有丨采用<a
-                href="http://yusi123.com/"> 欲思 </a>主题丨基于 Spring Spring MVC Mybatis 构建 © <script>
+                href="http://yusi123.com/"> 欲思 </a>主题丨基于 Spring SpringMVC Mybatis 构建 © <script>
             var date = new Date();  //创建对象
             var y = date.getFullYear();     //获取年份
             document.write(y);
