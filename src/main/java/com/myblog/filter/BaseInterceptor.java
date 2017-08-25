@@ -71,7 +71,7 @@ public class BaseInterceptor implements HandlerInterceptor {
                 ipLog.setVisitNum(1);
                 visitNum.set(1);
             } else {
-                ipLog.setVisitNum(visitNum.get() + 1);
+                ipLog.setVisitNum(visitNum.get() == null ? 0 : visitNum.get() + 1);
             }
             ipLogMapper.insert(ipLog);      //记录每一条日志
         } catch (Exception e) {
