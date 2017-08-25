@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -71,7 +72,7 @@ public class WeiboServiceImpl implements IWeiboService {
         try {
             CloseableHttpResponse response = null;
             HttpClientContext context = HttpClientContext.create();
-            HttpGet httpGet = new HttpGet("http://127.0.0.1:5000/helloscore/" + sentence);
+            HttpGet httpGet = new HttpGet("http://127.0.0.1:5000/helloscore/" + URLEncoder.encode(sentence, "utf-8"));
             response = httpClient.execute(httpGet, context);
             HttpEntity entity = response.getEntity();
             JsonParser parser = new JsonParser();
