@@ -3,14 +3,16 @@
 <mapper namespace="com.myblog.dao.IpLogMapper">
     <resultMap id="BaseResultMap" type="com.myblog.model.IpLog">
         <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="sid" jdbcType="VARCHAR" property="sid"/>
         <result column="ip" jdbcType="VARCHAR" property="ip"/>
         <result column="ip_time" jdbcType="TIMESTAMP" property="ipTime"/>
         <result column="area" jdbcType="VARCHAR" property="area"/>
         <result column="uri" jdbcType="VARCHAR" property="uri"/>
         <result column="response_time" jdbcType="BIGINT" property="responseTime"/>
+        <result column="visit_num" jdbcType="INTEGER" property="visitNum"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, ip, ip_time, area, uri, response_time
+    id, sid, ip, ip_time, area, uri, response_time, visit_num
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -23,18 +25,21 @@
     where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.myblog.model.IpLog">
-    insert into ip_log (id, ip, ip_time, 
-      area, uri, response_time
-      )
-    values (#{id,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{ipTime,jdbcType=TIMESTAMP}, 
-      #{area,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, #{responseTime,jdbcType=BIGINT}
-      )
+    insert into ip_log (id, sid, ip, 
+      ip_time, area, uri, 
+      response_time, visit_num)
+    values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{ipTime,jdbcType=TIMESTAMP}, #{area,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, 
+      #{responseTime,jdbcType=BIGINT}, #{visitNum,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.IpLog">
         insert into ip_log
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
+            </if>
+            <if test="sid != null">
+                sid,
             </if>
             <if test="ip != null">
                 ip,
@@ -51,10 +56,16 @@
             <if test="responseTime != null">
                 response_time,
             </if>
+            <if test="visitNum != null">
+                visit_num,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
+            </if>
+            <if test="sid != null">
+                #{sid,jdbcType=VARCHAR},
             </if>
             <if test="ip != null">
                 #{ip,jdbcType=VARCHAR},
@@ -69,13 +80,19 @@
                 #{uri,jdbcType=VARCHAR},
             </if>
             <if test="responseTime != null">
-                #{responseTime,jdbcType=INTEGER},
+                #{responseTime,jdbcType=BIGINT},
+            </if>
+            <if test="visitNum != null">
+                #{visitNum,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.myblog.model.IpLog">
         update ip_log
         <set>
+            <if test="sid != null">
+                sid = #{sid,jdbcType=VARCHAR},
+            </if>
             <if test="ip != null">
                 ip = #{ip,jdbcType=VARCHAR},
             </if>
@@ -91,16 +108,21 @@
             <if test="responseTime != null">
                 response_time = #{responseTime,jdbcType=BIGINT},
             </if>
+            <if test="visitNum != null">
+                visit_num = #{visitNum,jdbcType=INTEGER},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.myblog.model.IpLog">
     update ip_log
-    set ip = #{ip,jdbcType=VARCHAR},
+    set sid = #{sid,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
       ip_time = #{ipTime,jdbcType=TIMESTAMP},
       area = #{area,jdbcType=VARCHAR},
       uri = #{uri,jdbcType=VARCHAR},
-      response_time = #{responseTime,jdbcType=BIGINT}
+      response_time = #{responseTime,jdbcType=BIGINT},
+      visit_num = #{visitNum,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
-    </update>
+  </update>
 </mapper>

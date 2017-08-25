@@ -27,7 +27,8 @@ public class BaseInterceptor implements HandlerInterceptor {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(BaseInterceptor.class);
     private NamedThreadLocal<Long> startTimeThreadLocal =
-            new NamedThreadLocal<Long>("StopWatch-StartTime");
+            new NamedThreadLocal<>("StopWatch-StartTime");
+    private NamedThreadLocal<Integer> visitNum = new NamedThreadLocal<>("visitNum");
     @Resource
     private IpLogMapper ipLogMapper;
 
@@ -58,16 +59,21 @@ public class BaseInterceptor implements HandlerInterceptor {
             if (StringUtils.isEmpty(uri) || uri.equals("/")) {
                 return;
             }
+            String real_ip = IPUtils.getIpAddr(request);
+            IpLog ipLog = new IpLog();
+            ipLog.setSid(request.getSession().getId());
+            ipLog.setIp(real_ip);
+            ipLog.setIpTime(DateTime.now().toDate());
+            ipLog.setArea(IPUtils.getAddressByIP(real_ip));
+            ipLog.setUri(uri);
+            ipLog.setResponseTime(consumeTime);
             if (request.getSession().isNew()) {     //判断是不是新的一个session
-                String real_ip = IPUtils.getIpAddr(request);
-                IpLog ipLog = new IpLog();
-                ipLog.setIp(real_ip);
-                ipLog.setIpTime(DateTime.now().toDate());
-                ipLog.setArea(IPUtils.getAddressByIP(real_ip));
-                ipLog.setUri(uri);
-                ipLog.setResponseTime(consumeTime);
-                ipLogMapper.insert(ipLog);
+                ipLog.setVisitNum(1);
+                visitNum.set(1);
+            } else {
+                ipLog.setVisitNum(visitNum.get() + 1);
             }
+            ipLogMapper.insert(ipLog);      //记录每一条日志
         } catch (Exception e) {
             logger.error("Handle error", e);
         }
