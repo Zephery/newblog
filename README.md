@@ -1,0 +1,53 @@
+# newblog
+个人网站
+首先，帮忙点击一下我的网站[http://www.wenzhihuai.com/](http://www.wenzhihuai.com/)。谢谢啊，如果可以，GitHub上麻烦给个star，以后面试能讲讲这个项目，GitHub地址[https://github.com/Zephery/newblog](https://github.com/Zephery/newblog)
+大学的时候萌生的一个想法，就是建立一个个人网站，前前后后全部推翻重改了4、5遍，现在终于能看了，下面是首页。
+<div align="center">![](http://ohlrxdl4p.bkt.clouddn.com/home.png?imageView2/2/w/400)</div>
+由原本的ssh变成ssm，再变成ssm+shiro+lucene，到现在的前后台分离。前台使用ssm+lucene，后台使用spring boot+shiro。其中，使用pagehelper作为分页，lucene用来搜索和自动补全，使用百度统计的API做了个日志系统，统计pv和uv什么的，同时，还有使用了JMX来观察JVM的使用和cpu的使用率，机器学习方面，使用了adaboost和朴素贝叶斯对微博进行分类，有兴趣的可以点点[有点意思](http://www.wenzhihuai.com/weibonlp.html)这个页面。
+本文从下面这几个方面来讲讲网站的建立：
+1.萌生——初版——推翻重做——循环
+2.lucene搜索的使用
+3.使用quartz来定时备份数据库
+4.使用百度统计api做日志系统
+5.使用jmx观察jvm和cpu
+6.使用druid来监测数据库
+7.使用机器学习对微博进行分析
+8.网站性能优化
+9.SEO优化
+
+## 1.萌生——初版——推翻重做——循环
+起初，是因为学习的时候老是找不到什么好玩而又有挑战性的项目，看着struts、spring、hibernate的书，全都是一些小项目，做了感觉也没啥意义，有时候在博客园看到别人还有自己的网站，特羡慕，最终就选择了自己做一个个人网站。期初刚学的ssh，于是开始了自己的ssh搭建个人网站的行程，但是对于一个后端的人来说，前端是个大问题啊。。。。所以初版的时候差不多全是纯生的html、css、js，至少发博客这个功能实现了，但是确实没法看。前前后后折腾了一个多月，决定推翻重做，到百度看看别人怎么做的。首先看到的是[杨青](http://www.yangqq.com/)的网站，已经好几年没更新了，前端的代码看起来比较简单，也是自己能够掌握的，但是不够美观，继续找，在模板之家发现了一个高大上的模板。
+<div align="center">![](http://ohlrxdl4p.bkt.clouddn.com/joihfiohewifoheifahiauhvuia.png?imageView2/2/w/400)</div>
+第二版的界面确实是这样的，只是把图片的切换变成了wowslider，也是简单的用bootstrap和pagehelper做了下分页，现在的最终版保留了它的header，然后评论框使用了多说（超级怀念多说）。后端也由原来的ssh变成了ssm，之后加上了lucene来对文章进行索引。之后，随着多说要关闭了，突然之间有很多div都不适应了（我写死了的。。。），再一次，没法看，不想看，一怒之下再次推翻重做，变成了现在这个版本。
+最终版本在考虑时，也找了很多模板，影响深刻的是[tale](https://tale.biezhi.me/)和[欲思](https://yusi123.com/)这两个主题，期中，tale使用的是java语言写的，刚知道的那一刻我就没好感了，java后端我是要自己全部写的，tale这个页面简洁但是不够炫，而且内容量太低，可能就只是个纯博客，之后发现了欲思，拓展性强，只可惜没有静态的版本，后台是纯生的PHP（嗯，PHP是世界上最好的语言），看了看，没事，保存网页，前端自己改，后端自己全部重写，最终变成了现在这个版本，虽然拼接的时候各种css、js混入。。。。还好在做网站性能优化的时候差不多全部去掉了。最终版加入redis、quartz、shiro等，还有python机器学习、flask的restful api，可谓是大杂烩了。
+页面看着还算凑合，至少不是那种看都看不过去的那种了，但是仔细看看，还是有不少问题的，比如瀑布流，还有排版什么的。只能等自己什么时候想认真学学前端的东西了。
+已经部署在腾讯云服务器上，存储使用了七牛云的cdn。
+最终版的技术架构图如下：
+<div align="center">
+![](http://ohlrxdl4p.bkt.clouddn.com/awfawefwefwef.png)
+</div>
+网站核心主要采用Spring SpringMVC和Mybatis，下图是当访问一篇博客的时候的运行流程，参考了[张开涛](http://jinnianshilongnian.iteye.com/blog/1594806)的博客。
+![](http://ohlrxdl4p.bkt.clouddn.com/awefaweagregrgbwerbwer.png)
+**运行流程分析**
+1.浏览器发送http请求。/blogdetail.html?blogid=1。
+2.tomcat容器初始化，顺序为context-param>listener>filter>servlet，此时，spring中的bean还没有被注入的，不建议在此处加载bean，网站声明了两个类（IPFilter和CacheControlFilter），IPFilter用来拦截IP，CacheControlFilter用来缓存。
+3.初始化Spring。
+4.DispatcherServlet——>HandlerMapping进行请求到处理的映射，HandlerMapping将“/blogdetail”路径直接映射到名字为“/blogdetail”的Bean进行处理，即BlogController。
+5.自定义拦截器，其中BaseIntercepter实现了HandleInterceptor的接口，用来记录每次访问的链接以及后台响应的时间。
+6.DispatcherServlet——> SimpleControllerHandlerAdapter，SimpleControllerHandlerAdapter将HandlerExecutionChain中的处理器适配为BlogController。
+7.BlogController执行查询，取得结果集返回数据。
+8.blogdetail（ModelAndView的逻辑视图名）——>InternalResourceViewResolver， InternalResourceViewResolver使用JstlView，具体视图页面在/blogdetail.jsp。
+9.JstlView（/blogdetail.jsp）——>渲染，将在处理器传入的模型数据(blog=Blog！)在视图中展示出来；
+10.返回响应。
+![](http://ohlrxdl4p.bkt.clouddn.com/awfawefwefawefwef.png)
+
+![](http://ohlrxdl4p.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170825141127.png)
+
+## 2.lucene搜索的使用
+lucene的[介绍](https://zh.wikipedia.org/wiki/Lucene)
+[lucene官网](https://lucene.apache.org/)目前版本是6.6.0，版本改动很大，特别是4.0升5.0,5.0升6.0的时候，接口api的变动也很大，使用时注意版本。
+lucene原理：主要是将文档进行分词，然后去除停用词，再对词语进行倒排索引。其过程可粗略表示如下：
+<div align="center">![](http://ohlrxdl4p.bkt.clouddn.com/luceneiiii.png?imageView2/2/w/400)</div>
+入门知识我觉得[这个人](http://www.cnblogs.com/xing901022/p/3933675.html)讲得很好，推荐看看。
+我的网站主要使用lucene来进行搜索和输入框的自动补全，其中也遇到了不少问题，比如将搜索结果进行分页等。
+#### 2.1 使用lucene搜索
