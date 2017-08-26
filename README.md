@@ -64,7 +64,7 @@
 ![](http://ohlrxdl4p.bkt.clouddn.com/awfawefwefawefwef.png)
 
 </div>
-[日志系统](http://www.wenzhihuai.com/log.html) 曾经尝试采用过ELK，实时监控实在是让人不能不称赞，本地也跑起来了，但是一到服务器，卡卡卡，毕竟（1Ghz CPU、1G内存），只能放弃ELK，采用百度统计。百度统计提供了Tongji API供开发者使用，只是有次数限制，2000/日，实时的话实在有点低，只能统计前几天的PV、UV等开放出来。其实这个存放在mysql也行，不过这些零碎的数据还是放在redis中，方便管理。
+这个[日志系统](http://www.wenzhihuai.com/log.html) 曾经尝试采用过ELK，实时监控实在是让人不能不称赞，本地也跑起来了，但是一到服务器，卡卡卡，毕竟（1Ghz CPU、1G内存），只能放弃ELK，采用百度统计。百度统计提供了Tongji API供开发者使用，只是有次数限制，2000/日，实时的话实在有点低，只能统计前几天的PV、UV等开放出来。其实这个存放在mysql也行，不过这些零碎的数据还是放在redis中，方便管理。
 出了日志系统，自己对服务器的一些使用率也是挺关心的，毕竟服务器配置太低，于是利用了使用了tomcat的JMX来对CPU和jvm使用情况进行监控，这两个都是实时的。出了这两个，对内存的分配做了监控，Eden、Survivor、Tenured的使用情况。<br/>
 
 ### 1.4 【有点意思】自然语言处理<br/>
