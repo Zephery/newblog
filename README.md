@@ -1,3 +1,4 @@
+# 个人网站的建立
 首先，帮忙点击一下我的网站[http://www.wenzhihuai.com/](http://www.wenzhihuai.com/) 。谢谢啊，如果可以，GitHub上麻烦给个star，以后面试能讲讲这个项目，GitHub地址[https://github.com/Zephery/newblog](https://github.com/Zephery/newblog) 。
 大学的时候萌生的一个想法，就是建立一个个人网站，前前后后全部推翻重改了4、5遍，现在终于能看了，下面是首页。
 <div align="center">
@@ -37,7 +38,7 @@
 ![](http://ohlrxdl4p.bkt.clouddn.com/awfawefwefwef.png)
 
 </div>
-网站核心主要采用Spring SpringMVC和Mybatis，下图是当访问一篇博客的时候的运行流程，参考了 [张开涛](http://jinnianshilongnian.iteye.com/blog/1594806) 的博客。
+网站核心主要采用Spring SpringMVC和Mybatis，下图是当访问一篇博客的时候的运行流程，参考了[张开涛](http://jinnianshilongnian.iteye.com/blog/1594806) 的博客。
 <div align="center">
 
 ![](http://ohlrxdl4p.bkt.clouddn.com/awefaweagregrgbwerbwer.png)
@@ -53,7 +54,7 @@
 6. DispatcherServlet——> SimpleControllerHandlerAdapter，SimpleControllerHandlerAdapter将HandlerExecutionChain中的处理器适配为BlogController。<br/>
 7. BlogController执行查询，取得结果集返回数据。<br/>
 8. blogdetail（ModelAndView的逻辑视图名）——>InternalResourceViewResolver， InternalResourceViewResolver使用JstlView，具体视图页面在/blogdetail.jsp。<br/>
-9. JstlView（/blogdetail.jsp）——>渲染，将在处理器传入的模型数据(blog=Blog！)在视图中展示出来；<br/>
+9. JstlView（/blogdetail.jsp）——>渲染，将在处理器传入的模型数据(blog=Blog！)在视图中展示出来。<br/>
 10. 返回响应。<br/>
 
 ### 1.3 日志系统
@@ -67,7 +68,7 @@
 出了日志系统，自己对服务器的一些使用率也是挺关心的，毕竟服务器配置太低，于是利用了使用了tomcat的JMX来对CPU和jvm使用情况进行监控，这两个都是实时的。出了这两个，对内存的分配做了监控，Eden、Survivor、Tenured的使用情况。<br/>
 
 ### 1.4 【有点意思】自然语言处理<br/>
-本人大学里的毕业设计就是基于AdaBoost算法的情感分类，学到的东西还是要经常拿出来看看，要不然真的浪费了我这么久努力做的毕业设计啊。构建了一个基本的情感分类小系统，每天抓取微博进行分类存储在MySql上，并使用flask提供Restful API给java调用，可以点击 [这里](http://www.wenzhihuai.com/weibonlp.html) 尝试（请忽略Google的图片）。目前分类效果不是很明显，准确率大概只有百分之70%，因为训练样本只有500条（找不到训练样本），机器学习真的太依赖样本的标注。这个，只能请教各位路人大神指导指导了。
+本人大学里的毕业设计就是基于AdaBoost算法的情感分类，学到的东西还是要经常拿出来看看，要不然真的浪费了我这么久努力做的毕业设计啊。构建了一个基本的情感分类小系统，每天抓取微博进行分类存储在MySql上，并使用flask提供Restful API给java调用，可以点击[这里](http://www.wenzhihuai.com/weibonlp.html) 尝试（请忽略Google的图片）。目前分类效果不是很明显，准确率大概只有百分之70%，因为训练样本只有500条（找不到训练样本），机器学习真的太依赖样本的标注。这个，只能请教各位路人大神指导指导了。
 <div align="center">
 
 ![](http://ohlrxdl4p.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170825141127.png)
