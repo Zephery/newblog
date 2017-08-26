@@ -117,7 +117,7 @@ public class JMXClient {
             Long start = System.currentTimeMillis();
             long startT = opMXbean.getProcessCpuTime();
             try {
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.SECONDS.sleep(1);       //导致速度慢， 不过因为是ajax的，不要担心哈哈哈哈
             } catch (InterruptedException e) {
                 logger.error("InterruptedException occurred while MemoryCollector sleeping...");
             }

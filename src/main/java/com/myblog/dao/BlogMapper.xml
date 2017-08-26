@@ -129,7 +129,7 @@
         select
         <include refid="Base_Column_List"/>
         from blog
-        order by create_at desc
+        order by blogid desc
     </select>
     <select id="getByCategoryId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select

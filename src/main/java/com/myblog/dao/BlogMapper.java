@@ -20,6 +20,10 @@ public interface BlogMapper {
 
     int updateByPrimaryKey(Blog record);
 
+    /**
+     * 原本是根据order by create_at，但是速度实在太慢，更改为blogid
+     * @return
+     */
     List<Blog> getAllBlog();
 
     List<Blog> getByCategoryId(@Param("categoryid") Integer categoryid);
