@@ -37,7 +37,10 @@
 ![](http://ohlrxdl4p.bkt.clouddn.com/awfawefwefwef.png)
 
 </div>
-网站核心主要采用Spring SpringMVC和Mybatis，下图是当访问一篇博客的时候的运行流程，参考了[张开涛](http://jinnianshilongnian.iteye.com/blog/1594806)的博客。
+网站核心主要采用Spring SpringMVC和Mybatis，下图是当访问一篇博客的时候的运行流程，参考了
+
+[张开涛](http://jinnianshilongnian.iteye.com/blog/1594806)
+的博客。
 <div align="center">
 
 ![](http://ohlrxdl4p.bkt.clouddn.com/awefaweagregrgbwerbwer.png)
