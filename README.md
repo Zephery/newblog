@@ -6,16 +6,16 @@
 
 </div>
 由原本的ssh变成ssm，再变成ssm+shiro+lucene，到现在的前后台分离。前台使用ssm+lucene，后台使用spring boot+shiro。其中，使用pagehelper作为分页，lucene用来搜索和自动补全，使用百度统计的API做了个日志系统，统计pv和uv什么的，同时，还有使用了JMX来观察JVM的使用和cpu的使用率，机器学习方面，使用了adaboost和朴素贝叶斯对微博进行分类，有兴趣的可以点点[有点意思](http://www.wenzhihuai.com/weibonlp.html)这个页面。
-本文从下面这几个方面来讲讲网站的建立：<br/>
-1.建站故事与网站架构  <br/>
-2.lucene搜索的使用<br/>
-3.使用quartz来定时备份数据库<br/>
-4.使用百度统计api做日志系统<br/>
-5.使用jmx观察jvm和cpu<br/>
-6.使用druid来监测数据库<br/>
-7.使用机器学习对微博进行分析<br/>
-8.网站性能优化<br/>
-9.SEO优化<br/>
+本文从下面这几个方面来讲讲网站的建立：
+1.建站故事与网站架构
+2.lucene搜索的使用
+3.使用quartz来定时备份数据库
+4.使用百度统计api做日志系统
+5.使用jmx观察jvm和cpu
+6.使用druid来监测数据库
+7.使用机器学习对微博进行分析
+8.网站性能优化
+9.SEO优化
 
 ## 1.建站故事与网站架构
 ### 1.1建站过程
