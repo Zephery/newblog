@@ -69,19 +69,29 @@ public class WeiboServiceImpl implements IWeiboService {
     @Override
     public JsonObject getWeiboDetail(String sentence) {
         JsonObject object = null;
+        CloseableHttpResponse response = null;
         try {
-            CloseableHttpResponse response = null;
             HttpClientContext context = HttpClientContext.create();
-            HttpGet httpGet = new HttpGet("http://127.0.0.1:5000/helloscore/" + URLEncoder.encode(sentence, "utf-8"));
+            HttpGet httpGet = new HttpGet("http://127.0.0.1:5000/helloscore/" + URLEncoder.encode(sentence.replaceAll("/", ""), "utf-8"));
             response = httpClient.execute(httpGet, context);
             HttpEntity entity = response.getEntity();
             JsonParser parser = new JsonParser();
-            object = parser.parse(EntityUtils.toString(entity)).getAsJsonObject();
+            String str = EntityUtils.toString(entity);
+            object = parser.parse(str).getAsJsonObject();
             if (StringUtils.isNotEmpty(object.get("type").toString())) {
                 object.addProperty("type", TYPE.get(Integer.parseInt(object.get("type").toString())));
             }
+            response.close();
         } catch (IOException e) {
             logger.error("", e);
+        } finally {
+            if (response != null) {
+                try {
+                    response.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return object;
     }

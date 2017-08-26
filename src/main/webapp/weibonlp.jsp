@@ -51,6 +51,9 @@
     <script type="text/javascript">
         function submitword() {
             var sentence = $("#sentence").val();
+            console.log(sentence);
+            sentence=encodeURIComponent(sentence);
+            console.log(sentence);
             window.location.href = '${pageContext.request.contextPath}/weibonlp.html?weibo=' + sentence;
         }
     </script>
@@ -62,7 +65,7 @@
     </div>
     <div class="input-group"
          style="width: 85%;margin: -5% auto 3% auto;">
-        <input type="text" class="form-control input-lg" name="sentence" id="sentence" value="${sentence}">
+        <input type="text" class="form-control input-lg" name="sentence" id="sentence" placeholder="请输入一段句子" value="${sentence}">
         <span class="input-group-addon btn btn-primary" onclick="submitword()">情感分类</span>
     </div>
     <c:if test="${kvs!=null}">
