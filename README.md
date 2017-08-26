@@ -1,11 +1,9 @@
 # 个人网站的建立
 首先，帮忙点击一下我的网站[http://www.wenzhihuai.com/](http://www.wenzhihuai.com/) 。谢谢啊，如果可以，GitHub上麻烦给个star，以后面试能讲讲这个项目，GitHub地址[https://github.com/Zephery/newblog](https://github.com/Zephery/newblog) 。
 大学的时候萌生的一个想法，就是建立一个个人网站，前前后后全部推翻重改了4、5遍，现在终于能看了，下面是首页。
-<div align="center">
-
+<center>
 ![](http://ohlrxdl4p.bkt.clouddn.com/home.png?imageView2/2/w/600)
-
-</div>
+</center>
 由原本的ssh变成ssm，再变成ssm+shiro+lucene，到现在的前后台分离。前台使用ssm+lucene，后台使用spring boot+shiro。其中，使用pagehelper作为分页，lucene用来搜索和自动补全，使用百度统计的API做了个日志系统，统计pv和uv什么的，同时，还有使用了JMX来观察JVM的使用和cpu的使用率，机器学习方面，使用了adaboost和朴素贝叶斯对微博进行分类，有兴趣的可以点点[有点意思](http://www.wenzhihuai.com/weibonlp.html) 这个页面。
 本文从下面这几个方面来讲讲网站的建立：<br/>
 1. 建站故事与网站架构<br/>
