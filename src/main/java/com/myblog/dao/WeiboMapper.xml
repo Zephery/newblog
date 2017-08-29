@@ -148,6 +148,6 @@
         ,
         <include refid="Blob_Column_List"/>
         from weibo
-        WHERE TO_DAYS( NOW( ) ) - TO_DAYS(created_at) &lt;= 1 order by id desc
+        WHERE TO_DAYS( NOW( ) ) - TO_DAYS(created_at) = 0 order by id ASC
     </select>
 </mapper>

@@ -3,7 +3,7 @@
 <%@ page isELIgnored="false" %>
 <jsp:include page="head.jsp">
     <jsp:param name="indexactive" value="active"/>
-    <jsp:param name="title" value="Zephery | 温志怀的个人博客"/>
+    <jsp:param name="title" value="Zephery | 温志怀的个人日志"/>
 </jsp:include>
 <!DOCTYPE html>
 <!-- saved from url=(0022)http://cuiqingcai.com/ -->
