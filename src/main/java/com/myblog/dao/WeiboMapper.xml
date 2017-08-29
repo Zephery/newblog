@@ -131,7 +131,7 @@
       type = #{type,jdbcType=INTEGER},
       text = #{text,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
-  </update>
+    </update>
     <update id="updateByPrimaryKey" parameterType="com.myblog.model.Weibo">
         update weibo
         set uid = #{uid,jdbcType=VARCHAR},
@@ -148,6 +148,6 @@
         ,
         <include refid="Blob_Column_List"/>
         from weibo
-        WHERE date_format(now(), '%m-%d-%Y') - date_format(created_at, '%m-%d-%Y') = 0
+        WHERE TO_DAYS( NOW( ) ) - TO_DAYS(created_at) &lt;= 1 order by id desc
     </select>
 </mapper>
