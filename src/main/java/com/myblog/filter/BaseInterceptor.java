@@ -72,7 +72,7 @@ public class BaseInterceptor implements HandlerInterceptor {
             long beginTime = startTimeThreadLocal.get();//得到线程绑定的局部变量（开始时间）
             long consumeTime = endTime - beginTime;//3、消耗的时间
             String uri = request.getRequestURL().toString();
-            if (StringUtils.isEmpty(uri) || !set.contains(uri)) {
+            if (StringUtils.isEmpty(uri) || !uri.equals("/")) {
                 return;
             }
             String real_ip = IPUtils.getIpAddr(request);
