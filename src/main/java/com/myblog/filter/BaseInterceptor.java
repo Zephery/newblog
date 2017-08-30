@@ -15,8 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,19 +29,6 @@ public class BaseInterceptor implements HandlerInterceptor {
     private NamedThreadLocal<Long> startTimeThreadLocal =
             new NamedThreadLocal<>("StopWatch-StartTime");
     private NamedThreadLocal<Integer> visitNum = new NamedThreadLocal<>("visitNum");
-    private final static Set<String> set = new HashSet<String>() {
-        {
-            add("/index.jsp");
-            add("/tech.jsp");
-            add("/life.jsp");
-            add("/trip.jsp");
-            add("/log.jsp");
-            add("/board.jsp");
-            add("/aboutme.jsp");
-            add("/donate.jsp");
-            add("/weibonlp.jsp");
-        }
-    };
     @Resource
     private IpLogMapper ipLogMapper;
 
@@ -71,8 +56,8 @@ public class BaseInterceptor implements HandlerInterceptor {
             long endTime = System.currentTimeMillis();//2、结束时间
             long beginTime = startTimeThreadLocal.get();//得到线程绑定的局部变量（开始时间）
             long consumeTime = endTime - beginTime;//3、消耗的时间
-            String uri = request.getRequestURL().toString();
-            if (StringUtils.isEmpty(uri) || !uri.equals("/")) {
+            String uri = request.getRequestURI();
+            if (StringUtils.isEmpty(uri) || !judegeuri(uri)) {
                 return;
             }
             String real_ip = IPUtils.getIpAddr(request);
@@ -93,6 +78,12 @@ public class BaseInterceptor implements HandlerInterceptor {
         } catch (Exception e) {
             logger.error("Handle error", e);
         }
+    }
+
+    private boolean judegeuri(String uri) {
+        return uri.contains("index.html") || uri.contains("tech.html") || uri.contains("life.html") || uri.contains("trip.html")
+                || uri.contains("log.html") || uri.contains("board.html") || uri.contains("aboutme.html") || uri.contains("donate.html")
+                || uri.contains("weibonlp.html") || uri.contains("interest.html") || uri.equals("/");
     }
 
     @Override

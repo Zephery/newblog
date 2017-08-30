@@ -199,8 +199,9 @@
 <script src="js/autocomplete/jquery.autocomplete.js" type="text/javascript"></script>
 <script type="text/javascript">
     /******************** remote start **********************/
-    /**这里有个bug，页面加载的时候keyword为空也会发送请求**/
-    $('#remote_input').autocomplete({
+    var remote_input = $('#remote_input');
+    remote_input.autocomplete().disable();
+    remote_input.autocomplete({
         source: [
             {
                 url: "ajaxsearch.html?keyword=%QUERY%",

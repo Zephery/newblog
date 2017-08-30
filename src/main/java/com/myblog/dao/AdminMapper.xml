@@ -20,10 +20,8 @@
     where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.myblog.model.Admin">
-    insert into admin (id, adminname, adminpasswd
-      )
-    values (#{id,jdbcType=INTEGER}, #{adminname,jdbcType=VARCHAR}, #{adminpasswd,jdbcType=VARCHAR}
-      )
+    insert into admin (id, adminname, adminpasswd)
+    values (#{id,jdbcType=INTEGER}, #{adminname,jdbcType=VARCHAR}, #{adminpasswd,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.Admin">
         insert into admin
