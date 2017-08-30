@@ -22,7 +22,7 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
-    public Category selectByPrimaryKey(Integer categoryid) {
+    public Category selectByPrimaryKey(Integer categoryid) {   //TODO 做一下缓存处理
         return categoryMapper.selectByPrimaryKey(categoryid);
     }
 
