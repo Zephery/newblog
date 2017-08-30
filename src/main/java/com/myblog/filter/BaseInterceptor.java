@@ -33,15 +33,15 @@ public class BaseInterceptor implements HandlerInterceptor {
     private NamedThreadLocal<Integer> visitNum = new NamedThreadLocal<>("visitNum");
     private final static Set<String> set = new HashSet<String>() {
         {
-            add("/index.html");
-            add("/tech.html");
-            add("/life.html");
-            add("/trip.html");
-            add("/log.html");
-            add("/board.html");
-            add("/aboutme.html");
-            add("/donate.html");
-            add("/weibonlp.html");
+            add("/index.jsp");
+            add("/tech.jsp");
+            add("/life.jsp");
+            add("/trip.jsp");
+            add("/log.jsp");
+            add("/board.jsp");
+            add("/aboutme.jsp");
+            add("/donate.jsp");
+            add("/weibonlp.jsp");
         }
     };
     @Resource
