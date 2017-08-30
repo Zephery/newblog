@@ -200,10 +200,10 @@
 <script type="text/javascript">
     /******************** remote start **********************/
     var remote_input = $('#remote_input');
-    remote_input.autocomplete().disable();
     remote_input.autocomplete({
         source: [
             {
+                minChars:1,
                 url: "ajaxsearch.html?keyword=%QUERY%",
                 type: 'remote'
             }

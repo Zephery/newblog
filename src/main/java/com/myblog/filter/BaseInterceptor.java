@@ -83,7 +83,8 @@ public class BaseInterceptor implements HandlerInterceptor {
     private boolean judegeuri(String uri) {
         return uri.contains("index.html") || uri.contains("tech.html") || uri.contains("life.html") || uri.contains("trip.html")
                 || uri.contains("log.html") || uri.contains("board.html") || uri.contains("aboutme.html") || uri.contains("donate.html")
-                || uri.contains("weibonlp.html") || uri.contains("interest.html") || uri.equals("/");
+                || uri.contains("weibonlp.html") || uri.contains("interest.html")
+                || uri.contains("search.html") || uri.contains("getblogdetail.html") || uri.equals("/");
     }
 
     @Override
