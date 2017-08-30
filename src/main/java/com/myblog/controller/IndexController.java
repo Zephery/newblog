@@ -120,4 +120,25 @@ public class IndexController {
         }
         response.getWriter().write("success");
     }
+
+    @RequestMapping(value = "aboutme")
+    public ModelAndView abountme() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("aboutme");
+        return mv;
+    }
+
+    @RequestMapping(value = "donate")
+    public ModelAndView donate() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("donate");
+        return mv;
+    }
+
+    @RequestMapping(value = "404")
+    public ModelAndView fourzerofour() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("404");
+        return mv;
+    }
 }

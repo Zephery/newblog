@@ -143,9 +143,9 @@
                            class="<%=request.getParameter("logactive")%>">日志系统</a></li>
                     <li><a href="${pageContext.request.contextPath}/board.html"
                            class="<%=request.getParameter("boardactive")%>">留言板</a></li>
-                    <li><a href="${pageContext.request.contextPath}/aboutme.jsp"
-                           class="<%=request.getParameter("aboutmeactive")%>">关于</a></li>
-                    <li><a href="${pageContext.request.contextPath}/donate.jsp"
+                    <li><a href="${pageContext.request.contextPath}/aboutme.html"
+                           class="<%=request.getParameter("aboutmeactive")%>">关于我</a></li>
+                    <li><a href="${pageContext.request.contextPath}/donate.html"
                            class="<%=request.getParameter("donateactive")%>">捐赠</a></li>
                     <li><a href="${pageContext.request.contextPath}/weibonlp.html"
                            class="<%=request.getParameter("interestactive")%>">有点意思</a></li>
