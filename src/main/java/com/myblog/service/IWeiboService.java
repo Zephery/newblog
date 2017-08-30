@@ -14,5 +14,11 @@ import java.util.List;
 public interface IWeiboService {
     public List<Weibo> getAllWeiboToday();
 
+    /**
+     * 需要先启动本地的python脚本
+     *
+     * @param sentence
+     * @return
+     */
     public JsonObject getWeiboDetail(String sentence);
 }

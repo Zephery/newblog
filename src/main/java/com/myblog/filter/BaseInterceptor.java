@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,8 +31,22 @@ public class BaseInterceptor implements HandlerInterceptor {
     private NamedThreadLocal<Long> startTimeThreadLocal =
             new NamedThreadLocal<>("StopWatch-StartTime");
     private NamedThreadLocal<Integer> visitNum = new NamedThreadLocal<>("visitNum");
+    private final static Set<String> set = new HashSet<String>() {
+        {
+            add("/index.html");
+            add("/tech.html");
+            add("/life.html");
+            add("/trip.html");
+            add("/log.html");
+            add("/board.html");
+            add("/aboutme.html");
+            add("/donate.html");
+            add("/weibonlp.html");
+        }
+    };
     @Resource
     private IpLogMapper ipLogMapper;
+
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) {
@@ -55,8 +71,8 @@ public class BaseInterceptor implements HandlerInterceptor {
             long endTime = System.currentTimeMillis();//2、结束时间
             long beginTime = startTimeThreadLocal.get();//得到线程绑定的局部变量（开始时间）
             long consumeTime = endTime - beginTime;//3、消耗的时间
-            String uri = request.getRequestURI();
-            if (StringUtils.isEmpty(uri) || uri.equals("/")) {
+            String uri = request.getRequestURL().toString();
+            if (StringUtils.isEmpty(uri) || !set.contains(uri)) {
                 return;
             }
             String real_ip = IPUtils.getIpAddr(request);
