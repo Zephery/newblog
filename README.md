@@ -6,7 +6,7 @@
 ![](http://ohlrxdl4p.bkt.clouddn.com/home.png?imageView2/2/w/600)
 
 </div>
-由原本的ssh变成ssm，再变成ssm+shiro+lucene，到现在的前后台分离。前台使用ssm+lucene，后台使用spring boot+shiro。其中，使用pagehelper作为分页，lucene用来搜索和自动补全，使用百度统计的API做了个日志系统，统计pv和uv什么的，同时，还有使用了JMX来观察JVM的使用和cpu的使用率，机器学习方面，使用了adaboost和朴素贝叶斯对微博进行分类，有兴趣的可以点点 [有点意思](http://www.wenzhihuai.com/weibonlp.html)这个页面。
+由原本的ssh变成ssm，再变成ssm+shiro+lucene，到现在的前后台分离。前台使用ssm+lucene，后台使用spring boot+shiro。其中，使用pagehelper作为分页，lucene用来搜索和自动补全，使用百度统计的API做了个日志系统，统计pv和uv什么的，同时，还有使用了JMX来观察JVM的使用和cpu的使用率，机器学习方面，使用了adaboost和朴素贝叶斯对微博进行分类，有兴趣的可以点点[有点意思](http://www.wenzhihuai.com/weibonlp.html)这个页面。
 本文从下面这几个方面来讲讲网站的建立：<br/>
 1. 建站故事与网站架构<br/>
 2. lucene搜索的使用<br/>
@@ -26,7 +26,8 @@
 ![](http://ohlrxdl4p.bkt.clouddn.com/joihfiohewifoheifahiauhvuia.png?imageView2/2/w/500)
 
 </div>
-第二版的界面确实是这样的，只是把图片的切换变成了wowslider，也是简单的用bootstrap和pagehelper做了下分页，现在的最终版保留了它的header，然后评论框使用了多说（超级怀念多说）。后端也由原来的ssh变成了ssm，之后加上了lucene来对文章进行索引。之后，随着多说要关闭了，突然之间有很多div都不适应了（我写死了的。。。），再一次，没法看，不想看，一怒之下再次推翻重做，变成了现在这个版本。
+第二版的界面确实是这样的，只是把图片的切换变成了wowslider，也是简单的用bootstrap和pagehelper做了下分页，现在的最终版保留了它的header，然后评论框使用了多说（超级怀念多说）。后端也由原来的ssh变成了ssm，之后加上了lucene来对文章进行索引。之后，随着多说要关闭了，突然之间有很多div都不适应了（我写死了的。。。），再一次，没法看，不想看，一怒之下再次推翻重做，变成了现在这个版本。  
+
 最终版本在考虑时，也找了很多模板，影响深刻的是 [tale](https://tale.biezhi.me)和 [欲思](https://yusi123.com) 这两个主题，期中，tale使用的是java语言写的，刚知道的那一刻我就没好感了，java后端我是要自己全部写的，tale这个页面简洁但是不够炫，而且内容量太低，可能就只是个纯博客，之后发现了欲思，拓展性强，只可惜没有静态的版本，后台是纯生的PHP（嗯，PHP是世界上最好的语言），看了看，没事，保存网页，前端自己改，后端自己全部重写，最终变成了现在这个版本，虽然拼接的时候各种css、js混入。。。。还好在做网站性能优化的时候差不多全部去掉了。最终版加入redis、quartz、shiro等，还有python机器学习、flask的restful api，可谓是大杂烩了。
 页面看着还算凑合，至少不是那种看都看不过去的那种了，但是仔细看看，还是有不少问题的，比如瀑布流，还有排版什么的。只能等自己什么时候想认真学学前端的东西了。
 已经部署在腾讯云服务器上，存储使用了七牛云的cdn。
@@ -38,7 +39,8 @@
 ![](http://ohlrxdl4p.bkt.clouddn.com/awfawefwefwef.png)
 
 </div>
-网站核心主要采用Spring SpringMVC和Mybatis，下图是当访问一篇博客的时候的运行流程，参考了[张开涛](http://jinnianshilongnian.iteye.com/blog/1594806) 的博客。
+
+网站核心主要采用Spring SpringMVC和Mybatis，下图是当访问一篇博客的时候的运行流程，参考了 [张开涛](http://jinnianshilongnian.iteye.com/blog/1594806) 的博客。
 <div align="center">
 
 ![](http://ohlrxdl4p.bkt.clouddn.com/awefaweagregrgbwerbwer.png)
@@ -68,7 +70,7 @@
 [日志系统](http://www.wenzhihuai.com/log.html) 曾经尝试采用过ELK，实时监控实在是让人不能不称赞，本地也跑起来了，但是一到服务器，卡卡卡，毕竟（1Ghz CPU、1G内存），只能放弃ELK，采用百度统计。百度统计提供了Tongji API供开发者使用，只是有次数限制，2000/日，实时的话实在有点低，只能统计前几天的PV、UV等开放出来。其实这个存放在mysql也行，不过这些零碎的数据还是放在redis中，方便管理。
 出了日志系统，自己对服务器的一些使用率也是挺关心的，毕竟服务器配置太低，于是利用了使用了tomcat的JMX来对CPU和jvm使用情况进行监控，这两个都是实时的。出了这两个，对内存的分配做了监控，Eden、Survivor、Tenured的使用情况。<br/>
 
-### 1.4 【有点意思】自然语言处理<br/>
+### 1.4 【有点意思】自然语言处理  
 本人大学里的毕业设计就是基于AdaBoost算法的情感分类，学到的东西还是要经常拿出来看看，要不然真的浪费了我这么久努力做的毕业设计啊。构建了一个基本的情感分类小系统，每天抓取微博进行分类存储在MySql上，并使用flask提供Restful API给java调用，可以点击 [这里](http://www.wenzhihuai.com/weibonlp.html) 尝试（请忽略Google的图片）。目前分类效果不是很明显，准确率大概只有百分之70%，因为训练样本只有500条（找不到训练样本），机器学习真的太依赖样本的标注。这个，只能请教各位路人大神指导指导了。
 <div align="center">
 
