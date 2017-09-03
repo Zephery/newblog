@@ -74,7 +74,9 @@ public class BaseInterceptor implements HandlerInterceptor {
             } else {
                 ipLog.setVisitNum(visitNum.get() == null ? 0 : visitNum.get() + 1);
             }
-            ipLogMapper.insert(ipLog);      //记录每一条日志
+            if(!uri.contains("ajaxsearch.html")){
+                ipLogMapper.insert(ipLog);      //记录每一条日志
+            }
         } catch (Exception e) {
             logger.error("Handle error", e);
         }
