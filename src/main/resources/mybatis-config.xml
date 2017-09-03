@@ -5,7 +5,8 @@
 <configuration>
 
     <settings>
-        <setting name="cacheEnabled" value="false"/>
+        <!--use cache-->
+        <setting name="cacheEnabled" value="true"/>
         <setting name="lazyLoadingEnabled" value="true"/>
         <setting name="aggressiveLazyLoading" value="false"/>
         <setting name="localCacheScope" value="STATEMENT"/>

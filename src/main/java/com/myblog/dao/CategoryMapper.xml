@@ -79,6 +79,11 @@
       c_num = #{cNum,jdbcType=INTEGER}
     where c_id = #{cId,jdbcType=INTEGER}
     </update>
+    <cache eviction="LRU"
+           type="org.apache.ibatis.cache.impl.PerpetualCache"
+           flushInterval="120000"
+           size="1024"
+           readOnly="true"/>
     <select id="getAllCategory" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

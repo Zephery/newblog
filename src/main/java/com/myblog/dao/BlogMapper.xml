@@ -151,9 +151,14 @@
         select
         <include refid="Base_Column_List"/>
         from blog
-        order by create_at desc
+        order by blogid desc
         limit 5
     </select>
+    <cache eviction="LRU"
+           type="org.apache.ibatis.cache.impl.PerpetualCache"
+           flushInterval="120000"
+           size="1024"
+           readOnly="true"/>
     <select id="getHits" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
@@ -172,13 +177,13 @@
         <include refid="Base_Column_List"/>
         FROM blog
         WHERE categoryid=0
-        order by create_at desc
+        order by blogid desc
     </select>
     <select id="getAllTechBlog" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from blog
         WHERE categoryid!=0
-        order by create_at desc
+        order by blogid desc
     </select>
 </mapper>

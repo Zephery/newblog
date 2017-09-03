@@ -55,17 +55,6 @@ public class BlogIndex {
         }
     }
 
-    public static void main(String args[]) {
-        try {
-            String str = " 根据我的经验，我总结了下，<b><font color='red'>大学</font></b>里掌握以下两种，" +
-                    "毕业的时候，用人单位比较喜欢； 第一种能力，自学能力； 所谓自学能力，顾名思义，就是自我" +
-                    "学习知识，技术的能力，这种能力，人与人之间的差距有大，就像有的";
-            System.out.println(str.length());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private IndexWriter getWriter() throws Exception {
         dir = FSDirectory.open(Paths.get("blog_index"));
         SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
@@ -170,5 +159,16 @@ public class BlogIndex {
             blogIndexList.add(blog);
         }
         return blogIndexList;
+    }
+
+    public static void main(String args[]) {
+        try {
+            List<Blog> list = new BlogIndex().searchBlog(1, "j", 4);
+            for (Blog blog : list) {
+                System.out.println(blog.getTitle());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
