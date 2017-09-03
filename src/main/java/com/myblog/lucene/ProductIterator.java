@@ -26,6 +26,7 @@ public class ProductIterator implements InputIterator {
         this.productIterator = productIterator;
     }
 
+    @Override
     public boolean hasContexts() {
         return true;
     }
@@ -33,6 +34,7 @@ public class ProductIterator implements InputIterator {
     /**
      * 是否有设置payload信息
      */
+    @Override
     public boolean hasPayloads() {
         return true;
     }
@@ -41,6 +43,7 @@ public class ProductIterator implements InputIterator {
         return null;
     }
 
+    @Override
     public BytesRef next() {
         if (productIterator.hasNext()) {
             currentProduct = productIterator.next();
@@ -59,6 +62,7 @@ public class ProductIterator implements InputIterator {
      * 将Product对象序列化存入payload
      * [这里仅仅是个示例，其实这种做法不可取,一般不会把整个对象存入payload,这样索引体积会很大，浪费硬盘空间]
      */
+    @Override
     public BytesRef payload() {
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -76,6 +80,7 @@ public class ProductIterator implements InputIterator {
      * Set集合里的每一个元素都会被创建一个TermQuery，你只是提供一个Set集合，至于new TermQuery
      * Lucene底层API去做了，但你必须要了解底层干了些什么
      */
+    @Override
     public Set<BytesRef> contexts() {
         try {
             Set<BytesRef> regions = new HashSet<BytesRef>();

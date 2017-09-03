@@ -34,11 +34,12 @@ public class BlogIterator implements InputIterator {
         this.blogIterator = blogIterator;
     }
 
+    @Override
     public boolean hasContexts() {
         return true;
     }
 
-
+    @Override
     public boolean hasPayloads() {
         return true;
     }
@@ -47,6 +48,7 @@ public class BlogIterator implements InputIterator {
         return null;
     }
 
+    @Override
     public BytesRef next() {
         if (blogIterator.hasNext()) {
             currentBlog = blogIterator.next();
@@ -66,6 +68,7 @@ public class BlogIterator implements InputIterator {
      * 将Blog对象序列化存入payload
      * 可以只将所需要的字段存入payload，这里对整个实体类进行序列化，方便以后需求，不建议采用这种方法
      */
+    @Override
     public BytesRef payload() {
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -83,6 +86,7 @@ public class BlogIterator implements InputIterator {
     /**
      * 文章标题
      */
+    @Override
     public Set<BytesRef> contexts() {
         try {
             Set<BytesRef> regions = new HashSet<BytesRef>();
@@ -97,6 +101,7 @@ public class BlogIterator implements InputIterator {
      * 返回权重值，这个值会影响排序
      * 这里以产品的销售量作为权重值，weight值即最终返回的热词列表里每个热词的权重值
      */
+    @Override
     public long weight() {
         return currentBlog.getHits();   //change to hits
     }
