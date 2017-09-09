@@ -37,7 +37,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * Description: 远程连接的时候，在服务器上用hostname -i查看是否为127.0.0.1，如果是，则要
  * 配置-Djava.rmi.server.hostname=your ip address。
  * 在catalina.sh前面配置
- * JAVA_OPTS="$JAVA_OPTS -Djava.rmi.server.hostname=123.206.28.24
+ * JAVA_OPTS="$JAVA_OPTS -Djava.rmi.server.hostname=47.95.10.139
  * -Dcom.sun.management.jmxremote.port=8888
  * -Dcom.sun.management.jmxremote.ssl=false
  * -Dcom.sun.management.jmxremote.authenticate=false"

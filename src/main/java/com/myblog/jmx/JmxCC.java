@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * Description: 远程连接的时候，在服务器上用hostname -i查看是否为127.0.0.1，如果是，则要
  * 配置-Djava.rmi.server.hostname=your ip address。
  * 在catalina.sh前面配置
- * JAVA_OPTS="$JAVA_OPTS -Djava.rmi.server.hostname=123.206.28.24
+ * JAVA_OPTS="$JAVA_OPTS -Djava.rmi.server.hostname=47.95.10.139
  * -Dcom.sun.management.jmxremote.port=8888
  * -Dcom.sun.management.jmxremote.ssl=false
  * -Dcom.sun.management.jmxremote.authenticate=false"
@@ -29,7 +29,7 @@ public class JmxCC {
     public static void main(String[] args) {
         try {
 
-            String jmxURL = "service:jmx:rmi:///jndi/rmi://123.206.28.24:8888/jmxrmi";
+            String jmxURL = "service:jmx:rmi:///jndi/rmi://47.95.10.139:8888/jmxrmi";
             JMXServiceURL serviceURL = new JMXServiceURL(jmxURL);
             Map map = new HashMap();
             String[] credentials = new String[]{"monitorRole", "tomcat"};
