@@ -39,8 +39,8 @@
                             <th>您的IP</th>
                             <th style="text-align: center">您的地址</th>
                             <th style="text-align: center">统计时间范围</th>
-                            <th style="text-align: center">本站上周总PV</th>
-                            <th style="text-align: center">本站上周总UV</th>
+                            <th style="text-align: center">本时间段总PV</th>
+                            <th style="text-align: center">本时间段总UV</th>
                         </tr>
                         <tbody>
                         <tr>
@@ -307,7 +307,7 @@
             <div class="col-md-9 col-sm-12 col-xs-12" style="width: 100%">
                 <div class="panel panel-default">
                     <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
-                        <strong>前${topTens.size()}受访页面</strong>
+                        <strong>前${topTens.size()}访问页面</strong>
                     </div>
                     <table class="table table-bordered" style="width: 100%">
                         <tr>
@@ -334,7 +334,7 @@
             <div class="col-md-9 col-sm-12 col-xs-12" style="width: 100%">
                 <div class="panel panel-default">
                     <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
-                        <strong> 前${rukou.size()}入口页面</strong>
+                        <strong> 前${rukou.size()}来源页面</strong>
                     </div>
                     <table class="table table-bordered">
                         <tr>
