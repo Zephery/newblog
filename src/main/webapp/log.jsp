@@ -105,11 +105,7 @@
                                 }, {
                                     name: 'uv',
                                     data:${visitor_count}
-                                }, {
-                                    name: 'ip_count',
-                                    data:${ip_count}
-                                }
-                                ]
+                                }]
                             })
                         </script>
                     </div>

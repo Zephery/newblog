@@ -36,7 +36,6 @@ public class LogController {
         String temp = jedis.get("daterange");
         String pv_count = jedis.get("pv_count");
         String visitor_count = jedis.get("visitor_count");
-        String ip_count = jedis.get("ip_count");
         String bounce_ratio = jedis.get("bounce_ratio");
         String avg_visit_time = jedis.get("avg_visit_time");
         String top_ten = jedis.get("top_ten");
@@ -108,7 +107,6 @@ public class LogController {
         mv.addObject("topTens", topTens);
         mv.addObject("pv_count", pv_count);
         mv.addObject("visitor_count", visitor_count);
-        mv.addObject("ip_count", ip_count);
         mv.addObject("bounce_ratio", bounce_ratio);
         mv.addObject("sourcelist", sourcelist);
         mv.addObject("rukou", rukou.subList(0, rukou.size() > 5 ? 5 : rukou.size()));
@@ -127,8 +125,7 @@ public class LogController {
 
     @RequestMapping("/jmx")
     @ResponseBody
-    public void jmx(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String time = request.getParameter("time");
+    public void jmx(HttpServletResponse response) throws IOException {
         int aa = Integer.parseInt(JMXClient.getInstance().getJVMUsage().toString());
         Integer bb = aa / 1048576;
         response.setCharacterEncoding("UTF-8");
@@ -138,8 +135,7 @@ public class LogController {
 
     @RequestMapping("/cpu")
     @ResponseBody
-    public void cpu(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String time = request.getParameter("time");
+    public void cpu(HttpServletResponse response) throws IOException {
         String aa = JMXClient.getInstance().getCpuUsage();
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
