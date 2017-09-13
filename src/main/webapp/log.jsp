@@ -140,7 +140,7 @@
                                 yAxis: [{
                                     lineWidth: 1,
                                     title: {
-                                        text: '时长(单位:s)'
+                                        text: '时长(单位:分)'
                                     }
 
                                 }, {
