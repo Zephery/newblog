@@ -12,7 +12,7 @@
 1. [建站故事与网站架构](https://github.com/Zephery/newblog/blob/master/doc/1.%E5%8E%86%E5%8F%B2%E4%B8%8E%E6%9E%B6%E6%9E%84.md)<br/>
 2. [lucene搜索的使用](https://github.com/Zephery/newblog/blob/master/doc/2.Lucene%E7%9A%84%E4%BD%BF%E7%94%A8.md)<br/>
 3. [使用quartz来定时备份数据库](https://github.com/Zephery/newblog/blob/master/doc/3.%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.md)<br/>
-4. 使用百度统计api做日志系统<br/>
+4. [使用百度统计api做日志系统](https://github.com/Zephery/baidutongji/blob/master/README.md)<br/>
 5. 使用jmx观察jvm和cpu<br/>
 6. 使用druid来监测数据库<br/>
 7. 使用机器学习对微博进行分析<br/>
