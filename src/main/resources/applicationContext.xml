@@ -30,9 +30,9 @@
     </bean>
     <!-- 配置数据源，使用阿里巴巴连接池Druid -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
+        <property name="url" value="${jdbc.url_2}"/>
+        <property name="username" value="${jdbc.username_2}"/>
+        <property name="password" value="${jdbc.password_2}"/>
         <!--配置这些才能使用druid监控-->
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="1"/>
