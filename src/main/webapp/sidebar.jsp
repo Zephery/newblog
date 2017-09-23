@@ -8,35 +8,90 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
+<script>
+    $.ajax({
+        url: "${pageContext.request.contextPath}/blogbyhits.do",
+        type: "get",
+        dataType: 'json',
+        success: function (data) {
+            var html = "";
+            var guessyourlike = $(".guessyourlike");
+            for (var i = 0; i < data.length; i++) {
+                html += "    <li><a href=\"" + "${pageContext.request.contextPath}/getblogdetail.html?blogid=" + data[i].blogid + "\"\n" +
+                    "    title=\"" + data[i].title + "\">\n" +
+                    "        <span class=\"thumbnail\"><img src=\"" + data[i].imageurl + "\" alt=\"" + data[i].title + "\" width=\"100px\"></span>\n" +
+                    "        <span class=\"text\">" + data[i].title + "</span><span class=\"muted\">" + data[i].createAt + "</span>\n" +
+                    "    <span class=\"muted\">" + data[i].hits + "浏览</span></a></li>\n";
+            }
+            guessyourlike.append(html);
+        },
+        error: function (e) {
+            alert(e);
+            window.clearInterval(timer);
+        }
+    });
+    $.ajax({
+        url: "${pageContext.request.contextPath}/getjsonbycategories.do",
+        type: "get",
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            var html = "";
+            var fenlei = $("#fenlei");
+            for (var i = 0; i < data.length; i++) {
+                html += "<a href=\"${pageContext.request.contextPath}/getbycategoryid.html?cid=" + data[i].cId + "\">\n" +
+                    data[i].cName + "</a>\n"
+            }
+            fenlei.append(html);
+            console.log(html);
+        },
+        error: function (e) {
+            alert(e);
+            window.clearInterval(timer);
+        }
+    });
+    $.ajax({
+        url: "${pageContext.request.contextPath}/biaoqianyun.do",
+        type: "get",
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            var html = "";
+            var fenlei = $("#biaoqian");
+            for (var i = 0; i < data.length; i++) {
+                html += "<a href=\"${pageContext.request.contextPath}/tech.html?tid=" + data[i].key + "\">\n" +
+                    data[i].value + "</a>\n"
+            }
+            fenlei.append(html);
+            console.log(html);
+        },
+        error: function (e) {
+            alert(e);
+            window.clearInterval(timer);
+        }
+    });
+</script>
 <aside class="sidebar">
     <div class="widget widget_text" style="height: 115px;margin-bottom: 0px">
         <iframe src="//www.seniverse.com/weather/weather.aspx?uid=U35799536E&cid=CHBJ000000&l=&p=SMART&a=1&u=C&s=13&m=
         0&x=1&d=0&fc=&bgc=2E93D9&bc=&ti=0&in=1&li=" frameborder="0" scrolling="no" width="330" height="115"
                 allowTransparency="true"></iframe>
     </div>
-    <div class="widget d_postlist">
-        <div class="title"><h2>猜你喜欢</h2></div>
-        <ul>
-            <c:forEach var="blog" items="${blogbyhits}">
-                <li><a href="${pageContext.request.contextPath}/getblogdetail.html?blogid=${blog.blogid}"
-                       title="${blog.title}">
-                    <span class="thumbnail"><img src="${blog.imageurl}" alt="${blog.title}" width="100px"></span>
-                    <span class="text">${blog.title}</span><span class="muted">${blog.createAt}</span>
-                    <span class="muted">${blog.hits}浏览</span></a></li>
-            </c:forEach>
-        </ul>
-    </div>
 
     <div class="widget d_tag">
         <div class="title"><h2>分类</h2></div>
-        <div class="d_tags">
-            <c:forEach var="category" items="${categories}">
-                <a href="${pageContext.request.contextPath}/getbycategoryid.html?cid=${category.cId}">
-                        ${category.cName}</a>
-            </c:forEach>
+        <div class="d_tags" id="fenlei" style="height: auto">
             <a href="${pageContext.request.contextPath}/life.html">生活笔记</a>
         </div>
     </div>
+
+
+    <div class="widget d_postlist">
+        <div class="title"><h2>猜你喜欢</h2></div>
+        <ul class="guessyourlike">
+        </ul>
+    </div>
+
 
     <div class="widget widget_text">
         <div class="title"><h2>新浪微博</h2></div>
@@ -49,7 +104,7 @@
     <div class="widgetRoller">
         <div class="widget d_tag">
             <div class="title"><h2>标签云</h2></div>
-            <div class="d_tags">
+            <div class="d_tags" id="biaoqian">
                 <c:forEach var="tag" items="${tags}">
                     <a title="" href="${pageContext.request.contextPath}/tech.html?tid=${tag.key}"
                        data-original-title="3个话题">${tag.value}</a>

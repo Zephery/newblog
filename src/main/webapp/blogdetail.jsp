@@ -32,10 +32,7 @@
     <script src="js/mdeditor/lib/marked.min.js"></script>
     <script src="js/mdeditor/lib/prettify.min.js"></script>
     <script src="js/mdeditor/lib/raphael.min.js"></script>
-    <script src="js/mdeditor/lib/underscore.min.js"></script>
     <script src="js/mdeditor/lib/sequence-diagram.min.js"></script>
-    <script src="js/mdeditor/lib/flowchart.min.js"></script>
-    <script src="js/mdeditor/lib/jquery.flowchart.min.js"></script>
     <script src="js/mdeditor/editormd.js"></script>
     <script type="text/javascript">
         $(function () {
@@ -179,7 +176,7 @@ ${blog.content}
 
         </div>
     </div>
-    <c:import url="/sidebar.html"/>
+    <%@include file="sidebar.jsp" %>
 </section>
 </body>
 </html>

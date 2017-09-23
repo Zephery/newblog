@@ -160,8 +160,7 @@
            size="1024"
            readOnly="true"/>
     <select id="getHits" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
+        SELECT  blogid, title, create_at, categoryid, hits, imageurl
         from blog
         WHERE DATE_SUB(CURDATE(), INTERVAL 60 DAY) &lt;= date(create_at)
         order by hits desc

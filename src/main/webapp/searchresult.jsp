@@ -114,7 +114,7 @@
             </c:if>
         </div>
     </div>
-    <c:import url="/sidebar.html"/>
+    <%@include file="sidebar.jsp" %>
 </section>
 </body>
 </html>

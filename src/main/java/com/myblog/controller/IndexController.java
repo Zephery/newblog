@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -84,27 +85,75 @@ public class IndexController {
         return mav;
     }
 
-    @RequestMapping("sidebar")
-    public ModelAndView sidebar() {
-        JedisUtil jedis = JedisUtil.getInstance();
-        ModelAndView modelAndView = new ModelAndView();
-        JsonParser parser = new JsonParser();
-        String str = jedis.get("biaoqian");
-        JsonArray jsonArray = (JsonArray) parser.parse(str);
-        Iterator iterator = jsonArray.iterator();
-        List<KeyAndValue> biaoqian = new ArrayList<>();
-        while (iterator.hasNext()) {
+//    @RequestMapping("sidebar")
+//    public ModelAndView sidebar() {
+//        JedisUtil jedis = JedisUtil.getInstance();
+//        ModelAndView modelAndView = new ModelAndView();
+//        JsonParser parser = new JsonParser();
+//        String str = jedis.get("biaoqian");
+//        JsonArray jsonArray = (JsonArray) parser.parse(str);
+//        Iterator iterator = jsonArray.iterator();
+//        List<KeyAndValue> biaoqian = new ArrayList<>();
+//        while (iterator.hasNext()) {
+//            Gson gson = new Gson();
+//            KeyAndValue keyAndValue = gson.fromJson((JsonObject) iterator.next(), KeyAndValue.class);
+//            biaoqian.add(keyAndValue);
+//        }
+//        List<Category> categories = categoryService.getAllCategory();
+//        List<Blog> blogbyhits = blogService.getByHits();
+//        modelAndView.addObject("blogbyhits", blogbyhits);
+//        modelAndView.addObject("tags", biaoqian);
+//        modelAndView.addObject("categories", categories);
+//        modelAndView.setViewName("sidebar");
+//        return modelAndView;
+//    }
+
+    @RequestMapping("blogbyhits")
+    @ResponseBody
+    public void blogbyhits(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        try {
+            List<Blog> blogbyhits = blogService.getByHits();
             Gson gson = new Gson();
-            KeyAndValue keyAndValue = gson.fromJson((JsonObject) iterator.next(), KeyAndValue.class);
-            biaoqian.add(keyAndValue);
+            String temp = gson.toJson(blogbyhits);
+            response.getWriter().write(temp);
+        } catch (Exception e) {
+            response.getWriter().write(e.toString());
         }
-        List<Category> categories = categoryService.getAllCategory();
-        List<Blog> blogbyhits = blogService.getByHits();
-        modelAndView.addObject("blogbyhits", blogbyhits);
-        modelAndView.addObject("tags", biaoqian);
-        modelAndView.addObject("categories", categories);
-        modelAndView.setViewName("sidebar");
-        return modelAndView;
+    }
+
+    @RequestMapping("getjsonbycategories")
+    @ResponseBody
+    public void getbycategoryid(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        try {
+            List<Category> categories = categoryService.getAllCategory();
+            Gson gson = new Gson();
+            String temp = gson.toJson(categories);
+            response.getWriter().write(temp);
+        } catch (Exception e) {
+            response.getWriter().write(e.toString());
+        }
+    }
+
+    @RequestMapping("biaoqianyun")
+    public void biaoqianyun(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        try {
+            JedisUtil jedis = JedisUtil.getInstance();
+            JsonParser parser = new JsonParser();
+            String str = jedis.get("biaoqian");
+            JsonArray jsonArray = (JsonArray) parser.parse(str);
+            Iterator iterator = jsonArray.iterator();
+            List<KeyAndValue> biaoqian = new ArrayList<>();
+            while (iterator.hasNext()) {
+                Gson gson = new Gson();
+                KeyAndValue keyAndValue = gson.fromJson((JsonObject) iterator.next(), KeyAndValue.class);
+                biaoqian.add(keyAndValue);
+            }
+            Gson gson = new Gson();
+            String temp = gson.toJson(biaoqian);
+            response.getWriter().write(temp);
+        } catch (Exception e) {
+            response.getWriter().write(e.toString());
+        }
     }
 
 
