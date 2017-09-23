@@ -20,10 +20,8 @@
     <!-- Custom Theme files -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <%--<link rel="stylesheet"--%>
-    <%--href="${pageContext.request.contextPath}/js/font-awesome-4.7.0/css/font-awesome.min.css">--%>
     <%--font-awesome cdn--%>
-    <script src="https://use.fontawesome.com/58ebe948e6.js"></script>
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/js/social-share-1.0.2/dist/social-share.min.css">
     <script src="${pageContext.request.contextPath}/js/social-share-1.0.2/dist/social-share.min.js"></script>

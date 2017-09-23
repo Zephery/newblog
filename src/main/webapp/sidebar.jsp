@@ -70,6 +70,15 @@
             window.clearInterval(timer);
         }
     });
+
+    function test() {
+        var div1 = $("#biaoqian");
+        if (div1.style.display == "block") {
+            div1.style.display = "none";
+        } else {
+            div1.style.display = "block";
+        }
+    }
 </script>
 <aside class="sidebar">
     <div class="widget widget_text" style="height: 115px;margin-bottom: 0px">
@@ -105,10 +114,6 @@
         <div class="widget d_tag">
             <div class="title"><h2>标签云</h2></div>
             <div class="d_tags" id="biaoqian">
-                <c:forEach var="tag" items="${tags}">
-                    <a title="" href="${pageContext.request.contextPath}/tech.html?tid=${tag.key}"
-                       data-original-title="3个话题">${tag.value}</a>
-                </c:forEach>
             </div>
         </div>
     </div>

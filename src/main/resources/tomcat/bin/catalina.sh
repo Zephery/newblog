@@ -103,8 +103,8 @@
 # JDK7
 #JAVA_OPTS="-server -Xms800m -Xmx800m -XX:PermSize=64M -XX:MaxNewSize=256m -XX:MaxPermSize=128m -Djava.awt.headless=true "
 # JDK8
-JAVA_OPTS='-server -Xmx512m -Xms512m -XX:MaxMetaspaceSize=128m -XX:MetaspaceSize=128m -XX:+UseConcMarkSweepGC  -verbose:gc -XX:+PrintGCDetails -Xloggc:/var/log/gc.log'
-JAVA_OPTS="$JAVA_OPTS -Djava.rmi.server.hostname=127.0.0.1
+JAVA_OPTS='-server -Xmx256m -Xms256m -XX:MaxMetaspaceSize=128m -XX:MetaspaceSize=64m -XX:+UseConcMarkSweepGC  -verbose:gc -XX:+PrintGCDetails -Xloggc:/var/log/gc.log'
+JAVA_OPTS="$JAVA_OPTS -Djava.rmi.server.hostname=119.23.46.71
 -Dcom.sun.management.jmxremote.port=8888
 -Dcom.sun.management.jmxremote.ssl=false
 -Dcom.sun.management.jmxremote.authenticate=false"
