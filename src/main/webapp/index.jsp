@@ -15,7 +15,7 @@
           href="${pageContext.request.contextPath}/wowslider/engine1/style.css"/>
     <script src="${pageContext.request.contextPath}/js/responsiveslides.min.js"></script>
     <meta charset="UTF-8">
-    <link rel="stylesheet" id="style-css" href="js/jingmi/jingmistyle.css" type="text/css" media="all">
+    <link rel="stylesheet" id="style-css" href="http://ohlrxdl4p.bkt.clouddn.com/jingmistyle-1503806575354.css" type="text/css" media="all">
     <!-- Start WOWSlider.com HEAD section -->
     <link rel="stylesheet" type="text/css" href="wowslider/engine1/style.css"/>
     <!-- End WOWSlider.com HEAD section -->

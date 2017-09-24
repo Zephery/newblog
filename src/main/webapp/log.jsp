@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>日志系统</title>
-    <link rel="stylesheet" id="style-css" href="js/jingmi/jingmistyle.css" type="text/css" media="all">
+    <link rel="stylesheet" id="style-css" href="http://ohlrxdl4p.bkt.clouddn.com/jingmistyle-1503806575354.css" type="text/css" media="all">
     <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
     <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
     <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>

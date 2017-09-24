@@ -162,7 +162,8 @@
     });
 </script>
 <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-<script src="https://cdn.bootcss.com/bootstrap/4.0.0-beta/js/bootstrap.js"></script><script type="text/javascript">
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0-beta/js/bootstrap.js"></script>
+<script type="text/javascript">
     function checkData() {
         var q = document.getElementById("remote_input").value.trim();
         if (q == null || q == "") {
