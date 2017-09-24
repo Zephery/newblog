@@ -14,7 +14,7 @@
     <title><%=request.getParameter("title")%>
     </title>
     <link type="image/x-icon" rel="shortcut icon" href="http://ohlrxdl4p.bkt.clouddn.com/66.jpg"/>
-    <link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="http://ohlrxdl4p.bkt.clouddn.com/blogbootstrap.css" type="text/css" rel="stylesheet" media="all">
     <link href="css/style.css" type="text/css" rel="stylesheet" media="all">
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <!-- Custom Theme files -->
@@ -162,8 +162,7 @@
     });
 </script>
 <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-<script src="js/bootstrap.js"></script>
-<script type="text/javascript">
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0-beta/js/bootstrap.js"></script><script type="text/javascript">
     function checkData() {
         var q = document.getElementById("remote_input").value.trim();
         if (q == null || q == "") {
