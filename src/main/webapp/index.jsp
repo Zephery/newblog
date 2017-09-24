@@ -44,7 +44,7 @@
                                 <li><a href="getblogdetail.html?blogid=${banner.blogid}" target="_self">
                                     <img src="${banner.imageurl}"
                                          alt="${banner.title}" title="${banner.title}"
-                                         id="wows1_0"/></a>${banner.title}
+                                         id="wows1_0"/></a>
                                 </li>
                             </c:forEach>
                         </ul>

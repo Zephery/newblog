@@ -14,6 +14,9 @@
     <sql id="Base_Column_List">
     blogid, title, summary, content, create_at, categoryid, hits, imageurl
     </sql>
+    <sql id="NoContent">
+        blogid, title, summary, create_at, categoryid, hits, imageurl
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -127,20 +130,20 @@
     </update>
     <select id="getAllBlog" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="NoContent"/>
         from blog
         order by blogid desc
     </select>
     <select id="getByCategoryId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="NoContent"/>
         from blog
         where categoryid = #{categoryid,jdbcType=INTEGER}
         ORDER BY create_at desc
     </select>
     <select id="getBlogByTagId" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Column_List"/>
+        <include refid="NoContent"/>
         FROM myblog.blog
         where blogid in (
         select blogid from
@@ -149,7 +152,7 @@
     </select>
     <select id="getBanner" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        blogid, title, imageurl
         from blog
         order by blogid desc
         limit 5
@@ -160,7 +163,7 @@
            size="1024"
            readOnly="true"/>
     <select id="getHits" resultMap="BaseResultMap">
-        SELECT  blogid, title, create_at, categoryid, hits, imageurl
+        SELECT  blogid, title, create_at, hits, imageurl
         from blog
         WHERE DATE_SUB(CURDATE(), INTERVAL 60 DAY) &lt;= date(create_at)
         order by hits desc
@@ -173,14 +176,14 @@
     </update>
     <select id="getLife" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Column_List"/>
+        <include refid="NoContent"/>
         FROM blog
         WHERE categoryid=0
         order by blogid desc
     </select>
     <select id="getAllTechBlog" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="NoContent"/>
         from blog
         WHERE categoryid!=0
         order by blogid desc

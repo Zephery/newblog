@@ -130,9 +130,6 @@ public class BlogServiceImpl implements IBlogService {
     @Override
     public List<Blog> getBanner() {
         List<Blog> blogs = blogMapper.getBanner();
-        for (Blog blog : blogs) {
-            blog.setCategory(categoryMapper.selectByPrimaryKey(blog.getCategoryid()));
-        }
         return blogs;
     }
 
