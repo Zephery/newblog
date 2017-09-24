@@ -67,17 +67,20 @@
         }
     });
     $(document).ready(function () {
-        var navOffset = $(".widgetRoller").offset().top;
-        $(window).scroll(function () {
-            var scrollPos = $(window).scrollTop();
-            console.log(scrollPos);
-            if (scrollPos >= navOffset) {
-                $(".widgetRoller").css({position: "fixed", top: 0, zIndex: 0, width: 330}).fadeIn(100);
-            } else {
-                $(".widgetRoller").removeAttr("style");
-            }
-        });
+        setTimeout(function () {
+            var navOffset = $(".widgetRoller").offset().top;
+            $(window).scroll(function () {
+                var scrollPos = $(window).scrollTop();
+                console.log(scrollPos);
+                if (scrollPos >= navOffset) {
+                    $(".widgetRoller").css({position: "fixed", top: 0, zIndex: 0, width: 330}).fadeIn(100);
+                } else {
+                    $(".widgetRoller").removeAttr("style");
+                }
+            });
+        }, 1000);
     });
+
     function test() {
         var div1 = $("#biaoqian");
         if (div1.style.display == "block") {
