@@ -66,12 +66,18 @@
             window.clearInterval(timer);
         }
     });
-	jQuery(document).ready(function ($) {
-		$(".scroll").click(function (event) {
-			event.preventDefault();
-			$('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
-		});
-	});
+    $(document).ready(function () {
+        var navOffset = $(".widgetRoller").offset().top;
+        $(window).scroll(function () {
+            var scrollPos = $(window).scrollTop();
+            console.log(scrollPos);
+            if (scrollPos >= navOffset) {
+                $(".widgetRoller").css({position: "fixed", top: 0, zIndex: 0, width: 330}).fadeIn(100);
+            } else {
+                $(".widgetRoller").removeAttr("style");
+            }
+        });
+    });
     function test() {
         var div1 = $("#biaoqian");
         if (div1.style.display == "block") {
