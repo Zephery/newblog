@@ -35,7 +35,6 @@
         type: "get",
         dataType: 'json',
         success: function (data) {
-            console.log(data);
             var html = "";
             var fenlei = $("#fenlei");
             for (var i = 0; i < data.length; i++) {
@@ -43,7 +42,6 @@
                     data[i].cName + "</a>\n"
             }
             fenlei.append(html);
-            console.log(html);
         },
         error: function (e) {
             alert(e);
@@ -55,7 +53,6 @@
         type: "get",
         dataType: 'json',
         success: function (data) {
-            console.log(data);
             var html = "";
             var fenlei = $("#biaoqian");
             for (var i = 0; i < data.length; i++) {
@@ -63,7 +60,6 @@
                     data[i].value + "</a>\n"
             }
             fenlei.append(html);
-            console.log(html);
         },
         error: function (e) {
             alert(e);

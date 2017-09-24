@@ -25,7 +25,7 @@
     <script type="text/javascript"
             src="http://assets.changyan.sohu.com/upload/plugins/plugins.count.js">
     </script>
-    <link rel="stylesheet" href="js/mdeditor/css/editormd.preview.css"/>
+    <link rel="stylesheet" href="http://ohlrxdl4p.bkt.clouddn.com/editormd.preview.css"/>
     <script type="text/javascript">
         $(function () {
             editormd.markdownToHTML("test-editormd-view2", {

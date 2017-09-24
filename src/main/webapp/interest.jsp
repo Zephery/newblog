@@ -25,15 +25,12 @@
     <script type="text/javascript"
             src="http://assets.changyan.sohu.com/upload/plugins/plugins.count.js">
     </script>
-    <link rel="stylesheet" href="js/mdeditor/css/editormd.preview.css"/>
-    <script src="js/mdeditor/lib/marked.min.js"></script>
-    <script src="js/mdeditor/lib/prettify.min.js"></script>
-    <script src="js/mdeditor/lib/raphael.min.js"></script>
-    <script src="js/mdeditor/lib/underscore.min.js"></script>
-    <script src="js/mdeditor/lib/sequence-diagram.min.js"></script>
-    <script src="js/mdeditor/lib/flowchart.min.js"></script>
-    <script src="js/mdeditor/lib/jquery.flowchart.min.js"></script>
-    <script src="js/mdeditor/editormd.js"></script>
+    <link rel="stylesheet" href="http://ohlrxdl4p.bkt.clouddn.com/editormd.preview.css"/>
+    <script src="https://cdn.bootcss.com/marked/0.3.6/marked.js"></script>
+    <script src="https://cdn.bootcss.com/prettify/r224/prettify.min.js"></script>
+    <script src="https://cdn.bootcss.com/raphael/2.2.7/raphael.min.js"></script>
+    <script src="https://cdn.bootcss.com/js-sequence-diagrams/1.0.6/sequence-diagram-min.js"></script>
+    <script src="http://ohlrxdl4p.bkt.clouddn.com/editormd.js"></script>
     <script type="text/javascript">
         $(function () {
             editormd.markdownToHTML("test-editormd-view2", {
