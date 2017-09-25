@@ -1,5 +1,6 @@
 package com.myblog.util;
 
+import com.myblog.common.Config;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.BucketManager;
@@ -10,8 +11,8 @@ import org.slf4j.LoggerFactory;
 
 public class QiniuUtil {
     //自己的七牛
-    private static final String ACCESS_KEY = "QN3U7hRV4WYTmNSPJLVGCfuthzwN2MsDnPojtaZ4";
-    private static final String SECRET_KEY = "4qqIC6qDc4-KNfSqbG3WOvgSEN8mZx5zEDOsAdo8";
+    private static final String ACCESS_KEY = Config.getProperty("qiniu.access_key");
+    private static final String SECRET_KEY = Config.getProperty("qiniu.secret_key");
     private static Logger log = LoggerFactory.getLogger(QiniuUtil.class);
     private static UploadManager uploadManager = new UploadManager();
 

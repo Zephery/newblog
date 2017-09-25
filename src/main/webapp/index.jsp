@@ -6,7 +6,6 @@
     <jsp:param name="title" value="Zephery | 温志怀的个人日志"/>
 </jsp:include>
 <!DOCTYPE html>
-<!-- saved from url=(0022)http://cuiqingcai.com/ -->
 <html>
 <head>
     <link href="${pageContext.request.contextPath}/js/mousepicture/css/lanrenzhijia.css" type="text/css"
@@ -15,7 +14,8 @@
           href="${pageContext.request.contextPath}/wowslider/engine1/style.css"/>
     <script src="${pageContext.request.contextPath}/js/responsiveslides.min.js"></script>
     <meta charset="UTF-8">
-    <link rel="stylesheet" id="style-css" href="http://ohlrxdl4p.bkt.clouddn.com/jingmistyle-1503806575354.css" type="text/css" media="all">
+    <link rel="stylesheet" id="style-css" href="http://ohlrxdl4p.bkt.clouddn.com/jingmistyle-1503806575354.css"
+          type="text/css" media="all">
     <!-- Start WOWSlider.com HEAD section -->
     <link rel="stylesheet" type="text/css" href="wowslider/engine1/style.css"/>
     <!-- End WOWSlider.com HEAD section -->
@@ -108,6 +108,7 @@
                         <span class="muted">
                             <a href="${pageContext.request.contextPath}/getblogdetail.html?blogid=${blog.blogid}">
                             <span id="sourceId::${blog.blogid}" class="cy_cmt_count"></span>
+                                <!--畅言导致加载缓慢，有时间处理一下-->
                             <script id="cy_cmt_num"
                                     src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cyt4SnwiG">
                             </script>评论</a>

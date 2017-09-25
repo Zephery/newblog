@@ -89,4 +89,9 @@
         <include refid="Base_Column_List"/>
         from category
     </select>
+    <cache eviction="LRU"
+           type="org.apache.ibatis.cache.impl.PerpetualCache"
+           flushInterval="120000"
+           size="1024"
+           readOnly="true"/>
 </mapper>

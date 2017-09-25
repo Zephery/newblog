@@ -155,4 +155,9 @@
         from weibo
         WHERE TO_DAYS( NOW( ) ) - TO_DAYS(created_at) = 0 order by id ASC
     </select>
+    <cache eviction="LRU"
+           type="org.apache.ibatis.cache.impl.PerpetualCache"
+           flushInterval="120000"
+           size="1024"
+           readOnly="true"/>
 </mapper>
