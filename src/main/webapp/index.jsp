@@ -11,13 +11,13 @@
     <link href="${pageContext.request.contextPath}/js/mousepicture/css/lanrenzhijia.css" type="text/css"
           rel="stylesheet"/>
     <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/wowslider/engine1/style.css"/>
+          href="${pageContext.request.contextPath}/js/wowslider/engine1/style.css"/>
     <script src="${pageContext.request.contextPath}/js/responsiveslides.min.js"></script>
     <meta charset="UTF-8">
     <link rel="stylesheet" id="style-css" href="http://ohlrxdl4p.bkt.clouddn.com/jingmistyle-1503806575354.css"
           type="text/css" media="all">
     <!-- Start WOWSlider.com HEAD section -->
-    <link rel="stylesheet" type="text/css" href="wowslider/engine1/style.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/wowslider/engine1/style.css"/>
     <!-- End WOWSlider.com HEAD section -->
     <script type="text/javascript">
         $(function () {
@@ -61,8 +61,8 @@
                     </div>
                     <div class="ws_shadow"></div>
                 </div>
-                <script type="text/javascript" src="wowslider/engine1/wowslider.js"></script>
-                <script type="text/javascript" src="wowslider/engine1/script.js"></script>
+                <script type="text/javascript" src="${pageContext.request.contextPath}/js/wowslider/engine1/wowslider.js"></script>
+                <script type="text/javascript" src="${pageContext.request.contextPath}/js/wowslider/engine1/script.js"></script>
                 <!-- End WOWSlider.com BODY section -->
             </div>
             <div>

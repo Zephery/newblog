@@ -202,7 +202,7 @@
 #wowslider-container1 .ws_bullets a { 
 	width:22px;
 	height:22px;
-	background: url(./bullet.png) left top;
+	background: url(bullet.png) left top;
 	float: left; 
 	text-indent: -4000px; 
 	position:relative;
@@ -222,7 +222,7 @@
 	z-index:60;
 	height: 7.1em;
 	width: 7.1em;
-	background-image: url(./arrows.png);
+	background-image: url(arrows.png);
 	background-size: 200%;
 }
 #wowslider-container1 a.ws_next{
@@ -254,11 +254,11 @@
 }
 
 #wowslider-container1 .ws_pause {
-    background-image: url(./pause.png);
+    background-image: url(pause.png);
 }
 
 #wowslider-container1 .ws_play {
-    background-image: url(./play.png);
+    background-image: url(play.png);
 }
 
 #wowslider-container1 .ws_pause:hover, #wowslider-container1 .ws_play:hover {
@@ -278,7 +278,7 @@
 	bottom: 1.5em;
 	left: 0.4em;
 	margin-right:0.4em;
-	color:#7698c1;
+	color: #4359e4;
 	z-index: 50;
 	line-height: 1em;
 	font-weight: bold;
@@ -356,7 +356,7 @@
 	bottom:-10px;
 	margin-left:-1px;
 	left:60px;
-	background:url(./triangle.png);
+	background:url(triangle.png);
 	width:15px;
 	height:6px;
 }#wowslider-container1 .ws_bulframe div div{

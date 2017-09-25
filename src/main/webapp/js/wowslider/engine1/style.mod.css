@@ -29,11 +29,11 @@
 }
 
 #wowslider-container1 .pause {
-    background-image: url(./pause.png);
+    background-image: url(pause.png);
 }
 
 #wowslider-container1 .play {
-    background-image: url(./play.png);
+    background-image: url(play.png);
 }
 
 #wowslider-container1 .pause:hover, #wowslider-container1 .play:hover {
