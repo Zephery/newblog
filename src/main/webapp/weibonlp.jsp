@@ -49,9 +49,7 @@
     <script type="text/javascript">
         function submitword() {
             var sentence = $("#sentence").val();
-            console.log(sentence);
             sentence=encodeURIComponent(sentence);
-            console.log(sentence);
             window.location.href = '${pageContext.request.contextPath}/weibonlp.html?weibo=' + sentence;
         }
     </script>

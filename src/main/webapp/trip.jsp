@@ -217,7 +217,6 @@
             var win_width = $(window).width();
             var mleft=$(".m-left");
             if (win_width < 500) {
-                console.log(win_width);
                 mleft.autoIMG();
             } else {
                 mleft.center();

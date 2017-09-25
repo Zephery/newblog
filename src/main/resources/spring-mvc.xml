@@ -18,7 +18,6 @@
 
     <!-- 静态资源解析，包括js,css,img... -->
     <mvc:resources location="/css/" mapping="/css/**"/>
-    <mvc:resources location="/fonts/" mapping="/fonts/**"/>
     <mvc:resources location="/images/" mapping="/images/**"/>
     <mvc:resources location="/js/" mapping="/js/**"/>
     <!--自定义拦截器-->
