@@ -25,9 +25,7 @@
     <script type="text/javascript"
             src="http://assets.changyan.sohu.com/upload/plugins/plugins.count.js">
     </script>
-    <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
-    <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
-    <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    <script src="https://cdn.bootcss.com/highcharts/5.0.14/highcharts.js"></script>
     <script type="text/javascript">
         $(function () {
             editormd.markdownToHTML("test-editormd-view2", {

@@ -12,9 +12,7 @@
     <meta charset="utf-8"/>
     <title>日志系统</title>
     <link rel="stylesheet" id="style-css" href="http://ohlrxdl4p.bkt.clouddn.com/jingmistyle-1503806575354.css" type="text/css" media="all">
-    <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
-    <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
-    <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    <script src="https://cdn.bootcss.com/highcharts/5.0.14/highcharts.js"></script>
     <script src="https://cdn.bootcss.com/echarts/3.6.2/echarts.min.js"></script>
     <script type="text/javascript" src="js/china.js"></script>
     <!--不要导入jquery，扇形图有冲突-->
