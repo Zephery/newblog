@@ -30,10 +30,11 @@
         });
     </script>
     <meta charset="UTF-8">
-    <link rel="stylesheet" id="style-css" href="http://ohlrxdl4p.bkt.clouddn.com/jingmistyle-1503806575354.css" type="text/css" media="all">
+    <link rel="stylesheet" id="style-css" href="http://ohlrxdl4p.bkt.clouddn.com/jingmistyle-1503806575354.css"
+          type="text/css" media="all">
     <script>
         var _hmt = _hmt || [];
-        (function() {
+        (function () {
             var hm = document.createElement("script");
             hm.src = "https://hm.baidu.com/hm.js?e580b8db831811a4aaf4a8f3e30034dc";
             var s = document.getElementsByTagName("script")[0];
@@ -51,20 +52,23 @@
             </h1>
             <div class="pull-right"><!-- 百度分享 -->
                 <span class="action action-share bdsharebuttonbox bdshare-button-style0-24"
-                      data-bd-bind="1498225366914"><i class="fa fa-share-alt"></i>分享<div
-                        class="action-popover"><div class="popover top in"><div class="arrow"></div><div
-                        class="popover-content"><a href="#" class="sinaweibo fa fa-weibo" data-cmd="tsina"
-                                                   title="分享到新浪微博"></a><a href="#" class="bds_qzone fa fa-star"
-                                                                          data-cmd="qzone" title="分享到QQ空间"></a><a
-                        href="#" class="tencentweibo fa fa-tencent-weibo" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#"
-                                                                                                                class="qq fa fa-qq"
-                                                                                                                data-cmd="sqq"
-                                                                                                                title="分享到QQ好友"></a><a
-                        href="#" class="bds_renren fa fa-renren" data-cmd="renren" title="分享到人人网"></a><a href="#"
-                                                                                                         class="bds_weixin fa fa-weixin"
-                                                                                                         data-cmd="weixin"
-                                                                                                         title="分享到微信"></a><a
-                        href="#" class="bds_more fa fa-ellipsis-h" data-cmd="more"></a></div></div></div></span>
+                      data-bd-bind="1498225366914"><i class="fa fa-share-alt"></i>分享
+                    <div class="action-popover">
+                        <div class="popover top in"><div class="arrow"></div>
+                            <div class="popover-content">
+                                <a href="#" class="sinaweibo fa fa-weibo" data-cmd="tsina"
+                                   title="分享到新浪微博"></a>
+                                <a href="#" class="bds_qzone fa fa-star" data-cmd="qzone" title="分享到QQ空间"></a>
+                                <a href="#" class="tencentweibo fa fa-tencent-weibo" data-cmd="tqq"
+                                   title="分享到腾讯微博"></a>
+                                <a href="#" class="qq fa fa-qq" data-cmd="sqq" title="分享到QQ好友"></a>
+                                <a href="#" class="bds_renren fa fa-renren" data-cmd="renren" title="分享到人人网"></a>
+                                <a href="#" class="bds_weixin fa fa-weixin" data-cmd="weixin" title="分享到微信"></a>
+                                <a href="#" class="bds_more fa fa-ellipsis-h" data-cmd="more"></a>
+                            </div>
+                        </div>
+                    </div>
+                </span>
                 <script>window._bd_share_config = {
                     "common": {
                         "bdSnsKey": {},
@@ -86,7 +90,7 @@
                         "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]
                     }
                 };
-                with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+                with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
             </div>
         </header>
         <div class="article-content">
