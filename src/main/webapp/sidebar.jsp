@@ -27,7 +27,6 @@
         },
         error: function (e) {
             alert(e);
-            window.clearInterval(timer);
         }
     });
     $.ajax({
@@ -45,7 +44,6 @@
         },
         error: function (e) {
             alert(e);
-            window.clearInterval(timer);
         }
     });
     $.ajax({
@@ -63,7 +61,6 @@
         },
         error: function (e) {
             alert(e);
-            window.clearInterval(timer);
         }
     });
     $(document).ready(function () {
@@ -91,7 +88,7 @@
 </script>
 <aside class="sidebar">
     <div class="widget widget_text" style="height: 115px;margin-bottom: 0px">
-        <iframe src="//www.seniverse.com/weather/weather.aspx?uid=U35799536E&cid=CHBJ000000&l=&p=SMART&a=1&u=C&s=13&m=
+        <iframe src="http://www.seniverse.com/weather/weather.aspx?uid=U35799536E&cid=CHBJ000000&l=&p=SMART&a=1&u=C&s=13&m=
         0&x=1&d=0&fc=&bgc=2E93D9&bc=&ti=0&in=1&li=" frameborder="0" scrolling="no" width="330" height="115"
                 allowTransparency="true"></iframe>
     </div>

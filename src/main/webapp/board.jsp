@@ -13,13 +13,10 @@
     <jsp:param name="title" value="留言板"/>
 </jsp:include>
 <!DOCTYPE html>
-<!-- saved from url=(0022)http://cuiqingcai.com/ -->
 <html>
 <head>
     <link href="${pageContext.request.contextPath}/js/mousepicture/css/lanrenzhijia.css" type="text/css"
           rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/wowslider/engine1/style.css"/>
     <script src="${pageContext.request.contextPath}/js/responsiveslides.min.js"></script>
     <script type="text/javascript">
         $(function () {
@@ -50,7 +47,7 @@
     <div class="pagewrapper clearfix">
         <header class="pageheader clearfix">
             <h1 class="pull-left">
-                <a href="http://cuiqingcai.com/message">给我留言</a>
+                <a href="http://www.wenzhihuai.com/board.html">给我留言</a>
             </h1>
             <div class="pull-right"><!-- 百度分享 -->
                 <span class="action action-share bdsharebuttonbox bdshare-button-style0-24"

@@ -13,13 +13,10 @@
     <jsp:param name="title" value="捐赠"/>
 </jsp:include>
 <!DOCTYPE html>
-<!-- saved from url=(0022)http://cuiqingcai.com/ -->
 <html>
 <head>
     <link href="${pageContext.request.contextPath}/js/mousepicture/css/lanrenzhijia.css" type="text/css"
           rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/wowslider/engine1/style.css"/>
     <script src="${pageContext.request.contextPath}/js/responsiveslides.min.js"></script>
     <script type="text/javascript">
         $(function () {
@@ -40,7 +37,7 @@
     <div class="pagewrapper clearfix">
         <header class="pageheader clearfix">
             <h1 class="pull-left">
-                <a href="http://cuiqingcai.com/donate">赞助作者</a>
+                <a href="http://www.wenzhihuai.com/donate.html">赞助作者</a>
             </h1>
             <div class="pull-right">
                 <!-- JiaThis Button BEGIN -->

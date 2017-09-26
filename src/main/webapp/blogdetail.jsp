@@ -73,7 +73,7 @@
                 </h1>
                 <div class="meta" style="text-align: center">
                     <span id="mute-category" class="muted"><i class="fa fa-list-alt"></i><a
-                            href="http://cuiqingcai.com/category/technique/python"
+                            href="http://www.wenzhihuai.com"
                             style="padding-left: 7px">${blog.category.cName}</a></span>
                     <time class="muted"><i class="fa fa-clock-o"></i> ${blog.createAt}</time>
                     <span class="muted"><i class="fa fa-eye"></i> ${blog.hits}浏览</span>

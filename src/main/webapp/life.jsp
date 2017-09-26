@@ -13,7 +13,6 @@
     <jsp:param name="title" value="生活笔记"/>
 </jsp:include>
 <!DOCTYPE html>
-<!-- saved from url=(0022)http://cuiqingcai.com/ -->
 <html>
 <head>
     <link href="${pageContext.request.contextPath}/js/mousepicture/css/lanrenzhijia.css" type="text/css"
