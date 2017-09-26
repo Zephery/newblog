@@ -4,6 +4,7 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx" xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
         http://www.springframework.org/schema/beans
@@ -13,7 +14,9 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
         http://www.springframework.org/schema/cache
-        http://www.springframework.org/schema/cache/spring-cache.xsd">
+        http://www.springframework.org/schema/cache/spring-cache.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task.xsd">
 
     <!-- 自动扫描包中的bean -->
     <context:component-scan base-package="com.myblog.*"/>
@@ -26,9 +29,12 @@
     <!-- enable transaction demarcation with annotations -->
 
     <tx:annotation-driven/>
-    <bean id="myStatLogger" class="com.myblog.druid.MyStatLogger">
-    </bean>
+    <bean id="myStatLogger" class="com.myblog.druid.MyStatLogger"/>
 
+    <!-- 支持异步方法执行 -->
+    <task:annotation-driven executor="annotationExecutor" />
+    <!-- 支持 @Async 注解 -->
+    <task:executor id="annotationExecutor" pool-size="100"/>
 
     <!-- 扫描mapper接口（即dao），Spring会自动查找其下的类 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

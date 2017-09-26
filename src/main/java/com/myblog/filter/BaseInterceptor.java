@@ -1,13 +1,14 @@
 package com.myblog.filter;
 
-import com.myblog.dao.IpLogMapper;
 import com.myblog.model.IpLog;
+import com.myblog.service.IAsyncService;
 import com.myblog.util.IPUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.NamedThreadLocal;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * Description: 自定义拦截器，目前只是增加IP记录的功能，并记录后台反应的时长
  */
 @Component
+@EnableAsync
 public class BaseInterceptor implements HandlerInterceptor {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(BaseInterceptor.class);
@@ -30,7 +32,7 @@ public class BaseInterceptor implements HandlerInterceptor {
             new NamedThreadLocal<>("StopWatch-StartTime");
     private NamedThreadLocal<Integer> visitNum = new NamedThreadLocal<>("visitNum");
     @Resource
-    private IpLogMapper ipLogMapper;
+    private IAsyncService asyncService;
 
 
     @Override
@@ -74,13 +76,14 @@ public class BaseInterceptor implements HandlerInterceptor {
             } else {
                 ipLog.setVisitNum(visitNum.get() == null ? 0 : visitNum.get() + 1);
             }
-            if(!uri.contains("ajaxsearch.html")){
-                ipLogMapper.insert(ipLog);      //记录每一条日志
+            if (!uri.contains("ajaxsearch.html")) {
+                asyncService.insertIpLog(ipLog);
             }
         } catch (Exception e) {
             logger.error("Handle error", e);
         }
     }
+
 
     private boolean judegeuri(String uri) {
         return uri.contains("index.html") || uri.contains("tech.html") || uri.contains("life.html") || uri.contains("trip.html")

@@ -10,6 +10,7 @@ import com.myblog.lucene.BlogIterator;
 import com.myblog.model.Blog;
 import com.myblog.model.Category;
 import com.myblog.model.Tag;
+import com.myblog.service.IAsyncService;
 import com.myblog.service.IBlogService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
@@ -39,6 +40,8 @@ public class BlogServiceImpl implements IBlogService {
     private CategoryMapper categoryMapper;
     @Resource
     private TagMapper tagMapper;
+    @Resource
+    private IAsyncService asyncService;
     private BlogIndex blogIndex = new BlogIndex();
 
     /**
@@ -106,10 +109,7 @@ public class BlogServiceImpl implements IBlogService {
         blog.setCategory(category);
         List<Tag> tags = tagMapper.getTagByBlogId(blog.getBlogid());
         blog.setTags(tags.size() > 0 ? tags : null);
-        if (blogMapper.updatehits(blogid)) {
-        } else {
-            logger.info("read count failure");
-        }
+        asyncService.updatebloghits(blogid);//异步更新阅读次数
         return blog;
     }
 
@@ -234,6 +234,7 @@ public class BlogServiceImpl implements IBlogService {
             return null;
         }
     }
+
     public static void main(String[] args) {
         try {
             Directory dir = FSDirectory.open(Paths.get("autocomplete"));
