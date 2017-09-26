@@ -3,6 +3,10 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
     <display-name>Blog</display-name>
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
+        <param-value>develop</param-value>
+    </context-param>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
