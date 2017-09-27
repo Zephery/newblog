@@ -97,8 +97,16 @@
     </script>
     <!--360搜索-->
     <meta name="360-site-verification" content="db160af16a61f74e2657c0540f4ccd0d"/>
+    <!--360自动收录-->
+    <script>
+        (function () {
+            var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?3c2ebef08880b4f3ed8dd43ac4361401"
+                : "https://jspassport.ssl.qhimg.com/11.0.1.js?3c2ebef08880b4f3ed8dd43ac4361401";
+            document.write('<script src="' + src + '" id="sozz"><\/script>');
+        })();
+    </script>
     <!--搜狗-->
-    <meta name="sogou_site_verification" content="ASSLaoFirg"/>
+    <meta name="sogou_site_verification" content="Lzg0yrcxwy"/>
 </head>
 <body>
 <!--navigation-->
@@ -189,7 +197,7 @@
     remote_input.autocomplete({
         source: [
             {
-                minChars:1,
+                minChars: 1,
                 url: "ajaxsearch.html?keyword=%QUERY%",
                 type: 'remote'
             }
