@@ -32,7 +32,7 @@ public class AsyncServiceImpl implements IAsyncService {
     @Override
     public void insertIpLog(IpLog ipLog) {
         try {
-            ipLogMapper.insert(ipLog);      //记录每一条日志
+            ipLogMapper.insertSelective(ipLog);      //记录每一条日志
         } catch (Exception e) {
             logger.error("ip插入错误", e);
         }

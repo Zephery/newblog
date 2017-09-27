@@ -10,9 +10,12 @@
     <sql id="Base_Column_List">
     c_id, c_name, c_descrip, c_num
     </sql>
+    <sql id="NoDescrip">
+    c_id, c_name, c_num
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="NoDescrip"/>
         from category
         where c_id = #{cId,jdbcType=INTEGER}
     </select>

@@ -25,10 +25,10 @@
     where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.myblog.model.IpLog">
-    insert into ip_log (id, sid, ip, 
+        insert into ip_log (id, sid, ip,
       ip_time, area, uri, 
       response_time, visit_num)
-    values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+        values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR},
       #{ipTime,jdbcType=TIMESTAMP}, #{area,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, 
       #{responseTime,jdbcType=BIGINT}, #{visitNum,jdbcType=INTEGER})
     </insert>

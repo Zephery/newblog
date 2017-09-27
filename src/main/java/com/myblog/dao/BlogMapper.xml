@@ -139,7 +139,7 @@
         <include refid="NoContent"/>
         from blog
         where categoryid = #{categoryid,jdbcType=INTEGER}
-        ORDER BY create_at desc
+        ORDER BY id desc
     </select>
     <select id="getBlogByTagId" resultMap="BaseResultMap">
         SELECT
