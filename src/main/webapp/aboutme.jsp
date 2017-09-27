@@ -20,12 +20,13 @@
           rel="stylesheet"/>
     <link rel="stylesheet" type="text/css"/>
     <meta charset="UTF-8">
-    <link rel="stylesheet" id="style-css" href="http://ohlrxdl4p.bkt.clouddn.com/jingmistyle-1503806575354.css" type="text/css" media="all">
+    <link rel="stylesheet" id="style-css" href="http://image.wenzhihuai.com/jingmistyle-1503806575354.css"
+          type="text/css" media="all">
     <!--畅言获取评论数，未来有可能变为https-->
     <script type="text/javascript"
             src="http://assets.changyan.sohu.com/upload/plugins/plugins.count.js">
     </script>
-    <link rel="stylesheet" href="http://ohlrxdl4p.bkt.clouddn.com/editormd.preview.css"/>
+    <link rel="stylesheet" href="http://image.wenzhihuai.com/editormd.preview.css"/>
     <script type="text/javascript">
         $(function () {
             editormd.markdownToHTML("test-editormd-view2", {

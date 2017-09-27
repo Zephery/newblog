@@ -13,8 +13,8 @@
 <head>
     <title><%=request.getParameter("title")%>
     </title>
-    <link type="image/x-icon" rel="shortcut icon" href="http://ohlrxdl4p.bkt.clouddn.com/66.jpg"/>
-    <link href="http://ohlrxdl4p.bkt.clouddn.com/blogbootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link type="image/x-icon" rel="shortcut icon" href="http://image.wenzhihuai.com/66.jpg"/>
+    <link href="http://image.wenzhihuai.com/blogbootstrap.css" type="text/css" rel="stylesheet" media="all">
     <link href="css/style.css" type="text/css" rel="stylesheet" media="all">
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <!-- Custom Theme files -->
@@ -181,8 +181,8 @@
     </div>
 </div>
 </body>
-<link rel="stylesheet" href="http://ohlrxdl4p.bkt.clouddn.com/jquery.autocomplete.css">
-<script src="http://ohlrxdl4p.bkt.clouddn.com/jquery.autocomplete.js" type="text/javascript"></script>
+<link rel="stylesheet" href="http://image.wenzhihuai.com/jquery.autocomplete.css">
+<script src="http://image.wenzhihuai.com/jquery.autocomplete.js" type="text/javascript"></script>
 <script type="text/javascript">
     /******************** remote start **********************/
     var remote_input = $('#remote_input');

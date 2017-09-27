@@ -3,7 +3,7 @@
 大学的时候萌生的一个想法，就是建立一个个人网站，前前后后全部推翻重改了4、5遍，现在终于能看了，下面是首页。
 <div align="center">
 
-![](http://ohlrxdl4p.bkt.clouddn.com/home.png?imageView2/2/w/600)
+![](http://image.wenzhihuai.com/home.png?imageView2/2/w/600)
 
 </div>
 
@@ -24,7 +24,7 @@
 起初，是因为学习的时候老是找不到什么好玩而又有挑战性的项目，看着struts、spring、hibernate的书，全都是一些小项目，做了感觉也没啥意义，有时候在博客园看到别人还有自己的网站，特羡慕，最终就选择了自己做一个个人网站。期初刚学的ssh，于是开始了自己的ssh搭建个人网站的行程，但是对于一个后端的人来说，前端是个大问题啊。。。。所以初版的时候差不多全是纯生的html、css、js，至少发博客这个功能实现了，但是确实没法看。前前后后折腾了一个多月，决定推翻重做，到百度看看别人怎么做的。首先看到的是[杨青](http://www.yangqq.com/)的网站，已经好几年没更新了，前端的代码看起来比较简单，也是自己能够掌握的，但是不够美观，继续找，在模板之家发现了一个高大上的模板。
 <div align="center">
 
-![](http://ohlrxdl4p.bkt.clouddn.com/joihfiohewifoheifahiauhvuia.png?imageView2/2/w/500)
+![](http://image.wenzhihuai.com/joihfiohewifoheifahiauhvuia.png?imageView2/2/w/500)
 
 </div>
 第二版的界面确实是这样的，只是把图片的切换变成了wowslider，也是简单的用bootstrap和pagehelper做了下分页，现在的最终版保留了它的header，然后评论框使用了多说（超级怀念多说）。后端也由原来的ssh变成了ssm，之后加上了lucene来对文章进行索引。之后，随着多说要关闭了，突然之间有很多div都不适应了（我写死了的。。。），再一次，没法看，不想看，一怒之下再次推翻重做，变成了现在这个版本。  
@@ -37,14 +37,14 @@
 最终版的技术架构图如下：
 <div align="center">
 
-![](http://ohlrxdl4p.bkt.clouddn.com/awfawefwefwef.png)
+![](http://image.wenzhihuai.com/awfawefwefwef.png)
 
 </div>
 
 网站核心主要采用Spring SpringMVC和Mybatis，下图是当访问一篇博客的时候的运行流程，参考了[张开涛](http://jinnianshilongnian.iteye.com/blog/1594806)的博客。
 <div align="center">
 
-![](http://ohlrxdl4p.bkt.clouddn.com/awefaweagregrgbwerbwer.png)
+![](http://image.wenzhihuai.com/awefaweagregrgbwerbwer.png)
 
 </div>
 
@@ -64,7 +64,7 @@
 日志系统架构如下：
 <div align="center">
 
-![](http://ohlrxdl4p.bkt.clouddn.com/awfawefwefawefwef.png)
+![](http://image.wenzhihuai.com/awfawefwefawefwef.png)
 
 </div>
 
@@ -75,7 +75,7 @@
 本人大学里的毕业设计就是基于AdaBoost算法的情感分类，学到的东西还是要经常拿出来看看，要不然真的浪费了我这么久努力做的毕业设计啊。构建了一个基本的情感分类小系统，每天抓取微博进行分类存储在MySql上，并使用flask提供Restful API给java调用，可以点击[这里](http://www.wenzhihuai.com/weibonlp.html)尝试（请忽略Google的图片）。目前分类效果不是很明显，准确率大概只有百分之70%，因为训练样本只有500条（找不到训练样本），机器学习真的太依赖样本的标注。这个，只能请教各位路人大神指导指导了。
 <div align="center">
 
-![](http://ohlrxdl4p.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170825141127.png)
+![](http://image.wenzhihuai.com/QQ%E6%88%AA%E5%9B%BE20170825141127.png)
 
 </div>
 

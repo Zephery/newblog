@@ -10,7 +10,8 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <link rel="stylesheet" id="style-css" href="http://ohlrxdl4p.bkt.clouddn.com/jingmistyle-1503806575354.css" type="text/css" media="all">
+    <link rel="stylesheet" id="style-css" href="http://image.wenzhihuai.com/jingmistyle-1503806575354.css"
+          type="text/css" media="all">
 </head>
 <body>
 <footer class="footer">

@@ -19,7 +19,8 @@
           rel="stylesheet"/>
     <script src="${pageContext.request.contextPath}/js/responsiveslides.min.js"></script>
     <meta charset="UTF-8">
-    <link rel="stylesheet" id="style-css" href="http://ohlrxdl4p.bkt.clouddn.com/jingmistyle-1503806575354.css" type="text/css" media="all">
+    <link rel="stylesheet" id="style-css" href="http://image.wenzhihuai.com/jingmistyle-1503806575354.css"
+          type="text/css" media="all">
     <script type="text/javascript">
         $(function () {
             $("#slider").responsiveSlides({

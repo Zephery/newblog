@@ -14,7 +14,13 @@
 .woo-pbr li.woo-ell{margin:10px 8px 0 6px;font-size:10px;font-weight:bold;+font-size:12px;+font-weight:normal;}
 @media all and (min-width: 0px){ .woo-pbr a{display:inline-block;float:none}.woo-pbr li{float:left}}{}
 .woo-pbr a.woo-pre,
-.woo-pbr a.woo-nxt{width:56px;text-indent:-9999px;font-weight:normal;background-image:url(http://ohlrxdl4p.bkt.clouddn.com/20130719140023_YrJaZ.png);background-repeat:no-repeat;}
+.woo-pbr a.woo-nxt {
+    width: 56px;
+    text-indent: -9999px;
+    font-weight: normal;
+    background-image: url(http://image.wenzhihuai.com/20130719140023_YrJaZ.png);
+    background-repeat: no-repeat;
+}
 .woo-pbr a.woo-pre:link,
 .woo-pbr a.woo-pre:visited{background-position:-1px -1px;}
 .woo-pbr a.woo-pre:hover{background-position:-1px -31px;}

@@ -12,7 +12,7 @@
           rel="stylesheet"/>
     <script src="${pageContext.request.contextPath}/js/responsiveslides.min.js"></script>
     <meta charset="UTF-8">
-    <link rel="stylesheet" id="style-css" href="http://ohlrxdl4p.bkt.clouddn.com/jingmistyle-1503806575354.css"
+    <link rel="stylesheet" id="style-css" href="http://image.wenzhihuai.com/jingmistyle-1503806575354.css"
           type="text/css" media="all">
     <!-- Start WOWSlider.com HEAD section -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/wowslider/engine1/style.css"/>

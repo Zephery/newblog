@@ -20,7 +20,8 @@
           rel="stylesheet"/>
     <link rel="stylesheet" type="text/css"/>
     <meta charset="UTF-8">
-    <link rel="stylesheet" id="style-css" href="http://ohlrxdl4p.bkt.clouddn.com/jingmistyle-1503806575354.css" type="text/css" media="all">
+    <link rel="stylesheet" id="style-css" href="http://image.wenzhihuai.com/jingmistyle-1503806575354.css"
+          type="text/css" media="all">
     <!--畅言获取评论数，未来有可能变为https-->
     <script type="text/javascript"
             src="http://assets.changyan.sohu.com/upload/plugins/plugins.count.js">
@@ -57,7 +58,7 @@
 <body class="home blog hPC">
 <section class="contentcontainer" style="background-color: #FFFFFF">
     <div style="text-align: center">
-        <img src="http://ohlrxdl4p.bkt.clouddn.com/201510914124865365367.jpg" style="padding: 0 auto"/>
+        <img src="http://image.wenzhihuai.com/201510914124865365367.jpg" style="padding: 0 auto"/>
     </div>
     <div class="input-group"
          style="width: 85%;margin: -5% auto 3% auto;">

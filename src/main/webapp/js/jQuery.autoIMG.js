@@ -4,7 +4,7 @@
 (function ($) {
 	
 	var // 设置加载状态的替换图像
-		tempPath = 'http://ohlrxdl4p.bkt.clouddn.com/5-121204193R0-50.gif',
+        tempPath = 'http://image.wenzhihuai.com/5-121204193R0-50.gif',
 		// 设置加载错误的替换图像
 		errorPath = './images/error.png',
 		// 检测是否支持css2.1 max-width属性

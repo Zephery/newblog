@@ -30,7 +30,8 @@
         });
     </script>
     <meta charset="UTF-8">
-    <link rel="stylesheet" id="style-css" href="http://ohlrxdl4p.bkt.clouddn.com/jingmistyle-1503806575354.css" type="text/css" media="all">
+    <link rel="stylesheet" id="style-css" href="http://image.wenzhihuai.com/jingmistyle-1503806575354.css"
+          type="text/css" media="all">
 </head>
 <body class="home blog hPC">
 <section class="contentcontainer">
@@ -67,13 +68,13 @@
                     <div class="zhifubao">
                         <h3 style="text-align: center;">手机支付宝扫一扫</h3>
                         <img class="alignnone size-full wp-image-1100"
-                             src="http://ohlrxdl4p.bkt.clouddn.com/zhifubao.jpg"
+                             src="http://image.wenzhihuai.com/zhifubao.jpg"
                              alt="1424922459123" width="270px" height="270px"
                              style="width: 270px;">
                     </div>
                     <div class="wechat">
                         <h3 style="text-align: center;">使用微信扫一扫</h3>
-                        <img class="alignnone size-full wp-image-1100" src="http://ohlrxdl4p.bkt.clouddn.com/weixin.png"
+                        <img class="alignnone size-full wp-image-1100" src="http://image.wenzhihuai.com/weixin.png"
                              alt="1424922459123" width="270px" height="270px"
                              style="width: 270px;">
                     </div>
