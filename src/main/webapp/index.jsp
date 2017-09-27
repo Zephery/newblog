@@ -60,7 +60,7 @@
                     <div class="ws_shadow"></div>
                 </div>
                 <!--wowslider依赖的jquery版本太低，只能继续使用jquery1.11.2-->
-                <script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+                <%--<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>--%>
                 <script type="text/javascript"
                         src="${pageContext.request.contextPath}/js/wowslider/engine1/wowslider.js"></script>
                 <script type="text/javascript"

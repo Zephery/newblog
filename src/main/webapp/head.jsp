@@ -181,8 +181,8 @@
     </div>
 </div>
 </body>
-<link rel="stylesheet" href="js/autocomplete/jquery.autocomplete.css">
-<script src="js/autocomplete/jquery.autocomplete.js" type="text/javascript"></script>
+<link rel="stylesheet" href="http://ohlrxdl4p.bkt.clouddn.com/jquery.autocomplete.css">
+<script src="http://ohlrxdl4p.bkt.clouddn.com/jquery.autocomplete.js" type="text/javascript"></script>
 <script type="text/javascript">
     /******************** remote start **********************/
     var remote_input = $('#remote_input');
