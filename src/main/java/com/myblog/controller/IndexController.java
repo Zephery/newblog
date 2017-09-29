@@ -10,8 +10,10 @@ import com.myblog.lucene.BlogIndex;
 import com.myblog.model.Blog;
 import com.myblog.model.Category;
 import com.myblog.model.KeyAndValue;
+import com.myblog.model.Links;
 import com.myblog.service.IBlogService;
 import com.myblog.service.ICategoryService;
+import com.myblog.service.ILinksService;
 import com.myblog.util.JedisUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -41,6 +43,8 @@ public class IndexController {
     private IBlogService blogService;
     @Resource
     private ICategoryService categoryService;
+    @Resource
+    private ILinksService linksService;
     private BlogIndex blogIndex = new BlogIndex();
 
     @RequestMapping("index")
@@ -85,29 +89,6 @@ public class IndexController {
         return mav;
     }
 
-//    @RequestMapping("sidebar")
-//    public ModelAndView sidebar() {
-//        JedisUtil jedis = JedisUtil.getInstance();
-//        ModelAndView modelAndView = new ModelAndView();
-//        JsonParser parser = new JsonParser();
-//        String str = jedis.get("biaoqian");
-//        JsonArray jsonArray = (JsonArray) parser.parse(str);
-//        Iterator iterator = jsonArray.iterator();
-//        List<KeyAndValue> biaoqian = new ArrayList<>();
-//        while (iterator.hasNext()) {
-//            Gson gson = new Gson();
-//            KeyAndValue keyAndValue = gson.fromJson((JsonObject) iterator.next(), KeyAndValue.class);
-//            biaoqian.add(keyAndValue);
-//        }
-//        List<Category> categories = categoryService.getAllCategory();
-//        List<Blog> blogbyhits = blogService.getByHits();
-//        modelAndView.addObject("blogbyhits", blogbyhits);
-//        modelAndView.addObject("tags", biaoqian);
-//        modelAndView.addObject("categories", categories);
-//        modelAndView.setViewName("sidebar");
-//        return modelAndView;
-//    }
-
     @RequestMapping("blogbyhits")
     @ResponseBody
     public void blogbyhits(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -135,6 +116,7 @@ public class IndexController {
     }
 
     @RequestMapping("biaoqianyun")
+    @ResponseBody
     public void biaoqianyun(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
             JedisUtil jedis = JedisUtil.getInstance();
@@ -153,6 +135,18 @@ public class IndexController {
             response.getWriter().write(temp);
         } catch (Exception e) {
             response.getWriter().write(e.toString());
+        }
+    }
+
+    @RequestMapping("links")
+    @ResponseBody
+    public void links(HttpServletResponse response) {
+        try {
+            List<Links> list = linksService.getAllLinks();
+            Gson gson = new Gson();
+            response.getWriter().write(gson.toJson(list));
+        } catch (IOException e) {
+            logger.error("友情链接出错", e);
         }
     }
 
