@@ -107,6 +107,8 @@
     </script>
     <!--搜狗-->
     <meta name="sogou_site_verification" content="Lzg0yrcxwy"/>
+    <!--bing-->
+    <meta name="msvalidate.01" content="68A11010C9AEE3FD3F5BD421EACC7499" />
 </head>
 <body>
 <!--navigation-->
