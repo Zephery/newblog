@@ -72,7 +72,7 @@ public class InterestController {
                 mv.addObject("sentence", weibo);
                 mv.addObject("kvs", kvlist);
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error("微博nlp出错", e);
             }
         }
         mv.setViewName("weibonlp");

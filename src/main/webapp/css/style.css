@@ -1,7 +1,4 @@
-*{
-    margin: 0;
-    font-family: "微软雅黑", "Lucida Grande", "Lucida Sans", Helvetica, Arial, Sans;
-}
+
 body {
     margin: 0;
     font-family: 'Roboto Condensed', sans-serif;
@@ -21,6 +18,8 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
     margin: 0;
+    font-size: 15px;
+    font-family: '微软雅黑'
 }
 
 ul, label {
@@ -31,8 +30,6 @@ ul, label {
 body a:hover {
     text-decoration: none;
 }
-
-
 
 div#bs-example-navbar-collapse-1 {
     padding: 0;
@@ -108,7 +105,6 @@ a.navbar-brand {
     line-height: initial;
     padding: 0;
 }
-
 
 .banner {
     background: url(../images/bnr.jpg) no-repeat 0px 0px;
@@ -327,9 +323,19 @@ a.navbar-brand {
     padding: 10em 0;
 }
 
+.article-header h1 {
+    font-size: 30px;
+}
+
+@media screen and (max-width: 500px) {
+    .article-header h1 {
+        font-size: 17px;
+    }
+}
+
 .slider-top h1 {
     font-weight: 700;
-    font-size: 48px;
+    font-size: 40px;
     color: #010101;
 }
 
@@ -1029,7 +1035,6 @@ ul.pagination li a {
 .read-more-grids {
     padding-left: 0 !important;
 }
-
 
 .comment-icons {
     border-top: 1px dashed rgb(95, 158, 160);
@@ -2982,31 +2987,30 @@ p.m_5 {
     }
 }
 
-
-
-
-
-
 /*--- slider-css --*/
-.banner{
-    background-size:cover;
-    min-height:585px;
+.banner {
+    background-size: cover;
+    min-height: 585px;
 }
-.banner1{
-    background:url(../images/bnr.jpg) no-repeat 0px 0px;
-    background-size:cover;
-    min-height:585px;
+
+.banner1 {
+    background: url(../images/bnr.jpg) no-repeat 0px 0px;
+    background-size: cover;
+    min-height: 585px;
 }
-.banner2{
-    background:url(../images/bnr2.jpg) no-repeat 0px 0px;
-    background-size:cover;
-    min-height:585px;
+
+.banner2 {
+    background: url(../images/bnr2.jpg) no-repeat 0px 0px;
+    background-size: cover;
+    min-height: 585px;
 }
-.banner3{
-    background:url(../images/bnr3.jpg) no-repeat 0px 0px;
-    background-size:cover;
-    min-height:585px;
+
+.banner3 {
+    background: url(../images/bnr3.jpg) no-repeat 0px 0px;
+    background-size: cover;
+    min-height: 585px;
 }
+
 .rslides {
     position: relative;
     list-style: none;
@@ -3015,6 +3019,7 @@ p.m_5 {
     padding: 0;
     margin: 0;
 }
+
 .rslides li {
     -webkit-backface-visibility: hidden;
     position: absolute;
@@ -3023,11 +3028,13 @@ p.m_5 {
     left: 0;
     top: 0;
 }
+
 .rslides li:first-child {
     position: relative;
     display: block;
     float: left;
 }
+
 .rslides img {
     display: block;
     height: auto;
@@ -3035,6 +3042,7 @@ p.m_5 {
     width: 100%;
     border: 0;
 }
+
 .banner-info {
     width: 59%;
     position: absolute;
@@ -3043,26 +3051,30 @@ p.m_5 {
     text-align: center;
     z-index: 1;
 }
-.banner-info h3{
+
+.banner-info h3 {
     color: #FFF;
     font-weight: 700;
-    font-size:3em;
+    font-size: 3em;
     text-transform: uppercase;
     z-index: 999;
 }
-.banner-info p{
+
+.banner-info p {
     color: #FFF;
     line-height: 1.5em;
     font-size: 1.2em;
-    width:70%;
-    margin:0 auto;
+    width: 70%;
+    margin: 0 auto;
     text-align: center;
-    padding:1em 0 1.5em 0;
+    padding: 1em 0 1.5em 0;
 }
+
 .callbacks_container {
     position: relative;
     width: 100%;
 }
+
 .callbacks {
     position: relative;
     list-style: none;
@@ -3071,17 +3083,20 @@ p.m_5 {
     padding: 0;
     margin: 0;
 }
+
 .callbacks li {
     position: absolute;
     left: 0;
     top: 0;
 }
+
 .callbacks img {
     position: relative;
     z-index: 1;
     height: auto;
     border: 0;
 }
+
 .callbacks .caption {
     display: block;
     position: absolute;
@@ -3097,10 +3112,11 @@ p.m_5 {
     top: 10%;
     text-align: center;
 }
+
 .callbacks_nav {
     position: absolute;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    top:40%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    top: 40%;
     left: 0;
     opacity: 0.7;
     z-index: 3;
@@ -3111,15 +3127,16 @@ p.m_5 {
     width: 38px;
     background: transparent url("../images/sp.png") no-repeat -19px -7px;
 }
+
 .callbacks_nav:active {
     opacity: 1.0;
 }
+
 .callbacks_nav.next {
     left: auto;
     background: transparent url("../images/sp.png") no-repeat -77px -7px;
-    right:0;
+    right: 0;
 }
-
 
 #weather {
     width: 425px;
@@ -3127,6 +3144,7 @@ p.m_5 {
     text-align: center;
     text-transform: uppercase;
 }
+
 #weather h2 {
     margin: 0 0 8px;
     color: #fff;
@@ -3135,17 +3153,20 @@ p.m_5 {
     text-align: center;
     text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
 }
+
 #weather ul {
     margin: 0;
     padding: 0;
 }
+
 #weather li {
     background: #fff;
-    background: rgba(255,255,255,0.90);
+    background: rgba(255, 255, 255, 0.90);
     padding: 20px;
     display: inline-block;
     border-radius: 5px;
 }
+
 #weather .currently {
     margin: 0 20px;
 }

@@ -10,7 +10,7 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <link rel="stylesheet" id="style-css" href="http://image.wenzhihuai.com/jingmistyle-1503806575354.css"
+    <link rel="stylesheet" id="style-css" href="${pageContext.request.contextPath}/css/aa.css"
           type="text/css" media="all">
 </head>
 <body>
