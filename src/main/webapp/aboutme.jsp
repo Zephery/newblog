@@ -258,7 +258,7 @@ background-size: 100% 100%;background-attachment: fixed;">
             <p><img src="http://image.wenzhihuai.com/66.jpg" style="border-radius:50%;width:100px"></p>
             <p style="text-align: center;font-size:16px;color: white">温志怀</p>
             <p style="text-align: center;color: white">爱生活、爱艺术、爱书画、爱音乐、爱设计、爱编程。</p>
-            <p style="text-align: center;color: white">人生百态，笑口常开，秉承自我，谨慎独行。静觅，静静寻觅生活的美好。</p>
+            <p style="text-align: center;color: white">人生百态，笑口常开，秉承自我，谨慎独行。</p>
             <p style="text-align: center;">
             </p>
             <p><!--end personal --></p>
