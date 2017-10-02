@@ -25,4 +25,4 @@ iptables -A INPUT -s xmr.crypto-pool.fr -j DROP
 iptables -A OUTPUT -d xmr.crypto-pool.fr -j DROP
 
 
-
+# 2017-10-02 再次遭到挖矿攻击

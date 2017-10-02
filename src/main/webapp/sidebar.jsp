@@ -26,7 +26,6 @@
             guessyourlike.append(html);
         },
         error: function (e) {
-            alert(e);
         }
     });
     $.ajax({
@@ -43,7 +42,6 @@
             fenlei.append(html);
         },
         error: function (e) {
-            alert(e);
         }
     });
     $.ajax({
@@ -60,7 +58,6 @@
             fenlei.append(html);
         },
         error: function (e) {
-            alert(e);
         }
     });
     $(document).ready(function () {
