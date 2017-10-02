@@ -23,7 +23,7 @@
             var y = date.getFullYear();     //获取年份
             document.write(y);
             </script> 丨托管于
-            <a rel="nofollow" target="_blank" href="https://www.qcloud.com/">腾讯云主机</a>
+            <a rel="nofollow" target="_blank" href="https://www.aliyun.com">阿里云主机</a>
             &amp; <a rel="nofollow" target="_blank" href="http://www.qiniu.com/">七牛云存储 </a>丨
             <a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn">粤ICP备17092242号-1</a>
         </div>
