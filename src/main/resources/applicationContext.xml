@@ -153,7 +153,11 @@
         <aop:pointcut id="pointCut" expression="execution(* com.myblog.service.*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="pointCut"/>
     </aop:config>
+    <!--httpclient配置-->
     <import resource="bean-httpclient.xml"/>
+    <!--spring rabbitmq配置-->
+    <import resource="rabbitmq.xml"/>
+    <!--数据源-->
     <beans profile="develop">
         <!-- 配置数据源，使用阿里巴巴连接池Druid -->
         <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">

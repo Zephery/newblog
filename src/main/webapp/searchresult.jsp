@@ -117,6 +117,6 @@
     </div>
     <%@include file="sidebar.jsp" %>
 </section>
+<%@include file="foot.jsp"%>
 </body>
 </html>
-<jsp:include page="foot.jsp"/>

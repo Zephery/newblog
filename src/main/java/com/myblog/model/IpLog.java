@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author 
+ * @author
  */
 public class IpLog implements Serializable {
     private Integer id;
@@ -87,5 +87,10 @@ public class IpLog implements Serializable {
 
     public void setVisitNum(Integer visitNum) {
         this.visitNum = visitNum;
+    }
+
+    @Override
+    public String toString() {
+        return ip + " " + uri;
     }
 }

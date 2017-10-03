@@ -136,7 +136,6 @@
         </script>
     </div>
 </section>
+<%@include file="foot.jsp"%>
 </body>
 </html>
-<jsp:include page="foot.jsp"/>
-

@@ -4,6 +4,7 @@ import com.myblog.dao.BlogMapper;
 import com.myblog.dao.IpLogMapper;
 import com.myblog.model.IpLog;
 import com.myblog.service.IAsyncService;
+import com.myblog.service.IMessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
@@ -27,11 +28,14 @@ public class AsyncServiceImpl implements IAsyncService {
     private IpLogMapper ipLogMapper;
     @Resource
     private BlogMapper blogMapper;
+    @Resource
+    private IMessageService messageService;
 
     @Async
     @Override
     public void insertIpLog(IpLog ipLog) {
         try {
+            messageService.pushToMessageQueue("rabbit_queue_one", ipLog.toString());
             ipLogMapper.insertSelective(ipLog);      //记录每一条日志
         } catch (Exception e) {
             logger.error("ip插入错误", e);
@@ -41,10 +45,10 @@ public class AsyncServiceImpl implements IAsyncService {
     @Async
     @Override
     public void updatebloghits(Integer blogid) {
-        try{
+        try {
             blogMapper.updatehits(blogid);
-        }catch (Exception e){
-            logger.error("更新阅读次数错误",e);
+        } catch (Exception e) {
+            logger.error("更新阅读次数错误", e);
         }
     }
 }

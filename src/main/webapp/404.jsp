@@ -10,7 +10,7 @@
 <head>
     <title>Title</title>
 </head>
-<body>
-<h1>OOPS ERROR,错误错误</h1>
+<body style="background-image: url(http://image.wenzhihuai.com/jifoawjfoehfoaehfihefoa.jpg);">
+<h1 style="color: white">OOPS ERROR,错误错误</h1>
 </body>
 </html>

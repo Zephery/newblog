@@ -14,27 +14,27 @@
     <title><%=request.getParameter("title")%>
     </title>
     <link type="image/x-icon" rel="shortcut icon" href="http://image.wenzhihuai.com/66.jpg"/>
-    <link href="http://image.wenzhihuai.com/blogbootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="${pageContext.request.contextPath}/css/blogbootstrap.css" type="text/css" rel="stylesheet" media="all">
     <link href="${pageContext.request.contextPath}/css/style.css" type="text/css" rel="stylesheet" media="all">
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Custom Theme files -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" id="style-css" href="${pageContext.request.contextPath}/css/jingmi.css"
+          type="text/css" media="all">
     <%--font-awesome cdn--%>
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/js/social-share-1.0.2/dist/social-share.min.css">
     <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/social-share-1.0.2/dist/social-share.min.js"></script>
-    <script type="application/x-javascript"> addEventListener("load", function () {
-        setTimeout(hideURLbar, 0);
-    }, false);
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
 
-    function hideURLbar() {
-        window.scrollTo(0, 1);
-    } </script>
-    <script type="text/javascript" src="js/move-top.js"></script>
-    <script type="text/javascript" src="js/easing.js"></script>
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/move-top.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/easing.js"></script>
     <script>
         $(function () {
             var el = document.getElementById('share-area');
@@ -63,11 +63,15 @@
         });
     </script>
     <!--//end-smoth-scrolling-->
+    <!-- Custom Theme files -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <!--SEO-->
     <meta name="title" content="Zephery | 温志怀的个人日志">
     <meta name="keywords" content="温志怀,wenzhihuai,java,机器学习,python,日志"/>
     <meta name="description" content="温志怀的个人日志"/>
     <meta name="author" content="温志怀"/>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <!--百度统计-->
     <script type="text/javascript">
         var _hmt = _hmt || [];
@@ -192,7 +196,7 @@
         source: [
             {
                 minChars: 1,
-                url: "ajaxsearch.html?keyword=%QUERY%",
+                url: "${pageContext.request.contextPath}/ajaxsearch.html?keyword=%QUERY%",
                 type: 'remote'
             }
         ]

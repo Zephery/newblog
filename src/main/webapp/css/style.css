@@ -4,13 +4,6 @@ body {
     font-family: "微软雅黑", "Lucida Grande", "Lucida Sans", Helvetica, Arial, Sans;
 }
 
-body a {
-    transition: 0.5s all ease;
-    -webkit-transition: 0.5s all ease;
-    -moz-transition: 0.5s all ease;
-    -o-transition: 0.5s all ease;
-    -ms-transition: 0.5s all ease;
-}
 
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
@@ -51,6 +44,7 @@ ul.nav.navbar-nav.navbar-left li {
 ul.nav.navbar-nav li a {
     font-size: 17px;
     color: #fff;
+    text-decoration: none;
 }
 
 ul.nav.navbar-nav li a:hover, ul.nav.navbar-nav li a.active {

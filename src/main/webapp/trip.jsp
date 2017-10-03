@@ -27,6 +27,16 @@
             $.Woo();
         });
     </script>
+    <style type="text/css">
+        /* invisible holder for the page */
+        #win-holder {
+            overflow: hidden;
+            height: 0px;
+        }
+    </style>
+    <link href="${pageContext.request.contextPath}/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link rel="stylesheet" id="style-css" href="${pageContext.request.contextPath}/css/jingmi.css"
+          type="text/css" media="all">
 </head>
 <body>
 <div id="content">
@@ -50,13 +60,7 @@
     </div>
     <!-- Woo holder over -->
 </div>
-<style type="text/css">
-    /* invisible holder for the page */
-    #win-holder {
-        overflow: hidden;
-        height: 0px;
-    }
-</style>
+
 <div id="win-holder">
     <form action="${pageContext.request.contextPath}/ajaxpic.html?page=" id="woo-form-album">
         <input name="user_id" type="hidden" value="48"/>
@@ -224,6 +228,6 @@
         });
     })(jQuery);
 </script>
+<%@include file="foot.jsp"%>
 </body>
 </html>
-<jsp:include page="foot.jsp"/>

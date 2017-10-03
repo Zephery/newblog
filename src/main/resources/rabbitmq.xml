@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/rabbit
+      http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <description>rabbitmq 连接服务配置</description>
+    <!--配置数据源属性文件 -->
+    <context:property-placeholder location="classpath:load.properties"/>
+
+    <!-- 连接本地rabbitmq -->
+    <rabbit:connection-factory
+            id="connectionFactory" host="${rabbitmq.host}"
+            port="${rabbitmq.port}" username="${rabbitmq.username}" password="${rabbitmq.password}"/>
+
+    <rabbit:admin connection-factory="connectionFactory" id="amqpAdmin"/>
+
+    <!-- queue 队列声明 -->
+    <rabbit:queue id="rabbit_queue_one" durable="true"
+                  auto-delete="false" exclusive="false" name="rabbit_queue_one"/>
+
+    <!-- exchange queue binging key 绑定 -->
+    <rabbit:direct-exchange name="mq-exchange"
+                            durable="true" auto-delete="false" id="mq-exchange">
+        <rabbit:bindings>
+            <rabbit:binding queue="rabbit_queue_one" key="rabbit_queue_one"/>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+
+    <!-- spring template声明 -->
+    <rabbit:template exchange="mq-exchange" id="amqpTemplate"
+                     connection-factory="connectionFactory"/>
+
+    <!-- queue litener  观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象 taskExecutor这个需要自己实现一个连接池 按照官方说法 除非特别大的数据量 一般不需要连接池 -->
+    <rabbit:listener-container connection-factory="connectionFactory" acknowledge="auto">
+        <rabbit:listener queues="rabbit_queue_one" ref="messageConsumer"/>
+    </rabbit:listener-container>
+</beans>

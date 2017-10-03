@@ -8,7 +8,6 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.NamedThreadLocal;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
  * Description: 自定义拦截器，目前只是增加IP记录的功能，并记录后台反应的时长
  */
 @Component
-@EnableAsync
 public class BaseInterceptor implements HandlerInterceptor {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(BaseInterceptor.class);

@@ -8,12 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
-<html>
-<head>
-    <link rel="stylesheet" id="style-css" href="${pageContext.request.contextPath}/css/jingmi.css"
-          type="text/css" media="all">
-</head>
-<body>
 <footer class="footer">
     <div class="footer-inner">
         <div class="copyright pull-left">
@@ -29,5 +23,3 @@
         </div>
     </div>
 </footer>
-</body>
-</html>
