@@ -27,18 +27,6 @@
             src="http://assets.changyan.sohu.com/upload/plugins/plugins.count.js">
     </script>
     <script src="https://cdn.bootcss.com/highcharts/5.0.14/highcharts.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            editormd.markdownToHTML("test-editormd-view2", {
-                htmlDecode: "style,script,iframe",  // you can filter tags decode
-                emoji: true,
-                taskList: true,
-                tex: true,  // 默认不解析
-                flowChart: true,  // 默认不解析
-                sequenceDiagram: true   // 默认不解析
-            });
-        });
-    </script>
     <style>
         .article-content h1 {
             margin: 20px -20px 20px -20px;

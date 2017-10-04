@@ -2,12 +2,12 @@ package com.myblog.service.impl;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.myblog.common.Config;
 import com.myblog.dao.WeiboMapper;
 import com.myblog.model.Weibo;
 import com.myblog.service.IWeiboService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
-import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -30,7 +30,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created with IntelliJ IDEA.
  * User: Zephery
  * Time: 2017/8/20 0:05
- * Description:
+ * Description:微博nlp
  */
 @Service("weiboService")
 public class WeiboServiceImpl implements IWeiboService {
@@ -41,7 +41,6 @@ public class WeiboServiceImpl implements IWeiboService {
             .custom()
             .setDefaultRequestConfig(
                     RequestConfig.custom()
-                            .setCookieSpec(CookieSpecs.BROWSER_COMPATIBILITY)
                             .build()).build();
 
     static {
@@ -72,7 +71,8 @@ public class WeiboServiceImpl implements IWeiboService {
         CloseableHttpResponse response = null;
         try {
             HttpClientContext context = HttpClientContext.create();
-            HttpGet httpGet = new HttpGet("http://127.0.0.1:5000/helloscore/" + URLEncoder.encode(sentence.replaceAll("/", ""), "utf-8"));
+            String weiboflaskurl= Config.getProperty("weiboflask.url");
+            HttpGet httpGet = new HttpGet(weiboflaskurl + URLEncoder.encode(sentence.replaceAll("/", ""), "utf-8"));
             response = httpClient.execute(httpGet, context);
             HttpEntity entity = response.getEntity();
             JsonParser parser = new JsonParser();

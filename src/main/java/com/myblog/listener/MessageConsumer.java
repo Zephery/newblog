@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * Created with IntelliJ IDEA.
  * User: Zephery
  * Time: 2017/10/3 18:30
- * Description:侦听
+ * Description:RabbitMQ侦听
  */
 @Service
 public class MessageConsumer implements MessageListener {
