@@ -18,9 +18,6 @@
     <link href="${pageContext.request.contextPath}/js/mousepicture/css/lanrenzhijia.css" type="text/css"
           rel="stylesheet"/>
     <script src="${pageContext.request.contextPath}/js/responsiveslides.min.js"></script>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" id="style-css" href="http://image.wenzhihuai.com/jingmistyle-1503806575354.css"
-          type="text/css" media="all">
     <script type="text/javascript">
         $(function () {
             $("#slider").responsiveSlides({

@@ -10,11 +10,7 @@
 <head>
     <link href="${pageContext.request.contextPath}/js/mousepicture/css/lanrenzhijia.css" type="text/css"
           rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css"/>
     <script src="${pageContext.request.contextPath}/js/responsiveslides.min.js"></script>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" id="style-css" href="http://image.wenzhihuai.com/jingmistyle-1503806575354.css"
-          type="text/css" media="all">
 </head>
 <body class="home blog hPC">
 <section class="contentcontainer">

@@ -11,8 +11,6 @@
 <head>
     <meta charset="utf-8"/>
     <title>日志系统</title>
-    <link rel="stylesheet" id="style-css" href="http://image.wenzhihuai.com/jingmistyle-1503806575354.css"
-          type="text/css" media="all">
     <script src="https://cdn.bootcss.com/highcharts/5.0.14/highcharts.js"></script>
     <script src="https://cdn.bootcss.com/echarts/3.6.2/echarts.min.js"></script>
     <script type="text/javascript" src="js/china.js"></script>

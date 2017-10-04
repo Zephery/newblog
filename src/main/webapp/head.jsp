@@ -13,6 +13,7 @@
 <head>
     <title><%=request.getParameter("title")%>
     </title>
+    <meta charset="UTF-8">
     <link type="image/x-icon" rel="shortcut icon" href="http://image.wenzhihuai.com/66.jpg"/>
     <link href="${pageContext.request.contextPath}/css/blogbootstrap.css" type="text/css" rel="stylesheet" media="all">
     <link href="${pageContext.request.contextPath}/css/style.css" type="text/css" rel="stylesheet" media="all">
