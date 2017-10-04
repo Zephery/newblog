@@ -2,6 +2,8 @@ package com.myblog.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author
@@ -63,4 +65,21 @@ public class StringUtil {
         return resultList;
     }
 
+    /**
+     * 标签中提取数字
+     *
+     * @param str
+     * @return
+     */
+    public static Integer stringgetint(String str) {
+        String regEx = "[^0-9]";
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(str);
+        String num_str = m.replaceAll("").trim();
+        return Integer.parseInt(num_str);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(stringgetint("python(342)"));
+    }
 }

@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
+<link href="${pageContext.request.contextPath}/css/newlypublished.css" rel="stylesheet">
 <script>
     $.ajax({
         url: "${pageContext.request.contextPath}/blogbyhits.do",
@@ -36,7 +37,7 @@
             var html = "";
             var fenlei = $("#fenlei");
             for (var i = 0; i < data.length; i++) {
-                html += "<a href=\"${pageContext.request.contextPath}/getbycategoryid.html?cid=" + data[i].cId + "\">\n" +
+                html += "<a href=\"${pageContext.request.contextPath}/tech.html?categoryid=" + data[i].cId + "\">\n" +
                     data[i].cName + "</a>\n"
             }
             fenlei.append(html);
@@ -44,13 +45,16 @@
         error: function (e) {
         }
     });
+//    <a href="http://www.ibloger.net/tags-12.html" class="tag-link-12" title="214个话题"
+//    style="font-size: 13px;"> Java </a>
+
     $.ajax({
         url: "${pageContext.request.contextPath}/biaoqianyun.do",
         type: "get",
         dataType: 'json',
         success: function (data) {
             var html = "";
-            var fenlei = $("#biaoqian");
+            var fenlei = $(".tags-box");
             for (var i = 0; i < data.length; i++) {
                 html += "<a href=\"${pageContext.request.contextPath}/tech.html?tid=" + data[i].key + "\">\n" +
                     data[i].value + "</a>\n"
@@ -121,11 +125,17 @@
     <%--<li><a href="http://www.findspace.name" target="_blank">Findspace</a></li>--%>
     <%--</ul>--%>
     <%--</div>--%>
+
+
+
+
     <div class="widgetRoller">
-        <div class="widget d_tag">
+        <div class="widget widget_divTags" id="divTags">
             <div class="title"><h2>标签云</h2></div>
-            <div class="d_tags" id="biaoqian">
-            </div>
+            <ul class="widget_divTags_inner">
+                <div class="tags-box">
+                </div>
+            </ul>
         </div>
     </div>
 </aside>

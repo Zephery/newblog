@@ -15,6 +15,7 @@ import com.myblog.service.IBlogService;
 import com.myblog.service.ICategoryService;
 import com.myblog.service.ILinksService;
 import com.myblog.util.JedisUtil;
+import com.myblog.util.StringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -130,8 +132,22 @@ public class IndexController {
                 KeyAndValue keyAndValue = gson.fromJson((JsonObject) iterator.next(), KeyAndValue.class);
                 biaoqian.add(keyAndValue);
             }
+            biaoqian.sort(new Comparator<KeyAndValue>() {
+                @Override
+                public int compare(KeyAndValue o1, KeyAndValue o2) {
+                    Integer a = StringUtil.stringgetint(o1.getValue());
+                    Integer b = StringUtil.stringgetint(o2.getValue());
+                    if (a > b) {
+                        return -1;
+                    } else if (a.equals(b)) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                }
+            });
             Gson gson = new Gson();
-            String temp = gson.toJson(biaoqian);
+            String temp = gson.toJson(biaoqian.size() > 25 ? biaoqian.subList(0, 25) : biaoqian);
             response.getWriter().write(temp);
         } catch (Exception e) {
             response.getWriter().write(e.toString());

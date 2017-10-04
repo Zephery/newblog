@@ -6,17 +6,6 @@
  * Credits for jello animation: https://daneden.github.io/animate.css/;	
  */
 
-@font-face {
-	font-family: 'chroma-ui';
-	src:url('../fonts/chroma-ui/chroma-ui.eot?-etc1qp');
-	src:url('../fonts/chroma-ui/chroma-ui.eot?#iefix-etc1qp') format('embedded-opentype'),
-		url('../fonts/chroma-ui/chroma-ui.ttf?-etc1qp') format('truetype'),
-		url('../fonts/chroma-ui/chroma-ui.woff?-etc1qp') format('woff'),
-		url('../fonts/chroma-ui/chroma-ui.svg?-etc1qp#chroma-ui') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
 [class^="chrgi-"], [class*=" chrgi-"] {
 	font-family: 'chroma-ui';
 	speak: none;

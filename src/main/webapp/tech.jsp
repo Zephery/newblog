@@ -24,7 +24,7 @@
                 <a href="${pageContext.request.contextPath}/tech.html?pagenum=1" style="font-size: 17px">技术杂谈</a>
                 <c:if test="${category.cName!=null}">
                     <small>&gt;</small>
-                    <a href="${pageContext.request.contextPath}/tech.html?pagenum=1&categoryid=${category.cId}">分类：${category.cName}</a>
+                    <a href="${pageContext.request.contextPath}/tech.html?pagenum=1&categoryid=${category.cId}">类别：${category.cName}</a>
                 </c:if>
                 <c:if test="${tag.tName!=null}">
                     <small>&gt;</small>
