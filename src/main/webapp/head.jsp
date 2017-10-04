@@ -17,7 +17,7 @@
     <link type="image/x-icon" rel="shortcut icon" href="http://image.wenzhihuai.com/66.jpg"/>
     <link href="${pageContext.request.contextPath}/css/blogbootstrap.css" type="text/css" rel="stylesheet" media="all">
     <link href="${pageContext.request.contextPath}/css/style.css" type="text/css" rel="stylesheet" media="all">
-    <link rel="stylesheet" id="style-css" href="${pageContext.request.contextPath}/css/jingmi.css"
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jingmi.css"
           type="text/css" media="all">
     <%--font-awesome cdn--%>
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
