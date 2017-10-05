@@ -1,50 +1,29 @@
 package com.myblog.model;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class Blog implements Serializable {
-    /**
-     * 博客id，主键
-     */
+public class Blog {
     private Integer blogid;
-    /**
-     * 博客标题
-     */
+
     private String title;
 
-    /**
-     * 博客摘要，从博客文本中选取前200个字符
-     */
     private String summary;
-    /**
-     * 博客文本
-     */
+
     private String content;
-    /**
-     * 创建时间
-     */
+
     private String createAt;
-    /**
-     * 类别id
-     */
+
     private Integer categoryid;
-    /**
-     * 浏览量
-     */
+
     private Integer hits;
-    /**
-     * 图片的url，选取第一张jpg/png图片作为文章的图片
-     */
+
     private String imageurl;
-    /**
-     * 类别
-     */
+
     private Category category;
-    /**
-     * 标签
-     */
+
     private List<Tag> tags;
+
+    private String tagforsplit;
 
     public Integer getBlogid() {
         return blogid;
@@ -121,8 +100,15 @@ public class Blog implements Serializable {
     public List<Tag> getTags() {
         return tags;
     }
-
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public String getTagforsplit() {
+        return tagforsplit;
+    }
+
+    public void setTagforsplit(String tagforsplit) {
+        this.tagforsplit = tagforsplit;
     }
 }
