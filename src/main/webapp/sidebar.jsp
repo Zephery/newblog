@@ -72,7 +72,6 @@
         dataType: 'json',
         success: function (data) {
             var html = "";
-            console.log(data);
             var fenlei = $(".blogroll");
             for (var i = 0; i < data.length; i++) {
                 html += "<li><a href=" + data[i].url + "\">\n" +
