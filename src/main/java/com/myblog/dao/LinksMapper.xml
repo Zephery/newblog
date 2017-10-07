@@ -90,7 +90,7 @@
       sort = #{sort,jdbcType=INTEGER}
     where lid = #{lid,jdbcType=INTEGER}
     </update>
-    <select id="getAllLinks" parameterType="com.myblog.model.Links">
+    <select id="getAllLinks" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from links

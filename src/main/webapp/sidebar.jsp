@@ -45,8 +45,8 @@
         error: function (e) {
         }
     });
-//    <a href="http://www.ibloger.net/tags-12.html" class="tag-link-12" title="214个话题"
-//    style="font-size: 13px;"> Java </a>
+    //    <a href="http://www.ibloger.net/tags-12.html" class="tag-link-12" title="214个话题"
+    //    style="font-size: 13px;"> Java </a>
 
     $.ajax({
         url: "${pageContext.request.contextPath}/biaoqianyun.do",
@@ -58,6 +58,25 @@
             for (var i = 0; i < data.length; i++) {
                 html += "<a href=\"${pageContext.request.contextPath}/tech.html?tid=" + data[i].key + "\">\n" +
                     data[i].value + "</a>\n"
+            }
+            fenlei.append(html);
+        },
+        error: function (e) {
+        }
+    });
+
+    //link
+    $.ajax({
+        url: "${pageContext.request.contextPath}/links.do",
+        type: "get",
+        dataType: 'json',
+        success: function (data) {
+            var html = "";
+            console.log(data);
+            var fenlei = $(".blogroll");
+            for (var i = 0; i < data.length; i++) {
+                html += "<li><a href=" + data[i].url + "\">\n" +
+                    data[i].name + "</a></li>\n"
             }
             fenlei.append(html);
         },
@@ -116,17 +135,17 @@
                     src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=1&isFans=1&uid=1925306000&verifier=5d4515d6&dpc=1"></iframe>
         </div>
     </div>
-    <%--<div class="widget widget_links"><div class="title"><h2>友情链接</h2></div>--%>
-    <%--<ul class="xoxo blogroll">--%>
-    <%--<li><a href="http://www.99banzou.com" target="_blank">99伴奏网</a></li>--%>
-    <%--<li><a href="http://www.anotherhome.net" target="_blank">Anotherhome</a></li>--%>
-    <%--<li><a href="http://zhouchenwen.com" rel="acquaintance" target="_blank">ColdCoder</a></li>--%>
-    <%--<li><a href="http://www.spotty.com.cn/" target="_blank">DevNews</a></li>--%>
-    <%--<li><a href="http://www.findspace.name" target="_blank">Findspace</a></li>--%>
-    <%--</ul>--%>
-    <%--</div>--%>
-
-
+    <div class="widget widget_links">
+        <div class="title"><h2>友情链接</h2></div>
+        <ul class="xoxo blogroll" style="width: 332px;">
+            <li><a href="http://www.99banzou.com" target="_blank">99伴奏网</a></li>
+            <li><a href="http://www.anotherhome.net" target="_blank">Anotherhome</a></li>
+            <li><a href="http://zhouchenwen.com" rel="acquaintance" target="_blank">ColdCoder</a></li>
+            <li><a href="http://www.spotty.com.cn/" target="_blank">DevNews</a></li>
+            <li><a href="http://www.findspace.name" target="_blank">Findspace</a></li>
+            <li><a href="http://blog.hickwu.com/" target="_blank">Hick</a></li>
+        </ul>
+    </div>
 
 
     <div class="widgetRoller">

@@ -267,7 +267,7 @@ background-size: 100% 100%;background-attachment: fixed;">
                         Java
                     </div>
                     <div class="progress">
-                        <span class="blue" style="width: 82%;"><span>82%</span></span>
+                        <span class="blue" style="width: 85%;"><span>85%</span></span>
                     </div>
                     <p></p>
                 </div>
@@ -300,14 +300,6 @@ background-size: 100% 100%;background-attachment: fixed;">
                 </div>
             </section>
             <p><!-- end tech --></p>
-            <p style="text-align: center;">
-                <a href="http://www.wenzhihuai.com" data-original-title="" title=""><br>
-                    <input type="button" value="申请友链"
-                           style="width: 310px; margin: 10px auto 20px auto; background-color: rgb(3, 202, 177);
-                           color: rgb(255, 255, 255); height: 40px; border: none;
-                           font-size: 16px; letter-spacing: 2px;">
-                </a>
-            </p>
         </div>
     </div>
 </section>
