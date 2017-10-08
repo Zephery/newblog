@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="http://image.wenzhihuai.com/editormd.preview.css"/>
     <style>
         * {
-            font-family: "Microsoft Yahei", arial, sans-serif;
+            font-family: "微软雅黑", arial, sans-serif;
         }
 
         .article-content h1 {
