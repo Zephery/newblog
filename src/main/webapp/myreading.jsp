@@ -13,9 +13,11 @@
         color: white;
     }
 
-    .table-bordered th {
+    .table-bordered thead tr th {
         background: transparent;
         text-align: center;
+        font-weight: bolder;
+        color: white;
     }
 </style>
 <script>

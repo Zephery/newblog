@@ -305,6 +305,7 @@ background-size: 100% 100%;background-attachment: fixed;">
         <%@include file="myreading.jsp" %>
     </div>
 </section>
-<%@include file="foot.jsp"%>
+<br>
+<%@include file="foot.jsp" %>
 </body>
 </html>
