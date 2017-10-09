@@ -19,6 +19,11 @@
     <sql id="Blob_Column_List">
         text
     </sql>
+    <cache eviction="LRU"
+           type="org.apache.ibatis.cache.impl.PerpetualCache"
+           flushInterval="120000"
+           size="1024"
+           readOnly="true"/>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
@@ -142,11 +147,6 @@
         type = #{type,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <cache eviction="LRU"
-           type="org.apache.ibatis.cache.impl.PerpetualCache"
-           flushInterval="120000"
-           size="1024"
-           readOnly="true"/>
     <select id="getAllWeiboToday" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myblog.dao.MyreadingMapper">
+    <resultMap id="BaseResultMap" type="com.myblog.model.Myreading">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="author" jdbcType="VARCHAR" property="author"/>
+        <result column="bookindex" jdbcType="VARCHAR" property="bookindex"/>
+        <result column="rentdate" jdbcType="VARCHAR" property="rentdate"/>
+        <result column="returndate" jdbcType="VARCHAR" property="returndate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, title, author, bookindex, rentdate, returndate
+    </sql>
+    <cache eviction="LRU"
+           type="org.apache.ibatis.cache.impl.PerpetualCache"
+           flushInterval="120000"
+           size="1024"
+           readOnly="true"/>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from myreading
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from myreading
+    where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.myblog.model.Myreading">
+    insert into myreading (id, title, author, 
+      bookindex, rentdate, returndate
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{bookindex,jdbcType=VARCHAR}, #{rentdate,jdbcType=VARCHAR}, #{returndate,jdbcType=VARCHAR}
+      )
+    </insert>
+    <insert id="insertSelective" parameterType="com.myblog.model.Myreading">
+        insert into myreading
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="author != null">
+                author,
+            </if>
+            <if test="bookindex != null">
+                bookindex,
+            </if>
+            <if test="rentdate != null">
+                rentdate,
+            </if>
+            <if test="returndate != null">
+                returndate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="author != null">
+                #{author,jdbcType=VARCHAR},
+            </if>
+            <if test="bookindex != null">
+                #{bookindex,jdbcType=VARCHAR},
+            </if>
+            <if test="rentdate != null">
+                #{rentdate,jdbcType=VARCHAR},
+            </if>
+            <if test="returndate != null">
+                #{returndate,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.myblog.model.Myreading">
+        update myreading
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="author != null">
+                author = #{author,jdbcType=VARCHAR},
+            </if>
+            <if test="bookindex != null">
+                bookindex = #{bookindex,jdbcType=VARCHAR},
+            </if>
+            <if test="rentdate != null">
+                rentdate = #{rentdate,jdbcType=VARCHAR},
+            </if>
+            <if test="returndate != null">
+                returndate = #{returndate,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.myblog.model.Myreading">
+        update myreading
+        set title = #{title,jdbcType=VARCHAR},
+          author = #{author,jdbcType=VARCHAR},
+          bookindex = #{bookindex,jdbcType=VARCHAR},
+          rentdate = #{rentdate,jdbcType=VARCHAR},
+          returndate = #{returndate,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="getAllReading" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from myreading
+    </select>
+</mapper>

@@ -1,0 +1,30 @@
+package com.myblog.service.impl;
+
+import com.myblog.dao.MyreadingMapper;
+import com.myblog.model.Myreading;
+import com.myblog.service.IMyReadingService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: Zephery
+ * Time: 2017/10/9 16:05
+ * Description:
+ */
+@Service("myReadingService")
+public class MyReadingServiceImpl implements IMyReadingService {
+    //logger
+    private static final Logger logger = LoggerFactory.getLogger(MyReadingServiceImpl.class);
+    @Resource
+    private MyreadingMapper myreadingMapper;
+
+    @Override
+    public List<Myreading> getAllReading() {
+        return myreadingMapper.getAllReading();
+    }
+}

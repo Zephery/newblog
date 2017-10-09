@@ -7,13 +7,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.myblog.lucene.BlogIndex;
-import com.myblog.model.Blog;
-import com.myblog.model.Category;
-import com.myblog.model.KeyAndValue;
-import com.myblog.model.Links;
+import com.myblog.model.*;
 import com.myblog.service.IBlogService;
 import com.myblog.service.ICategoryService;
 import com.myblog.service.ILinksService;
+import com.myblog.service.IMyReadingService;
 import com.myblog.util.JedisUtil;
 import com.myblog.util.StringUtil;
 import org.apache.commons.lang.StringUtils;
@@ -47,6 +45,8 @@ public class IndexController {
     private ICategoryService categoryService;
     @Resource
     private ILinksService linksService;
+    @Resource
+    private IMyReadingService myReadingService;
     private BlogIndex blogIndex = new BlogIndex();
 
     @RequestMapping("index")
@@ -166,6 +166,17 @@ public class IndexController {
         }
     }
 
+    @RequestMapping("myreading")
+    public void myreading(HttpServletResponse response) {
+        try {
+            List<Myreading> list = myReadingService.getAllReading();
+            Gson gson = new Gson();
+            response.getWriter().write(gson.toJson(list));
+        } catch (IOException e) {
+            logger.error("我的阅读出错", e);
+        }
+    }
+
 
     @RequestMapping(value = "lucene")
     public void jfoe(HttpServletResponse response) throws Exception {
@@ -174,7 +185,7 @@ public class IndexController {
             try {
                 blogIndex.addIndex(blog);
             } catch (IOException e) {
-                logger.error("jofijo", e);
+                logger.error("lucene出错", e);
             }
         }
         response.getWriter().write("success");
