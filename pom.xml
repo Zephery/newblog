@@ -487,8 +487,8 @@
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore-nio -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore-nio</artifactId>
-            <version>4.4.6</version>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.7</version>
         </dependency>
         <dependency>
             <groupId>com.github.hoverruan</groupId>
