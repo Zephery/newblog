@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  * Time: 2017/9/26 18:32
  * Description:Spring中异步
  */
-@Service
+@Service("asyncService")
 @Transactional
 public class AsyncServiceImpl implements IAsyncService {
     //logger

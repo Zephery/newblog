@@ -46,7 +46,8 @@ public class LibraryUtil {
     private static CloseableHttpClient httpClient = null;
     private static HttpClientContext context = null;
     private static CookieStore cookieStore = null;
-    @Resource
+
+    @Resource(name = "asyncService")
     private IAsyncService asyncService;
 
     static {
