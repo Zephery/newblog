@@ -2,7 +2,9 @@ package com.myblog.service.impl;
 
 import com.myblog.dao.BlogMapper;
 import com.myblog.dao.IpLogMapper;
+import com.myblog.dao.MyreadingMapper;
 import com.myblog.model.IpLog;
+import com.myblog.model.Myreading;
 import com.myblog.service.IAsyncService;
 import com.myblog.service.IMessageService;
 import org.slf4j.Logger;
@@ -30,6 +32,8 @@ public class AsyncServiceImpl implements IAsyncService {
     private BlogMapper blogMapper;
     @Resource
     private IMessageService messageService;
+    @Resource
+    private MyreadingMapper myreadingMapper;
 
     @Async
     @Override
@@ -49,6 +53,16 @@ public class AsyncServiceImpl implements IAsyncService {
             blogMapper.updatehits(blogid);
         } catch (Exception e) {
             logger.error("更新阅读次数错误", e);
+        }
+    }
+
+    @Async
+    @Override
+    public void insertlibrary(Myreading myreading) {
+        try {
+            myreadingMapper.insert(myreading);
+        } catch (Exception e) {
+            logger.error("借阅错误", e);
         }
     }
 }

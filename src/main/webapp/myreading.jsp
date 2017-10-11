@@ -48,7 +48,7 @@
 <table class="table table-bordered" style="width: 90%;margin: 0 auto;background: transparent">
     <thead>
     <tr>
-        <th>序号</th>
+        <th style="width: 5%">序号</th>
         <th>标题</th>
         <th>作者</th>
         <th>索引号</th>

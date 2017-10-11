@@ -1,6 +1,7 @@
 package com.myblog.service;
 
 import com.myblog.model.IpLog;
+import com.myblog.model.Myreading;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,4 +23,11 @@ public interface IAsyncService {
      * @return
      */
     public void updatebloghits(Integer blogid);
+
+    /**
+     * 借书记录
+     *
+     * @param myreading
+     */
+    public void insertlibrary(Myreading myreading);
 }
