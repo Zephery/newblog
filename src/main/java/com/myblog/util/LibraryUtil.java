@@ -39,16 +39,12 @@ import java.util.List;
  * 参考来源：http://blog.csdn.net/zmx729618/article/details/51801958
  */
 @Component("libraryUtil")
-@EnableScheduling
 public class LibraryUtil {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(LibraryUtil.class);
     private static CloseableHttpClient httpClient = null;
     private static HttpClientContext context = null;
     private static CookieStore cookieStore = null;
-
-    @Resource(name = "asyncService")
-    private IAsyncService asyncService;
 
     static {
         init();
@@ -229,17 +225,17 @@ public class LibraryUtil {
 //        printResponse(eaa);
     }
 
-    @Scheduled(cron = "0/30 * * * * ?")
+    //    @Scheduled(cron = "0/30 * * * * ?")
     public static void start() {
         new LibraryUtil().htmltoJavaBean();
-
+        System.out.println("hello world");
     }
 
     public static void main(String[] args) {
         start();
     }
 
-    public String getHTML() {
+    public static String getHTML() {
         String username = Config.getProperty("guangtu.username");
         String password = Config.getProperty("guangtu.password");
         String string = null;
@@ -264,9 +260,10 @@ public class LibraryUtil {
         return string;
     }
 
-    public void htmltoJavaBean() {
+    public static List<Myreading> htmltoJavaBean() {
         String html = getHTML();
         Element element = Jsoup.parse(html).select("table.jieyue-table").get(0).select("tbody").get(0);
+        List<Myreading> list = new ArrayList<>();
         Elements trs = element.select("tr");
         for (int i = 0; i < trs.size(); i++) {
             Elements tds = trs.get(i).select("td");
@@ -276,9 +273,10 @@ public class LibraryUtil {
             myreading.setBookindex(tds.get(2).text());
             myreading.setRentdate(tds.get(3).text());
             myreading.setReturndate(tds.get(4).text());
-            asyncService.insertlibrary(myreading);
+            list.add(myreading);
             logger.info("借阅记录抓取成功");
         }
+        return list;
     }
 
 }

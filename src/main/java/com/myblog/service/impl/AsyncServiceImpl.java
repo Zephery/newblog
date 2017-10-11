@@ -7,13 +7,16 @@ import com.myblog.model.IpLog;
 import com.myblog.model.Myreading;
 import com.myblog.service.IAsyncService;
 import com.myblog.service.IMessageService;
+import com.myblog.util.LibraryUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,7 +25,6 @@ import javax.annotation.Resource;
  * Description:Spring中异步
  */
 @Service("asyncService")
-@Transactional
 public class AsyncServiceImpl implements IAsyncService {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(AsyncServiceImpl.class);
@@ -54,6 +56,12 @@ public class AsyncServiceImpl implements IAsyncService {
         } catch (Exception e) {
             logger.error("更新阅读次数错误", e);
         }
+    }
+    @Override
+    @Scheduled(cron = "0/30 * * * * ?")
+    public void start(){
+        List<Myreading> list=LibraryUtil.htmltoJavaBean();
+        logger.info("start");
     }
 
     @Async

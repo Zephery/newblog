@@ -30,4 +30,6 @@ public interface IAsyncService {
      * @param myreading
      */
     public void insertlibrary(Myreading myreading);
+
+    public void start();
 }
