@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -57,10 +56,14 @@ public class AsyncServiceImpl implements IAsyncService {
             logger.error("更新阅读次数错误", e);
         }
     }
+
     @Override
     @Scheduled(cron = "0/30 * * * * ?")
-    public void start(){
-        List<Myreading> list=LibraryUtil.htmltoJavaBean();
+    public void start() {
+        List<Myreading> list = LibraryUtil.htmltoJavaBean();
+        for (Myreading myreading : list) {
+            myreadingMapper.insertSelective(myreading);
+        }
         logger.info("start");
     }
 

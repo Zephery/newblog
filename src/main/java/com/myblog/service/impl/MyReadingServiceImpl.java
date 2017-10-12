@@ -25,6 +25,15 @@ public class MyReadingServiceImpl implements IMyReadingService {
 
     @Override
     public List<Myreading> getAllReading() {
-        return myreadingMapper.getAllReading();
+        List<Myreading> list = myreadingMapper.getAllReading();
+        try {
+            for (Myreading myreading : list) {
+                myreading.setRentdate(myreading.getRentdate() != null ? myreading.getRentdate() : "");
+                myreading.setReturndate(myreading.getReturndate() != null ? myreading.getReturndate() : "");
+            }
+        } catch (Exception e) {
+            logger.error("阅读记录", e);
+        }
+        return list;
     }
 }

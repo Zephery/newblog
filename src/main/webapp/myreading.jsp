@@ -51,9 +51,9 @@
         <th style="width: 5%">序号</th>
         <th>标题</th>
         <th>作者</th>
-        <th>索引号</th>
-        <th>借书日期</th>
-        <th>还书日期</th>
+        <th style="width: 10%">索引号</th>
+        <th style="width: 10%">借书日期</th>
+        <th style="width: 10%">还书日期</th>
     </tr>
     </thead>
     <tbody class="myreading">

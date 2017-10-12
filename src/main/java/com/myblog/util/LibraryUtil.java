@@ -2,7 +2,7 @@ package com.myblog.util;
 
 import com.myblog.common.Config;
 import com.myblog.model.Myreading;
-import com.myblog.service.IAsyncService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.*;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
@@ -22,11 +22,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +34,6 @@ import java.util.List;
  * Description:广州图书馆借书记录抓取
  * 参考来源：http://blog.csdn.net/zmx729618/article/details/51801958
  */
-@Component("libraryUtil")
 public class LibraryUtil {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(LibraryUtil.class);
@@ -227,7 +222,7 @@ public class LibraryUtil {
 
     //    @Scheduled(cron = "0/30 * * * * ?")
     public static void start() {
-        new LibraryUtil().htmltoJavaBean();
+        htmltoJavaBean();
         System.out.println("hello world");
     }
 
@@ -249,9 +244,11 @@ public class LibraryUtil {
             String lt = Jsoup.parse(content).select("form").select("input[name=lt]").attr("value");
             response.close();
             printCookies();
-            CloseableHttpResponse response3 = postParam(loginURL, "username=" + username + "&" + "password=" + password + "&" + "_eventId=submit&" + "lt=" + lt, null);
-            printHTML(response3);
-            response3.close();
+            if (StringUtils.isNotEmpty(lt)) {//如果不为空，说明session失效
+                CloseableHttpResponse response3 = postParam(loginURL, "username=" + username + "&" + "password=" + password + "&" + "_eventId=submit&" + "lt=" + lt, null);
+                printHTML(response3);
+                response3.close();
+            }
             CloseableHttpResponse response2 = get("http://www.gzlib.gov.cn/member/historyLoanList.jspx", null);
             string = printResponse(response2);
         } catch (IOException e) {
@@ -268,11 +265,9 @@ public class LibraryUtil {
         for (int i = 0; i < trs.size(); i++) {
             Elements tds = trs.get(i).select("td");
             Myreading myreading = new Myreading();
-            myreading.setTitle(tds.get(0).text());
-            myreading.setAuthor(tds.get(1).text());
-            myreading.setBookindex(tds.get(2).text());
-            myreading.setRentdate(tds.get(3).text());
-            myreading.setReturndate(tds.get(4).text());
+            myreading.setTitle(tds.get(1).text());
+            myreading.setAuthor(tds.get(2).text());
+            myreading.setBookindex(tds.get(3).text());
             list.add(myreading);
             logger.info("借阅记录抓取成功");
         }
