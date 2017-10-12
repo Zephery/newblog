@@ -24,15 +24,19 @@ public class MysqlUtil {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(MysqlUtil.class);
 
+    public static void main(String[] args) {
+        new MysqlUtil().exportDataBase();
+    }
+
     /**
      * export database;
      */
     public void exportDataBase() {
         logger.info("start backup database");
-        String username = Config.getProperty("jdbc.username");
-        String password = Config.getProperty("jdbc.password");
+        String username = Config.getProperty("jdbc.username_dev");
+        String password = Config.getProperty("jdbc.password_dev");
         String database = Config.getProperty("jdbc.database");
-        String host = Config.getProperty("jdbc.host");
+        String host = Config.getProperty("jdbc.host_dev");
         String os = System.getProperty("os.name");
         String file_path = null;
         if (os.toLowerCase().startsWith("win")) {       //根据系统类型
@@ -45,6 +49,7 @@ public class MysqlUtil {
         logger.info("file_path and file_name: " + file);
         //server
         String s_host = Config.getProperty("server.host");
+        Integer s_port = Config.getIntProperty("server.port");
         String s_username = Config.getProperty("server.username");
         String s_password = Config.getProperty("server.password");
         try {
@@ -54,7 +59,7 @@ public class MysqlUtil {
             String sql = sb.toString();
             logger.info(sql);
             //connect to server
-            Connection connection = new Connection(s_host);
+            Connection connection = new Connection(s_host, s_port);
             connection.connect();
             boolean isAuth = connection.authenticateWithPassword(s_username, s_password);
             if (!isAuth) {
@@ -75,6 +80,7 @@ public class MysqlUtil {
             stdout.close();
             br.close();
             logger.info("backup finish");
+            logger.info(sb.toString());
         } catch (Exception e) {
             logger.error("error", e);
         }
