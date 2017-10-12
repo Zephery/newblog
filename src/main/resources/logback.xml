@@ -57,7 +57,7 @@
     <logger name="java.sql.PreparedStatement" level="debug"/>
     <logger name="java.sql.ResultSet" level="debug"/>
     <root>
-        <level value="ERROR"/>
+        <level value="INFO"/>
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
         <appender-ref ref="ERROR_FILE"/>
