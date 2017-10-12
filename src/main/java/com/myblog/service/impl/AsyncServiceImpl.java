@@ -58,7 +58,7 @@ public class AsyncServiceImpl implements IAsyncService {
     }
 
     @Override
-    @Scheduled(cron = "0/30 * * * * ?")
+    @Scheduled(cron = "0 59 2 ? * *")
     public void start() {
         List<Myreading> list = LibraryUtil.htmltoJavaBean();
         for (Myreading myreading : list) {
