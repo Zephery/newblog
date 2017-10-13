@@ -226,9 +226,6 @@ public class LibraryUtil {
         System.out.println("hello world");
     }
 
-    public static void main(String[] args) {
-        start();
-    }
 
     public static String getHTML() {
         String username = Config.getProperty("guangtu.username");
@@ -272,6 +269,13 @@ public class LibraryUtil {
             logger.info("借阅记录抓取成功");
         }
         return list;
+    }
+
+    public static void main(String[] args) {
+        List<Myreading> list = htmltoJavaBean();
+        for (Myreading myreading : list) {
+            System.out.println(myreading.getTitle());
+        }
     }
 
 }
