@@ -234,7 +234,7 @@ public class LibraryUtil {
         try {
             CloseableHttpResponse re = get("http://www.gzlib.gov.cn/", null);
             re.close();
-            String loginURL = "http://login.gzlib.gov.cn/sso-server/login?service=http%3A%2F%2Fwww.gzlib.gov.cn%2Flogin.jspx%3FreturnUrl%3Dhttp%253A%252F%252Fwww.gzlib.gov.cn%252F%26locale%3Dzh_CN&appId=www.gzlib.gov.cn&locale=zh_CN&sessionId=" + cookiegetSession();
+            String loginURL = "http://login.gzlib.gov.cn/sso-server/login";
             CloseableHttpResponse response = get(loginURL, null);
             String content = toString(response);
             //参考：http://blog.csdn.net/championhengyi/article/details/68491306
@@ -266,16 +266,13 @@ public class LibraryUtil {
             myreading.setAuthor(tds.get(2).text());
             myreading.setBookindex(tds.get(3).text());
             list.add(myreading);
-            logger.info("借阅记录抓取成功");
+            logger.info("借阅记录抓取成功" + myreading.getTitle());
         }
         return list;
     }
 
     public static void main(String[] args) {
-        List<Myreading> list = htmltoJavaBean();
-        for (Myreading myreading : list) {
-            System.out.println(myreading.getTitle());
-        }
+        htmltoJavaBean();
     }
 
 }
