@@ -234,7 +234,7 @@ public class LibraryUtil {
         try {
             CloseableHttpResponse re = get("http://www.gzlib.gov.cn/", null);
             re.close();
-            String loginURL = "http://login.gzlib.gov.cn/sso-server/login";
+            String loginURL = "http://login.gzlib.gov.cn/sso-server/login?service=http%3A%2F%2Fwww.gzlib.gov.cn%2Flogin.jspx%3FreturnUrl%3Dhttp%253A%252F%252Fwww.gzlib.gov.cn%252F%26locale%3Dzh_CN&appId=www.gzlib.gov.cn&locale=zh_CN";
             CloseableHttpResponse response = get(loginURL, null);
             String content = toString(response);
             //参考：http://blog.csdn.net/championhengyi/article/details/68491306
