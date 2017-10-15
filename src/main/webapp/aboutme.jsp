@@ -254,7 +254,7 @@ background-size: 100% 100%;background-attachment: fixed;">
             <h1 style="text-align: center;margin: 0;background: transparent;color: white">个人简介</h1>
             <p><img src="http://image.wenzhihuai.com/66.jpg" style="border-radius:50%;width:100px"></p>
             <p style="text-align: center;font-size:16px;color: white">温志怀</p>
-            <p style="text-align: center;color: white">爱生活、爱艺术、爱书画、爱音乐、爱编程。</p>
+            <p style="text-align: center;color: white">爱音乐、爱编程。</p>
             <p style="text-align: center;color: white">人生百态，笑口常开，秉承自我，谨慎独行。</p>
             <p style="text-align: center;color: white">专注高并发、高可用、分布式计算</p>
             <p style="text-align: center;">

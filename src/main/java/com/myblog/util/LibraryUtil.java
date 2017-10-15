@@ -259,8 +259,8 @@ public class LibraryUtil {
         Element element = Jsoup.parse(html).select("table.jieyue-table").get(0).select("tbody").get(0);
         List<Myreading> list = new ArrayList<>();
         Elements trs = element.select("tr");
-        for (int i = 0; i < trs.size(); i++) {
-            Elements tds = trs.get(i).select("td");
+        for (Element tr : trs) {
+            Elements tds = tr.select("td");
             Myreading myreading = new Myreading();
             myreading.setTitle(tds.get(1).text());
             myreading.setAuthor(tds.get(2).text());
