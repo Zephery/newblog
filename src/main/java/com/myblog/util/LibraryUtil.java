@@ -226,28 +226,31 @@ public class LibraryUtil {
         System.out.println("hello world");
     }
 
-
+    /**
+     * 参考：http://blog.csdn.net/championhengyi/article/details/68491306
+     *
+     * @return
+     */
     public static String getHTML() {
         String username = Config.getProperty("guangtu.username");
         String password = Config.getProperty("guangtu.password");
         String string = null;
         try {
-            CloseableHttpResponse re = get("http://www.gzlib.gov.cn/", null);
-            re.close();
+            CloseableHttpResponse homeResponse = get("http://www.gzlib.gov.cn/", null);
+            homeResponse.close();
             String loginURL = "http://login.gzlib.gov.cn/sso-server/login?service=http%3A%2F%2Fwww.gzlib.gov.cn%2Flogin.jspx%3FreturnUrl%3Dhttp%253A%252F%252Fwww.gzlib.gov.cn%252F%26locale%3Dzh_CN&appId=www.gzlib.gov.cn&locale=zh_CN";
-            CloseableHttpResponse response = get(loginURL, null);
-            String content = toString(response);
-            //参考：http://blog.csdn.net/championhengyi/article/details/68491306
+            CloseableHttpResponse loginGetResponse = get(loginURL, null);
+            String content = toString(loginGetResponse);
             String lt = Jsoup.parse(content).select("form").select("input[name=lt]").attr("value");
-            response.close();
+            loginGetResponse.close();
             printCookies();
             if (StringUtils.isNotEmpty(lt)) {//如果不为空，说明session失效
-                CloseableHttpResponse response3 = postParam(loginURL, "username=" + username + "&" + "password=" + password + "&" + "_eventId=submit&" + "lt=" + lt, null);
-                printHTML(response3);
-                response3.close();
+                CloseableHttpResponse loginPostResponse = postParam(loginURL, "username=" + username + "&" + "password=" + password + "&" + "_eventId=submit&" + "lt=" + lt, null);
+                printHTML(loginPostResponse);
+                loginPostResponse.close();
             }
-            CloseableHttpResponse response2 = get("http://www.gzlib.gov.cn/member/historyLoanList.jspx", null);
-            string = printResponse(response2);
+            CloseableHttpResponse historyResponse = get("http://www.gzlib.gov.cn/member/historyLoanList.jspx", null);
+            string = printResponse(historyResponse);
         } catch (IOException e) {
             logger.error("错误", e);
         }
