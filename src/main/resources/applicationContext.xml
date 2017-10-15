@@ -157,6 +157,8 @@
     <import resource="bean-httpclient.xml"/>
     <!--spring rabbitmq配置-->
     <import resource="rabbitmq.xml"/>
+    <!--websocket-->
+    <import resource="websocket.xml"/>
     <!--数据源-->
     <beans profile="develop">
         <!-- 配置数据源，使用阿里巴巴连接池Druid -->

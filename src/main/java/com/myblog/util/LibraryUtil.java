@@ -122,7 +122,7 @@ public class LibraryUtil {
 
     @SuppressWarnings("unused")
     private static List<NameValuePair> toNameValuePairList(String parameters) {
-        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+        List<NameValuePair> nvps = new ArrayList<>();
         String[] paramList = parameters.split("&");
         for (String parm : paramList) {
             int index = -1;

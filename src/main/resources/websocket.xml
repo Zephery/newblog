@@ -1,0 +1,16 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/websocket
+    http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+    <websocket:handlers allowed-origins="*">
+        <websocket:mapping path="/springws/websocket.ws" handler="demoWSHandler"/>
+        <websocket:handshake-interceptors>
+            <bean class="com.myblog.websocket.HandshakeInterceptor"/>
+        </websocket:handshake-interceptors>
+    </websocket:handlers>
+
+    <bean id="demoWSHandler" class="com.myblog.websocket.DemoWSHandler"/>
+</beans>

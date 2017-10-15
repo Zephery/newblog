@@ -45,6 +45,10 @@
         <servlet-name>springMVC</servlet-name>
         <url-pattern>*.html</url-pattern> <!-- 伪静态 -->
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>springMVC</servlet-name>
+        <url-pattern>*.ws</url-pattern>
+    </servlet-mapping>
     <!--阿里巴巴druid监控-->
     <servlet>
         <servlet-name>DruidStatView</servlet-name>
