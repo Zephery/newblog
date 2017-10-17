@@ -8,11 +8,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="${pageContext.request.contextPath}/js/mousepicture/css/lanrenzhijia.css" type="text/css"
-          rel="stylesheet"/>
-    <script src="${pageContext.request.contextPath}/js/responsiveslides.min.js"></script>
+    <script src="http://image.wenzhihuai.com/responsiveslides.min.js?ver=20171017"></script>
     <!-- Start WOWSlider.com HEAD section -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/wowslider/engine1/style.css"/>
+    <link rel="stylesheet" type="text/css" href="http://image.wenzhihuai.com/wowsliderstyle.css?ver=20171017"/>
     <!-- End WOWSlider.com HEAD section -->
     <script type="text/javascript">
         $(function () {

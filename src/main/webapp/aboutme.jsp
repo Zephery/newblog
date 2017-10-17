@@ -16,13 +16,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="${pageContext.request.contextPath}/js/mousepicture/css/lanrenzhijia.css" type="text/css"
+    <link href="http://image.wenzhihuai.com/lanrenzhijia.css?ver=20171017" type="text/css"
           rel="stylesheet"/>
     <!--畅言获取评论数，未来有可能变为https-->
     <script type="text/javascript"
             src="http://assets.changyan.sohu.com/upload/plugins/plugins.count.js">
     </script>
-    <link rel="stylesheet" href="http://image.wenzhihuai.com/editormd.preview.css"/>
+    <link rel="stylesheet" href="http://image.wenzhihuai.com/editormd.preview.css?ver=20171017"/>
     <style>
         * {
             font-family: "微软雅黑", arial, sans-serif;

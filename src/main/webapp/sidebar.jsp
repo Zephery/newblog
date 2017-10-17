@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
-<link href="${pageContext.request.contextPath}/css/newlypublished.css" rel="stylesheet">
+<link href="http://image.wenzhihuai.com/newlypublished.css?ver=20171017" rel="stylesheet">
 <script>
     $.ajax({
         url: "${pageContext.request.contextPath}/blogbyhits.do",

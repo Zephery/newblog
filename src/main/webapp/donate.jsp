@@ -15,9 +15,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="${pageContext.request.contextPath}/js/mousepicture/css/lanrenzhijia.css" type="text/css"
-          rel="stylesheet"/>
-    <script src="${pageContext.request.contextPath}/js/responsiveslides.min.js"></script>
+
+    <script src="http://image.wenzhihuai.com/responsiveslides.min.js?ver=20171017"></script>
     <script type="text/javascript">
         $(function () {
             $("#slider").responsiveSlides({

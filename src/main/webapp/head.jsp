@@ -15,17 +15,20 @@
     </title>
     <meta charset="UTF-8">
     <link type="image/x-icon" rel="shortcut icon" href="http://image.wenzhihuai.com/66.jpg"/>
-    <link href="${pageContext.request.contextPath}/css/blogbootstrap.css" type="text/css" rel="stylesheet" media="all">
-    <link href="${pageContext.request.contextPath}/css/style.css" type="text/css" rel="stylesheet" media="all">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jingmi.css"
+    <link href="http://image.wenzhihuai.com/blogbootstrap.css?ver=20171017" type="text/css" rel="stylesheet"
+          media="all">
+    <link href="http://image.wenzhihuai.com/style.css?ver=20171017" type="text/css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="http://image.wenzhihuai.com/jingmi.css?ver=20171017"
           type="text/css" media="all">
+    <link href="http://image.wenzhihuai.com/lanrenzhijia.css?ver=20171017" type="text/css"
+          rel="stylesheet"/>
     <%--font-awesome cdn--%>
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/js/social-share-1.0.2/dist/social-share.min.css">
+          href="http://image.wenzhihuai.com/social-share-1.0.2/dist/social-share.min.css?ver=20171017">
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/social-share-1.0.2/dist/social-share.min.js"></script>
+    <script src="http://image.wenzhihuai.com/social-share-1.0.2/dist/social-share.min.js?ver=20171017"></script>
     <script type="application/x-javascript">
         addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
@@ -35,8 +38,8 @@
             window.scrollTo(0, 1);
         }
     </script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/move-top.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/easing.js"></script>
+    <script type="text/javascript" src="http://image.wenzhihuai.com/move-top.js?ver=20171017"></script>
+    <script type="text/javascript" src="http://image.wenzhihuai.com/easing.js?ver=20171017"></script>
     <script>
         $(function () {
             var el = document.getElementById('share-area');
@@ -173,7 +176,8 @@
 <div class="header">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt=""></a>
+            <a class="navbar-brand" href="index.html"><img src="http://image.wenzhihuai.com/logo.png?ver=20171017"
+                                                           alt=""></a>
         </div>
         <form action="${pageContext.request.contextPath}/search.html" method="post"
               class="navbar-form navbar-right" role="search">
