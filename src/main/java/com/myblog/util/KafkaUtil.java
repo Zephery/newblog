@@ -31,7 +31,6 @@ public class KafkaUtil {
 
     private static Properties getKafkaProp() {
         Properties props = new Properties();
-        ;
         final InputStream input = Config.class
                 .getResourceAsStream(KAFKA_CONFIG);
         if (input == null) {

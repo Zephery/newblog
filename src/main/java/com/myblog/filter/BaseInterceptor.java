@@ -83,15 +83,21 @@ public class BaseInterceptor implements HandlerInterceptor {
     }
 
 
-    private boolean judegeuri(String uri) {
+    private static boolean judegeuri(String uri) {
         return uri.contains("index.html") || uri.contains("tech.html") || uri.contains("life.html") || uri.contains("trip.html")
                 || uri.contains("log.html") || uri.contains("board.html") || uri.contains("aboutme.html") || uri.contains("donate.html")
                 || uri.contains("weibonlp.html") || uri.contains("interest.html")
                 || uri.contains("search.html") || uri.contains("getblogdetail.html") || uri.equals("/");
     }
 
+    public static void main(String[] args) {
+        String uri = "/";
+        long start = System.currentTimeMillis();
+        System.out.println(judegeuri(uri));
+        System.out.println(System.currentTimeMillis() - start);
+    }
+
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-
     }
 }
