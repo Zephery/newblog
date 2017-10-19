@@ -4,7 +4,6 @@ import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.protocol.CanalEntry.*;
 import com.alibaba.otter.canal.protocol.Message;
-import com.sun.istack.internal.NotNull;
 
 import java.net.InetSocketAddress;
 import java.util.List;
@@ -54,7 +53,7 @@ public class CanalClientUtil {
         }
     }
 
-    private static void printEntry(@NotNull List<Entry> entrys) {
+    private static void printEntry(List<Entry> entrys) {
         for (Entry entry : entrys) {
             if (entry.getEntryType() == EntryType.TRANSACTIONBEGIN || entry.getEntryType() == EntryType.TRANSACTIONEND) {
                 continue;
@@ -89,7 +88,7 @@ public class CanalClientUtil {
         }
     }
 
-    private static void printColumn(@NotNull List<Column> columns) {
+    private static void printColumn(List<Column> columns) {
         for (Column column : columns) {
             System.out.println(column.getName() + " : " + column.getValue() + "    update=" + column.getUpdated());
         }
