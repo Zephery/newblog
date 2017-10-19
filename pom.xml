@@ -557,11 +557,11 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.9.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.alibaba.otter</groupId>
-            <artifactId>canal.client</artifactId>
-            <version>1.0.24</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>com.alibaba.otter</groupId>-->
+        <!--<artifactId>canal.client</artifactId>-->
+        <!--<version>1.0.24</version>-->
+        <!--</dependency>-->
     </dependencies>
     <build>
         <finalName>myblog</finalName>
