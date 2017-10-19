@@ -16,6 +16,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="http://image.wenzhihuai.com/blogbootstrap.css?ver=20171019" type="text/css" rel="stylesheet"
+          media="all">
     <!--畅言获取评论数，未来有可能变为https-->
     <script type="text/javascript"
             src="http://assets.changyan.sohu.com/upload/plugins/plugins.count.js">
@@ -111,7 +113,7 @@
             </div>
         </div>
     </c:if>
-    <table class="table table-bordered" style="width: 90%;margin: 0 auto">
+    <table class="table table-bordered" style="width: 90%;margin: 0 auto;word-break:break-all; word-wrap: break-word;">
         <thead>
         <tr>
             <th style="width: 5%;text-align: center">序号</th>
@@ -121,9 +123,9 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="weibo" items="${weibos}">
+        <c:forEach var="weibo" items="${weibos}" varStatus="s">
             <tr>
-                <td style="text-align: center">${weibo.id}</td>
+                <td style="text-align: center">${s.index+1}</td>
                 <td>${weibo.name}</td>
                 <td>${weibo.text}</td>
                 <td style="text-align: center">${weibo.typename}</td>
@@ -131,9 +133,9 @@
         </c:forEach>
         </tbody>
     </table>
+    <br>
 </section>
-<p></p>
-<p></p>
+<br>
 <%@include file="foot.jsp"%>
 </body>
 </html>

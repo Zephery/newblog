@@ -29,7 +29,6 @@
     <script src="https://cdn.bootcss.com/marked/0.3.6/marked.js"></script>
     <script src="https://cdn.bootcss.com/prettify/r224/prettify.min.js"></script>
     <script src="https://cdn.bootcss.com/raphael/2.2.7/raphael.min.js"></script>
-    <script src="https://cdn.bootcss.com/js-sequence-diagrams/1.0.6/sequence-diagram-min.js"></script>
     <script src="http://image.wenzhihuai.com/editormd.js"></script>
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript">

@@ -15,7 +15,7 @@
     </title>
     <meta charset="UTF-8">
     <link type="image/x-icon" rel="shortcut icon" href="http://image.wenzhihuai.com/66.jpg"/>
-    <link href="http://image.wenzhihuai.com/blogbootstrap.css?ver=20171017" type="text/css" rel="stylesheet"
+    <link href="http://image.wenzhihuai.com/blogbootstrap.css?ver=20171019" type="text/css" rel="stylesheet"
           media="all">
     <link href="http://image.wenzhihuai.com/style.css?ver=20171017" type="text/css" rel="stylesheet" media="all">
     <link rel="stylesheet" href="http://image.wenzhihuai.com/jingmi.css?ver=20171017"
