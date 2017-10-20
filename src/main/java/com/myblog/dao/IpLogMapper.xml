@@ -10,9 +10,10 @@
         <result column="uri" jdbcType="VARCHAR" property="uri"/>
         <result column="response_time" jdbcType="BIGINT" property="responseTime"/>
         <result column="visit_num" jdbcType="INTEGER" property="visitNum"/>
+        <result column="referer" jdbcType="VARCHAR" property="referer"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, sid, ip, ip_time, area, uri, response_time, visit_num
+        id, sid, ip, ip_time, area, uri, response_time, visit_num, referer
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -26,11 +27,11 @@
     </delete>
     <insert id="insert" parameterType="com.myblog.model.IpLog">
         insert into ip_log (id, sid, ip,
-      ip_time, area, uri, 
-      response_time, visit_num)
+      ip_time, area, uri,
+        response_time, visit_num, referer)
         values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR},
-      #{ipTime,jdbcType=TIMESTAMP}, #{area,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, 
-      #{responseTime,jdbcType=BIGINT}, #{visitNum,jdbcType=INTEGER})
+      #{ipTime,jdbcType=TIMESTAMP}, #{area,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR},
+        #{responseTime,jdbcType=BIGINT}, #{visitNum,jdbcType=INTEGER}, #{referer,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.IpLog">
         insert into ip_log
@@ -59,6 +60,9 @@
             <if test="visitNum != null">
                 visit_num,
             </if>
+            <if test="referer != null">
+                referer,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -84,6 +88,9 @@
             </if>
             <if test="visitNum != null">
                 #{visitNum,jdbcType=INTEGER},
+            </if>
+            <if test="referer != null">
+                #{referer,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -111,18 +118,22 @@
             <if test="visitNum != null">
                 visit_num = #{visitNum,jdbcType=INTEGER},
             </if>
+            <if test="referer != null">
+                uri = #{referer,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.myblog.model.IpLog">
-    update ip_log
-    set sid = #{sid,jdbcType=VARCHAR},
-      ip = #{ip,jdbcType=VARCHAR},
-      ip_time = #{ipTime,jdbcType=TIMESTAMP},
-      area = #{area,jdbcType=VARCHAR},
-      uri = #{uri,jdbcType=VARCHAR},
-      response_time = #{responseTime,jdbcType=BIGINT},
-      visit_num = #{visitNum,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+        update ip_log
+        set sid = #{sid,jdbcType=VARCHAR},
+        ip = #{ip,jdbcType=VARCHAR},
+        ip_time = #{ipTime,jdbcType=TIMESTAMP},
+        area = #{area,jdbcType=VARCHAR},
+        uri = #{uri,jdbcType=VARCHAR},
+        response_time = #{responseTime,jdbcType=BIGINT},
+        visit_num = #{visitNum,jdbcType=INTEGER},
+        referer = #{referer,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -23,6 +23,8 @@ public class IpLog implements Serializable {
 
     private Integer visitNum;
 
+    private String referer;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -87,6 +89,14 @@ public class IpLog implements Serializable {
 
     public void setVisitNum(Integer visitNum) {
         this.visitNum = visitNum;
+    }
+
+    public String getReferer() {
+        return referer;
+    }
+
+    public void setReferer(String referer) {
+        this.referer = referer;
     }
 
     @Override

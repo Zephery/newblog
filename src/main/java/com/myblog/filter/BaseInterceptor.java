@@ -64,6 +64,9 @@ public class BaseInterceptor implements HandlerInterceptor {
             IpLog ipLog = new IpLog();
             ipLog.setSid(request.getSession().getId());
             ipLog.setIp(real_ip);
+            if (request.getHeader("referer") != null) {
+                ipLog.setReferer(request.getHeader("referer"));
+            }
             ipLog.setIpTime(DateTime.now().toDate());
             ipLog.setArea(IPUtils.getAddressByIP(real_ip));
             ipLog.setUri(uri);
