@@ -1,0 +1,303 @@
+/*	--------------------------------------------------
+	Reveal Modals
+	-------------------------------------------------- */
+* {
+    font-family: "微软雅黑", arial, sans-serif;
+}
+
+.big-link {
+    display: block;
+    margin-top: 100px;
+    text-align: center;
+    font-size: 70px;
+    color: #06f;
+}
+
+.colleft {
+    margin-left: -30px;
+}
+
+.article-content h1 {
+    margin: 20px -20px 20px -20px;
+    padding: 10px 20px 9px 10px;
+    border-left: 4px solid #00a67c;
+    background-color: #fbfbfb
+}
+
+.icon-contact .sinaweibo {
+    background-color: #EC5B5B;
+}
+
+.icon-contact .tencentweibo {
+    background-color: #2BC0B5;
+}
+
+.icon-contact .wechat {
+    background-color: #49C085;
+}
+
+.icon-contact .qq {
+    background-color: #6F92FF;
+}
+
+.icon-contact .renren {
+    background-color: #7243D4;
+}
+
+.icon-contact .github {
+    background-color: #7782D1;
+}
+
+.icon-contact a {
+    color: #fff !important;
+}
+
+.icon-contact #icon {
+    float: left;
+}
+
+.icon-contact .col {
+    width: 16.666667%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+}
+
+.icon-contact {
+    max-width: 700px;
+    text-indent: 0px;
+    margin: 0 230px 0 250px
+}
+
+.friend-link a {
+    color: #00a67c !important;
+}
+
+.tech {
+    max-width: 700px;
+    margin: auto;
+}
+
+.tech .item {
+    width: 100%;
+    clear: both;
+    margin-right: auto;
+    margin-left: auto;
+    height: 35px;
+}
+
+.tech .describe {
+    margin-right: 12px;
+    text-align: center;
+}
+
+.tech .progress {
+    float: left;
+    height: 25px;
+    background: #f2f2f2;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    width: 70%;
+}
+
+.tech .progress > span {
+    position: relative;
+    float: left;
+    margin: 0 -1px;
+    min-width: 30px;
+    height: 25px;
+    line-height: 21px;
+    text-align: right;
+    background: #cccccc;
+    border: none;
+    border-color: #bfbfbf #b3b3b3 #9e9e9e;
+    -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.tech .progress > span > span {
+    padding: 0 8px;
+    font-size: 14px;
+    color: #404040;
+    color: rgba(0, 0, 0, 0.7);
+    line-height: 25px;
+}
+
+.tech .progress > span:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    height: 25px;
+    border-radius: 10px;
+}
+
+.tech .progress .green {
+    background: #49C085;
+}
+
+.tech .progress .darkblue {
+    background: #7782D1;
+}
+
+.tech .progress .red {
+    background: rgb(245, 138, 135);
+}
+
+.tech .progress .orange {
+    background: #f2b63c;
+}
+
+.tech .progress .blue {
+    background: #6F92FF;
+}
+
+@media (min-width: 750px) {
+    .tech .describe {
+        width: 130px;
+        float: left;
+    }
+
+    .tech .progress {
+        width: 79%;
+        float: left;
+    }
+}
+
+@media (max-width: 750px) {
+    .tech .describe {
+        width: 100%;
+        margin-bottom: 5px;
+        text-align: left;
+    }
+
+    .tech .progress {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}
+
+/* 响应式布局 */
+@media (min-width: 768px) {
+    .icon-contact {
+        height: 80px;
+        margin: auto;
+        width: 100%;
+        max-width: 700px;
+    }
+
+    .colleft {
+        margin-left: -30px;
+    }
+
+    .icon-contact .fa {
+        line-height: 70px;
+        font-size: 35px;
+        width: 70px;
+    }
+
+    .icon-contact .social-icon {
+        display: inline-block;
+        width: 70px;
+        height: 70px;
+        color: #fff;
+        border-radius: 100%;
+        margin: 6px;
+        text-align: center;
+        text-indent: 0px;
+    }
+}
+
+@media (max-width: 768px) {
+    .icon-contact {
+        height: 60px;
+        margin: auto;
+        width: 100%;
+    }
+
+    .icon-contact .fa {
+        line-height: 50px;
+        font-size: 20px;
+        width: 50px;
+    }
+
+    .colleft {
+        margin-left: 0;
+    }
+
+    .icon-contact .social-icon {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        color: #fff;
+        border-radius: 100%;
+        margin: 6px;
+        text-align: center;
+        text-indent: 0px;
+    }
+}
+
+.reveal-modal-bg {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: #000;
+    background: rgba(0, 0, 0, .8);
+    z-index: 100;
+    display: none;
+    top: 0;
+    left: 0;
+}
+
+.reveal-modal {
+    visibility: hidden;
+    top: 50px;
+    left: 50%;
+    margin-left: -300px;
+    width: 520px;
+    background: #eee url(http://image.wenzhihuai.com/mywechat.png) no-repeat;
+    position: absolute;
+    z-index: 101;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+    -box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+}
+
+.reveal-modal.small {
+    width: 200px;
+    margin-left: -140px;
+}
+
+.reveal-modal.medium {
+    width: 400px;
+    margin-left: -240px;
+}
+
+.reveal-modal.large {
+    width: 600px;
+    margin-left: -340px;
+}
+
+.reveal-modal.xlarge {
+    width: 800px;
+    margin-left: -440px;
+}
+
+.reveal-modal .close-reveal-modal {
+    font-size: 22px;
+    line-height: .5;
+    position: absolute;
+    top: 8px;
+    right: 11px;
+    color: #aaa;
+    text-shadow: 0 -1px 1px rbga(0, 0, 0, .6);
+    font-weight: bold;
+    cursor: pointer;
+}
+
