@@ -24,8 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -209,6 +211,17 @@ public class IndexController {
     public ModelAndView fourzerofour() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("404");
+        return mv;
+    }
+
+    @RequestMapping("checkcookie")
+    public ModelAndView checkcookie(HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView("checkcookie");
+        HttpSession session = request.getSession();
+        Cookie[] cookies = request.getCookies();
+        mv.addObject("cookies", cookies);
+        mv.addObject("session", session);
+        mv.addObject("request", request);
         return mv;
     }
 }

@@ -28,63 +28,15 @@
             font-family: "微软雅黑", arial, sans-serif;
         }
 
+        .colleft {
+            margin-left: -30px;
+        }
+
         .article-content h1 {
             margin: 20px -20px 20px -20px;
             padding: 10px 20px 9px 10px;
             border-left: 4px solid #00a67c;
             background-color: #fbfbfb
-        }
-
-        /* 响应式布局 */
-        @media (min-width: 768px) {
-            .icon-contact {
-                height: 80px;
-                margin: auto;
-                width: 100%;
-                max-width: 700px;
-            }
-
-            .icon-contact .fa {
-                line-height: 70px;
-                font-size: 35px;
-                width: 70px;
-            }
-
-            .icon-contact .social-icon {
-                display: inline-block;
-                width: 70px;
-                height: 70px;
-                color: #fff;
-                border-radius: 100%;
-                margin: 6px;
-                text-align: center;
-                text-indent: 0px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .icon-contact {
-                height: 60px;
-                margin: auto;
-                width: 100%;
-            }
-
-            .icon-contact .fa {
-                line-height: 50px;
-                font-size: 20px;
-                width: 50px;
-            }
-
-            .icon-contact .social-icon {
-                display: inline-block;
-                width: 50px;
-                height: 50px;
-                color: #fff;
-                border-radius: 100%;
-                margin: 6px;
-                text-align: center;
-                text-indent: 0px;
-            }
         }
 
         .icon-contact .sinaweibo {
@@ -128,8 +80,8 @@
 
         .icon-contact {
             max-width: 700px;
-            margin: auto;
             text-indent: 0px;
+            margin: 0 230px 0 250px
         }
 
         .friend-link a {
@@ -150,7 +102,6 @@
         }
 
         .tech .describe {
-            font-family: "Microsoft Yahei";
             margin-right: 12px;
             text-align: center;
         }
@@ -184,7 +135,6 @@
             font-size: 14px;
             color: #404040;
             color: rgba(0, 0, 0, 0.7);
-            font-family: "Microsoft Yahie";
             line-height: 25px;
         }
 
@@ -244,7 +194,73 @@
                 margin-bottom: 5px;
             }
         }
+
+        /* 响应式布局 */
+        @media (min-width: 768px) {
+            .icon-contact {
+                height: 80px;
+                margin: auto;
+                width: 100%;
+                max-width: 700px;
+            }
+
+            .colleft {
+                margin-left: -30px;
+            }
+
+            .icon-contact .fa {
+                line-height: 70px;
+                font-size: 35px;
+                width: 70px;
+            }
+
+            .icon-contact .social-icon {
+                display: inline-block;
+                width: 70px;
+                height: 70px;
+                color: #fff;
+                border-radius: 100%;
+                margin: 6px;
+                text-align: center;
+                text-indent: 0px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .icon-contact {
+                height: 60px;
+                margin: auto;
+                width: 100%;
+            }
+
+            .icon-contact .fa {
+                line-height: 50px;
+                font-size: 20px;
+                width: 50px;
+            }
+
+            .colleft {
+                margin-left: 0;
+            }
+
+            .icon-contact .social-icon {
+                display: inline-block;
+                width: 50px;
+                height: 50px;
+                color: #fff;
+                border-radius: 100%;
+                margin: 6px;
+                text-align: center;
+                text-indent: 0px;
+            }
+        }
     </style>
+    <script>
+        function showwechat() {
+            console.log("hello world");
+            $(".wechat-qrcode").css("display", "block");
+        }
+    </script>
 </head>
 <body class="home blog hPC">
 <section class="contentcontainer">
@@ -257,11 +273,54 @@ background-size: 100% 100%;background-attachment: fixed;">
             <p style="text-align: center;color: white">爱音乐、爱编程。</p>
             <p style="text-align: center;color: white">人生百态，笑口常开，秉承自我，谨慎独行。</p>
             <p style="text-align: center;color: white">专注高并发、高可用、分布式计算</p>
+            <p style="text-align: center;color: white">
+                本站源码：<a href="https://github.com/Zephery/newblog" style="color: white">https://github.com/Zephery/newblog</a>
+            </p>
+
             <p style="text-align: center;">
             </p>
+            <h2 style="text-align: center;margin: 0;background: transparent;color: white">与我联系</h2>
+            <div class="icon-contact">
+                <div class="col" id="icon">
+                    <a href="http://www.weibo.com/1925306000/profile" target="_blank"
+                       class="social-icon tool-tip sinaweibo"
+                       title="" data-placement="top" data-original-title="新浪微博"><i class="fa fa-weibo"></i></a>
+                </div>
+                <div class="col" id="icon">
+                    <a href="http://t.qq.com/w1570631036?preview" target="_blank"
+                       class="social-icon tool-tip tencentweibo" title="" data-placement="top"
+                       data-original-title="腾讯微博"><i class="fa fa-tencent-weibo"></i></a>
+                </div>
+                <div class="col" id="icon">
+                    <a title="1570631036" href="http://wpa.qq.com/msgrd?v=3&uin=1570631036&site=qq&menu=yes"
+                       target="_blank" class="social-icon tool-tip qq" data-placement="top"
+                       data-original-title="1570631036"><i class="fa fa-qq"></i></a>
+                </div>
+                <div class="col" id="icon">
+                    <a href="https://github.com/Zephery" target="_blank" class="social-icon tool-tip github" title=""
+                       data-placement="top" data-original-title="GitHub"><i class="fa fa-github"></i></a>
+                </div>
+
+                <div class="col" id="icon">
+                    <a href="https://www.facebook.com/zephery.wen" target="_blank" class="social-icon tool-tip facebook"
+                       title=""
+                       data-placement="top" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
+                </div>
+                <div class="col colleft" id="icon">
+                    <a href="http://image.wenzhihuai.com/mywechat.png" target="_blank"
+                       class="social-icon tool-tip wechat" title=""
+                       data-placement="top" data-original-title="WeChat" onmouseover="showwechat()"><i
+                            class="fa fa-wechat"></i></a>
+                </div>
+                <%--<div class="wechat-qrcode" style="display: none"><h4>微信扫一扫：分享</h4>--%>
+                <%--<div class="qrcode">--%>
+                <%--<canvas width="100" height="100"></canvas>--%>
+                <%--</div>--%>
+                <%--</div>--%>
+            </div>
             <p><!--end personal --></p>
             <p><!-- tech tree --></p>
-            <h2 style="text-align: center;margin: 0px;background: transparent;color: white">我的技能树</h2>
+            <h2 style="text-align: center;margin: 0;background: transparent;color: white">我的技能树</h2>
             <section class="tech">
                 <div class="item">
                     <div class="describe" style="color: white">
