@@ -23,9 +23,17 @@
             src="http://assets.changyan.sohu.com/upload/plugins/plugins.count.js">
     </script>
     <link rel="stylesheet" href="http://image.wenzhihuai.com/editormd.preview.css?ver=20171017"/>
-    <link rel="stylesheet" href="http://image.wenzhihuai.com/reveal.css?ver=20171021">
+    <link rel="stylesheet" href="http://image.wenzhihuai.com/reveal.css?ver=20171023">
+    <%--<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reveal.css"/>--%>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://image.wenzhihuai.com/jquery.reveal.js?ver=20171021"></script>
+    <style>
+        p {
+            text-align: center;
+            font-size: 16px;
+            color: white
+        }
+    </style>
 </head>
 <body class="home blog hPC">
 <section class="contentcontainer">
@@ -34,14 +42,17 @@ background-size: 100% 100%;background-attachment: fixed;">
         <div style="text-indent:0px;">
             <h1 style="text-align: center;margin: 0;background: transparent;color: white">个人简介</h1>
             <p><img src="http://image.wenzhihuai.com/66.jpg" style="border-radius:50%;width:100px"></p>
-            <p style="text-align: center;font-size:16px;color: white">温志怀</p>
-            <p style="text-align: center;color: white">爱音乐、爱编程。</p>
-            <p style="text-align: center;color: white">人生百态，笑口常开，秉承自我，谨慎独行。</p>
-            <p style="text-align: center;color: white">专注高并发、高可用、分布式计算</p>
-            <p style="text-align: center;color: white">
-                本站源码：<a href="https://github.com/Zephery/newblog" style="color: white">https://github.com/Zephery/newblog</a>
+            <p>温志怀</p>
+            <p>哈哈哈哈哈哈哈</p>
+            <p></p>
+            <p>人生百态，笑口常开，秉承自我，谨慎独行。</p>
+            <p>专注高并发、高可用、分布式计算</p>
+            <p>
+                本站源码：
+                <a href="https://github.com/Zephery/newblog" style="color: white">
+                    <strong>https://github.com/Zephery/newblog</strong>
+                </a>
             </p>
-
             <p style="text-align: center;">
             </p>
             <h2 style="text-align: center;margin: 0;background: transparent;color: white">与我联系</h2>
@@ -123,6 +134,7 @@ background-size: 100% 100%;background-attachment: fixed;">
             <p><!-- end tech --></p>
         </div>
         <%@include file="myreading.jsp" %>
+        <br>
     </div>
 </section>
 <br>

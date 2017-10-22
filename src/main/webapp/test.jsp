@@ -9,7 +9,7 @@
 
     <!-- Attach our CSS -->
 
-    <link rel="stylesheet" href="js/moaModal/reveal.css">
+    <link rel="stylesheet" href="css/reveal.css">
 
 
     <!-- Attach necessary scripts -->
@@ -18,7 +18,7 @@
 
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 
-    <script type="text/javascript" src="js/moaModal/jquery.reveal.js"></script>
+    <script type="text/javascript" src="js/jquery.reveal.js"></script>
 
 
     <style type="text/css">
