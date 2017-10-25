@@ -33,6 +33,10 @@
             font-size: 16px;
             color: white
         }
+
+        .article-content a {
+            color: #00ccff;
+        }
     </style>
 </head>
 <body class="home blog hPC">
@@ -44,12 +48,12 @@ background-size: 100% 100%;background-attachment: fixed;">
             <p><img src="http://image.wenzhihuai.com/66.jpg" style="border-radius:50%;width:100px"></p>
             <p>温志怀</p>
             <p>哈哈哈哈哈哈哈</p>
-            <p></p>
-            <p>人生百态，笑口常开，秉承自我，谨慎独行。</p>
-            <p>专注高并发、高可用、分布式计算</p>
-            <p>
+            <p>本网站尚未彻底完成~</p>
+            <p>采用Spring SpringMVC Mybatis Lucene等框架</p>
+            <p>专注高并发、高可用、分布式计算、大数据开发</p>
+            <p style="color: #ff14fd">
                 本站源码：
-                <a href="https://github.com/Zephery/newblog" style="color: white">
+                <a href="https://github.com/Zephery/newblog">
                     <strong>https://github.com/Zephery/newblog</strong>
                 </a>
             </p>
@@ -58,33 +62,33 @@ background-size: 100% 100%;background-attachment: fixed;">
             <h2 style="text-align: center;margin: 0;background: transparent;color: white">与我联系</h2>
             <div class="icon-contact">
                 <div class="col" id="icon">
-                    <a href="http://www.weibo.com/1925306000/profile" target="_blank"
+                    <a href="http://www.weibo.com/1925306000/profile"
                        class="social-icon tool-tip sinaweibo"
                        title="" data-placement="top" data-original-title="新浪微博"><i class="fa fa-weibo"></i></a>
                 </div>
                 <div class="col" id="icon">
-                    <a href="http://t.qq.com/w1570631036?preview" target="_blank"
+                    <a href="http://t.qq.com/w1570631036?preview"
                        class="social-icon tool-tip tencentweibo" title="" data-placement="top"
                        data-original-title="腾讯微博"><i class="fa fa-tencent-weibo"></i></a>
                 </div>
                 <div class="col" id="icon">
                     <a title="QQ" href="http://wpa.qq.com/msgrd?v=3&uin=1570631036&site=qq&menu=yes"
-                       target="_blank" class="social-icon tool-tip qq" data-placement="top"
+                       class="social-icon tool-tip qq" data-placement="top"
                        data-original-title="1570631036"><i class="fa fa-qq"></i></a>
                 </div>
                 <div class="col" id="icon">
-                    <a href="https://github.com/Zephery" target="_blank" class="social-icon tool-tip github" title=""
+                    <a href="https://github.com/Zephery" class="social-icon tool-tip github" title=""
                        data-placement="top" data-original-title="GitHub"><i class="fa fa-github"></i></a>
                 </div>
 
                 <div class="col" id="icon">
-                    <a href="https://www.facebook.com/zephery.wen" target="_blank" class="social-icon tool-tip facebook"
+                    <a href="https://www.facebook.com/zephery.wen" class="social-icon tool-tip facebook"
                        title=""
                        data-placement="top" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
                 </div>
                 <div class="col colleft" id="icon">
                     <%--弹出层效果链接：http://www.jq22.com/jquery-info109--%>
-                    <a href="http://image.wenzhihuai.com/mywechat.png" target="_blank"
+                    <a href="http://image.wenzhihuai.com/mywechat.png"
                        class="social-icon tool-tip wechat big-link" title=""
                        data-placement="top" data-original-title="WeChat" data-reveal-id="myModal" data-animation="fade"><i
                             class="fa fa-wechat"></i></a>
