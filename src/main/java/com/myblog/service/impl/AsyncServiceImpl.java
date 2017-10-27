@@ -11,7 +11,6 @@ import com.myblog.util.LibraryUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -57,8 +56,8 @@ public class AsyncServiceImpl implements IAsyncService {
         }
     }
 
+    @Async
     @Override
-    @Scheduled(cron = "0 59 2 ? * *")
     public void start() {
         List<Myreading> list = LibraryUtil.htmltoJavaBean();
         for (Myreading myreading : list) {

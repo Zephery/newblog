@@ -1,9 +1,11 @@
 package com.myblog.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Zephery on 2017/6/28.
  */
-public class TopTen {
+public class TopTen implements Serializable {
     private String name;
     private Integer average_stay_time;
     private Integer visitor_count;

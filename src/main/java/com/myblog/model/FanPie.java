@@ -1,9 +1,11 @@
 package com.myblog.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Zephery on 2017/6/28.
  */
-public class FanPie {
+public class FanPie implements Serializable {
     private String name;
     private Integer visitor_count;
     private Double pv_ratio;

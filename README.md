@@ -1,6 +1,6 @@
 # 个人网站的建立  
-首先，帮忙点击一下我的网站[http://www.wenzhihuai.com/](http://www.wenzhihuai.com/) 。谢谢啊，如果可以，GitHub上麻烦给个star，以后面试能讲讲这个项目，GitHub地址[https://github.com/Zephery/newblog](https://github.com/Zephery/newblog) 。
-大学的时候萌生的一个想法，就是建立一个个人网站，前前后后全部推翻重改了4、5遍，现在终于能看了，下面是首页。
+各位大佬瞄一眼[我的个人网站](http://www.wenzhihuai.com/)呗 。如果觉得不错，希望能在GitHub上麻烦给个star，GitHub地址[https://github.com/Zephery/newblog](https://github.com/Zephery/newblog) 。
+大学的时候萌生的一个想法，就是建立一个个人网站，前前后后全部推翻重构了4、5遍，现在终于能看了，下面是目前的首页。
 <div align="center">
 
 ![](http://image.wenzhihuai.com/home.png?imageView2/2/w/600)

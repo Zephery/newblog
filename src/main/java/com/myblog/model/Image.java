@@ -1,6 +1,8 @@
 package com.myblog.model;
 
-public class Image {
+import java.io.Serializable;
+
+public class Image implements Serializable {
     private Integer imageid;
 
     private String imagename;

@@ -1,9 +1,11 @@
 package com.myblog.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Zephery on 2017/6/27.
  */
-public class TongJi {
+public class TongJi implements Serializable {
     //"pv_count,visitor_count,ip_count,bounce_ratio,avg_visit_time", 10879516, "20170625", "20170627")
 
     private String pv_count;

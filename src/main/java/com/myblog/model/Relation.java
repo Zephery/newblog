@@ -1,8 +1,9 @@
 package com.myblog.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Relation {
+public class Relation implements Serializable {
     private Integer id;
 
     private Integer blogid;

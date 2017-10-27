@@ -13,6 +13,7 @@ import com.myblog.model.Tag;
 import com.myblog.service.IAsyncService;
 import com.myblog.service.IBlogService;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
 import org.apache.lucene.search.suggest.Lookup.LookupResult;
 import org.apache.lucene.search.suggest.analyzing.AnalyzingInfixSuggester;
@@ -24,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.*;
@@ -189,6 +191,8 @@ public class BlogServiceImpl implements IBlogService {
     @Override
     public void ajaxbuild() {
         try {
+            FileUtils.deleteDirectory(new File("autocomplete"));
+            logger.info("delete autocomplete file success");
             Directory dir = FSDirectory.open(Paths.get("autocomplete"));
             SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
             AnalyzingInfixSuggester suggester = new AnalyzingInfixSuggester(dir, analyzer);

@@ -1,8 +1,9 @@
 package com.myblog.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Tag {
+public class Tag implements Serializable {
     private Integer tId;
 
     private String tName;

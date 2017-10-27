@@ -8,15 +8,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.myblog.lucene.BlogIndex;
 import com.myblog.model.*;
-import com.myblog.service.IBlogService;
-import com.myblog.service.ICategoryService;
-import com.myblog.service.ILinksService;
-import com.myblog.service.IMyReadingService;
+import com.myblog.service.*;
 import com.myblog.util.JedisUtil;
 import com.myblog.util.StringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +38,7 @@ import java.util.List;
 
 @Controller
 public class IndexController {
+    //logger
     private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
     @Resource
     private IBlogService blogService;
@@ -49,8 +48,19 @@ public class IndexController {
     private ILinksService linksService;
     @Resource
     private IMyReadingService myReadingService;
+    @Resource
+    private IAsyncService asyncService;
     private BlogIndex blogIndex = new BlogIndex();
 
+    /**
+     * 首页
+     *
+     * @param typeId
+     * @param releaseDateStr
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("index")
     public ModelAndView index(@RequestParam(value = "typeId", required = false) String typeId,
                               @RequestParam(value = "releaseDateStr", required = false) String releaseDateStr,
@@ -181,15 +191,9 @@ public class IndexController {
 
 
     @RequestMapping(value = "lucene")
-    public void jfoe(HttpServletResponse response) throws Exception {
+    public void lucene(HttpServletResponse response) throws Exception {
         List<Blog> blogs = blogService.getAllBlog();
-        for (Blog blog : blogs) {
-            try {
-                blogIndex.addIndex(blog);
-            } catch (IOException e) {
-                logger.error("lucene出错", e);
-            }
-        }
+        blogIndex.refreshlucene(blogs);
         response.getWriter().write("success");
     }
 
@@ -223,5 +227,19 @@ public class IndexController {
         mv.addObject("session", session);
         mv.addObject("request", request);
         return mv;
+    }
+
+    /**
+     * 每天更新借书记录（由于隐私关系已停掉），刷新一遍Lucene索引记录
+     *
+     * @throws Exception
+     */
+    @Scheduled(cron = "0 30 1 * * * ")
+    public void updateLuceneEverydate() throws Exception {
+        List<Blog> blogs = blogService.getAllBlog();
+        blogIndex.refreshlucene(blogs);//刷新博客
+        blogService.ajaxbuild();//刷新自动补全
+        asyncService.start();//广州图书馆借书记录
+        logger.info("success");
     }
 }

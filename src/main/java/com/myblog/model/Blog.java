@@ -1,8 +1,11 @@
 package com.myblog.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Blog {
+public class Blog implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private Integer blogid;
 
     private String title;
@@ -100,6 +103,7 @@ public class Blog {
     public List<Tag> getTags() {
         return tags;
     }
+
     public void setTags(List<Tag> tags) {
         this.tags = tags;
     }

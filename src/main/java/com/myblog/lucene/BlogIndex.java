@@ -43,7 +43,7 @@ public class BlogIndex {
      *
      * @param blogs
      */
-    public static void refreshlucene(List<Blog> blogs) {
+    public void refreshlucene(List<Blog> blogs) {
         try {
             BlogIndex blogIndex = new BlogIndex();
             FileUtils.deleteDirectory(new File("blog_index"));
@@ -69,7 +69,7 @@ public class BlogIndex {
         doc.add(new StringField("blogid", String.valueOf(blog.getBlogid()), Field.Store.YES));
         doc.add(new TextField("title", blog.getTitle(), Field.Store.YES));
         doc.add(new StringField("create_at", DateUtil.formatDate(new Date(), "yyyy-MM-dd"), Field.Store.YES));
-        doc.add(new TextField("content", Jsoup.parse(blog.getContent()).text(), Field.Store.YES));
+        doc.add(new TextField("content", blog.getContent() == null ? "" : Jsoup.parse(blog.getContent()).text(), Field.Store.YES));
         doc.add(new StringField("categoryid", blog.getCategory().getcId().toString(), Field.Store.YES));
         doc.add(new TextField("imageurl", blog.getImageurl(), Field.Store.YES));
         doc.add(new StringField("hits", String.valueOf(blog.getHits()), Field.Store.YES));
@@ -128,7 +128,7 @@ public class BlogIndex {
             Document doc = search.doc(scoreDoc.doc);
             Blog blog = new Blog();
             blog.setBlogid(Integer.parseInt(doc.get(("blogid"))));
-            blog.setCreateAt(DateTime.parse(doc.get("create_at")).toString());
+            blog.setCreateAt(DateTime.parse(doc.get("create_at")).toString("yyyy-MM-dd"));
             blog.setImageurl(doc.get("imageurl"));
             blog.setCategoryid(Integer.parseInt(doc.get("categoryid")));
             blog.setHits(Integer.parseInt(doc.get("hits")));
@@ -159,6 +159,15 @@ public class BlogIndex {
             blogIndexList.add(blog);
         }
         return blogIndexList;
+    }
+
+    /**
+     * 先删除后保存新的
+     *
+     * @throws Exception
+     */
+    public void deleteDir() throws Exception {
+
     }
 
     public static void main(String args[]) {

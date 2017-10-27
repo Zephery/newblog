@@ -1,6 +1,8 @@
 package com.myblog.model;
 
-public class Admin {
+import java.io.Serializable;
+
+public class Admin implements Serializable {
     private Integer id;
 
     private String adminname;
