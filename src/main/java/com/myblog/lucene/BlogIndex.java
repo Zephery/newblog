@@ -37,6 +37,7 @@ import java.util.List;
 public class BlogIndex {
     private final static Logger logger = LoggerFactory.getLogger(BlogIndex.class);
     private Directory dir;
+    private final static String BASE_PATH = System.getProperty("user.dir");
 
     /**
      * refresh lucene
@@ -46,7 +47,7 @@ public class BlogIndex {
     public void refreshlucene(List<Blog> blogs) {
         try {
             BlogIndex blogIndex = new BlogIndex();
-            FileUtils.deleteDirectory(new File("blog_index"));
+            FileUtils.deleteDirectory(new File(BASE_PATH + "blog_index"));
             for (Blog blog : blogs) {
                 blogIndex.addIndex(blog);
             }
@@ -105,7 +106,7 @@ public class BlogIndex {
      * @throws Exception
      */
     public List<Blog> searchBlog(Integer pageStart, String q, Integer pagehits) throws Exception {
-        dir = FSDirectory.open(Paths.get("blog_index"));
+        dir = FSDirectory.open(Paths.get(BASE_PATH + "blog_index"));
         IndexReader reader = DirectoryReader.open(dir);
         IndexSearcher search = new IndexSearcher(reader);
         ScoreDoc lastBottom = null;//相当于pageSize

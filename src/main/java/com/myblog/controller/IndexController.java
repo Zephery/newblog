@@ -6,9 +6,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.myblog.common.Config;
 import com.myblog.lucene.BlogIndex;
 import com.myblog.model.*;
 import com.myblog.service.*;
+import com.myblog.util.HttpHelper;
 import com.myblog.util.JedisUtil;
 import com.myblog.util.StringUtil;
 import org.apache.commons.lang.StringUtils;
@@ -235,8 +237,14 @@ public class IndexController {
     public void updateLuceneEverydate() throws Exception {
         List<Blog> blogs = blogService.getAllBlog();
         blogIndex.refreshlucene(blogs);//刷新博客
+        logger.info("刷新博客完成");
         blogService.ajaxbuild();//刷新自动补全
+        logger.info("刷新自动补全完成");
         asyncService.start();//广州图书馆借书记录
-        logger.info("success");
+        logger.info("刷新广图借书记录完成");
+        HttpHelper.getInstance().get(Config.getProperty("360"));
+        logger.info("360SEO完成");
+        HttpHelper.getInstance().get(Config.getProperty("baidu"));
+        logger.info("baidu完成");
     }
 }
