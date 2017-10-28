@@ -27,10 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Zephery on 2016/8/5.
@@ -181,9 +178,9 @@ public class IndexController {
     @RequestMapping("myreading")
     public void myreading(HttpServletResponse response) {
         try {
-            List<Myreading> list = myReadingService.getAllReading();
+            Set<Myreading> set = myReadingService.getAllReading();
             Gson gson = new Gson();
-            response.getWriter().write(gson.toJson(list));
+            response.getWriter().write(gson.toJson(set));
         } catch (IOException e) {
             logger.error("我的阅读出错", e);
         }

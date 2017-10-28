@@ -61,4 +61,23 @@ public class Myreading implements Serializable {
     public void setReturndate(String returndate) {
         this.returndate = returndate;
     }
+
+    @Override
+    public int hashCode() {
+        return this.title.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (null != obj && obj instanceof Myreading) {
+            Myreading myreading = (Myreading) obj;
+            if (title.equals(myreading.title)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

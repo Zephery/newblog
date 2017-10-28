@@ -30,7 +30,7 @@
             var fenlei = $(".myreading");
             for (var i = 0; i < data.length; i++) {
                 html += "        <tr>\n" +
-                    "            <td style=\"text-align: center\">" + data[i].id + "</td>\n" +
+                    "            <td style=\"text-align: center\">" + parseInt(i + 1) + "</td>\n" +
                     "            <td style=\"text-align: center\">" + data[i].title + "</td>\n" +
                     "            <td style=\"text-align: center\">" + data[i].author + "</td>\n" +
                     "            <td style=\"text-align: center\">" + data[i].bookindex + "</td>\n" +

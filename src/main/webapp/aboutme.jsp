@@ -137,6 +137,7 @@ background-size: 100% 100%;background-attachment: fixed;">
             </section>
             <p><!-- end tech --></p>
         </div>
+        <h2 style="text-align: center;margin: 0;background: transparent;color: white">我的读书记录</h2>
         <%@include file="myreading.jsp" %>
         <br>
     </div>

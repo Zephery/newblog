@@ -111,6 +111,7 @@
     <select id="getAllReading" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from myreading
+        from myreading m
+        order by m.rentdate
     </select>
 </mapper>

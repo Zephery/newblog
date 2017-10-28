@@ -2,7 +2,7 @@ package com.myblog.service;
 
 import com.myblog.model.Myreading;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface IMyReadingService {
 
-    public List<Myreading> getAllReading();
+    public Set<Myreading> getAllReading();
 }

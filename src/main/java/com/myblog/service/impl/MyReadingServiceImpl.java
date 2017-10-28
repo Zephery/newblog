@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,8 +26,10 @@ public class MyReadingServiceImpl implements IMyReadingService {
     private MyreadingMapper myreadingMapper;
 
     @Override
-    public List<Myreading> getAllReading() {
+    public Set<Myreading> getAllReading() {
         List<Myreading> list = myreadingMapper.getAllReading();
+        Set<Myreading> set = new HashSet<>();
+        set.addAll(list);
         try {
             for (Myreading myreading : list) {
                 myreading.setRentdate(myreading.getRentdate() != null ? myreading.getRentdate() : "");
@@ -34,6 +38,6 @@ public class MyReadingServiceImpl implements IMyReadingService {
         } catch (Exception e) {
             logger.error("阅读记录", e);
         }
-        return list;
+        return set;
     }
 }
