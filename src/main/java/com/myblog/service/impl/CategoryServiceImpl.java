@@ -26,4 +26,9 @@ public class CategoryServiceImpl implements ICategoryService {
         return categoryMapper.selectByPrimaryKey(categoryid);
     }
 
+    @Override
+    public List<Category> getAllCatWithoutLife() {
+        return categoryMapper.getAllCatWithoutLife();
+    }
+
 }

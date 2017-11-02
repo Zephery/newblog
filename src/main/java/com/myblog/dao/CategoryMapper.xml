@@ -92,6 +92,12 @@
         <include refid="Base_Column_List"/>
         from category
     </select>
+    <select id="getAllCatWithoutLife" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from category
+        WHERE c_id!=0
+    </select>
     <cache eviction="LRU"
            type="org.apache.ibatis.cache.impl.PerpetualCache"
            flushInterval="120000"

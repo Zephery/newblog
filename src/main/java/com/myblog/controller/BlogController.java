@@ -127,8 +127,6 @@ public class BlogController {
             }
             List<Blog> lists = blogService.getLuceneBlog(pagenum, keyword, 10);
             PageHelper.startPage(pagenum, 10);
-            List<Category> categories = categoryService.getAllCategory();
-            modelAndView.addObject("categories", categories);
             PageInfo<Blog> blogs = new PageInfo<>(lists);
             blogs.setPageSize(10);
             blogs.setSize(10);

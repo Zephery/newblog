@@ -20,4 +20,6 @@ public interface CategoryMapper {
     int updateByPrimaryKey(Category record);
 
     List<Category> getAllCategory();
+
+    List<Category> getAllCatWithoutLife();
 }

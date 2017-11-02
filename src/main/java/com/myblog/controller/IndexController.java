@@ -119,7 +119,7 @@ public class IndexController {
     @ResponseBody
     public void getbycategoryid(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
-            List<Category> categories = categoryService.getAllCategory();
+            List<Category> categories = categoryService.getAllCatWithoutLife();
             Gson gson = new Gson();
             String temp = gson.toJson(categories);
             response.getWriter().write(temp);
