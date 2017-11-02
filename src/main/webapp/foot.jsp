@@ -19,11 +19,18 @@
                 document.write(y);
             </script>
             丨托管于
-            <a rel="nofollow" target="_blank" href="https://www.aliyun.com">阿里云主机</a>
-            &amp; <a rel="nofollow" target="_blank" href="http://www.qiniu.com/">七牛云存储 </a>丨
-            <a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn">粤ICP备17092242号-1</a>
+            <a rel="nofollow" target="_blank" href="https://www.aliyun.com">阿里云&七牛云</a>
+            |
+            <a rel="nofollow" target="_blank" href="http://www.wenzhihuai.com:8081/admin/login.html">后台管理 </a>
+            丨
+            <a rel="nofollow" target="_blank"
+               href="http://www.miitbeian.gov.cn">粤ICP备17092242号-1</a>
+        </div>
+        <div>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cspan id='cnzz_stat_icon_1262457277'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1262457277%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cspan id='cnzz_stat_icon_1262457277'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1262457277%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
         </div>
     </div>
 </footer>
-<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cspan id='cnzz_stat_icon_1262457277'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1262457277%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
