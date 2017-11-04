@@ -33,4 +33,6 @@ public interface IBlogService {
     public void ajaxbuild();
 
     public Set<String> ajaxsearch(String keyword);
+
+    public List<Blog> getAllBlogWithContent();
 }

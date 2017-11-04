@@ -191,7 +191,7 @@ public class IndexController {
 
     @RequestMapping(value = "lucene")
     public void lucene(HttpServletResponse response) throws Exception {
-        List<Blog> blogs = blogService.getAllBlog();
+        List<Blog> blogs = blogService.getAllBlogWithContent();
         blogIndex.refreshlucene(blogs);
         response.getWriter().write("success");
     }
@@ -235,7 +235,7 @@ public class IndexController {
      */
     @Scheduled(cron = "0 30 1 * * * ")
     public void updateLuceneEverydate() throws Exception {
-        List<Blog> blogs = blogService.getAllBlog();
+        List<Blog> blogs = blogService.getAllBlogWithContent();
         blogIndex.refreshlucene(blogs);//刷新博客
         logger.info("刷新博客完成");
         blogService.ajaxbuild();//刷新自动补全

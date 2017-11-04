@@ -239,6 +239,14 @@ public class BlogServiceImpl implements IBlogService {
         }
     }
 
+    @Override
+    public List<Blog> getAllBlogWithContent() {
+        List<Blog> blogs = blogMapper.getAllBlogWithContent();
+        for (Blog blog : blogs) {
+            blog.setCategory(categoryMapper.selectByPrimaryKey(blog.getCategoryid()));
+        }
+        return blogs;
+    }
     public static void main(String[] args) {
         try {
             Directory dir = FSDirectory.open(Paths.get("autocomplete"));

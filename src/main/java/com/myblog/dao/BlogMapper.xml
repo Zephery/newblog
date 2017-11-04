@@ -188,4 +188,10 @@
         WHERE categoryid!=0
         order by blogid desc
     </select>
+    <select id="getAllBlogWithContent" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from blog
+        order by blogid desc
+    </select>
 </mapper>

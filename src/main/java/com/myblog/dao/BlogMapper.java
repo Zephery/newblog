@@ -39,4 +39,6 @@ public interface BlogMapper {
     List<Blog> getLife();
 
     List<Blog> getAllTechBlog();
+
+    List<Blog> getAllBlogWithContent();
 }
