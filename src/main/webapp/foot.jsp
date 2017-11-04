@@ -27,10 +27,16 @@
                href="http://www.miitbeian.gov.cn">粤ICP备17092242号-1</a>
         </div>
         <div>
-            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-            document.write(unescape("%3Cspan id='cnzz_stat_icon_1262457277'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1262457277%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
-            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-            document.write(unescape("%3Cspan id='cnzz_stat_icon_1262457277'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1262457277%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+            <!-- cnzz stats -->
+            <script type="text/javascript">
+                var cnzz_s_tag = document.createElement('script');
+                cnzz_s_tag.type = 'text/javascript';
+                cnzz_s_tag.async = true;
+                cnzz_s_tag.charset = 'utf-8';
+                cnzz_s_tag.src = 'https://w.cnzz.com/c.php?id=1262457277&async=1';
+                var root_s = document.getElementsByTagName('script')[0];
+                root_s.parentNode.insertBefore(cnzz_s_tag, root_s);
+            </script>
         </div>
     </div>
 </footer>
