@@ -58,7 +58,11 @@ public class BlogIndex {
             BlogIndex blogIndex = new BlogIndex();
             FileUtils.deleteDirectory(new File(BASE_PATH));
             for (Blog blog : blogs) {
-                blogIndex.addIndex(blog);
+                try {
+                    blogIndex.addIndex(blog);
+                } catch (Exception e) {
+                    logger.error("blog index", e);
+                }
             }
         } catch (Exception e) {
             logger.error("refreshlucene error" + e);
@@ -73,18 +77,35 @@ public class BlogIndex {
         return writer;
     }
 
+    /**
+     * 代码质量及其差，如果不加try catch，发生异常，writer没有关闭，将会导致加锁，writer.lock
+     *
+     * @param blog
+     * @throws Exception
+     */
     public void addIndex(Blog blog) throws Exception {
         IndexWriter writer = getWriter();
-        Document doc = new Document();
-        doc.add(new StringField("blogid", String.valueOf(blog.getBlogid()), Field.Store.YES));
-        doc.add(new TextField("title", blog.getTitle(), Field.Store.YES));
-        doc.add(new StringField("create_at", DateUtil.formatDate(new Date(), "yyyy-MM-dd"), Field.Store.YES));
-        doc.add(new TextField("content", blog.getContent() == null ? "" : Jsoup.parse(blog.getContent()).text(), Field.Store.YES));
-        doc.add(new StringField("categoryid", blog.getCategory().getcId().toString(), Field.Store.YES));
-        doc.add(new TextField("imageurl", blog.getImageurl(), Field.Store.YES));
-        doc.add(new StringField("hits", String.valueOf(blog.getHits()), Field.Store.YES));
-        writer.addDocument(doc);
-        writer.close();
+        try {
+            Document doc = new Document();
+            doc.add(new StringField("blogid", String.valueOf(blog.getBlogid()), Field.Store.YES));
+            doc.add(new TextField("title", blog.getTitle(), Field.Store.YES));
+            doc.add(new StringField("create_at", DateUtil.formatDate(new Date(), "yyyy-MM-dd"), Field.Store.YES));
+            doc.add(new TextField("content", blog.getContent() == null ? "" : Jsoup.parse(blog.getContent()).text(), Field.Store.YES));
+            doc.add(new StringField("categoryid", blog.getCategory().getcId().toString(), Field.Store.YES));
+            doc.add(new TextField("imageurl", blog.getImageurl(), Field.Store.YES));
+            doc.add(new StringField("hits", String.valueOf(blog.getHits()), Field.Store.YES));
+            writer.addDocument(doc);
+        } catch (Exception e) {
+            logger.error("blog error detail", e);
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (Exception e) {
+                    logger.error("", e);
+                }
+            }
+        }
     }
 
     public void deleteIndex(String blogId) throws Exception {
