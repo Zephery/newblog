@@ -25,7 +25,17 @@
     <!--<listener>-->
     <!--<listener-class>ssm.blog.listener.InitBloggerData</listener-class>-->
     <!--</listener>-->
-
+    <!--spring session-->
+    <filter>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <!--<dispatcher>REQUEST</dispatcher>-->
+        <!--<dispatcher>ERROR</dispatcher>-->
+    </filter-mapping>
     <!-- 添加springmvc支持 -->
     <servlet>
         <servlet-name>springMVC</servlet-name>
@@ -116,12 +126,12 @@
     </filter-mapping>
     <!--禁止直接jsp访问，重定向所有-->
     <!--<filter>-->
-        <!--<filter-name>jspfilter</filter-name>-->
-        <!--<filter-class>com.myblog.filter.JspFilter</filter-class>-->
+    <!--<filter-name>jspfilter</filter-name>-->
+    <!--<filter-class>com.myblog.filter.JspFilter</filter-class>-->
     <!--</filter>-->
     <!--<filter-mapping>-->
-        <!--<filter-name>jspfilter</filter-name>-->
-        <!--<url-pattern>*.jsp</url-pattern>-->
+    <!--<filter-name>jspfilter</filter-name>-->
+    <!--<url-pattern>*.jsp</url-pattern>-->
     <!--</filter-mapping>-->
     <!--缓存-->
     <filter>
