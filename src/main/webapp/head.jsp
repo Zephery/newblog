@@ -168,7 +168,7 @@
 <script src="https://cdn.bootcss.com/bootstrap/4.0.0-beta/js/bootstrap.js" type="text/javascript"></script>
 <script type="text/javascript">
     function checkData() {
-        var q = document.getElementById("remote_input").value.trim();
+        var q = $("#remote_input").val();
         if (q == null || q == "") {
             alert("请输入您要查询的关键字！");
             return false;

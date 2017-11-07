@@ -25,17 +25,7 @@
     <!--<listener>-->
     <!--<listener-class>ssm.blog.listener.InitBloggerData</listener-class>-->
     <!--</listener>-->
-    <!--spring session-->
-    <filter>
-        <filter-name>springSessionRepositoryFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>springSessionRepositoryFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-        <!--<dispatcher>REQUEST</dispatcher>-->
-        <!--<dispatcher>ERROR</dispatcher>-->
-    </filter-mapping>
+
     <!-- 添加springmvc支持 -->
     <servlet>
         <servlet-name>springMVC</servlet-name>
@@ -141,6 +131,18 @@
     <filter-mapping>
         <filter-name>cacheControlFilter</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!--spring session-->
+    <!--放前面的话，搜索的字符编码会有问题-->
+    <filter>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <!--<dispatcher>REQUEST</dispatcher>-->
+        <!--<dispatcher>ERROR</dispatcher>-->
     </filter-mapping>
     <!-- ip过滤器 -->
     <!--<filter>-->
