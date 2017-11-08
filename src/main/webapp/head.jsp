@@ -29,15 +29,16 @@
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
     <script src="http://image.wenzhihuai.com/social-share-1.0.2/dist/social-share.min.js?ver=20171017"></script>
-    <script type="application/x-javascript">
-        addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
+    <%--下面这段代码会回到顶部--%>
+    <%--<script type="application/x-javascript">--%>
+    <%--addEventListener("load", function () {--%>
+    <%--setTimeout(hideURLbar, 0);--%>
+    <%--}, false);--%>
 
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-    </script>
+    <%--function hideURLbar() {--%>
+    <%--window.scrollTo(0, 1);--%>
+    <%--}--%>
+    <%--</script>--%>
     <script type="text/javascript" src="http://image.wenzhihuai.com/move-top.js?ver=20171017"></script>
     <script type="text/javascript" src="http://image.wenzhihuai.com/easing.js?ver=20171017"></script>
     <script>
