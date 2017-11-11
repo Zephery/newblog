@@ -105,17 +105,21 @@
         }
 
         #share-box {
-            padding-left: 570px;
+            float: right;
         }
 
-        @media (max-width: 768px) {
+        .article-tags {
+            margin-top: 10px;
+        }
+
+        @media (max-width: 800px) {
             .article-tags {
                 float: none;
                 margin-bottom: 10px;
             }
 
             #share-box {
-                padding-left: 0;
+                float: left;
             }
         }
 

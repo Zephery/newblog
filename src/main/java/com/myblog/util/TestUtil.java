@@ -1,26 +1,89 @@
 package com.myblog.util;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.*;
+import java.util.Enumeration;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by Zephery on 2017/6/29.
  */
 public class TestUtil {
-    public static void main(String[] args) {
-        new TestUtil().print("13131");
+    public static String getServerIp() throws SocketException {
+        String localip = null;// 本地IP，如果没有配置外网IP则返回它
+        String netip = null;// 外网IP
+
+        Enumeration<NetworkInterface> netInterfaces = NetworkInterface.getNetworkInterfaces();
+        InetAddress ip = null;
+        boolean finded = false;// 是否找到外网IP
+        while (netInterfaces.hasMoreElements() && !finded) {
+            NetworkInterface ni = netInterfaces.nextElement();
+            Enumeration<InetAddress> address = ni.getInetAddresses();
+            while (address.hasMoreElements()) {
+                ip = address.nextElement();
+                if (!ip.isSiteLocalAddress() && !ip.isLoopbackAddress() && ip.getHostAddress().indexOf(":") == -1) {// 外网IP
+                    netip = ip.getHostAddress();
+                    finded = true;
+                    break;
+                } else if (ip.isSiteLocalAddress() && !ip.isLoopbackAddress()
+                        && ip.getHostAddress().indexOf(":") == -1) {// 内网IP
+                    localip = ip.getHostAddress();
+                }
+            }
+        }
+
+        if (netip != null && !"".equals(netip)) {
+            return netip;
+        } else {
+            return localip;
+        }
     }
 
-    public void printint(int i) {
-        System.out.println(i);
+    public static String getV4IP() {
+        String ip = "";
+        String chinaz = "http://ip.chinaz.com";
+
+        StringBuilder inputLine = new StringBuilder();
+        String read = "";
+        URL url = null;
+        HttpURLConnection urlConnection = null;
+        BufferedReader in = null;
+        try {
+            url = new URL(chinaz);
+            urlConnection = (HttpURLConnection) url.openConnection();
+            in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
+            while ((read = in.readLine()) != null) {
+                inputLine.append(read + "\r\n");
+            }
+            //System.out.println(inputLine.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        Pattern p = Pattern.compile("\\<dd class\\=\"fz24\">(.*?)\\<\\/dd>");
+        Matcher m = p.matcher(inputLine.toString());
+        if (m.find()) {
+            String ipstr = m.group(1);
+            ip = ipstr;
+            //System.out.println(ipstr);
+        }
+        return ip;
     }
 
-    private static boolean judegeuri(String uri) {
-        return uri.contains("index.html") || uri.contains("tech.html") || uri.contains("life.html") || uri.contains("trip.html")
-                || uri.contains("log.html") || uri.contains("board.html") || uri.contains("aboutme.html") || uri.contains("donate.html")
-                || uri.contains("weibonlp.html") || uri.contains("interest.html")
-                || uri.contains("search.html") || uri.contains("getblogdetail.html") || uri.equals("/");
-    }
-
-    public <T> T print(T t) {
-        System.out.println(t);
-        return t;
+    public static void main(String[] args) throws SocketException {
+        System.out.println(TestUtil.getV4IP());
     }
 }

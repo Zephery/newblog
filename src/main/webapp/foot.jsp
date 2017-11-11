@@ -8,6 +8,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
+<script>
+    $.ajax({
+        url: "${pageContext.request.contextPath}/getServerIP.do",
+        type: "get",
+        dataType: 'json',
+        success: function (data) {
+        },
+        error: function (e) {
+        }
+    });
+</script>
 <footer class="footer">
     <div class="footer-inner">
         <div class="copyright pull-left">
@@ -25,6 +36,9 @@
             丨
             <a rel="nofollow" target="_blank"
                href="http://www.miitbeian.gov.cn">粤ICP备17092242号-1</a>
+        </div>
+        <div class="copyright pull-left">
+            <a>serverIp</a>
         </div>
         <div>
             <!-- cnzz stats -->

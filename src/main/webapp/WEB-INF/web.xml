@@ -15,6 +15,10 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    <!--Spring自定义监听器，用来记录服务器IP-->
+    <listener>
+        <listener-class>com.myblog.listener.CustomListener</listener-class>
+    </listener>
     <!-- spring配置文件 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
