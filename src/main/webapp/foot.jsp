@@ -38,7 +38,7 @@
                href="http://www.miitbeian.gov.cn">粤ICP备17092242号-1</a>
         </div>
         <div class="copyright pull-left">
-            <a>serverIp</a>
+            <a>本机服务器IP地址：serverIp</a>
         </div>
         <div>
             <!-- cnzz stats -->

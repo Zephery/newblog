@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.io.*;
+import java.net.URL;
+import java.net.URLDecoder;
 
 /**
  * @author Zephery
@@ -23,7 +25,8 @@ public class CustomListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         logger.info("myblog start,begin to record the local server ip");
         try {
-            String userDir = this.getClass().getClassLoader().getResource("").getPath();
+            URL url = this.getClass().getClassLoader().getResource("");
+            String userDir = URLDecoder.decode(url.getPath(), "utf-8");
             File file1 = new File(userDir);
             String str = file1.getParent();
             File file2 = new File(str);
@@ -44,7 +47,7 @@ public class CustomListener implements ServletContextListener {
                 result.append("\r\n");
             }
             br.close();
-            String newStr = result.toString().replace("serverIp", ip);
+            String newStr = result.toString().replaceAll("serverIp", ip);
 
 
             FileOutputStream fileOutputStream = new FileOutputStream(file);
