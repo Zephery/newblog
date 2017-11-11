@@ -194,4 +194,18 @@
         from blog
         order by blogid desc
     </select>
+    <select id="preBlog" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        blogid,title
+        from blog
+        where blogid &lt; #{blogid,jdbcType=INTEGER}
+        ORDER BY blogid DESC LIMIT 1;
+    </select>
+    <select id="nextBlog" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        blogid,title
+        from blog
+        where blogid &gt; #{blogid,jdbcType=INTEGER}
+        ORDER BY blogid ASC LIMIT 1;
+    </select>
 </mapper>

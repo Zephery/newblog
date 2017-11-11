@@ -97,11 +97,11 @@ public class BlogController {
     public ModelAndView getBlogDetail(Integer blogid) {       //博客具体内容
         ModelAndView modelAndView = new ModelAndView();
         Blog blog = blogService.getBlogDetail(blogid);
-        Blog preblog = blogService.getBlogDetail(blogid - 1);
+        Blog preblog = blogService.preBlog(blogid);
         if (preblog != null) {
             modelAndView.addObject("preblog", preblog);
         }
-        Blog nextblog = blogService.getBlogDetail(blogid + 1);
+        Blog nextblog = blogService.nextBlog(blogid);
         if (nextblog != null) {
             modelAndView.addObject("nextblog", nextblog);
         }

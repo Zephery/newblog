@@ -41,4 +41,8 @@ public interface BlogMapper {
     List<Blog> getAllTechBlog();
 
     List<Blog> getAllBlogWithContent();
+
+    public Blog preBlog(Integer blogId);
+
+    public Blog nextBlog(Integer blogId);
 }

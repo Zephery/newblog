@@ -247,6 +247,18 @@ public class BlogServiceImpl implements IBlogService {
         }
         return blogs;
     }
+
+
+    @Override
+    public Blog preBlog(Integer blogId) {
+        return blogMapper.preBlog(blogId);
+    }
+
+    @Override
+    public Blog nextBlog(Integer blogId) {
+        return blogMapper.nextBlog(blogId);
+    }
+
     public static void main(String[] args) {
         try {
             Directory dir = FSDirectory.open(Paths.get("autocomplete"));

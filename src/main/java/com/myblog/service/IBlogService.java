@@ -35,4 +35,8 @@ public interface IBlogService {
     public Set<String> ajaxsearch(String keyword);
 
     public List<Blog> getAllBlogWithContent();
+
+    public Blog preBlog(Integer blogId);
+
+    public Blog nextBlog(Integer blogId);
 }
