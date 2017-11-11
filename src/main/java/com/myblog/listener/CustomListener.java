@@ -25,12 +25,8 @@ public class CustomListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         logger.info("myblog start,begin to record the local server ip");
         try {
-            URL url = this.getClass().getClassLoader().getResource("");
-            String userDir = URLDecoder.decode(url.getPath(), "utf-8");
-            File file1 = new File(userDir);
-            String str = file1.getParent();
-            File file2 = new File(str);
-            String abPath = WinOrLinux.isWin() ? file2.getParent() + "\\foot.jsp" : file2.getParent() + "/foot.jsp";
+            String user=System.getProperty("myblog.path");
+            String abPath = WinOrLinux.isWin() ? user+ "foot.jsp" : user + "foot.jsp";
             String ip = IPUtils.getServerIp();
             File file = new File(abPath);
 
