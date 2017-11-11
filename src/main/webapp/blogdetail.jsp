@@ -48,7 +48,101 @@
             border-left: 4px solid #00a67c;
             background-color: #fbfbfb
         }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        #share a {
+            width: 34px;
+            height: 34px;
+            padding: 0;
+            margin: 6px;
+            border-radius: 25px;
+            transition: all .4s;
+            cursor: url(http://www.mizuiren.com/wp-content/themes/QIUYE/images/link.cur), pointer;
+        }
+
+        .bdshare-button-style0-24 a:hover {
+            box-shadow: 0 0 2px 2px #FFF;
+            transition: all .4s !important;
+        }
+
+        #share a.bds_qzone {
+            background: url(http://image.wenzhihuai.com/t_QQZone.png
+            ) no-repeat;
+            background-size: 34px 34px;
+        }
+
+        #share a.bds_tsina {
+            background: url(http://image.wenzhihuai.com/t_XinLang.png
+            ) no-repeat;
+            background-size: 34px 34px;
+        }
+
+        #share a.bds_sqq {
+            background: url(http://image.wenzhihuai.com/t_QQ.png
+            ) no-repeat;
+            background-size: 34px 34px;
+        }
+
+        #share a.bds_weixin {
+            background: url(http://image.wenzhihuai.com/t_Friend.png
+            ) no-repeat;
+            background-size: 34px 34px;
+        }
+
+        #share a.bds_fbook {
+            background: url(http://image.wenzhihuai.com/t_Fbook.png
+            ) no-repeat;
+            background-size: 34px 34px;
+        }
+
+        #share a.bds_copy {
+            background: url(http://image.wenzhihuai.com/t_URL.png
+            ) no-repeat;
+            background-size: 34px 34px;
+        }
+
+        #share-box {
+            padding-left: 570px;
+        }
+
+        @media (max-width: 768px) {
+            .article-tags {
+                float: none;
+                margin-bottom: 10px;
+            }
+
+            #share-box {
+                padding-left: 0;
+            }
+        }
+
     </style>
+    <script>window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "1",
+            "bdSize": "32"
+        },
+        "share": {},
+        "image": {
+            "viewList": ["qzone", "tsina", "tqq", "renren", "weixin"],
+            "viewText": "分享到：",
+            "viewSize": "32"
+        },
+        "selectShare": {
+            "bdContainerClass": null,
+            "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]
+        }
+    };
+    with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+    </script>
 </head>
 <body class="home blog hPC">
 <section class="contentcontainer">
@@ -64,7 +158,7 @@
             </div>
             <header class="article-header">
                 <h1 class="article-title" style="text-align: center; margin: 15px 0"
-                        href="${pageContext.request.contextPath}/getblogdetail.html?blogid=${blog.blogid}">${blog.title}
+                    href="${pageContext.request.contextPath}/getblogdetail.html?blogid=${blog.blogid}">${blog.title}
                 </h1>
                 <div class="meta" style="text-align: center">
                     <span id="mute-category" class="muted"><i class="fa fa-list-alt"></i><a
@@ -100,32 +194,32 @@ ${blog.content}
                            data-original-title="" title="">${tag.tName}</a>
                     </c:forEach>
                 </div>
-                <div style="padding-left: 580px">
-                    <!-- JiaThis Button BEGIN -->
-                    <div class="jiathis_style_32x32">
-                        <a class="jiathis_button_qzone"></a>
-                        <a class="jiathis_button_tsina"></a>
-                        <a class="jiathis_button_tqq"></a>
-                        <a class="jiathis_button_weixin"></a>
-                        <a class="jiathis_button_renren"></a>
-                        <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis"
-                           target="_blank"></a>
+                <div id="share-box">
+                    <div id="share">
+                        <div class="bdsharebuttonbox bdshare-button-style0-24" data-bd-bind="1510388056059">
+                            <a href="#" class="bds_qzone" data-cmd="qzone" title="Share to Qzone">
+                            </a>
+                            <a href="#" class="bds_tsina" data-cmd="tsina" title="Share to Sina">
+                            </a>
+                            <a href="#" class="bds_sqq" data-cmd="sqq" title="Share to QQ">
+                            </a>
+                            <a href="#" class="bds_weixin" data-cmd="weixin" title="Share to Wechat">
+                            </a>
+                            <a href="#" class="bds_more" data-cmd="more"></a>
+                        </div>
                     </div>
-                    <script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js"
-                            charset="utf-8"></script>
-                    <!-- JiaThis Button END -->
                 </div>
             </footer>
             <nav class="article-nav">
                 <c:if test="${preblog!=null}">
                     <span class="article-nav-prev"><i class="fa fa-angle-double-left"></i> <a
                             href="${pageContext.request.contextPath}/getblogdetail.html?blogid=${preblog.blogid}"
-                            rel="prev">上一篇：${preblog.title}</a></span>
+                            rel="prev">${preblog.title}</a></span>
                 </c:if>
                 <c:if test="${nextblog!=null}">
                 <span class="article-nav-next">
                         <a href="${pageContext.request.contextPath}/getblogdetail.html?blogid=${nextblog.blogid}"
-                           rel="next">下一篇： ${nextblog.title}</a>
+                           rel="next">${nextblog.title}</a>
                     <i class="fa fa-angle-double-right"></i></span>
                 </c:if>
             </nav>
@@ -173,6 +267,6 @@ ${blog.content}
     </div>
     <%@include file="sidebar.jsp" %>
 </section>
-<%@include file="foot.jsp"%>
+<%@include file="foot.jsp" %>
 </body>
 </html>

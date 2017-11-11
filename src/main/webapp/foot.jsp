@@ -21,7 +21,7 @@
             丨托管于
             <a rel="nofollow" target="_blank" href="https://www.aliyun.com">阿里云&七牛云</a>
             |
-            <a rel="nofollow" target="_blank" href="http://www.wenzhihuai.com:8081/admin/login.html">后台管理 </a>
+            <a rel="nofollow" target="_blank" href="http://www.wenzhihuai.com:8081/admin/index.html">后台管理 </a>
             丨
             <a rel="nofollow" target="_blank"
                href="http://www.miitbeian.gov.cn">粤ICP备17092242号-1</a>
