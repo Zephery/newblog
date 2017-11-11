@@ -23,8 +23,7 @@
     <div class="footer-inner">
         <div class="copyright pull-left">
             <a href="${pageContext.request.contextPath}" title="Zephery">Zephery</a> 版权所有丨采用<a
-                href="http://yusi123.com/"> 欲思 </a>主题丨基于 Spring SpringMVC Mybatis 构建 © 2016-
-            <script>
+                href="http://yusi123.com/"> 欲思 </a>主题丨基于 Spring SpringMVC Mybatis 构建 © 2016-<script>
                 var date = new Date();  //创建对象
                 var y = date.getFullYear();     //获取年份
                 document.write(y);
@@ -38,7 +37,8 @@
                href="http://www.miitbeian.gov.cn">粤ICP备17092242号-1</a>
         </div>
         <div class="copyright pull-left">
-            <a>本机服务器IP地址：serverIp</a>
+            <a>本服务器IP地址：serverIp</a>
+            <a>项目启动时间：projectStartTime</a>
         </div>
         <div>
             <!-- cnzz stats -->

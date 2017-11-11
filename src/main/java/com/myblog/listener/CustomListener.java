@@ -2,6 +2,7 @@ package com.myblog.listener;
 
 import com.myblog.util.IPUtils;
 import com.myblog.util.WinOrLinux;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,8 +26,8 @@ public class CustomListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         logger.info("myblog start,begin to record the local server ip");
         try {
-            String user=System.getProperty("myblog.path");
-            String abPath = WinOrLinux.isWin() ? user+ "foot.jsp" : user + "foot.jsp";
+            String user = System.getProperty("myblog.path");
+            String abPath = WinOrLinux.isWin() ? user + "foot.jsp" : user + "foot.jsp";
             String ip = IPUtils.getServerIp();
             File file = new File(abPath);
 
@@ -43,8 +44,8 @@ public class CustomListener implements ServletContextListener {
                 result.append("\r\n");
             }
             br.close();
-            String newStr = result.toString().replaceAll("serverIp", ip);
-
+            //record ip and project start time
+            String newStr = result.toString().replaceAll("serverIp", ip).replaceAll("projectStartTime", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
 
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             OutputStreamWriter outputWriter = new OutputStreamWriter(fileOutputStream, "UTF-8");
