@@ -9,8 +9,6 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.io.*;
-import java.net.URL;
-import java.net.URLDecoder;
 
 /**
  * @author Zephery
@@ -21,7 +19,11 @@ public class CustomListener implements ServletContextListener {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(CustomListener.class);
 
-
+    /**
+     * 记录服务器IP和项目启动的时间
+     *
+     * @param servletContextEvent
+     */
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         logger.info("myblog start,begin to record the local server ip");

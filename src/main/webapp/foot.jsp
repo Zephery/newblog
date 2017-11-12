@@ -8,17 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
-<script>
-    $.ajax({
-        url: "${pageContext.request.contextPath}/getServerIP.do",
-        type: "get",
-        dataType: 'json',
-        success: function (data) {
-        },
-        error: function (e) {
-        }
-    });
-</script>
 <footer class="footer">
     <div class="footer-inner">
         <div class="copyright pull-left">
@@ -37,7 +26,7 @@
                href="http://www.miitbeian.gov.cn">粤ICP备17092242号-1</a>
         </div>
         <div class="copyright pull-left">
-            <a>本服务器IP地址：serverIp</a>
+            <a>本服务器IP地址：serverIp </a>
             <a>项目启动时间：projectStartTime</a>
         </div>
         <div>

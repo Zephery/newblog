@@ -36,7 +36,115 @@
             s.parentNode.insertBefore(hm, s);
         })();
     </script>
+    <style>
+        .article-content h1 {
+            margin: 20px -20px 20px -20px;
+            padding: 10px 20px 9px 10px;
+            border-left: 4px solid #00a67c;
+            background-color: #fbfbfb
+        }
 
+        a:hover {
+            text-decoration: none;
+        }
+
+        #share a {
+            width: 34px;
+            height: 34px;
+            padding: 0;
+            margin: 6px;
+            border-radius: 25px;
+            transition: all .4s;
+            /*cursor: url(http://www.mizuiren.com/wp-content/themes/QIUYE/images/link.cur), pointer;*/
+        }
+
+        .bdshare-button-style0-24 a:hover {
+            box-shadow: 0 0 2px 2px #FFF;
+            transition: all .4s !important;
+        }
+
+        #share a.bds_qzone {
+            background: url(http://image.wenzhihuai.com/t_QQZone.png
+            ) no-repeat;
+            background-size: 34px 34px;
+        }
+
+        #share a.bds_tsina {
+            background: url(http://image.wenzhihuai.com/t_XinLang.png
+            ) no-repeat;
+            background-size: 34px 34px;
+        }
+
+        #share a.bds_sqq {
+            background: url(http://image.wenzhihuai.com/t_QQ.png
+            ) no-repeat;
+            background-size: 34px 34px;
+        }
+
+        #share a.bds_weixin {
+            background: url(http://image.wenzhihuai.com/t_Friend.png
+            ) no-repeat;
+            background-size: 34px 34px;
+        }
+
+        #share a.bds_fbook {
+            background: url(http://image.wenzhihuai.com/t_Fbook.png
+            ) no-repeat;
+            background-size: 34px 34px;
+        }
+
+        #share a.bds_copy {
+            background: url(http://image.wenzhihuai.com/t_URL.png
+            ) no-repeat;
+            background-size: 34px 34px;
+        }
+
+        #share-box {
+            float: right;
+        }
+
+        .article-tags {
+            margin-top: 10px;
+        }
+
+        @media (max-width: 800px) {
+            .article-tags {
+                float: none;
+                margin-bottom: 10px;
+            }
+
+            #share-box {
+                float: left;
+            }
+        }
+
+        .sharetitle {
+            float: left;
+        }
+    </style>
+    <script>window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "1",
+            "bdSize": "32"
+        },
+        "share": {},
+        "image": {
+            "viewList": ["qzone", "tsina", "tqq", "renren", "weixin"],
+            "viewText": "分享到：",
+            "viewSize": "32"
+        },
+        "selectShare": {
+            "bdContainerClass": null,
+            "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]
+        }
+    };
+    with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+    </script>
 </head>
 <body class="home blog hPC">
 <section class="contentcontainer">
@@ -46,46 +154,24 @@
                 <a href="http://www.wenzhihuai.com/board.html">给我留言</a>
             </h1>
             <div class="pull-right"><!-- 百度分享 -->
-                <span class="action action-share bdsharebuttonbox bdshare-button-style0-24"
-                      data-bd-bind="1498225366914"><i class="fa fa-share-alt"></i>分享
-                    <div class="action-popover">
-                        <div class="popover top in"><div class="arrow"></div>
-                            <div class="popover-content">
-                                <a href="#" class="sinaweibo fa fa-weibo" data-cmd="tsina"
-                                   title="分享到新浪微博"></a>
-                                <a href="#" class="bds_qzone fa fa-star" data-cmd="qzone" title="分享到QQ空间"></a>
-                                <a href="#" class="tencentweibo fa fa-tencent-weibo" data-cmd="tqq"
-                                   title="分享到腾讯微博"></a>
-                                <a href="#" class="qq fa fa-qq" data-cmd="sqq" title="分享到QQ好友"></a>
-                                <a href="#" class="bds_renren fa fa-renren" data-cmd="renren" title="分享到人人网"></a>
-                                <a href="#" class="bds_weixin fa fa-weixin" data-cmd="weixin" title="分享到微信"></a>
-                                <a href="#" class="bds_more fa fa-ellipsis-h" data-cmd="more"></a>
-                            </div>
+                <h1 class="sharetitle" style="margin-top: 10px">
+                    <a>分享到</a>
+                </h1>
+                <div id="share-box">
+                    <div id="share">
+                        <div class="bdsharebuttonbox bdshare-button-style0-24" data-bd-bind="1510388056059">
+                            <a href="#" class="bds_qzone" data-cmd="qzone" title="Share to Qzone">
+                            </a>
+                            <a href="#" class="bds_tsina" data-cmd="tsina" title="Share to Sina">
+                            </a>
+                            <a href="#" class="bds_sqq" data-cmd="sqq" title="Share to QQ">
+                            </a>
+                            <a href="#" class="bds_weixin" data-cmd="weixin" title="Share to Wechat">
+                            </a>
+                            <a href="#" class="bds_more" data-cmd="more"></a>
                         </div>
                     </div>
-                </span>
-                <script>window._bd_share_config = {
-                    "common": {
-                        "bdSnsKey": {},
-                        "bdText": "",
-                        "bdMini": "2",
-                        "bdMiniList": false,
-                        "bdPic": "",
-                        "bdStyle": "0",
-                        "bdSize": "32"
-                    },
-                    "share": {},
-                    "image": {
-                        "viewList": ["qzone", "tsina", "tqq", "renren", "weixin"],
-                        "viewText": "分享到：",
-                        "viewSize": "32"
-                    },
-                    "selectShare": {
-                        "bdContainerClass": null,
-                        "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]
-                    }
-                };
-                with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+                </div>
             </div>
         </header>
         <div class="article-content">
@@ -131,6 +217,6 @@
         </script>
     </div>
 </section>
-<%@include file="foot.jsp"%>
+<%@include file="foot.jsp" %>
 </body>
 </html>
