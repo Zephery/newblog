@@ -28,10 +28,15 @@ public class CustomListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         logger.info("myblog start,begin to record the local server ip");
         try {
+
+
             String user = System.getProperty("myblog.path");
+            //下面这个也行，而且简单
+//            String user1=servletContextEvent.getServletContext().getRealPath("/");
             String abPath = WinOrLinux.isWin() ? user + "foot.jsp" : user + "foot.jsp";
             String ip = IPUtils.getServerIp();
             File file = new File(abPath);
+
 
 //            Document doc = Jsoup.parse(file, "utf-8").outputSettings(new Document.OutputSettings().prettyPrint(false));
 //            Document doc = new Document(abPath).outputSettings(new Document.OutputSettings().prettyPrint(false));
