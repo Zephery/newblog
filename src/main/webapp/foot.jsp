@@ -26,8 +26,7 @@
                href="http://www.miitbeian.gov.cn">粤ICP备17092242号-1</a>
         </div>
         <div class="copyright pull-left">
-            <a>本服务器IP地址：serverIp </a>
-            <a>项目启动时间：projectStartTime</a>
+            本服务器IP地址：serverIp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 项目启动时间：projectStartTime
         </div>
         <div>
             <!-- cnzz stats -->

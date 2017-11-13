@@ -39,7 +39,7 @@
     <%--window.scrollTo(0, 1);--%>
     <%--}--%>
     <%--</script>--%>
-    <script type="text/javascript" src="http://image.wenzhihuai.com/move-top.js?ver=20171017"></script>
+    <script type="text/javascript" src="http://image.wenzhihuai.com/move-top.js?ver=2017111411"></script>
     <script type="text/javascript" src="http://image.wenzhihuai.com/easing.js?ver=20171017"></script>
     <script>
         $(function () {
@@ -106,11 +106,12 @@
     </script>
     <!--360搜索-->
     <meta name="360-site-verification" content="db160af16a61f74e2657c0540f4ccd0d"/>
-    <script>(function () {
-        var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?3c2ebef08880b4f3ed8dd43ac4361401" : "https://jspassport.ssl.qhimg.com/11.0.1.js?3c2ebef08880b4f3ed8dd43ac4361401";
-        document.write('<script src="' + src + '" id="sozz"><\/script>');
-    })();
-    </script>
+    <%--注释掉垃圾360自动提交代码--%>
+    <%--<script>(function () {--%>
+    <%--var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?3c2ebef08880b4f3ed8dd43ac4361401" : "https://jspassport.ssl.qhimg.com/11.0.1.js?3c2ebef08880b4f3ed8dd43ac4361401";--%>
+    <%--document.write('<script src="' + src + '" id="sozz"><\/script>');--%>
+    <%--})();--%>
+    <%--</script>--%>
     <!--搜狗-->
     <meta name="sogou_site_verification" content="Lzg0yrcxwy"/>
     <!--bing-->
@@ -165,7 +166,7 @@
         $().UItoTop({easingType: 'easeOutQuart'});
     });
 </script>
-<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+<a href="#" id="toTop"></a>
 <script src="https://cdn.bootcss.com/bootstrap/4.0.0-beta/js/bootstrap.js" type="text/javascript"></script>
 <script type="text/javascript">
     function checkData() {
