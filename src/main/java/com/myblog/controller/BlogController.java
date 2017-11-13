@@ -63,10 +63,10 @@ public class BlogController {
         }
         for (int i = 0; i < lists.size(); i++) {
             try {
-                int category_id = lists.get(0).getCategoryid();
+                int category_id = lists.get(i).getCategoryid();//bug fix 2017-11-13
                 lists.get(i).setCategory(categoryService.selectByPrimaryKey(category_id));
             } catch (Exception e) {
-                logger.error("datetimeparse error" + e);
+                logger.error("分类设置" + e);
             }
         }
         PageInfo<Blog> blogs = new PageInfo<>(lists);
