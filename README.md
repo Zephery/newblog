@@ -13,8 +13,8 @@
 2. [lucene搜索的使用](https://github.com/Zephery/newblog/blob/master/doc/2.Lucene%E7%9A%84%E4%BD%BF%E7%94%A8.md)<br/>
 3. [使用quartz来定时备份数据库](https://github.com/Zephery/newblog/blob/master/doc/3.%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.md)<br/>
 4. [使用百度统计api做日志系统](https://github.com/Zephery/baidutongji/blob/master/README.md)<br/>
-5. 使用jmx观察jvm和cpu<br/>
-6. 使用druid来监测数据库<br/>
+5. [Nginx小集群的搭建](https://github.com/Zephery/newblog/blob/master/doc/6.%E5%B0%8F%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2.md)<br/>
+6. [数据库]<br/>
 7. 使用机器学习对微博进行分析<br/>
 8. 网站性能优化<br/>
 9. SEO优化<br/>

@@ -12,6 +12,7 @@ import com.myblog.model.*;
 import com.myblog.service.*;
 import com.myblog.util.HttpHelper;
 import com.myblog.util.JedisUtil;
+import com.myblog.util.PythonUtil;
 import com.myblog.util.StringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -246,5 +247,13 @@ public class IndexController {
         logger.info("360SEO完成");
         HttpHelper.getInstance().get(Config.getProperty("baidu"));
         logger.info("baidu完成");
+        PythonUtil.executeMyWeiBo();
+        logger.info("微博更新完成");
+    }
+
+    @RequestMapping("/pythontest")
+    public String pythontest() {
+        PythonUtil.executeMyWeiBo();
+        return "aa";
     }
 }

@@ -3,7 +3,6 @@ package com.myblog.lucene;
 import com.myblog.model.Blog;
 import com.myblog.util.DateUtil;
 import com.myblog.util.StringUtil;
-import com.myblog.util.WinOrLinux;
 import org.apache.commons.io.FileUtils;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
@@ -38,15 +37,15 @@ import java.util.List;
 public class BlogIndex {
     private final static Logger logger = LoggerFactory.getLogger(BlogIndex.class);
     private Directory dir;
-    private final static String BASE_PATH;
+    private final static String BASE_PATH = System.getProperty("myblog.path") + "blog_index";
 
-    static {
-        if (WinOrLinux.isWin()) {
-            BASE_PATH = System.getProperty("user.dir") + "\\blog_index";
-        } else {
-            BASE_PATH = System.getProperty("user.dir") + "/blog_index";
-        }
-    }
+//    static {
+//        if (WinOrLinux.isWin()) {
+//            BASE_PATH = System.getProperty("myblog.path") + "\\blog_index";
+//        } else {
+//            BASE_PATH = System.getProperty("myblog.path") + "/blog_index";
+//        }
+//    }
 
     /**
      * refresh lucene
@@ -54,6 +53,7 @@ public class BlogIndex {
      * @param blogs
      */
     public void refreshlucene(List<Blog> blogs) {
+        logger.info("project path" + BASE_PATH);
         try {
             BlogIndex blogIndex = new BlogIndex();
             FileUtils.deleteDirectory(new File(BASE_PATH));

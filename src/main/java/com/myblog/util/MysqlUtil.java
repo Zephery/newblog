@@ -39,12 +39,13 @@ public class MysqlUtil {
         String host = Config.getProperty("jdbc.host_dev");
         String os = System.getProperty("os.name");
         String file_path = null;
-        if (os.toLowerCase().startsWith("win")) {       //根据系统类型
-            file_path = System.getProperty("user.dir") + "\\sql\\";
-        } else {
-            file_path = System.getProperty("user.dir") + "/sql/";//保存的路径
-        }
-        String file_name = "myblog" + DateTime.now().toString("yyyyMMddHHmmss") + ".sql";
+//        if (os.toLowerCase().startsWith("win")) {       //根据系统类型
+//            file_path = System.getProperty("user.dir") + "\\sql\\";
+//        } else {
+//            file_path = System.getProperty("user.dir") + "/sql/";//保存的路径
+//        }
+        file_path = System.getProperty("myblog.path") + "sql";
+        String file_name = "/myblog" + DateTime.now().toString("yyyyMMddHHmmss") + ".sql";
         String file = file_path + file_name;
         logger.info("file_path and file_name: " + file);
         //server
