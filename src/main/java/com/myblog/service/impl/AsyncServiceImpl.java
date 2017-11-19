@@ -1,6 +1,7 @@
 package com.myblog.service.impl;
 
 import com.myblog.dao.BlogMapper;
+import com.myblog.dao.IMongoDao;
 import com.myblog.dao.IpLogMapper;
 import com.myblog.dao.MyreadingMapper;
 import com.myblog.model.IpLog;
@@ -14,6 +15,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -34,6 +36,8 @@ public class AsyncServiceImpl implements IAsyncService {
     private IMessageService messageService;
     @Resource
     private MyreadingMapper myreadingMapper;
+    @Resource
+    private IMongoDao mongoDao;
 
     @Async
     @Override
@@ -74,5 +78,11 @@ public class AsyncServiceImpl implements IAsyncService {
         } catch (Exception e) {
             logger.error("借阅错误", e);
         }
+    }
+
+    @Async
+    @Override
+    public void insertMongo(HttpServletRequest request) {
+        mongoDao.insert("{\"name\":\"菜鸟教程\"}", "user");
     }
 }

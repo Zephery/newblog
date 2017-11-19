@@ -3,6 +3,8 @@ package com.myblog.service;
 import com.myblog.model.IpLog;
 import com.myblog.model.Myreading;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Zephery
@@ -32,4 +34,6 @@ public interface IAsyncService {
     public void insertlibrary(Myreading myreading);
 
     public void start();
+
+    public void insertMongo(HttpServletRequest request);
 }

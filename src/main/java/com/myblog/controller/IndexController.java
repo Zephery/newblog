@@ -231,11 +231,9 @@ public class IndexController {
 
     /**
      * 每天更新借书记录（由于隐私关系已停掉），刷新一遍Lucene索引记录
-     *
-     * @throws Exception
      */
-    @Scheduled(cron = "0 30 1 * * * ")
-    public void updateLuceneEverydate() throws Exception {
+    @Scheduled(cron = "0 30 5 * * * ")
+    public void updateLuceneEverydate() {
         List<Blog> blogs = blogService.getAllBlogWithContent();
         blogIndex.refreshlucene(blogs);//刷新博客
         logger.info("刷新博客完成");
@@ -249,6 +247,8 @@ public class IndexController {
         logger.info("baidu完成");
         PythonUtil.executeMyWeiBo();
         logger.info("微博更新完成");
+        PythonUtil.executeGetBaidu();
+        logger.info("百度统计更新完成");
     }
 
     @RequestMapping("/pythontest")

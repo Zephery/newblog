@@ -53,6 +53,7 @@ public class BaseInterceptor implements HandlerInterceptor {
                            HttpServletResponse response,
                            Object o, ModelAndView modelAndView) throws Exception {
         try {
+            asyncService.insertMongo(request);
             long endTime = System.currentTimeMillis();//2、结束时间
             long beginTime = startTimeThreadLocal.get();//得到线程绑定的局部变量（开始时间）
             long consumeTime = endTime - beginTime;//3、消耗的时间
