@@ -83,6 +83,6 @@ public class AsyncServiceImpl implements IAsyncService {
     @Async
     @Override
     public void insertMongo(HttpServletRequest request) {
-        mongoDao.insert("{\"name\":\"菜鸟教程\"}", "user");
+        mongoDao.insert("{\"name\":\"菜鸟教程\"}", "requestlog");
     }
 }

@@ -208,7 +208,7 @@ public class BlogServiceImpl implements IBlogService {
         try {
             FileUtils.deleteDirectory(new File(AUTOCOMPLETEPATH));
             logger.info("delete autocomplete file success");
-            Directory dir = FSDirectory.open(Paths.get("autocomplete"));
+            Directory dir = FSDirectory.open(Paths.get(AUTOCOMPLETEPATH));
             SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
             AnalyzingInfixSuggester suggester = new AnalyzingInfixSuggester(dir, analyzer);
             //创建Blog测试数据
