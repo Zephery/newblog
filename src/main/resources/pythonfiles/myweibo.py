@@ -326,7 +326,10 @@ class WeiBoLogin(object):
                 }
                 rep = self.session.post('http://weibo.com/aj/mblog/del', data=data_for_del)
                 logging.info(mid)
-                time.sleep(random.randint(5, 20))
+                try:
+                    time.sleep(random.randint(5, 20))
+                except Exception as eee:
+                    print(eee)
                 print("delete" + mid)
         else:
             logging.warning("WeiBoLogin failed: %s", json_data_1)
