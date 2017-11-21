@@ -252,6 +252,7 @@ public class IndexController {
     }
 
     @RequestMapping("/pythontest")
+    @ResponseBody
     public String pythontest() {
         PythonUtil.executeMyWeiBo();
         return "aa";

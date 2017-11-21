@@ -195,19 +195,21 @@ class AppClient:
         first_weibo = json.dumps(first_str)
         first_weibo = json.loads(first_weibo)
         mid_list.append(first_weibo['mid'])
-        time.sleep(5)
+        time.sleep(random.randint(5, 20))
+        print("second weibo")
         second_str = client.post('statuses/share',
                                  status=str(random.randrange(1000000)) + 'aasecfweond,http://www.cnblogs.com/')
         second_weibo = json.dumps(second_str)
         second_weibo = json.loads(second_weibo)
         mid_list.append(second_weibo['mid'])
-        time.sleep(5)
+        time.sleep(random.randint(5, 20))
+        print("third weibo")
         third_str = client.post('statuses/share',
                                 status=str(random.randrange(1000000)) + 'aathigerd,http://www.cnblogs.com/')
         third_weibo = json.dumps(third_str)
         third_weibo = json.loads(third_weibo)
         mid_list.append(third_weibo['mid'])
-        time.sleep(5)
+        time.sleep(random.randint(5, 20))
         logging.info(mid_list)
         # 抓取公共微博
         count_temp = 1
@@ -324,6 +326,8 @@ class WeiBoLogin(object):
                 }
                 rep = self.session.post('http://weibo.com/aj/mblog/del', data=data_for_del)
                 logging.info(mid)
+                time.sleep(random.randint(5, 20))
+                print("delete" + mid)
         else:
             logging.warning("WeiBoLogin failed: %s", json_data_1)
         return True if self.user_uniqueid and self.user_nick else False

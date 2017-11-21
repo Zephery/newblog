@@ -36,4 +36,6 @@ public interface IAsyncService {
     public void start();
 
     public void insertMongo(HttpServletRequest request);
+
+    public void insertMongo(String key, String value);
 }

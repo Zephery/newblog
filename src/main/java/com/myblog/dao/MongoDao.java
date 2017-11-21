@@ -5,6 +5,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -17,6 +19,7 @@ import java.util.Map;
  * @since 2017/11/19 18:51
  */
 @Repository
+@EnableAsync
 public class MongoDao implements IMongoDao {
     @Resource
     private MongoTemplate mongoTemplate;
@@ -29,6 +32,8 @@ public class MongoDao implements IMongoDao {
         this.mongoTemplate = mongoTemplate;
     }
 
+    @Override
+    @Async
     public void insert(Object objectToSave, String tableName) {
         mongoTemplate.insert(objectToSave, tableName);
     }

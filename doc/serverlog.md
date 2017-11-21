@@ -26,3 +26,6 @@ iptables -A OUTPUT -d xmr.crypto-pool.fr -j DROP
 
 
 # 2017-10-02 再次遭到挖矿攻击
+
+# 2017-11-20
+19号添加mongodb之后，20号重启了服务器，但是忘记启动mongodb，导致后台一直在重连mongodb，也就导致了服务访问超级超级慢，记住要启动所需要的组件。
