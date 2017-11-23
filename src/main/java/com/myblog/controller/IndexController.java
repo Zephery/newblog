@@ -50,6 +50,8 @@ public class IndexController {
     private IMyReadingService myReadingService;
     @Resource
     private IAsyncService asyncService;
+    @Resource
+    private IWeiboService weiboService;
     private BlogIndex blogIndex = new BlogIndex();
 
     /**
@@ -245,8 +247,13 @@ public class IndexController {
         logger.info("360SEO完成");
         HttpHelper.getInstance().get(Config.getProperty("baidu"));
         logger.info("baidu完成");
-        PythonUtil.executeMyWeiBo();
-        logger.info("微博更新完成");
+        List<Weibo> weibos = weiboService.getAllWeiboToday();
+        if (weibos == null || weibos.size() > 0) {
+            logger.info("微博已经更新过了");
+        } else {
+            PythonUtil.executeMyWeiBo();
+            logger.info("微博更新完成");
+        }
         PythonUtil.executeGetBaidu();
         logger.info("百度统计更新完成");
     }

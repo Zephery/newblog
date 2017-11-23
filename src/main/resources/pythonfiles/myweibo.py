@@ -324,7 +324,7 @@ class WeiBoLogin(object):
                 data_for_del = {
                     "mid": mid,
                 }
-                rep = self.session.post('http://weibo.com/aj/mblog/del', data=data_for_del)
+                rep = self.session.post('https://weibo.com/aj/mblog/del?ajwvr=6', data=data_for_del)
                 logging.info(mid)
                 try:
                     time.sleep(random.randint(5, 20))

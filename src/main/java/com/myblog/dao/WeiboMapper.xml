@@ -149,11 +149,17 @@
     </update>
     <select id="getAllWeiboToday" resultMap="ResultMapWithBLOBs">
         select
-        <include refid="Base_Column_List"/>
-        ,
+        min(uid) as uid,
+        `name`,
+        location,
+        url,
+        created_at,
+        `type`,
         <include refid="Blob_Column_List"/>
         from weibo
-        WHERE TO_DAYS( NOW( ) ) - TO_DAYS(created_at) = 0 order by id ASC
+        WHERE TO_DAYS(NOW()) - TO_DAYS(created_at) = 0
+        GROUP BY uid,`name`,location,url,created_at,`type`,text
+        ORDER BY created_at ASC
     </select>
     <cache eviction="LRU"
            type="org.apache.ibatis.cache.impl.PerpetualCache"
