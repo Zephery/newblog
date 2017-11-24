@@ -683,7 +683,7 @@
                             }
 
                             function send_echo() {
-                                var wsUri = "ws://localhost:9090/wscpu.ws";
+                                var wsUri = "ws://${pageContext.request.serverName}:${pageContext.request.localPort}/wscpu.ws";
                                 ws = new WebSocket(wsUri);
                                 ws.onopen = function (evt) {
                                     writeToScreen("Connected !");
