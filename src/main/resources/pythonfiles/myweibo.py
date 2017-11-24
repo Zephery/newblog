@@ -384,4 +384,4 @@ if __name__ == '__main__':
                         filemode='a')
 
     weibo = WeiBoLogin()
-    weibo.login("w1570631036@sina.com", "wenzhihuai123")
+    weibo.login("w1570631036@sina.com", "wenzhihuai2015.")

@@ -233,8 +233,9 @@ public class IndexController {
 
     /**
      * 每天更新借书记录（由于隐私关系已停掉），刷新一遍Lucene索引记录
+     * 由于每次更新都要删除本地索引记录，所以时间必须在项目启动完之后再进行更新
      */
-    @Scheduled(cron = "0 30 5 * * * ")
+    @Scheduled(cron = "0 30 6 * * * ")
     @RequestMapping("/update")
     public void updateLuceneEverydate() throws Exception {
         List<Blog> blogs = blogService.getAllBlogWithContent();

@@ -88,12 +88,6 @@ public class JMXClient {
         return mbsconnector;
     }
 
-    public static void main(String[] args) {
-//        for (int i = 0; i < 100; i++) {
-        JMXClient.getInstance().initMBeanServerConnection();
-//        }
-    }
-
     public Long getJVMUsage() {
         MemoryMXBean memBean = null;
         try {
@@ -107,28 +101,9 @@ public class JMXClient {
         }
     }
 
-    public String getCpuUsage() {
-        double ratio = 0;
-        DecimalFormat df = new java.text.DecimalFormat("#.00");
-
-        try {
-            OperatingSystemMXBean opMXbean = ManagementFactory.newPlatformMXBeanProxy(mbsconnector,
-                    ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME, OperatingSystemMXBean.class);
-            Long start = System.currentTimeMillis();
-            long startT = opMXbean.getProcessCpuTime();
-            try {
-                TimeUnit.SECONDS.sleep(1);       //导致速度慢， 不过因为是ajax的，不要担心哈哈哈哈
-            } catch (InterruptedException e) {
-                logger.error("InterruptedException occurred while MemoryCollector sleeping...");
-            }
-            Long end = System.currentTimeMillis();
-            long endT = opMXbean.getProcessCpuTime();
-            ratio = (endT - startT) / 1000000.0 / (end - start) / opMXbean.getAvailableProcessors();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return df.format(ratio * 100);
+    public static void main(String[] args) throws Exception {
     }
+
 
     /**
      * 定时任务
@@ -217,5 +192,28 @@ public class JMXClient {
         array.add(mp.getCollectionUsage().getMax() / 1048576);
         jsonObject.add("data", parser.parse(array.toString()));
         return jsonObject;
+    }
+
+    public String getCpuUsage() {
+        double ratio = 0;
+        DecimalFormat df = new java.text.DecimalFormat("#.00");
+
+        try {
+            OperatingSystemMXBean opMXbean = ManagementFactory.newPlatformMXBeanProxy(mbsconnector,
+                    ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME, OperatingSystemMXBean.class);
+            Long start = System.currentTimeMillis();
+            long startT = opMXbean.getProcessCpuTime();
+            try {
+                TimeUnit.SECONDS.sleep(1);       //导致速度慢
+            } catch (InterruptedException e) {
+                logger.error("InterruptedException occurred while MemoryCollector sleeping...");
+            }
+            Long end = System.currentTimeMillis();
+            long endT = opMXbean.getProcessCpuTime();
+            ratio = (endT - startT) / 1000000.0 / (end - start) / opMXbean.getAvailableProcessors();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return df.format(ratio * 100);
     }
 }

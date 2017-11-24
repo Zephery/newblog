@@ -1,127 +1,72 @@
-<!doctype html>
-<html lang="zh">
+<%--
+  Created by IntelliJ IDEA.
+  User: Zephery
+  Date: 2017/10/15
+  Time: 19:32
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jQuery响应式Pinterest样式无限动态加载图片瀑布流特效</title>
-    <style>
-        * {
-            margin: 0;
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Web Socket JavaScript Echo Client</title>
+    <script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.js"></script>
+    <script language="javascript" type="text/javascript">
+        var ws;
+        var result;
+
+        function init() {
+            output = document.getElementById("output");
         }
 
-        .jq22-container {
-            margin-top: 50px;
+        function send_echo() {
+            var wsUri = "ws://localhost:9090/wscpu.ws";
+            writeToScreen("Connecting to " + wsUri);
+            ws = new WebSocket(wsUri);
+            ws.onopen = function (evt) {
+                writeToScreen("Connected !");
+                doSend(evt.value);
+            };
+            ws.onmessage = function (evt) {
+                writeToScreen("Received message: " + evt.data);
+
+            };
+            ws.onclose = function (event) {
+                alert("已经与服务器断开连接rn当前连接状态：" + this.readyState);
+            };
+            ws.onerror = function (evt) {
+                writeToScreen('<span style="color: red;">ERROR:</span> '
+                    + evt.data);
+            };
         }
 
-        #div1 {
-            margin: auto;
-            position: relative;
+        function doSend(message) {
+            ws.send(message);
+            writeToScreen("Sent message: " + message);
         }
 
-        .box {
-            float: left;
-            border: 0px solid #ccc;
-            background: #f7f7f7;
-            box-shadow: 0 0 8px #ccc;
+        function writeToScreen(message) {
+            var pre = document.createElement("p");
+            pre.style.wordWrap = "break-word";
+            pre.innerHTML = message;
+            output.appendChild(pre);
         }
 
-        .box:hover {
-            box-shadow: 0 0 10px #999;
-        }
-
-        .box img {
-            width: 240px;
-        }
-    </style>
-    <!--[if IE]>
-    <script src="http://libs.baidu.com/html5shiv/3.7/html5shiv.min.js"></script>
-    <![endif]-->
+        window.addEventListener("load", init, false);
+    </script>
 </head>
 <body>
-<div class="jq22-container">
-    <div class="jq22-content bgcolor-3">
-        <div id="div1">
-            <div class="box"><img src="img/01.jpg" alt=""></div>
-            <div class="box"><img src="img/02.jpg" alt=""></div>
-            <div class="box"><img src="img/03.jpg" alt=""></div>
-            <div class="box"><img src="img/04.jpg" alt=""></div>
-            <div class="box"><img src="img/05.jpg" alt=""></div>
-            <div class="box"><img src="img/06.jpg" alt=""></div>
-            <div class="box"><img src="img/07.jpg" alt=""></div>
-            <div class="box"><img src="img/08.jpg" alt=""></div>
-            <div class="box"><img src="img/02.jpg" alt=""></div>
-            <div class="box"><img src="img/03.jpg" alt=""></div>
-            <div class="box"><img src="img/04.jpg" alt=""></div>
-            <div class="box"><img src="img/05.jpg" alt=""></div>
-            <div class="box"><img src="img/06.jpg" alt=""></div>
-            <div class="box"><img src="img/07.jpg" alt=""></div>
-            <div class="box"><img src="img/01.jpg" alt=""></div>
-            <div class="box"><img src="img/02.jpg" alt=""></div>
-            <div class="box"><img src="img/03.jpg" alt=""></div>
-            <div class="box"><img src="img/04.jpg" alt=""></div>
-            <div class="box"><img src="img/05.jpg" alt=""></div>
-            <div class="box"><img src="img/06.jpg" alt=""></div>
-            <div class="box"><img src="img/07.jpg" alt=""></div>
-            <div class="box"><img src="img/01.jpg" alt=""></div>
-            <div class="box"><img src="img/02.jpg" alt=""></div>
-            <div class="box"><img src="img/03.jpg" alt=""></div>
-            <div class="box"><img src="img/04.jpg" alt=""></div>
-            <div class="box"><img src="img/05.jpg" alt=""></div>
-            <div class="box"><img src="img/06.jpg" alt=""></div>
-            <div class="box"><img src="img/07.jpg" alt=""></div>
-            <div class="box"><img src="img/01.jpg" alt=""></div>
-            <div class="box"><img src="img/02.jpg" alt=""></div>
-            <div class="box"><img src="img/03.jpg" alt=""></div>
-            <div class="box"><img src="img/04.jpg" alt=""></div>
-            <div class="box"><img src="img/05.jpg" alt=""></div>
-            <div class="box"><img src="img/06.jpg" alt=""></div>
-            <div class="box"><img src="img/08.jpg" alt=""></div>
-            <div class="box"><img src="img/01.jpg" alt=""></div>
-            <div class="box"><img src="img/02.jpg" alt=""></div>
-            <div class="box"><img src="img/03.jpg" alt=""></div>
-            <div class="box"><img src="img/04.jpg" alt=""></div>
-            <div class="box"><img src="img/05.jpg" alt=""></div>
-            <div class="box"><img src="img/06.jpg" alt=""></div>
-            <div class="box"><img src="img/07.jpg" alt=""></div>
-            <div class="box"><img src="img/08.jpg" alt=""></div>
-            <div class="box"><img src="img/01.jpg" alt=""></div>
-            <div class="box"><img src="img/02.jpg" alt=""></div>
-            <div class="box"><img src="img/03.jpg" alt=""></div>
-            <div class="box"><img src="img/04.jpg" alt=""></div>
-            <div class="box"><img src="img/05.jpg" alt=""></div>
-            <div class="box"><img src="img/06.jpg" alt=""></div>
-            <div class="box"><img src="img/07.jpg" alt=""></div>
-            <div class="box"><img src="img/08.jpg" alt=""></div>
-        </div>
-    </div>
+<h1>Echo Server</h1>
+<div style="text-align: left;">
+    <form action="">
+        <input onclick="send_echo()" value="发送socket请求" type="button">
+        <input id="textID" name="message" value="Hello World, Web Sockets" type="text">
+        <br>
+    </form>
 </div>
-<script src="http://www.jq22.com/jquery/1.7.2/jquery.min.js"></script>
-<script src="js/jquery.waterfall.js"></script>
-<script>
-    $("#div1").waterfall({
-        itemClass: ".box",
-        minColCount: 1,
-        spacingWidth: 5,
-        spacingHeight: 10,
-        resizeable: true,
-        ajaxCallback: function (success, end) {
-            var data = {
-                "data": [
-                    {"src": "03.jpg"}, {"src": "04.jpg"}, {"src": "02.jpg"}, {"src": "05.jpg"}, {"src": "01.jpg"}, {"src": "06.jpg"}
-                ]
-            };
-            var str = "";
-            var templ = '<div class="box" style="opacity:0;filter:alpha(opacity=0);"><div class="pic"><img src="img/{{src}}" /></div></div>'
-
-            for (var i = 0; i < data.data.length; i++) {
-                str += templ.replace("{{src}}", data.data[i].src);
-            }
-            $(str).appendTo($("#div1"));
-            success();
-            end();
-        }
-    });
-</script>
+<div id="output"></div>
 </body>
 </html>

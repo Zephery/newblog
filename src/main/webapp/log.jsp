@@ -1,3 +1,6 @@
+<%--前言
+由于不断采用新技术，此页面2017-11-24采用了websocket，之后应该没啥时间整理代码了，此外，网页加载时才连接websocket，所以会导致初始值result为空，此处在js中定义变量时声明为0.0。
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -14,6 +17,7 @@
     <script src="https://cdn.bootcss.com/highcharts/5.0.14/highcharts.js"></script>
     <script src="https://cdn.bootcss.com/echarts/3.6.2/echarts.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/china.js"></script>
+    <script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.js"></script>
     <!--不要导入jquery，扇形图有冲突-->
     <style>
         th {
@@ -355,13 +359,14 @@
                 <div class="panel panel-default chartJs">
                     <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
                         <div class="card-title">
-                            <strong>JVM使用</strong>
+                            <strong id="jvmtext">JVM使用（基于Ajax）</strong>
                         </div>
                     </div>
                     <div class="panel-body">
                         <div id="jvm" style="width: auto;height: 330px"></div>
                         <!--JVM-->
                         <script type="text/javascript">
+                            var interval;
                             Highcharts.setOptions({
                                 global: {
                                     useUTC: false
@@ -383,7 +388,7 @@
                                             // set up the updating of the chart each second
                                             var series = this.series[0],
                                                 chart = this;
-                                            setInterval(function () {
+                                            interval = setInterval(function () {
                                                 $.ajax({
                                                     type: "GET",  //提交方式
                                                     url: "${pageContext.request.contextPath}/jmx.do?" + (new Date).getTime(),//路径
@@ -561,7 +566,7 @@
                 <div class="panel panel-default chartJs">
                     <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">
                         <div class="card-title">
-                            <strong>CPU使用率</strong>
+                            <strong id="cputext">CPU使用率（基于WebSocket）</strong>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -590,20 +595,11 @@
                                             var series = this.series[0],
                                                 chart = this;
                                             setInterval(function () {
-                                                $.ajax({
-                                                    type: "GET",  //提交方式
-                                                    url: "${pageContext.request.contextPath}/cpu.do?" + (new Date).getTime(),//路径
-                                                    success: function (result) {//返回数据根据结果进行相应的处理
-                                                        var x = (new Date()).getTime(); // current time
-                                                        var yyy = result;
-                                                        series.addPoint([x, yyy], true, true);
-                                                        activeLastPointToolip(chart)
-                                                    },
-                                                    dataType: 'json'
-                                                });
-
+                                                var x = (new Date()).getTime(); // current time
+                                                var yyy = parseFloat(result);
+                                                series.addPoint([x, yyy], true, true);
+                                                activeLastPointToolip(chart);
                                             }, 1000);
-
                                         }
                                     }
                                 },
@@ -674,70 +670,60 @@
                                 activeLastPointToolip(c)
                             });
 
+
+                            //      ========    websocket    ==========
+                            var ws;
+                            var listener = 0.0;
+                            var result = 0.0;
+                            $(function () {
+                                send_echo();
+                            });
+
+                            function init() {
+                            }
+
+                            function send_echo() {
+                                var wsUri = "ws://localhost:9090/wscpu.ws";
+                                ws = new WebSocket(wsUri);
+                                ws.onopen = function (evt) {
+                                    writeToScreen("Connected !");
+                                    doSend(evt.value);
+                                };
+                                ws.onmessage = function (evt) {
+                                    writeToScreen("Received message: " + evt.data);
+                                    result = evt.data;
+                                };
+                                ws.onclose = function (event) {
+                                    result = 0.0;
+                                    clearInterval(interval);
+                                    $("#cputext").text("CPU使用率（基于WebSocket）连接已断开");
+                                    $("#jvmtetxt").text("JVM使用（基于Ajax）连接已断开");
+                                    alert("为节省资源，服务器已主动断开websocketh和ajax连接\r\n" +
+                                        "当前连接状态：" + this.readyState);
+
+                                };
+                                ws.onerror = function (evt) {
+                                    writeToScreen('<span style="color: red;">ERROR:</span> '
+                                        + evt.data);
+                                };
+                            }
+
+                            function doSend(message) {
+                                ws.send(message);
+                                writeToScreen("Sent message: " + message);
+                            }
+
+                            function writeToScreen(message) {
+                            }
+
+                            window.addEventListener("load", init, false);
                         </script>
                     </div>
                 </div>
             </div>
-            <%--<div class="col-sm-6 col-xs-12">--%>
-            <%--<div class="panel panel-default chartJs">--%>
-            <%--<div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">--%>
-            <%--<div class="card-title">--%>
-            <%--<strong>内存管理</strong>--%>
-            <%--</div>--%>
-            <%--</div>--%>
-            <%--<div class="panel-body">--%>
-            <%--<div id="memoryPoolJsonn" style="width: auto;height: 330px"></div>--%>
-            <%--<script>--%>
-            <%--$(function () {--%>
-            <%--$('#memoryPoolJsonn').highcharts({--%>
-            <%--chart: {--%>
-            <%--type: 'column'--%>
-            <%--},--%>
-            <%--title: {--%>
-            <%--text: null--%>
-            <%--},--%>
-            <%--credits: {--%>
-            <%--enabled: false--%>
-            <%--},--%>
-            <%--xAxis: {--%>
-            <%--categories: [--%>
-            <%--'init',--%>
-            <%--'use',--%>
-            <%--'commited',--%>
-            <%--'max'--%>
-            <%--],--%>
-            <%--crosshair: true--%>
-            <%--},--%>
-            <%--yAxis: {--%>
-            <%--min: 0,--%>
-            <%--title: {--%>
-            <%--text: null--%>
-            <%--}--%>
-            <%--},--%>
-            <%--tooltip: {--%>
-            <%--headerFormat: '<span style="font-size:10px">{point.key}</span><table>',--%>
-            <%--pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +--%>
-            <%--'<td style="padding:0"><b>{point.y:.1f} MB</b></td></tr>',--%>
-            <%--footerFormat: '</table>',--%>
-            <%--shared: true,--%>
-            <%--useHTML: true--%>
-            <%--},--%>
-            <%--plotOptions: {--%>
-            <%--column: {--%>
-            <%--pointPadding: 0.2,--%>
-            <%--borderWidth: 0--%>
-            <%--}--%>
-            <%--},--%>
-            <%--series:${memoryPoolJson}--%>
-            <%--});--%>
-            <%--});--%>
-
-            <%--</script>--%>
-            <%--</div>--%>
-            <%--</div>--%>
         </div>
     </div>
 </section>
-<%@include file="foot.jsp"%>
+<%@include file="foot.jsp" %>
 </body>
 </html>
