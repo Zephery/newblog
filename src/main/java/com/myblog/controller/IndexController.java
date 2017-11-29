@@ -326,7 +326,7 @@ public class IndexController {
     @RequestMapping("/qqlogin")
     @ResponseBody
     public String qqLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String code = "A6B54B5FF61D07FA078C3C6327345B35";
+        String code = request.getParameter("code");
         String toGetToken = "https://graph.qq.com/oauth2.0/token?code=" + code + "&grant_type=authorization_code"
                 + "&client_id=101323012&client_secret=8afd8601924d31418ea63a83619b21f8&redirect_uri=http://www.wenzhihuai.com/qqlogin.do";
         logger.info(toGetToken);
