@@ -14,7 +14,6 @@ import com.myblog.util.HttpHelper;
 import com.myblog.util.JedisUtil;
 import com.myblog.util.PythonUtil;
 import com.myblog.util.StringUtil;
-import com.qq.connect.QQConnectException;
 import com.qq.connect.oauth.Oauth;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -272,7 +271,6 @@ public class IndexController {
     /**
      * 处理从QQ到12345网站的单点登录
      *
-     * @param req
      * @param response
      * @return
      * @throws Exception
@@ -280,30 +278,70 @@ public class IndexController {
     @RequestMapping("/login")
     public void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+//        response.setContentType("text/html;charset=utf-8");
+//        try {
+        //response.sendRedirect(new Oauth().getAuthorizeURL(request));
+//
+        try {
+            String redirect_url = "https://graph.qq.com/oauth2.0/authorize?client_id=101323012&redirect_uri=http://www.wenzhihuai.com/qqlogin.do&response_type=code&state=b5f5c4579383a28085a1b8c7c424eddf&scope=get_user_info,add_topic,add_one_blog,add_album,upload_pic,list_album,add_share,check_page_fans,add_t,add_pic_t,del_t,get_repost_list,get_info,get_other_info,get_fanslist,get_idollist,add_idol,del_ido,get_tenpay_addr";
+            response.sendRedirect(redirect_url);
+            logger.info("aaa");
+        } catch (Exception e) {
+            logger.error("调用QQ接口异常！", e);
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/blogin")
+    public void blogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+//        response.setContentType("text/html;charset=utf-8");
+//        try {
+        //response.sendRedirect(new Oauth().getAuthorizeURL(request));
+//
+        try {
+            String redirect_url = "https://graph.qq.com/oauth2.0/authorize?client_id=101323012&redirect_uri=http://www.wenzhihuai.com/qqlogin.do&response_type=code&state=b5f5c4579383a28085a1b8c7c424eddf&scope=get_user_info,add_topic,add_one_blog,add_album,upload_pic,list_album,add_share,check_page_fans,add_t,add_pic_t,del_t,get_repost_list,get_info,get_other_info,get_fanslist,get_idollist,add_idol,del_ido,get_tenpay_addr";
+            response.sendRedirect(redirect_url);
+            logger.info("aaa");
+        } catch (Exception e) {
+            logger.error("调用QQ接口异常！", e);
+            e.printStackTrace();
+        }
+    }
+
+
+    @RequestMapping("/alogin")
+    public void alogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
         response.setContentType("text/html;charset=utf-8");
         try {
             response.sendRedirect(new Oauth().getAuthorizeURL(request));
-        } catch (QQConnectException e) {
+            logger.info("aaa");
+        } catch (Exception e) {
             logger.error("调用QQ接口异常！", e);
             e.printStackTrace();
         }
     }
 
     @RequestMapping("/qqlogin")
-    public void qqLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    @ResponseBody
+    public String qqLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String code = request.getParameter("code");
         String toGetToken = "https://graph.qq.com/oauth2.0/token?code=" + code + "&grant_type=authorization_code"
                 + "&client_id=101323012&client_secret=8afd8601924d31418ea63a83619b21f8";
         String tokeContent = HttpHelper.getInstance().get(toGetToken);
         logger.info(tokeContent);
-        String url = "https://graph.qq.com/user/get_user_info? \n" +
-                "access_token=*************&\n" +
-                "oauth_consumer_key=12345& \n" +
-                "openid=****************&\n" +
+        String token = tokeContent.split("&")[0].split("=")[0];
+        String url = "https://graph.qq.com/user/get_user_info?" +
+                "access_token=" + token + "&" +
+                "oauth_consumer_key=12345&" +
+                "openid=124124&" +
                 "format=json ";
+        logger.info(url);
         String content = HttpHelper.getInstance().get(url);
         logger.info("qqlogin message");
         logger.info(content);
         logger.info("qqlogin end");
+        return content;
     }
 }
