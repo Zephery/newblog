@@ -337,7 +337,7 @@ public class IndexController {
                 "access_token=" + token + "&" +
                 "oauth_consumer_key=12345&" +
                 "openid=124124&" +
-                "format=json ";
+                "format=json";
         logger.info(url);
         String content = HttpHelper.getInstance().get(url);
         logger.info("qqlogin message");
