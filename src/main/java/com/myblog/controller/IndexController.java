@@ -332,7 +332,7 @@ public class IndexController {
         logger.info(toGetToken);
         String tokeContent = HttpHelper.getInstance().get(toGetToken);
         logger.info(tokeContent);
-        String token = tokeContent.split("&")[0].split("=")[0];
+        String token = tokeContent.split("&")[0].split("=")[1];
         String url = "https://graph.qq.com/user/get_user_info?" +
                 "access_token=" + token + "&" +
                 "oauth_consumer_key=12345&" +
