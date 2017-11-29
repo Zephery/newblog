@@ -326,18 +326,29 @@ public class IndexController {
     @RequestMapping("/qqlogin")
     @ResponseBody
     public String qqLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String code = request.getParameter("code");
+        String code = "A6B54B5FF61D07FA078C3C6327345B35";
         String toGetToken = "https://graph.qq.com/oauth2.0/token?code=" + code + "&grant_type=authorization_code"
                 + "&client_id=101323012&client_secret=8afd8601924d31418ea63a83619b21f8&redirect_uri=http://www.wenzhihuai.com/qqlogin.do";
         logger.info(toGetToken);
+        //access token
         String tokeContent = HttpHelper.getInstance().get(toGetToken);
         logger.info(tokeContent);
         String token = tokeContent.split("&")[0].split("=")[1];
+        //openid
+        //callback( {"client_id":"YOUR_APPID","openid":"YOUR_OPENID"} ); 搜索
+        String openUrl = "https://graph.qq.com/oauth2.0/me?access_token=" + token;
+        String openContent = HttpHelper.getInstance().get(openUrl);
+        String json = openContent.replaceAll("callback\\( ", "").replace(" );", "");
+        System.out.println(json);
+        JsonParser parser = new JsonParser();
+        JsonObject object = parser.parse(json).getAsJsonObject();
+        String openid = object.get("openid").toString().replaceAll("\"", "");
+        //userInfo
         String url = "https://graph.qq.com/user/get_user_info?" +
-                "access_token=" + token + "&" +
-                "oauth_consumer_key=12345&" +
-                "openid=124124&" +
-                "format=json";
+                "access_token=" + token +
+                "&oauth_consumer_key=101323012" +
+                "&openid=" + openid +
+                "&format=json";
         logger.info(url);
         String content = HttpHelper.getInstance().get(url);
         logger.info("qqlogin message");
