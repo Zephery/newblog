@@ -354,6 +354,6 @@ public class IndexController {
         logger.info("qqlogin message");
         logger.info(content);
         logger.info("qqlogin end");
-        return content;
+        return parser.parse(content).toString();
     }
 }
