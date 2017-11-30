@@ -304,10 +304,10 @@ public class IndexController {
         String tokeContent = HttpHelper.getInstance().get(toGetToken);
         logger.info(tokeContent);
         String token = tokeContent.split("&")[0].split("=")[1];
-        String savedToken = redisTemplate.opsForValue().get("savedToken").toString();
-        if (StringUtils.isEmpty(savedToken)) {
+        if (redisTemplate.opsForValue().get("savedToken") == null) {
             redisTemplate.opsForValue().set("savedToken", token);
         } else {
+            String savedToken = redisTemplate.opsForValue().get("savedToken").toString();
             savedToken += "\n" + token;
             redisTemplate.opsForValue().set("savedToken", savedToken);
         }
