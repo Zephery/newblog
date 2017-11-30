@@ -331,7 +331,41 @@ public class IndexController {
         logger.info("qqlogin message");
         logger.info(content);
         logger.info("qqlogin end");
-        mongoTemplate.insert(parser.parse(content));
+        redisTemplate.opsForList().leftPush("qqmessage", parser.parse(content).toString());
+        String sss = parser.parse(content).toString();
+        mongoTemplate.insert(sss, "qqMessage");
+        return parser.parse(content).toString();
+    }
+
+
+    @RequestMapping("/qqlogintest")
+    @ResponseBody
+    @SuppressWarnings("unchecked")
+    public String qqlogintest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String token = "2F0A72CD203EBC9A9F4447B3172470DA";
+        //openid
+        //callback( {"client_id":"YOUR_APPID","openid":"YOUR_OPENID"} ); 搜索
+        String openUrl = "https://graph.qq.com/oauth2.0/me?access_token=" + token;
+        String openContent = HttpHelper.getInstance().get(openUrl);
+        String json = openContent.replaceAll("callback\\( ", "").replace(" );", "");
+        logger.info(json);
+        JsonParser parser = new JsonParser();
+        JsonObject object = parser.parse(json).getAsJsonObject();
+        String openid = object.get("openid").toString().replaceAll("\"", "");
+        //userInfo
+        String url = "https://graph.qq.com/user/get_user_info?" +
+                "access_token=" + token +
+                "&oauth_consumer_key=101323012" +
+                "&openid=" + openid +
+                "&format=json";
+        logger.info(url);
+        String content = HttpHelper.getInstance().get(url);
+        logger.info("qqlogin message");
+        logger.info(content);
+        logger.info("qqlogin end");
+        redisTemplate.opsForList().leftPush("qqmessage", parser.parse(content).toString());
+        String sss = parser.parse(content).toString();
+        mongoTemplate.insert(sss, "qqMessage");
         return parser.parse(content).toString();
     }
 }
