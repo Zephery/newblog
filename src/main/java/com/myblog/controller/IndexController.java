@@ -14,10 +14,11 @@ import com.myblog.util.HttpHelper;
 import com.myblog.util.JedisUtil;
 import com.myblog.util.PythonUtil;
 import com.myblog.util.StringUtil;
-import com.qq.connect.oauth.Oauth;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,6 +54,10 @@ public class IndexController {
     private IAsyncService asyncService;
     @Resource
     private IWeiboService weiboService;
+    @Resource
+    private RedisTemplate redisTemplate;
+    @Resource
+    private MongoTemplate mongoTemplate;
     private BlogIndex blogIndex = new BlogIndex();
 
     /**
@@ -277,45 +282,9 @@ public class IndexController {
      */
     @RequestMapping("/login")
     public void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-//        response.setContentType("text/html;charset=utf-8");
-//        try {
-        //response.sendRedirect(new Oauth().getAuthorizeURL(request));
-//
         try {
             String redirect_url = "https://graph.qq.com/oauth2.0/authorize?client_id=101323012&redirect_uri=http://www.wenzhihuai.com/qqlogin.do&response_type=code&state=b5f5c4579383a28085a1b8c7c424eddf&scope=get_user_info,add_topic,add_one_blog,add_album,upload_pic,list_album,add_share,check_page_fans,add_t,add_pic_t,del_t,get_repost_list,get_info,get_other_info,get_fanslist,get_idollist,add_idol,del_ido,get_tenpay_addr";
             response.sendRedirect(redirect_url);
-            logger.info("aaa");
-        } catch (Exception e) {
-            logger.error("调用QQ接口异常！", e);
-            e.printStackTrace();
-        }
-    }
-
-    @RequestMapping("/blogin")
-    public void blogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-//        response.setContentType("text/html;charset=utf-8");
-//        try {
-        //response.sendRedirect(new Oauth().getAuthorizeURL(request));
-//
-        try {
-            String redirect_url = "https://graph.qq.com/oauth2.0/authorize?client_id=101323012&redirect_uri=http://www.wenzhihuai.com/qqlogin.do&response_type=code&state=b5f5c4579383a28085a1b8c7c424eddf&scope=get_user_info,add_topic,add_one_blog,add_album,upload_pic,list_album,add_share,check_page_fans,add_t,add_pic_t,del_t,get_repost_list,get_info,get_other_info,get_fanslist,get_idollist,add_idol,del_ido,get_tenpay_addr";
-            response.sendRedirect(redirect_url);
-            logger.info("aaa");
-        } catch (Exception e) {
-            logger.error("调用QQ接口异常！", e);
-            e.printStackTrace();
-        }
-    }
-
-
-    @RequestMapping("/alogin")
-    public void alogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-        response.setContentType("text/html;charset=utf-8");
-        try {
-            response.sendRedirect(new Oauth().getAuthorizeURL(request));
             logger.info("aaa");
         } catch (Exception e) {
             logger.error("调用QQ接口异常！", e);
@@ -325,6 +294,7 @@ public class IndexController {
 
     @RequestMapping("/qqlogin")
     @ResponseBody
+    @SuppressWarnings("unchecked")
     public String qqLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String code = request.getParameter("code");
         String toGetToken = "https://graph.qq.com/oauth2.0/token?code=" + code + "&grant_type=authorization_code"
@@ -334,12 +304,19 @@ public class IndexController {
         String tokeContent = HttpHelper.getInstance().get(toGetToken);
         logger.info(tokeContent);
         String token = tokeContent.split("&")[0].split("=")[1];
+        String savedToken = redisTemplate.opsForValue().get("savedToken").toString();
+        if (StringUtils.isEmpty(savedToken)) {
+            redisTemplate.opsForValue().set("savedToken", token);
+        } else {
+            savedToken += "\n" + token;
+            redisTemplate.opsForValue().set("savedToken", savedToken);
+        }
         //openid
         //callback( {"client_id":"YOUR_APPID","openid":"YOUR_OPENID"} ); 搜索
         String openUrl = "https://graph.qq.com/oauth2.0/me?access_token=" + token;
         String openContent = HttpHelper.getInstance().get(openUrl);
         String json = openContent.replaceAll("callback\\( ", "").replace(" );", "");
-        System.out.println(json);
+        logger.info(json);
         JsonParser parser = new JsonParser();
         JsonObject object = parser.parse(json).getAsJsonObject();
         String openid = object.get("openid").toString().replaceAll("\"", "");
@@ -354,6 +331,7 @@ public class IndexController {
         logger.info("qqlogin message");
         logger.info(content);
         logger.info("qqlogin end");
+        mongoTemplate.insert(parser.parse(content));
         return parser.parse(content).toString();
     }
 }
