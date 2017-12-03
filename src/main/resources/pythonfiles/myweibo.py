@@ -1,19 +1,19 @@
 import base64
-import binascii
 import io
 import json
 import logging
 import random
 import re
-import sys
-import time
 import urllib
 import urllib.parse
 
+import binascii
 import httplib2
 import pymysql
 import requests
 import rsa
+import sys
+import time
 
 try:
     from urllib.parse import urlencode
@@ -191,21 +191,21 @@ class AppClient:
         uuid = self.AppCli.uid
         mid_list = []
         first_str = client.post('statuses/share',
-                                status=str(random.randrange(1000000)) + 'aafirefst,http://www.cnblogs.com/')
+                                status=str(random.randrange(1000000)) + 'aafirefst,http://www.wenzhihuai.com/')
         first_weibo = json.dumps(first_str)
         first_weibo = json.loads(first_weibo)
         mid_list.append(first_weibo['mid'])
         time.sleep(random.randint(5, 20))
         print("second weibo")
         second_str = client.post('statuses/share',
-                                 status=str(random.randrange(1000000)) + 'aasecfweond,http://www.cnblogs.com/')
+                                 status=str(random.randrange(1000000)) + 'aasecfweond,http://www.wenzhihuai.com/')
         second_weibo = json.dumps(second_str)
         second_weibo = json.loads(second_weibo)
         mid_list.append(second_weibo['mid'])
         time.sleep(random.randint(5, 20))
         print("third weibo")
         third_str = client.post('statuses/share',
-                                status=str(random.randrange(1000000)) + 'aathigerd,http://www.cnblogs.com/')
+                                status=str(random.randrange(1000000)) + 'aathigerd,http://www.wenzhihuai.com/')
         third_weibo = json.dumps(third_str)
         third_weibo = json.loads(third_weibo)
         mid_list.append(third_weibo['mid'])
