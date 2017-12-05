@@ -85,7 +85,7 @@
                         },
                         series: [{
                             type: 'pie',
-                            name: '浏览器访问量占比',
+                            name: '情感倾向占比',
                             data: [
                                 <c:forEach var="kv" items="${kvs}">
                                 ['${kv.key}', ${kv.value}],

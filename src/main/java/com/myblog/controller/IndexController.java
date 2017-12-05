@@ -157,17 +157,11 @@ public class IndexController {
                 public int compare(KeyAndValue o1, KeyAndValue o2) {
                     Integer a = StringUtil.stringgetint(o1.getValue());
                     Integer b = StringUtil.stringgetint(o2.getValue());
-                    if (a > b) {
-                        return -1;
-                    } else if (a.equals(b)) {
-                        return 0;
-                    } else {
-                        return 1;
-                    }
+                    return b.compareTo(a);
                 }
             });
             Gson gson = new Gson();
-            String temp = gson.toJson(biaoqian.size() > 25 ? biaoqian.subList(0, 25) : biaoqian);
+            String temp = gson.toJson(biaoqian.size() > 16 ? biaoqian.subList(0, 16) : biaoqian);
             response.getWriter().write(temp);
         } catch (Exception e) {
             response.getWriter().write(e.toString());
@@ -367,5 +361,78 @@ public class IndexController {
         String sss = parser.parse(content).toString();
         mongoTemplate.insert(sss, "qqMessage");
         return parser.parse(content).toString();
+    }
+
+    /**
+     * 跳转到微信登陆页面
+     *
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping("/wechatLogin")
+    public void wechatLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        try {
+            String redirect_url = "https://open.weixin.qq.com/connect/qrconnect?" +
+                    "appid=" + Config.getProperty("wexin.app.key") +
+                    "&redirect_uri=" + Config.getProperty("weixin.app.secret") +
+                    "&response_type=code" +
+                    "&scope=SCOPE" +
+                    "&state=STATE#wechat_redirect";
+            response.sendRedirect(redirect_url);
+            logger.info("aaa");
+        } catch (Exception e) {
+            logger.error("调用QQ接口异常！", e);
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/wechatReturn")
+    @SuppressWarnings("unchecked")
+    public String wechatReturn(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String code = request.getParameter("code");
+        JsonParser parser = new JsonParser();
+        logger.info("wechat code:" + code);
+        String toGetToken = "https://api.weixin.qq.com/sns/oauth2/access_token?" +
+                "appid=APPID" +
+                "&secret=SECRET" +
+                "&code=" + code +
+                "&grant_type=authorization_code";
+        logger.info(toGetToken);
+        //access token
+        String tokeContent = HttpHelper.getInstance().get(toGetToken);
+//        {
+//            "access_token":"ACCESS_TOKEN",
+//                "expires_in":7200,
+//                "refresh_token":"REFRESH_TOKEN",
+//                "openid":"OPENID",
+//                "scope":"SCOPE"
+//        }
+        logger.info(tokeContent);
+        //TODO 取得token和openid
+        JsonObject object = parser.parse(tokeContent).getAsJsonObject();
+        String access_token = object.get("access_token").toString();
+        String openid = object.get("openid").toString();
+        String toUserInfoURL = "https://api.weixin.qq.com/sns/userinfo?" +
+                "access_token=" + access_token +
+                "&openid=" + openid;
+        String userInfoContent = HttpHelper.getInstance().get(toUserInfoURL);
+        JsonObject userInfo = parser.parse(userInfoContent).getAsJsonObject();
+//        {
+//            "openid":"OPENID",
+//                "nickname":"NICKNAME",
+//                "sex":1,
+//                "province":"PROVINCE",
+//                "city":"CITY",
+//                "country":"COUNTRY",
+//                "headimgurl": "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0",
+//                "privilege":[
+//            "PRIVILEGE1",
+//                    "PRIVILEGE2"
+//],
+//            "unionid": " o6_bmasdasdsad6_2sgVt7hMZOPfL"
+//
+//        }
+        return null;
     }
 }

@@ -38,3 +38,11 @@ iptables -A OUTPUT -d xmr.crypto-pool.fr -j DROP
 
 </div>
 
+# 2017-12-05 wipefs
+<div align="center">
+
+![](http://image.wenzhihuai.com/images/20171205091617.png)
+
+</div>
+
+

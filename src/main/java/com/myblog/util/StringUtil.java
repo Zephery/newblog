@@ -72,14 +72,16 @@ public class StringUtil {
      * @return
      */
     public static Integer stringgetint(String str) {
-        String regEx = "[^0-9]";
-        Pattern p = Pattern.compile(regEx);
+        Pattern p = Pattern.compile("[0-9A-Z]+");
         Matcher m = p.matcher(str);
-        String num_str = m.replaceAll("").trim();
-        return Integer.parseInt(num_str);
+        String string = "";
+        while (m.find()) {
+            string = m.group();
+        }
+        return Integer.parseInt(string);
     }
 
     public static void main(String[] args) {
-        System.out.println(stringgetint("python(342)"));
+        System.out.println(stringgetint("tomcat9 (1233)"));
     }
 }
