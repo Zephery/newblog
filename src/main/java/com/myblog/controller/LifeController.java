@@ -29,7 +29,7 @@ public class LifeController {
     @Resource
     private ICategoryService categoryService;
 
-    @RequestMapping("life")
+    @RequestMapping("/life")
     public ModelAndView toshowarticle(HttpServletRequest request) {       //生活笔记
         String page = request.getParameter("pagenum");
         String categoryid = request.getParameter("categoryid");

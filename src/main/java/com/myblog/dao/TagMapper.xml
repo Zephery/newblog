@@ -69,4 +69,17 @@
         where t_id in (select t_id from relation
         where relation.blogid= #{blogid,jdbcType=INTEGER});
     </select>
+    <select id="getblogbytagid" resultMap="com.myblog.dao.BlogMapper.BaseResultMap">
+        SELECT * from blog
+        where blogid IN (select blogid from relation where t_id=#{t_id})
+    </select>
+    <select id="getAllTags" resultMap="BaseResultMap">
+        select * from tag
+    </select>
+    <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tag
+        where t_name = #{t_name,jdbcType=VARCHAR}
+    </select>
 </mapper>

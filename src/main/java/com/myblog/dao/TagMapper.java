@@ -1,5 +1,6 @@
 package com.myblog.dao;
 
+import com.myblog.model.Blog;
 import com.myblog.model.Tag;
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +21,10 @@ public interface TagMapper {
     int updateByPrimaryKey(Tag record);
 
     List<Tag> getTagByBlogId(Integer blogid);
+
+    List<Tag> getAllTags();
+
+    List<Blog> getblogbytagid(Integer tId);
+
+    Tag selectByName(String t_name);
 }

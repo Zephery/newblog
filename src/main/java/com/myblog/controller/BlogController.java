@@ -39,7 +39,7 @@ public class BlogController {
     private RedisTemplate<String, Blog> redisTemplate;
 
 
-    @RequestMapping("tech")
+    @RequestMapping("/tech")
     public ModelAndView to_show_article(HttpServletRequest request) {       //博客主页
         ModelAndView modelAndView = new ModelAndView();
         String page = request.getParameter("pagenum");
@@ -96,7 +96,7 @@ public class BlogController {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, path = "getblogdetail")
+    @RequestMapping(method = RequestMethod.GET, path = "/getblogdetail")
     public ModelAndView getBlogDetail(Integer blogid) {       //博客具体内容
         ModelAndView modelAndView = new ModelAndView();
         Blog blog = blogService.getBlogDetail(blogid);
@@ -113,7 +113,7 @@ public class BlogController {
         return modelAndView;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "getcategory")
+    @RequestMapping(method = RequestMethod.GET, path = "/getcategory")
     public ModelAndView getcategory() {
         ModelAndView modelAndView = new ModelAndView();//TODO 类别获取
         return modelAndView;
@@ -172,7 +172,7 @@ public class BlogController {
         return modelAndView;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "test")
+    @RequestMapping(method = RequestMethod.GET, path = "/test")
     public ModelAndView test() {
         ModelAndView modelAndView = new ModelAndView();
         String md = "# hello world";
@@ -181,14 +181,14 @@ public class BlogController {
         return modelAndView;
     }
 
-    @RequestMapping("ajaxbuild")
+    @RequestMapping("/ajaxbuild")
     public void buildsearch(HttpServletResponse response) throws IOException {
         blogService.ajaxbuild();
         response.getWriter().write("success");
 
     }
 
-    @RequestMapping("ajaxsearch")
+    @RequestMapping("/ajaxsearch")
     public void ajaxsearch(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String keyword = request.getParameter("keyword");
         if (StringUtils.isEmpty(keyword)) {

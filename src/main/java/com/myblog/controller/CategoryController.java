@@ -26,7 +26,7 @@ public class CategoryController {
     @Resource
     private IBlogService blogService;
 
-    @RequestMapping("getbytagid")
+    @RequestMapping("/getbytagid")
     public ModelAndView getbytagid(HttpServletRequest request) {
         Integer tid = Integer.parseInt(request.getParameter("tid"));
         ModelAndView modelAndView = new ModelAndView();
@@ -36,7 +36,7 @@ public class CategoryController {
         return modelAndView;
     }
 
-    @RequestMapping("getbycategoryid")
+    @RequestMapping("/getbycategoryid")
     public ModelAndView getbycategoryid(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView modelAndView = new ModelAndView();
         Integer cid = Integer.parseInt(request.getParameter("cid"));

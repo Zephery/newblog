@@ -33,14 +33,14 @@ public class InterestController {
     @Resource
     private IWeiboService weiboService;
 
-    @RequestMapping("interest")
+    @RequestMapping("/interest")
     public ModelAndView interest() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("interest");
         return mv;
     }
 
-    @RequestMapping("weibonlp")
+    @RequestMapping("/weibonlp")
     public ModelAndView weibonlpdetail(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         String weibo = request.getParameter("weibo");

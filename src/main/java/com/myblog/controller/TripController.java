@@ -67,13 +67,13 @@ public class TripController {
     private IImageService imageService;
 
 
-    @RequestMapping("trip")
+    @RequestMapping("/trip")
     public ModelAndView gettrip(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("trip");
         return modelAndView;
     }
 
-    @RequestMapping("ajaxpic")
+    @RequestMapping("/ajaxpic")
     public void ajaxpic(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String page = request.getParameter("page");
         Integer pagenum;
@@ -108,12 +108,12 @@ public class TripController {
         response.getWriter().write(json);
     }
 
-    @RequestMapping("tripbypage")
+    @RequestMapping("/tripbypage")
     public String tripbypage() {
         return "jofej";
     }
 
-    @RequestMapping("updateallpic")
+    @RequestMapping("/updateallpic")
     public void temppic() {
         try {
             List<Image> list = imageService.getAllImage();
@@ -131,7 +131,7 @@ public class TripController {
         }
     }
 
-    @RequestMapping("imagedetail")
+    @RequestMapping("/imagedetail")
     public void imagedetail(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         String str_imageid = request.getParameter("imageid");

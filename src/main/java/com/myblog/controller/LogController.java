@@ -30,7 +30,7 @@ import java.util.List;
 public class LogController {
     private final static Logger logger = LoggerFactory.getLogger(LogController.class);
 
-    @RequestMapping("log")
+    @RequestMapping("/log")
     public ModelAndView log(HttpServletRequest request) {
         JedisUtil jedis = JedisUtil.getInstance();    //remember not to close
         String temp = jedis.get("daterange");

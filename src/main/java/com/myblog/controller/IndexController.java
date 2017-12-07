@@ -10,10 +10,7 @@ import com.myblog.common.Config;
 import com.myblog.lucene.BlogIndex;
 import com.myblog.model.*;
 import com.myblog.service.*;
-import com.myblog.util.HttpHelper;
-import com.myblog.util.JedisUtil;
-import com.myblog.util.PythonUtil;
-import com.myblog.util.StringUtil;
+import com.myblog.util.*;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +48,8 @@ public class IndexController {
     @Resource
     private IMyReadingService myReadingService;
     @Resource
+    private ITagService tagService;
+    @Resource
     private IAsyncService asyncService;
     @Resource
     private IWeiboService weiboService;
@@ -69,7 +68,7 @@ public class IndexController {
      * @return
      * @throws Exception
      */
-    @RequestMapping("index")
+    @RequestMapping("/index")
     public ModelAndView index(@RequestParam(value = "typeId", required = false) String typeId,
                               @RequestParam(value = "releaseDateStr", required = false) String releaseDateStr,
                               HttpServletRequest request)
@@ -111,7 +110,7 @@ public class IndexController {
         return mav;
     }
 
-    @RequestMapping("blogbyhits")
+    @RequestMapping("/blogbyhits")
     @ResponseBody
     public void blogbyhits(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
@@ -124,7 +123,7 @@ public class IndexController {
         }
     }
 
-    @RequestMapping("getjsonbycategories")
+    @RequestMapping("/getjsonbycategories")
     @ResponseBody
     public void getbycategoryid(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
@@ -137,7 +136,7 @@ public class IndexController {
         }
     }
 
-    @RequestMapping("biaoqianyun")
+    @RequestMapping("/biaoqianyun")
     @ResponseBody
     public void biaoqianyun(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
@@ -168,7 +167,7 @@ public class IndexController {
         }
     }
 
-    @RequestMapping("links")
+    @RequestMapping("/links")
     @ResponseBody
     public void links(HttpServletResponse response) {
         try {
@@ -180,7 +179,7 @@ public class IndexController {
         }
     }
 
-    @RequestMapping("myreading")
+    @RequestMapping("/myreading")
     public void myreading(HttpServletResponse response) {
         try {
             Set<Myreading> set = myReadingService.getAllReading();
@@ -192,35 +191,35 @@ public class IndexController {
     }
 
 
-    @RequestMapping(value = "lucene")
+    @RequestMapping(value = "/lucene")
     public void lucene(HttpServletResponse response) throws Exception {
         List<Blog> blogs = blogService.getAllBlogWithContent();
         blogIndex.refreshlucene(blogs);
         response.getWriter().write("success");
     }
 
-    @RequestMapping(value = "aboutme")
+    @RequestMapping(value = "/aboutme")
     public ModelAndView abountme() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("aboutme");
         return mv;
     }
 
-    @RequestMapping(value = "donate")
+    @RequestMapping(value = "/donate")
     public ModelAndView donate() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("donate");
         return mv;
     }
 
-    @RequestMapping(value = "404")
+    @RequestMapping(value = "/404")
     public ModelAndView fourzerofour() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("404");
         return mv;
     }
 
-    @RequestMapping("checkcookie")
+    @RequestMapping("/checkcookie")
     public ModelAndView checkcookie(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("checkcookie");
         HttpSession session = request.getSession();
@@ -229,6 +228,29 @@ public class IndexController {
         mv.addObject("session", session);
         mv.addObject("request", request);
         return mv;
+    }
+
+    /**
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("/updatetag")
+    @ResponseBody
+    public void updatetag(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (tagService.updatetag(1) == 1) {
+            response.getWriter().write("update success");
+        } else {
+            response.getWriter().write("update error");
+        }
+    }
+
+    /**
+     * 重启本项目
+     */
+    @RequestMapping("/restart")
+    public void restart() {
+        BashUtil.getInstance().executeRestartProject();
     }
 
     /**
@@ -258,6 +280,10 @@ public class IndexController {
         }
         PythonUtil.executeGetBaidu();
         logger.info("百度统计更新完成");
+        tagService.updatetag(1);
+        logger.info("标签云更新完成");
+        logger.info("restart:项目开始重启");
+        BashUtil.getInstance().executeRestartProject();
     }
 
     @RequestMapping("/pythontest")
