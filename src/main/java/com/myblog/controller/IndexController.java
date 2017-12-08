@@ -10,7 +10,10 @@ import com.myblog.common.Config;
 import com.myblog.lucene.BlogIndex;
 import com.myblog.model.*;
 import com.myblog.service.*;
-import com.myblog.util.*;
+import com.myblog.util.HttpHelper;
+import com.myblog.util.JedisUtil;
+import com.myblog.util.PythonUtil;
+import com.myblog.util.StringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -248,10 +251,10 @@ public class IndexController {
     /**
      * 重启本项目
      */
-    @RequestMapping("/restart")
-    public void restart() {
-        BashUtil.getInstance().executeRestartProject();
-    }
+//    @RequestMapping("/restart")
+//    public void restart() {
+//        BashUtil.getInstance().executeRestartProject();
+//    }
 
     /**
      * 每天更新借书记录（由于隐私关系已停掉），刷新一遍Lucene索引记录
@@ -282,8 +285,8 @@ public class IndexController {
         logger.info("百度统计更新完成");
         tagService.updatetag(1);
         logger.info("标签云更新完成");
-        logger.info("restart:项目开始重启");
-        BashUtil.getInstance().executeRestartProject();
+//        logger.info("restart:项目开始重启");
+//        BashUtil.getInstance().executeRestartProject();
     }
 
     @RequestMapping("/pythontest")
@@ -357,38 +360,6 @@ public class IndexController {
         return parser.parse(content).toString();
     }
 
-
-    @RequestMapping("/qqlogintest")
-    @ResponseBody
-    @SuppressWarnings("unchecked")
-    public String qqlogintest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String token = "2F0A72CD203EBC9A9F4447B3172470DA";
-        //openid
-        //callback( {"client_id":"YOUR_APPID","openid":"YOUR_OPENID"} ); 搜索
-        String openUrl = "https://graph.qq.com/oauth2.0/me?access_token=" + token;
-        String openContent = HttpHelper.getInstance().get(openUrl);
-        String json = openContent.replaceAll("callback\\( ", "").replace(" );", "");
-        logger.info(json);
-        JsonParser parser = new JsonParser();
-        JsonObject object = parser.parse(json).getAsJsonObject();
-        String openid = object.get("openid").toString().replaceAll("\"", "");
-        //userInfo
-        String url = "https://graph.qq.com/user/get_user_info?" +
-                "access_token=" + token +
-                "&oauth_consumer_key=101323012" +
-                "&openid=" + openid +
-                "&format=json";
-        logger.info(url);
-        String content = HttpHelper.getInstance().get(url);
-        logger.info("qqlogin message");
-        logger.info(content);
-        logger.info("qqlogin end");
-        redisTemplate.opsForList().leftPush("qqmessage", parser.parse(content).toString());
-        String sss = parser.parse(content).toString();
-        mongoTemplate.insert(sss, "qqMessage");
-        return parser.parse(content).toString();
-    }
-
     /**
      * 跳转到微信登陆页面
      *
@@ -413,6 +384,14 @@ public class IndexController {
         }
     }
 
+    /**
+     * 微信回调
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/wechatReturn")
     @SuppressWarnings("unchecked")
     public String wechatReturn(HttpServletRequest request, HttpServletResponse response) throws Exception {

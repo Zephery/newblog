@@ -74,7 +74,7 @@
             var html = "";
             var fenlei = $(".blogroll");
             for (var i = 0; i < data.length; i++) {
-                html += "<li><a href=" + data[i].url + "\">\n" +
+                html += "<li><a href=" + data[i].url + ">" +
                     data[i].name + "</a></li>\n"
             }
             fenlei.append(html);
