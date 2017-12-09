@@ -83,7 +83,7 @@ public class TestUtil {
         return ip;
     }
 
-    public static void main(String[] args) throws SocketException {
-        System.out.println(TestUtil.getV4IP());
+    public static void main(String[] args) throws Exception {
+        System.out.println(URLEncoder.encode("http://858a2ec2.ngrok.io/12345_weixinreceive/receive.do", "utf-8"));
     }
 }

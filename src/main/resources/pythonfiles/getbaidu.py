@@ -1,11 +1,11 @@
 import datetime
 import json
 import logging
-import time
 import urllib.parse
 import urllib.request
 
 import redis
+import time
 
 # 日期开始
 start_date = time.strftime("%Y%m%d", time.localtime())
@@ -16,7 +16,7 @@ print(str(yesterday).replace("-", ""), str(fifteenago).replace("-", ""))
 end, start = str(yesterday).replace("-", ""), str(fifteenago).replace("-", "")
 # 日期结束
 base_url = "https://api.baidu.com/json/tongji/v1/ReportService/getData"
-pool = redis.ConnectionPool(host='119.23.46.71', port=6379, password='root')  # TODO redis地址
+pool = redis.ConnectionPool(host='119.23.46.71', port=6340, password='root')  # TODO redis地址
 r = redis.Redis(connection_pool=pool)
 # logging
 logging.basicConfig(level=logging.DEBUG,

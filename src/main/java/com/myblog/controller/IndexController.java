@@ -10,11 +10,9 @@ import com.myblog.common.Config;
 import com.myblog.lucene.BlogIndex;
 import com.myblog.model.*;
 import com.myblog.service.*;
-import com.myblog.util.HttpHelper;
-import com.myblog.util.JedisUtil;
-import com.myblog.util.PythonUtil;
-import com.myblog.util.StringUtil;
+import com.myblog.util.*;
 import org.apache.commons.lang.StringUtils;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -248,6 +246,14 @@ public class IndexController {
         }
     }
 
+
+    @RequestMapping("/singleToMany")
+    @ResponseBody
+    public String singleToMany() {
+        SingleToMany.getInstance().test();
+        return DateTime.now().toString("yyyy-MM-dd HH:mm:ss");
+    }
+
     /**
      * 重启本项目
      */
@@ -375,7 +381,8 @@ public class IndexController {
                     "&redirect_uri=" + Config.getProperty("weixin.app.secret") +
                     "&response_type=code" +
                     "&scope=SCOPE" +
-                    "&state=STATE#wechat_redirect";
+                    "&state=STATE" +
+                    "#wechat_redirect";
             response.sendRedirect(redirect_url);
             logger.info("aaa");
         } catch (Exception e) {
@@ -386,6 +393,7 @@ public class IndexController {
 
     /**
      * 微信回调
+     * https://open.weixin.qq.com/connect/qrconnect?appid=wx9a96b80ccf8dd805&redirect_uri=http%3A%2F%2F858a2ec2.ngrok.io%2F12345_weixinreceive%2Freceive.do&response_type=code&scope=snsapi_login&state=3d6be0a4035d839573b04816624a415e#wechat_redirect
      *
      * @param request
      * @param response
