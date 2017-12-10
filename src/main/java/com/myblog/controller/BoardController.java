@@ -1,9 +1,12 @@
 package com.myblog.controller;
 
+import com.myblog.util.SingleToMany;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,5 +22,12 @@ public class BoardController {
     public String modelAndView(HttpServletResponse response) {
         response.setHeader("Content-Encoding", "gzip");
         return "board";
+    }
+
+    @RequestMapping("/singleToMany2")
+    @ResponseBody
+    public String singleToMany2() throws Exception {
+        SingleToMany.getInstance().test();
+        return DateTime.now().toString("yyyy-MM-dd HH:mm:ss");
     }
 }

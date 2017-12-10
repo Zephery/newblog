@@ -249,14 +249,14 @@ public class IndexController {
 
     @RequestMapping("/singleToMany")
     @ResponseBody
-    public String singleToMany() {
+    public String singleToMany() throws Exception {
         SingleToMany.getInstance().test();
         return DateTime.now().toString("yyyy-MM-dd HH:mm:ss");
     }
 
-    /**
-     * 重启本项目
-     */
+//    /**
+//     * 重启本项目
+//     */
 //    @RequestMapping("/restart")
 //    public void restart() {
 //        BashUtil.getInstance().executeRestartProject();

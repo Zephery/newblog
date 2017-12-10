@@ -34,7 +34,7 @@ import java.util.Map;
 /**
  * 重写isRedirected 目的机制重定向
  *
- * @author wanglong
+ * @author zephery
  */
 public class HttpHelper {
 
