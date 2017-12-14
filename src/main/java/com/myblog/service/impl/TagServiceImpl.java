@@ -8,8 +8,6 @@ import com.myblog.model.Blog;
 import com.myblog.model.KeyAndValue;
 import com.myblog.model.Tag;
 import com.myblog.service.ITagService;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -49,13 +47,10 @@ public class TagServiceImpl implements ITagService {
             jsonObject.addProperty("value", str);
             jsonArray.add(jsonObject);
         }
-        boolean result = redisTemplate.execute(new RedisCallback<Boolean>() {
-            @Override
-            public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
-                RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
-                connection.set(serializer.serialize("biaoqian"), serializer.serialize(jsonArray.toString()));
-                return true;
-            }
+        boolean result = redisTemplate.execute((RedisCallback<Boolean>) connection -> {
+            RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
+            connection.set(serializer.serialize("biaoqian"), serializer.serialize(jsonArray.toString()));
+            return true;
         });
         return tId;
     }

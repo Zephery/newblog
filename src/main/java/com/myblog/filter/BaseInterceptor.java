@@ -32,6 +32,19 @@ public class BaseInterceptor implements HandlerInterceptor {
     @Resource
     private IAsyncService asyncService;
 
+    private static boolean judegeuri(String uri) {
+        return uri.contains("index.html") || uri.contains("tech.html") || uri.contains("life.html") || uri.contains("trip.html")
+                || uri.contains("log.html") || uri.contains("board.html") || uri.contains("aboutme.html") || uri.contains("donate.html")
+                || uri.contains("weibonlp.html") || uri.contains("interest.html")
+                || uri.contains("search.html") || uri.contains("getblogdetail.html") || uri.equals("/");
+    }
+
+    public static void main(String[] args) {
+        String uri = "/";
+        long start = System.currentTimeMillis();
+        System.out.println(judegeuri(uri));
+        System.out.println(System.currentTimeMillis() - start);
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) {
@@ -84,21 +97,6 @@ public class BaseInterceptor implements HandlerInterceptor {
         } catch (Exception e) {
             logger.error("Handle error", e);
         }
-    }
-
-
-    private static boolean judegeuri(String uri) {
-        return uri.contains("index.html") || uri.contains("tech.html") || uri.contains("life.html") || uri.contains("trip.html")
-                || uri.contains("log.html") || uri.contains("board.html") || uri.contains("aboutme.html") || uri.contains("donate.html")
-                || uri.contains("weibonlp.html") || uri.contains("interest.html")
-                || uri.contains("search.html") || uri.contains("getblogdetail.html") || uri.equals("/");
-    }
-
-    public static void main(String[] args) {
-        String uri = "/";
-        long start = System.currentTimeMillis();
-        System.out.println(judegeuri(uri));
-        System.out.println(System.currentTimeMillis() - start);
     }
 
     @Override

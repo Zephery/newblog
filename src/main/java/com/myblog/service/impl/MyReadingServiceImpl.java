@@ -28,8 +28,7 @@ public class MyReadingServiceImpl implements IMyReadingService {
     @Override
     public Set<Myreading> getAllReading() {
         List<Myreading> list = myreadingMapper.getAllReading();
-        Set<Myreading> set = new HashSet<>();
-        set.addAll(list);
+        Set<Myreading> set = new HashSet<>(list);
         try {
             for (Myreading myreading : list) {
                 myreading.setRentdate(myreading.getRentdate() != null ? myreading.getRentdate() : "");

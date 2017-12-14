@@ -68,9 +68,8 @@ public class TripController {
 
 
     @RequestMapping("/trip")
-    public ModelAndView gettrip(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView("trip");
-        return modelAndView;
+    public ModelAndView gettrip() {
+        return new ModelAndView("trip");
     }
 
     @RequestMapping("/ajaxpic")

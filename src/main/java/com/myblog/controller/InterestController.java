@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -58,14 +57,11 @@ public class InterestController {
                     kvlist.add(keyAndValue);
                 }
                 if (kvlist.size() > 0) {
-                    kvlist.sort(new Comparator<KeyAndValue>() {
-                        @Override
-                        public int compare(KeyAndValue o1, KeyAndValue o2) {
-                            if (Float.parseFloat(o1.getValue()) > Float.parseFloat(o2.getValue())) {
-                                return -1;
-                            } else {
-                                return 1;
-                            }
+                    kvlist.sort((o1, o2) -> {
+                        if (Float.parseFloat(o1.getValue()) > Float.parseFloat(o2.getValue())) {
+                            return -1;
+                        } else {
+                            return 1;
                         }
                     });
                 }

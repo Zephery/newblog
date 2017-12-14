@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -74,24 +73,18 @@ public class LogController {
             TopTen topTen = gson.fromJson(element, TopTen.class);
             diyu.add(topTen);
         }
-        rukou.sort(new Comparator<TopTen>() {
-            @Override
-            public int compare(TopTen o1, TopTen o2) {
-                if (o1.getPv_count() > o2.getPv_count()) {
-                    return -1;
-                } else {
-                    return 1;
-                }
+        rukou.sort((o1, o2) -> {
+            if (o1.getPv_count() > o2.getPv_count()) {
+                return -1;
+            } else {
+                return 1;
             }
         });
-        diyu.sort(new Comparator<TopTen>() {
-            @Override
-            public int compare(TopTen o1, TopTen o2) {
-                if (o1.getPv_count() > o2.getPv_count()) {
-                    return -1;
-                } else {
-                    return 1;
-                }
+        diyu.sort((o1, o2) -> {
+            if (o1.getPv_count() > o2.getPv_count()) {
+                return -1;
+            } else {
+                return 1;
             }
         });
         List<String> jmx_memory_use = JedisUtil.getInstance().lrange("jmx_memory_use");

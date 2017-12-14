@@ -36,8 +36,8 @@ import java.util.List;
  */
 public class BlogIndex {
     private final static Logger logger = LoggerFactory.getLogger(BlogIndex.class);
-    private Directory dir;
     private final static String BASE_PATH = System.getProperty("myblog.path") + "blog_index";
+    private Directory dir;
 
 //    static {
 //        if (WinOrLinux.isWin()) {
@@ -46,6 +46,17 @@ public class BlogIndex {
 //            BASE_PATH = System.getProperty("myblog.path") + "/blog_index";
 //        }
 //    }
+
+    public static void main(String args[]) {
+        try {
+            List<Blog> list = new BlogIndex().searchBlog(1, "j", 4);
+            for (Blog blog : list) {
+                System.out.println(blog.getTitle());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * refresh lucene
@@ -199,16 +210,5 @@ public class BlogIndex {
      */
     public void deleteDir() throws Exception {
 
-    }
-
-    public static void main(String args[]) {
-        try {
-            List<Blog> list = new BlogIndex().searchBlog(1, "j", 4);
-            for (Blog blog : list) {
-                System.out.println(blog.getTitle());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

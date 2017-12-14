@@ -71,7 +71,7 @@ public class WeiboServiceImpl implements IWeiboService {
         CloseableHttpResponse response = null;
         try {
             HttpClientContext context = HttpClientContext.create();
-            String weiboflaskurl= Config.getProperty("weiboflask.url");
+            String weiboflaskurl = Config.getProperty("weiboflask.url");
             HttpGet httpGet = new HttpGet(weiboflaskurl + URLEncoder.encode(sentence.replaceAll("/", ""), "utf-8"));
             response = httpClient.execute(httpGet, context);
             HttpEntity entity = response.getEntity();

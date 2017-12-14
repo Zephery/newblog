@@ -7,25 +7,16 @@ import java.util.Date;
  * @author
  */
 public class IpLog implements Serializable {
-    private Integer id;
-
-    private String sid;
-
-    private String ip;
-
-    private Date ipTime;
-
-    private String area;
-
-    private String uri;
-
-    private Long responseTime;
-
-    private Integer visitNum;
-
-    private String referer;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private String sid;
+    private String ip;
+    private Date ipTime;
+    private String area;
+    private String uri;
+    private Long responseTime;
+    private Integer visitNum;
+    private String referer;
 
     public Integer getId() {
         return id;

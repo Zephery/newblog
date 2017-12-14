@@ -36,6 +36,7 @@ import java.util.*;
 @Service("blogService")
 public class BlogServiceImpl implements IBlogService {
     private static final Logger logger = LoggerFactory.getLogger(BlogServiceImpl.class);
+    private static final String AUTOCOMPLETEPATH = System.getProperty("myblog.path") + "autocomplete";
     @Resource
     private BlogMapper blogMapper;
     @Resource
@@ -44,7 +45,6 @@ public class BlogServiceImpl implements IBlogService {
     private TagMapper tagMapper;
     @Resource
     private IAsyncService asyncService;
-    private static final String AUTOCOMPLETEPATH = System.getProperty("myblog.path") + "autocomplete";
     private BlogIndex blogIndex = new BlogIndex();
 
     /**
@@ -85,6 +85,20 @@ public class BlogServiceImpl implements IBlogService {
 //            System.out.println("blog-numberSold:" + blog.getHits());
         }
         return list;
+    }
+
+    public static void main(String[] args) {
+        try {
+            Directory dir = FSDirectory.open(Paths.get(AUTOCOMPLETEPATH));
+            RAMDirectory indexDir = new RAMDirectory();
+            SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
+            AnalyzingInfixSuggester suggester = new AnalyzingInfixSuggester(dir, analyzer);
+            IBlogService blogService = new BlogServiceImpl();
+            lookup(suggester, "jav");
+//            new BlogServiceImpl().ajaxsearch("北京");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -163,20 +177,6 @@ public class BlogServiceImpl implements IBlogService {
         return blogs;
     }
 
-    public static void main(String[] args) {
-        try {
-            Directory dir = FSDirectory.open(Paths.get(AUTOCOMPLETEPATH));
-            RAMDirectory indexDir = new RAMDirectory();
-            SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
-            AnalyzingInfixSuggester suggester = new AnalyzingInfixSuggester(dir, analyzer);
-            IBlogService blogService = new BlogServiceImpl();
-            lookup(suggester, "jav");
-//            new BlogServiceImpl().ajaxsearch("北京");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     /**
      * 根据lucene搜索blog
      *
@@ -252,20 +252,14 @@ public class BlogServiceImpl implements IBlogService {
             SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
             AnalyzingInfixSuggester suggester = new AnalyzingInfixSuggester(dir, analyzer);
             List<String> list = lookup(suggester, keyword);
-            list.sort(new Comparator<String>() {
-                @Override
-                public int compare(String o1, String o2) {
-                    if (o1.length() > o2.length()) {
-                        return 1;
-                    } else {
-                        return -1;
-                    }
+            list.sort((o1, o2) -> {
+                if (o1.length() > o2.length()) {
+                    return 1;
+                } else {
+                    return -1;
                 }
             });
-            Set<String> set = new LinkedHashSet<>();
-            for (String string : list) {
-                set.add(string);
-            }
+            Set<String> set = new LinkedHashSet<>(list);
             ssubSet(set, 7);
             return set;
         } catch (IOException e) {

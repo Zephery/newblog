@@ -22,15 +22,15 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from ip_log
-    where id = #{id,jdbcType=INTEGER}
+        delete from ip_log
+        where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.myblog.model.IpLog">
         insert into ip_log (id, sid, ip,
-      ip_time, area, uri,
+        ip_time, area, uri,
         response_time, visit_num, referer)
         values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR},
-      #{ipTime,jdbcType=TIMESTAMP}, #{area,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR},
+        #{ipTime,jdbcType=TIMESTAMP}, #{area,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR},
         #{responseTime,jdbcType=BIGINT}, #{visitNum,jdbcType=INTEGER}, #{referer,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.IpLog">
@@ -135,5 +135,5 @@
         visit_num = #{visitNum,jdbcType=INTEGER},
         referer = #{referer,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
-  </update>
+    </update>
 </mapper>

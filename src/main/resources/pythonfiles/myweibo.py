@@ -6,6 +6,7 @@ import random
 import re
 import urllib
 import urllib.parse
+from urllib.parse import urlencode
 
 import binascii
 import httplib2
@@ -15,10 +16,6 @@ import rsa
 import sys
 import time
 
-try:
-    from urllib.parse import urlencode
-except ImportError:
-    from urllib import urlencode
 # 设置编码
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf8')
 
@@ -144,8 +141,8 @@ class AppClient:
         self._appKey = APP_KEY  # your app key
         self._appSecret = APP_SECRET  # your app secret
         self._callbackUrl = REDIRECT_URI  # your callback url
-        self._account = 'w1570631036@sina.com'  # your weibo user name (eg.email)
-        self._password = 'wenzhihuai2018.'  # your weibo pwd
+        self._account = ''  # your weibo user name (eg.email)
+        self._password = ''  # your weibo pwd
         self.AppCli = client
         self._author_url = self.AppCli.authorize_url
 
@@ -265,16 +262,16 @@ class WeiBoLogin(object):
 
         # make post_data
         post_data = {
-            "entry": "weibo",
+            "entry": "account",
             "gateway": "1",
             "from": "",
-            "savestate": "7",
-            "userticket": "1",
+            "savestate": "30",
+            "userticket": "0",
             "vsnf": "1",
-            "service": "miniblog",
+            "service": "account",
             "encoding": "UTF-8",
             "pwencode": "rsa2",
-            "sr": "1280*800",
+            "sr": "1366*768",
             "prelt": "529",
             "url": "http://weibo.com/ajaxlogin.php?framelogin=1&callback=parent.sinaSSOController.feedBackUrlCallBack",
             "rsakv": json_data["rsakv"],
@@ -293,7 +290,7 @@ class WeiBoLogin(object):
             code = input("请输入验证码:")
             post_data["pcid"] = json_data["pcid"]
             post_data["door"] = code
-
+        print(post_data)
         # login weibo.com
         login_url_1 = "http://login.sina.com.cn/sso/login.php?client=ssologin.js(v1.4.18)&_=%d" % int(time.time())
         json_data_1 = self.session.post(login_url_1, data=post_data).json()

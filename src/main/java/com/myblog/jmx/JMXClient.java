@@ -88,6 +88,9 @@ public class JMXClient {
         return mbsconnector;
     }
 
+    public static void main(String[] args) throws Exception {
+    }
+
     public Long getJVMUsage() {
         MemoryMXBean memBean = null;
         try {
@@ -100,10 +103,6 @@ public class JMXClient {
             return 0L;
         }
     }
-
-    public static void main(String[] args) throws Exception {
-    }
-
 
     /**
      * 定时任务

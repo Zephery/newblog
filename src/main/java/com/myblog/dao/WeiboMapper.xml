@@ -127,15 +127,15 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myblog.model.Weibo">
-    update weibo
-    set uid = #{uid,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      location = #{location,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      created_at = #{createdAt,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
-      text = #{text,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+        update weibo
+        set uid = #{uid,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
+        location = #{location,jdbcType=VARCHAR},
+        url = #{url,jdbcType=VARCHAR},
+        created_at = #{createdAt,jdbcType=VARCHAR},
+        type = #{type,jdbcType=INTEGER},
+        text = #{text,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.myblog.model.Weibo">
         update weibo

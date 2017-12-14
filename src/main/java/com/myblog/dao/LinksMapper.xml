@@ -9,7 +9,7 @@
         <result column="sort" jdbcType="INTEGER" property="sort"/>
     </resultMap>
     <sql id="Base_Column_List">
-    lid, name, url, logo, sort
+        lid, name, url, logo, sort
     </sql>
     <cache eviction="LRU"
            type="org.apache.ibatis.cache.impl.PerpetualCache"
@@ -23,14 +23,14 @@
         where lid = #{lid,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from links
-    where lid = #{lid,jdbcType=INTEGER}
+        delete from links
+        where lid = #{lid,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.myblog.model.Links">
-    insert into links (lid, name, url, 
-      logo, sort)
-    values (#{lid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
-      #{logo,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER})
+        insert into links (lid, name, url,
+        logo, sort)
+        values (#{lid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+        #{logo,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.Links">
         insert into links
@@ -88,12 +88,12 @@
         where lid = #{lid,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.myblog.model.Links">
-    update links
-    set name = #{name,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      logo = #{logo,jdbcType=VARCHAR},
-      sort = #{sort,jdbcType=INTEGER}
-    where lid = #{lid,jdbcType=INTEGER}
+        update links
+        set name = #{name,jdbcType=VARCHAR},
+        url = #{url,jdbcType=VARCHAR},
+        logo = #{logo,jdbcType=VARCHAR},
+        sort = #{sort,jdbcType=INTEGER}
+        where lid = #{lid,jdbcType=INTEGER}
     </update>
     <select id="getAllLinks" resultMap="BaseResultMap">
         select

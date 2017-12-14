@@ -50,10 +50,10 @@ public class LifeController {
             lists = blogService.getByCategoryId(Integer.parseInt(categoryid));
         }
         ModelAndView modelAndView = new ModelAndView();
-        for (int i = 0; i < lists.size(); i++) {
+        for (Blog list : lists) {
             try {
                 int category_id = lists.get(0).getCategoryid();
-                lists.get(i).setCategory(categoryService.selectByPrimaryKey(category_id));
+                list.setCategory(categoryService.selectByPrimaryKey(category_id));
             } catch (Exception e) {
                 logger.error("datetimeparse error" + e);
             }

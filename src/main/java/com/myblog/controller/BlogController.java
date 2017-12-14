@@ -64,10 +64,10 @@ public class BlogController {
         } else {
             lists = blogService.getAllTechBlog();
         }
-        for (int i = 0; i < lists.size(); i++) {
+        for (Blog list : lists) {
             try {
-                int category_id = lists.get(i).getCategoryid();//bug fix 2017-11-13
-                lists.get(i).setCategory(categoryService.selectByPrimaryKey(category_id));
+                int category_id = list.getCategoryid();//bug fix 2017-11-13
+                list.setCategory(categoryService.selectByPrimaryKey(category_id));
             } catch (Exception e) {
                 logger.error("分类设置" + e);
             }

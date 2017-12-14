@@ -7,11 +7,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.myblog.common.Config;
+import com.myblog.common.SSOCommon;
 import com.myblog.lucene.BlogIndex;
 import com.myblog.model.*;
 import com.myblog.service.*;
 import com.myblog.util.*;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +22,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,7 +31,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.*;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Zephery on 2016/8/5.
@@ -63,17 +68,12 @@ public class IndexController {
     /**
      * 首页
      *
-     * @param typeId
-     * @param releaseDateStr
      * @param request
      * @return
      * @throws Exception
      */
     @RequestMapping("/index")
-    public ModelAndView index(@RequestParam(value = "typeId", required = false) String typeId,
-                              @RequestParam(value = "releaseDateStr", required = false) String releaseDateStr,
-                              HttpServletRequest request)
-            throws Exception {
+    public ModelAndView index(HttpServletRequest request) throws Exception {
         String page = request.getParameter("pagenum");
         Integer pagenum;
         if (StringUtils.isEmpty(page)) {
@@ -113,7 +113,7 @@ public class IndexController {
 
     @RequestMapping("/blogbyhits")
     @ResponseBody
-    public void blogbyhits(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void blogbyhits(HttpServletResponse response) throws Exception {
         try {
             List<Blog> blogbyhits = blogService.getByHits();
             Gson gson = new Gson();
@@ -126,7 +126,7 @@ public class IndexController {
 
     @RequestMapping("/getjsonbycategories")
     @ResponseBody
-    public void getbycategoryid(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void getbycategoryid(HttpServletResponse response) throws Exception {
         try {
             List<Category> categories = categoryService.getAllCatWithoutLife();
             Gson gson = new Gson();
@@ -139,7 +139,7 @@ public class IndexController {
 
     @RequestMapping("/biaoqianyun")
     @ResponseBody
-    public void biaoqianyun(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void biaoqianyun(HttpServletResponse response) throws Exception {
         try {
             JedisUtil jedis = JedisUtil.getInstance();
             JsonParser parser = new JsonParser();
@@ -152,13 +152,10 @@ public class IndexController {
                 KeyAndValue keyAndValue = gson.fromJson((JsonObject) iterator.next(), KeyAndValue.class);
                 biaoqian.add(keyAndValue);
             }
-            biaoqian.sort(new Comparator<KeyAndValue>() {
-                @Override
-                public int compare(KeyAndValue o1, KeyAndValue o2) {
-                    Integer a = StringUtil.stringgetint(o1.getValue());
-                    Integer b = StringUtil.stringgetint(o2.getValue());
-                    return b.compareTo(a);
-                }
+            biaoqian.sort((o1, o2) -> {
+                Integer a = StringUtil.stringgetint(o1.getValue());
+                Integer b = StringUtil.stringgetint(o2.getValue());
+                return b.compareTo(a);
             });
             Gson gson = new Gson();
             String temp = gson.toJson(biaoqian.size() > 16 ? biaoqian.subList(0, 16) : biaoqian);
@@ -232,13 +229,12 @@ public class IndexController {
     }
 
     /**
-     * @param request
      * @param response
      * @return
      */
     @RequestMapping("/updatetag")
     @ResponseBody
-    public void updatetag(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void updatetag(HttpServletResponse response) throws IOException {
         if (tagService.updatetag(1) == 1) {
             response.getWriter().write("update success");
         } else {
@@ -310,24 +306,31 @@ public class IndexController {
      * @throws Exception
      */
     @RequestMapping("/login")
-    public void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void login(HttpServletResponse response) throws Exception {
         try {
-            String redirect_url = "https://graph.qq.com/oauth2.0/authorize?client_id=101323012&redirect_uri=http://www.wenzhihuai.com/qqlogin.do&response_type=code&state=b5f5c4579383a28085a1b8c7c424eddf&scope=get_user_info,add_topic,add_one_blog,add_album,upload_pic,list_album,add_share,check_page_fans,add_t,add_pic_t,del_t,get_repost_list,get_info,get_other_info,get_fanslist,get_idollist,add_idol,del_ido,get_tenpay_addr";
+            String redirect_url = "https://graph.qq.com/oauth2.0/authorize?" +
+                    "client_id=" + SSOCommon.qqAppKey +
+                    "&redirect_uri=" + SSOCommon.qqRedirectUri +
+                    "&response_type=code" +
+                    "&state=" + RandomStringUtils.randomAlphanumeric(10) +      //设置为简单的随机数
+                    "&scope=get_user_info";
             response.sendRedirect(redirect_url);
-            logger.info("aaa");
         } catch (Exception e) {
             logger.error("调用QQ接口异常！", e);
-            e.printStackTrace();
         }
     }
 
-    @RequestMapping("/qqlogin")
+    @RequestMapping("/qqCallback")
     @ResponseBody
     @SuppressWarnings("unchecked")
-    public String qqLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String qqCallback(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String code = request.getParameter("code");
-        String toGetToken = "https://graph.qq.com/oauth2.0/token?code=" + code + "&grant_type=authorization_code"
-                + "&client_id=101323012&client_secret=8afd8601924d31418ea63a83619b21f8&redirect_uri=http://www.wenzhihuai.com/qqlogin.do";
+        String toGetToken = "https://graph.qq.com/oauth2.0/token?" +
+                "code=" + code +
+                "&grant_type=authorization_code" +
+                "&client_id=" + SSOCommon.qqAppKey +
+                "&client_secret=" + SSOCommon.qqAppSecret +
+                "&redirect_uri=" + SSOCommon.qqRedirectUri;
         logger.info(toGetToken);
         //access token
         String tokeContent = HttpHelper.getInstance().get(toGetToken);
@@ -373,79 +376,45 @@ public class IndexController {
      * @param response
      * @throws Exception
      */
-    @RequestMapping("/wechatLogin")
-    public void wechatLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    @RequestMapping("/weixinLogin")
+    public void weixinLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
             String redirect_url = "https://open.weixin.qq.com/connect/qrconnect?" +
-                    "appid=" + Config.getProperty("wexin.app.key") +
-                    "&redirect_uri=" + Config.getProperty("weixin.app.secret") +
+                    "appid=" + SSOCommon.weixinAppKey +
+                    "&redirect_uri=" + URLEncoder.encode(SSOCommon.weixinRedirectUri, "utf-8") +
                     "&response_type=code" +
-                    "&scope=SCOPE" +
-                    "&state=STATE" +
+                    "&scope=" + SSOCommon.weixinScope +
+                    "&state=" + RandomStringUtils.randomAlphanumeric(10) +      //设置为简单的随机数
                     "#wechat_redirect";
+            logger.info(redirect_url);
             response.sendRedirect(redirect_url);
-            logger.info("aaa");
         } catch (Exception e) {
             logger.error("调用QQ接口异常！", e);
-            e.printStackTrace();
         }
     }
 
     /**
      * 微信回调
-     * https://open.weixin.qq.com/connect/qrconnect?appid=wx9a96b80ccf8dd805&redirect_uri=http%3A%2F%2F858a2ec2.ngrok.io%2F12345_weixinreceive%2Freceive.do&response_type=code&scope=snsapi_login&state=3d6be0a4035d839573b04816624a415e#wechat_redirect
      *
      * @param request
      * @param response
      * @return
      * @throws Exception
      */
-    @RequestMapping("/wechatReturn")
+    @RequestMapping("/weixinReturn")
+    @ResponseBody
     @SuppressWarnings("unchecked")
     public String wechatReturn(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String code = request.getParameter("code");
-        JsonParser parser = new JsonParser();
-        logger.info("wechat code:" + code);
-        String toGetToken = "https://api.weixin.qq.com/sns/oauth2/access_token?" +
-                "appid=APPID" +
-                "&secret=SECRET" +
-                "&code=" + code +
-                "&grant_type=authorization_code";
-        logger.info(toGetToken);
-        //access token
-        String tokeContent = HttpHelper.getInstance().get(toGetToken);
-//        {
-//            "access_token":"ACCESS_TOKEN",
-//                "expires_in":7200,
-//                "refresh_token":"REFRESH_TOKEN",
-//                "openid":"OPENID",
-//                "scope":"SCOPE"
-//        }
-        logger.info(tokeContent);
-        //TODO 取得token和openid
-        JsonObject object = parser.parse(tokeContent).getAsJsonObject();
-        String access_token = object.get("access_token").toString();
-        String openid = object.get("openid").toString();
-        String toUserInfoURL = "https://api.weixin.qq.com/sns/userinfo?" +
+        String code = request.getParameter("code");               // 注意失效
+        JsonObject object = SSOUtil.getWeiXinMessage(code);
+//        JsonObject object = parser.parse(mecontent).getAsJsonObject();
+        String access_token = object.get("access_token").getAsString();
+        String refresh_token = object.get("refresh_token").getAsString();
+        String openid = object.get("openid").getAsString();
+//        SSOUtil.refreshWeixinToken(refresh_token);            //刷新，可不要
+        String userInfoURL = "https://api.weixin.qq.com/sns/userinfo?" +
                 "access_token=" + access_token +
                 "&openid=" + openid;
-        String userInfoContent = HttpHelper.getInstance().get(toUserInfoURL);
-        JsonObject userInfo = parser.parse(userInfoContent).getAsJsonObject();
-//        {
-//            "openid":"OPENID",
-//                "nickname":"NICKNAME",
-//                "sex":1,
-//                "province":"PROVINCE",
-//                "city":"CITY",
-//                "country":"COUNTRY",
-//                "headimgurl": "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0",
-//                "privilege":[
-//            "PRIVILEGE1",
-//                    "PRIVILEGE2"
-//],
-//            "unionid": " o6_bmasdasdsad6_2sgVt7hMZOPfL"
-//
-//        }
-        return null;
+        return HttpHelper.getInstance().get(userInfoURL);
     }
 }
