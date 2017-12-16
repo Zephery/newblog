@@ -1,77 +1,54 @@
-# 个人网站的建立  
-各位大佬瞄一眼[我的个人网站](http://www.wenzhihuai.com/)呗 。如果觉得不错，希望能在GitHub上麻烦给个star，GitHub地址[https://github.com/Zephery/newblog](https://github.com/Zephery/newblog) 。
-大学的时候萌生的一个想法，就是建立一个个人网站，前前后后全部推翻重构了4、5遍，现在终于能看了，下面是目前的首页。
+# 个人博客技术选型
+网站站点：[http://www.wenzhihuai.com/](http://www.wenzhihuai.com/)  
+
+Java后端框架：Spring、Spring MVC、Mybatis、WebSocket（实时推送）、Lucene（搜索系统）、JMX  
+前端框架：Bootstrap、Jquery、Highcharts、Echarts、WaterFall（瀑布流）、WowSlider（图片切换）  
+缓存：Redis（日志系统等）  
+数据库：MySQL  
+部署：Tomcat、Nginx、阿里云服务器、七牛云CDN  
+Python相关：百度统计的获取、Flask提供文本分析API  
+其他：MongoDB（目前只用来记录数据库启动）、RabbitMQ（目前只用来记录请求）、畅言  
+
+**此项目涉及到的依赖（例如：百度统计账号、文本分析API等）实在太多，不能直接copy。自己折腾吧，加油，建站（特别是自己的网站）是个锻炼自己的好机会。如果有疑问，可以联系我哦**
+
+### 相关博客文章：<br/>
+1. [建站故事与网站架构](https://github.com/Zephery/newblog/blob/master/doc/1.%E5%8E%86%E5%8F%B2%E4%B8%8E%E6%9E%B6%E6%9E%84.md)<br/>
+2. [lucene搜索的使用](https://github.com/Zephery/newblog/blob/master/doc/2.Lucene%E7%9A%84%E4%BD%BF%E7%94%A8.md)<br/>
+3. [使用quartz来定时备份数据库](https://github.com/Zephery/newblog/blob/master/doc/3.%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.md)<br/>
+4. [使用百度统计api做日志系统](https://github.com/Zephery/baidutongji/blob/master/README.md)<br/>
+5. [Nginx小集群的搭建](https://github.com/Zephery/newblog/blob/master/doc/6.%E5%B0%8F%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2.md)<br/>
+6. [数据库备份](https://github.com/Zephery/newblog/blob/master/doc/7.%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%87%E4%BB%BD.md)<br/>
+7. [那些牛逼的插件]()
+8. 使用机器学习对微博进行分析<br/>
+9. 网站性能优化<br/>
+10. SEO优化<br/>
+
+### 网站首页  
+首页耗了很多时间在里面，包括加载速度，毕竟影响用户的体验。一直都想做的炫酷一点，不过代价是速度越来越慢，光是初次加载到看到页面就需要7秒，加载完需要30秒。这种速度实在不能忍，直到现在全部换成了CDN，去掉了不能访问的链接（谷歌服务）等，不能说特别快，但是至少不会让用户等7秒了。
 <div align="center">
 
 ![](http://image.wenzhihuai.com/home.png?imageView2/2/w/600)
 
 </div>
 
-由原本的ssh变成ssm，再变成ssm+shiro+lucene，到现在的前后台分离。前台使用ssm+lucene，后台使用spring boot+shiro。其中，使用pagehelper作为分页，lucene用来搜索和自动补全，使用百度统计的API做了个日志系统，统计pv和uv什么的，同时，还有使用了JMX来观察JVM的使用和cpu的使用率，机器学习方面，使用了adaboost和朴素贝叶斯对微博进行分类，有兴趣的可以点点[有点意思](http://www.wenzhihuai.com/weibonlp.html)这个页面。
-本文从下面这几个方面来讲讲网站的建立：<br/>
-1. [建站故事与网站架构](https://github.com/Zephery/newblog/blob/master/doc/1.%E5%8E%86%E5%8F%B2%E4%B8%8E%E6%9E%B6%E6%9E%84.md)<br/>
-2. [lucene搜索的使用](https://github.com/Zephery/newblog/blob/master/doc/2.Lucene%E7%9A%84%E4%BD%BF%E7%94%A8.md)<br/>
-3. [使用quartz来定时备份数据库](https://github.com/Zephery/newblog/blob/master/doc/3.%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.md)<br/>
-4. [使用百度统计api做日志系统](https://github.com/Zephery/baidutongji/blob/master/README.md)<br/>
-5. [Nginx小集群的搭建](https://github.com/Zephery/newblog/blob/master/doc/6.%E5%B0%8F%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2.md)<br/>
-6. [数据库]<br/>
-7. 使用机器学习对微博进行分析<br/>
-8. 网站性能优化<br/>
-9. SEO优化<br/>
-
-## 1.建站故事与网站架构
-### 1.1建站过程
-起初，是因为学习的时候老是找不到什么好玩而又有挑战性的项目，看着struts、spring、hibernate的书，全都是一些小项目，做了感觉也没啥意义，有时候在博客园看到别人还有自己的网站，特羡慕，最终就选择了自己做一个个人网站。期初刚学的ssh，于是开始了自己的ssh搭建个人网站的行程，但是对于一个后端的人来说，前端是个大问题啊。。。。所以初版的时候差不多全是纯生的html、css、js，至少发博客这个功能实现了，但是确实没法看。前前后后折腾了一个多月，决定推翻重做，到百度看看别人怎么做的。首先看到的是[杨青](http://www.yangqq.com/)的网站，已经好几年没更新了，前端的代码看起来比较简单，也是自己能够掌握的，但是不够美观，继续找，在模板之家发现了一个高大上的模板。
-<div align="center">
-
-![](http://image.wenzhihuai.com/joihfiohewifoheifahiauhvuia.png?imageView2/2/w/500)
-
-</div>
-第二版的界面确实是这样的，只是把图片的切换变成了wowslider，也是简单的用bootstrap和pagehelper做了下分页，现在的最终版保留了它的header，然后评论框使用了多说（超级怀念多说）。后端也由原来的ssh变成了ssm，之后加上了lucene来对文章进行索引。之后，随着多说要关闭了，突然之间有很多div都不适应了（我写死了的。。。），再一次，没法看，不想看，一怒之下再次推翻重做，变成了现在这个版本。  
-
-最终版本在考虑时，也找了很多模板，影响深刻的是[tale](https://tale.biezhi.me)和[欲思](https://yusi123.com)这两个主题，期中，tale使用的是java语言写的，刚知道的那一刻我就没好感了，java后端我是要自己全部写的，tale这个页面简洁但是不够炫，而且内容量太低，可能就只是个纯博客，之后发现了欲思，拓展性强，只可惜没有静态的版本，后台是纯生的PHP（嗯，PHP是世界上最好的语言），看了看，没事，保存网页，前端自己改，后端自己全部重写，最终变成了现在这个版本，虽然拼接的时候各种css、js混入。。。。还好在做网站性能优化的时候差不多全部去掉了。最终版加入redis、quartz、shiro等，还有python机器学习、flask的restful api，可谓是大杂烩了。
-页面看着还算凑合，至少不是那种看都看不过去的那种了，但是仔细看看，还是有不少问题的，比如瀑布流，还有排版什么的。只能等自己什么时候想认真学学前端的东西了。
-已经部署在腾讯云服务器上，存储使用了七牛云的cdn。
-
-### 1.2 网站整体技术架构
-最终版的技术架构图如下：
+### 技术架构图如下  
+一直想在选型上采用点新技术，有些用上确实是完美，但是有些却不知用来干什么好，比如RabbitMQ和MongoDB，毕竟个人网站没有这些业务，有网友说没必要用，毕竟没必要为了业务而业务，等以后有需求了再优化这些技术在博客中的嵌入吧。↖(^ω^)↗
 <div align="center">
 
 ![](http://image.wenzhihuai.com/awfawefwefwef.png)
 
 </div>
 
-网站核心主要采用Spring SpringMVC和Mybatis，下图是当访问一篇博客的时候的运行流程，参考了[张开涛](http://jinnianshilongnian.iteye.com/blog/1594806)的博客。
-<div align="center">
-
-![](http://image.wenzhihuai.com/awefaweagregrgbwerbwer.png)
-
-</div>
-
-**运行流程分析**<br/>
-1. 浏览器发送http请求。/blogdetail.html?blogid=1。<br/>
-2. tomcat容器初始化，顺序为context-param>listener>filter>servlet，此时，spring中的bean还没有被注入的，不建议在此处加载bean，网站声明了两个类（IPFilter和CacheControlFilter），IPFilter用来拦截IP，CacheControlFilter用来缓存。<br/>
-3. 初始化Spring。<br/>
-4. DispatcherServlet——>HandlerMapping进行请求到处理的映射，HandlerMapping将“/blogdetail”路径直接映射到名字为“/blogdetail”的Bean进行处理，即BlogController。<br/>
-5. 自定义拦截器，其中BaseIntercepter实现了HandleInterceptor的接口，用来记录每次访问的链接以及后台响应的时间。<br/>
-6. DispatcherServlet——> SimpleControllerHandlerAdapter，SimpleControllerHandlerAdapter将HandlerExecutionChain中的处理器适配为BlogController。<br/>
-7. BlogController执行查询，取得结果集返回数据。<br/>
-8. blogdetail（ModelAndView的逻辑视图名）——>InternalResourceViewResolver， InternalResourceViewResolver使用JstlView，具体视图页面在/blogdetail.jsp。<br/>
-9. JstlView（/blogdetail.jsp）——>渲染，将在处理器传入的模型数据(blog=Blog！)在视图中展示出来。<br/>
-10. 返回响应。<br/>
-
-### 1.3 日志系统
-日志系统架构如下：
+### 日志系统架构如下
+[日志系统](http://www.wenzhihuai.com/log.html)曾经尝试采用过ELK，实时监控实在是让人不能不称赞，本地也跑起来了，但是一到服务器，卡卡卡，毕竟（1Ghz CPU、1G内存），只能放弃ELK，采用百度统计。百度统计提供了Tongji API供开发者使用，只是有次数限制，2000/日，实时的话实在有点低，只能统计前几天的PV、UV等开放出来。其实这个存放在mysql也行，不过这些零碎的数据还是放在redis中，方便管理。
+除了日志系统，自己对服务器的一些使用率也是挺关心的，毕竟服务器配置太低，于是利用了使用了tomcat的JMX来对CPU和jvm使用情况进行监控，这两个都是实时的。出了这两个，对内存的分配做了监控，Eden、Survivor、Tenured的使用情况
 <div align="center">
 
 ![](http://image.wenzhihuai.com/awfawefwefawefwef.png)
 
 </div>
 
-[日志系统](http://www.wenzhihuai.com/log.html)曾经尝试采用过ELK，实时监控实在是让人不能不称赞，本地也跑起来了，但是一到服务器，卡卡卡，毕竟（1Ghz CPU、1G内存），只能放弃ELK，采用百度统计。百度统计提供了Tongji API供开发者使用，只是有次数限制，2000/日，实时的话实在有点低，只能统计前几天的PV、UV等开放出来。其实这个存放在mysql也行，不过这些零碎的数据还是放在redis中，方便管理。
-出了日志系统，自己对服务器的一些使用率也是挺关心的，毕竟服务器配置太低，于是利用了使用了tomcat的JMX来对CPU和jvm使用情况进行监控，这两个都是实时的。出了这两个，对内存的分配做了监控，Eden、Survivor、Tenured的使用情况。<br/>
-
-### 1.4 【有点意思】自然语言处理  
+### 文本分类 
 本人大学里的毕业设计就是基于AdaBoost算法的情感分类，学到的东西还是要经常拿出来看看，要不然真的浪费了我这么久努力做的毕业设计啊。构建了一个基本的情感分类小系统，每天抓取微博进行分类存储在MySql上，并使用flask提供Restful API给java调用，可以点击[这里](http://www.wenzhihuai.com/weibonlp.html)尝试（请忽略Google的图片）。目前分类效果不是很明显，准确率大概只有百分之70%，因为训练样本只有500条（找不到训练样本），机器学习真的太依赖样本的标注。这个，只能请教各位路人大神指导指导了。
 <div align="center">
 
@@ -79,5 +56,60 @@
 
 </div>
 
-## 总结<br/>
-断断续续，也总算做了一个能拿得出手仍要遮遮掩掩才能给别人看的网站，哈哈哈哈哈，也劳烦各位帮忙找找bug。前前后后从初学Java EE就一直设想的事也还算有了个了结，以后要多多看书，写点精品文章。PS：[GitHub上求给个Star](https://github.com/Zephery/newblog)，以后面试能讲讲这个网站。
+### 更新日志
+**2016-3-21**：学完ssh，感觉不扎实，心想要整个自己的博客网站  
+**2016-4-10**：前端采用原生的html、css、js，后端使用ssh，增删改查，至少博客能写了。  
+**2016-5-11**：后悔了，实在太丑了，要不改用PHP？  
+**2016-5-12**：看到了杨青、java1234的博客，嗯，还是继续java吧，即使页面会low一点  
+**2016-5-13**：据说ssh落后了，好吧，弃用ssh，改用ssm，继续  
+**2016-5-15**：由于页面low爆了，抛弃之前所有前端页面。换模板，整了个旅游的高大上的模板，开始改  
+**2016-5-28**：后端根据java1234的Lucene整合进个人网站  
+**2016-6-3**：在腾讯云上线，唉，没人访问  
+**2016-6-3至6-30**：考试，项目暂停  
+**2016-7-1**：Mybatis分页真头疼，到底是采用逻辑上分页还是物理上？  
+**2016-7-1**：引入PageHelper分页插件  
+**2016-7-1**：后台编辑器换成editor.md，数据库中保存之后的html，没选择保存原生的md  
+**2016-7-10**：处理MyBatis一对一，一对多的关系  
+**2016-7-15**：修改Lucene，修改前端模板，好像首页图片切换效果不太好哦  
+**2016-7-29**：抛弃之前的首页图片切换效果使用WOWSlider，加上多说，6666，好看一点点了  
+**2016-8-3**：更新版上下，额，，，还是没人访问。。。。  
+**2016-8-3至8-30**：好好建站居然没人访问。。信心受挫，专注并发去，项目暂停。  
+**2016-9-1**：整理整理网站，如果面试有问到的话，可以展示展示  
+**2016-9-20至2016-12-31**：好好实习，认真工作，项目暂停  
+**2017-1-10**：在家无聊，想起自己还有腾讯云服务器，好吧再看看吧。  
+**2017-1-15**：editor.md存储，选择数据库中保存原生md和html  
+**2017-1-20**：引入Masonry瀑布流，让网站更炫，呵呵，结果感觉变丑了  
+**2017-1-24**：瀑布流换成waterfall，无线加载，好像不太对啊  
+**2017-2至3月**：准备春招，专注JVM，项目暂停  
+**2017-4-3**：多说要关闭了，换成畅言吧  
+**2017-4-5**：日志系统建一个吧，ELK还是Kafka+flume？  
+**2017-4-8**：本地都跑起来了，但是服务器，1GHz CPU+1GHz的内存卡死了，根本跑不起ELK  
+**2017-4-10**：想到百度统计？  
+**2017-5至6-15**：准备毕业设计，项目继续暂停  
+**2017-6-20**：面试失败，绝望，想起面试的时候说到了自己博客，决定重构项目  
+**2017-6-21**：右键欲思，保存网页，布局就使用这个了  
+**2017-6-22**：决定前台后台分析，给用户看的用ssm，后台管理系统采用spring boot  
+**2017-6-23**：上传GitHub，前台的觉[newblog]()，后台管理系统叫[newblogback]()  
+**2017-6-24**：修改布局，标签云那个效果整了好久。后台使用Themyleaf  
+**2017-6-25**：引入微博秀、天气控件、social-share等前端插件，顺眼了好多  
+**2017-6-26**：引入百度统计，哈哈，我真是天才  
+**2017-6-27**：Themyleaf，后台改改改，想着反正只有我一个人用，那就随便点吧  
+**2017-6-30**：结合Highcharts，日志系统基本框架完毕  
+**2017-7-1**：瀑布流怎么办？整合整合，还是没达到预期的效果  
+**2017-7-2**：大学的毕业设计怎么办？文本分类还是蛮有意思的，好，结合进去  
+**2017-7-3**：使用Flask提供一个RESTFUL API，能够给Java调用  
+**2017-7-4至7月20**：继续优化优化界面  
+**2017-7-21**：新域名（www.wenzhihuai.com）通过，初步上线  
+**2017-7-22**：highcharts的地域图好像不太好，用echarts，毕竟国产  
+**2017-7-23**：SSO，百度搜我的名字，排名第一了哈哈哈哈  
+**2017-7-24**：想起百度，搜索的时候输入一个词就弹出相关词，可以可以，我要整这个  
+**2017-7-28**：Lucene Suggest+Autocomplete结合进去，效果还可以  
+**2017-8-13**：社交分享抛弃JiaThis，真的low，换成baidu-share.js  
+**2017-8-15**：Nginx集群、MySQL集群、Tomcat集群  
+**2017-8-24**：数据库连接池换成Druid  
+**2017-9-12**：引入RabbitMQ，额，好像个人网站没这个需求，用来记录访问的吧  
+**2017-10-14**：引入MongoDB，额，这个也没需求啊，用来记录数据库的连接情况吧  
+**2017-10-27**：分布式下Tomcat Session好像不一致，换成Spring-Session  
+**2017-11-14**：网友建议ajax轮询不好，最好用WebSocket，OK，一天之内整完  
+**2017-12-4**：服务器被黑，好吧，换成JDK9.0，加油↖(^ω^)↗  
+#### 持续更新

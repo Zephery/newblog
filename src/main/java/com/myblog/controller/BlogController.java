@@ -115,8 +115,7 @@ public class BlogController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/getcategory")
     public ModelAndView getcategory() {
-        ModelAndView modelAndView = new ModelAndView();//TODO 类别获取
-        return modelAndView;
+        return new ModelAndView();
     }
 
     @RequestMapping(value = "/search")

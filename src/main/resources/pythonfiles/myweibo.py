@@ -15,6 +15,7 @@ import requests
 import rsa
 import sys
 import time
+from aip import AipOcr
 
 # 设置编码
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf8')
@@ -284,10 +285,10 @@ class WeiBoLogin(object):
 
         # get captcha code
         if json_data["showpin"] == 1:
+            baiduAI = BaiduAI()
             url = "http://login.sina.com.cn/cgi/pin.php?r=%d&s=0&p=%s" % (int(time.time()), json_data["pcid"])
-            with open("captcha.jpeg", "wb") as file_out:
-                file_out.write(self.session.get(url).content)
-            code = input("请输入验证码:")
+            code = baiduAI.recognition_word(url).replace(" ", "", 10)
+            print(code)
             post_data["pcid"] = json_data["pcid"]
             post_data["door"] = code
         print(post_data)
@@ -328,6 +329,9 @@ class WeiBoLogin(object):
                 except Exception as eee:
                     print(eee)
                 print("delete" + mid)
+
+        elif json_data_1["retcode"] == "2070":
+            raise Exception("retcode：验证码错误")
         else:
             logging.warning("WeiBoLogin failed: %s", json_data_1)
         return True if self.user_uniqueid and self.user_nick else False
@@ -373,6 +377,25 @@ class WeiBoLogin(object):
         return password.decode()
 
 
+class BaiduAI:
+    def get_file_content(self, filePath):
+        with open(filePath, 'rb') as fp:
+            return fp.read()
+
+    def recognition_word(self, url):
+        APP_ID = '10530811'
+        API_KEY = 'LwqnDLTHYIdH3H5pOIM5H3wB'
+        SECRET_KEY = 'EIa2DECI9udOOK3acNrg3mxsIGcT7nDK'
+        client = AipOcr(APP_ID, API_KEY, SECRET_KEY)
+        result = client.basicGeneral(requests.get(url).content)
+        print(result)
+        try:
+            return result['words_result'][0]['words']
+        except Exception as e:
+            print(e)
+            raise Exception("解析错误")
+
+
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG,
                         format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
@@ -381,4 +404,11 @@ if __name__ == '__main__':
                         filemode='a')
 
     weibo = WeiBoLogin()
-    weibo.login("w1570631036@sina.com", "wenzhihuai2015.")
+    for i in range(0, 100):
+        try:
+            print("=============" + str(i) + "================")
+            weibo.login("w1570631036@sina.com", "wenzhihuai2015.")
+            time.sleep(random.randint(10))
+            break
+        except Exception as e:
+            print(e)

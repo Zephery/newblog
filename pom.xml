@@ -722,6 +722,13 @@
             <version>1.16.18</version>
             <scope>provided</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/cn.easyproject/easyocr -->
+        <dependency>
+            <groupId>cn.easyproject</groupId>
+            <artifactId>easyocr</artifactId>
+            <version>3.0.4-RELEASE</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>myblog</finalName>
