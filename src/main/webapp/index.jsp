@@ -35,7 +35,7 @@
                         <ul>
                             <c:forEach var="banner" items="${banners}">
                                 <li><a href="getblogdetail.html?blogid=${banner.blogid}" target="_self">
-                                    <img src="${banner.imageurl}"
+                                    <img src="${banner.imageurl}?imageView2/1/w/830/h/500"
                                          alt="${banner.title}" title="${banner.title}"
                                          id="wows1_0"/></a>
                                 </li>

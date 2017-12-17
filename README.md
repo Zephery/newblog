@@ -11,6 +11,8 @@ Python相关：百度统计的获取、Flask提供文本分析API
 
 **此项目涉及到的依赖（例如：百度统计账号、文本分析API等）实在太多，不能直接copy。自己折腾吧，加油，建站（特别是自己的网站）是个锻炼自己的好机会。如果有疑问，可以联系我哦**
 
+**BTW，希望给个star或者fork奖励**
+
 ### 相关博客文章：<br/>
 1. [建站故事与网站架构](https://github.com/Zephery/newblog/blob/master/doc/1.%E5%8E%86%E5%8F%B2%E4%B8%8E%E6%9E%B6%E6%9E%84.md)<br/>
 2. [lucene搜索的使用](https://github.com/Zephery/newblog/blob/master/doc/2.Lucene%E7%9A%84%E4%BD%BF%E7%94%A8.md)<br/>
@@ -99,7 +101,7 @@ Python相关：百度统计的获取、Flask提供文本分析API
 **2017-7-2**：大学的毕业设计怎么办？文本分类还是蛮有意思的，好，结合进去  
 **2017-7-3**：使用Flask提供一个RESTFUL API，能够给Java调用  
 **2017-7-4至7月20**：继续优化优化界面  
-**2017-7-21**：新域名（www.wenzhihuai.com）通过，初步上线  
+**2017-7-21**：新域名（[www.wenzhihuai.com](http://www.wenzhihuai.com)）通过，初步上线  
 **2017-7-22**：highcharts的地域图好像不太好，用echarts，毕竟国产  
 **2017-7-23**：SSO，百度搜我的名字，排名第一了哈哈哈哈  
 **2017-7-24**：想起百度，搜索的时候输入一个词就弹出相关词，可以可以，我要整这个  
@@ -112,4 +114,4 @@ Python相关：百度统计的获取、Flask提供文本分析API
 **2017-10-27**：分布式下Tomcat Session好像不一致，换成Spring-Session  
 **2017-11-14**：网友建议ajax轮询不好，最好用WebSocket，OK，一天之内整完  
 **2017-12-4**：服务器被黑，好吧，换成JDK9.0，加油↖(^ω^)↗  
-#### 持续更新
+#### 持续更新...
