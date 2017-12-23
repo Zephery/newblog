@@ -25,7 +25,7 @@
     <script type="text/javascript"
             src="http://assets.changyan.sohu.com/upload/plugins/plugins.count.js">
     </script>
-    <link rel="stylesheet" href="http://image.wenzhihuai.com/editormd.preview.css?ver=20171017"/>
+    <link rel="stylesheet" href="http://image.wenzhihuai.com/editormd.preview.css?ver=20171221"/>
     <script src="https://cdn.bootcss.com/marked/0.3.6/marked.js"></script>
     <script src="https://cdn.bootcss.com/prettify/r224/prettify.min.js"></script>
     <script src="https://cdn.bootcss.com/raphael/2.2.7/raphael.min.js"></script>

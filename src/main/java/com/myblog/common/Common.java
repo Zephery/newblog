@@ -22,4 +22,9 @@ public class Common {
             " \"id\": 97290923,\n" +
             " \"repc\": 0\n" +
             " }";
+    public final static String BAIDU_APP_ID = "10530811";
+
+    public final static String BAIDU_APP_KEY = "LwqnDLTHYIdH3H5pOIM5H3wB";
+
+    public final static String BAIDU_SECRET_KEY = "EIa2DECI9udOOK3acNrg3mxsIGcT7nDK";
 }

@@ -1,4 +1,10 @@
 # 个人博客技术选型
+
+[![GitHub stars](https://img.shields.io/github/stars/Zephery/newblog.svg)](https://github.com/Zephery/newblog/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Zephery/newblog.svg)](https://github.com/Zephery/newblog/network)
+[![GitHub issues](https://img.shields.io/github/issues/Zephery/newblog.svg)](https://github.com/Zephery/newblog/issues)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/Zephery/newblog.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FZephery%2Fnewblog)
+
 网站站点：[http://www.wenzhihuai.com/](http://www.wenzhihuai.com/)  
 
 Java后端框架：Spring、Spring MVC、Mybatis、WebSocket（实时推送）、Lucene（搜索系统）、JMX  
@@ -8,10 +14,13 @@ Java后端框架：Spring、Spring MVC、Mybatis、WebSocket（实时推送）�
 部署：Tomcat、Nginx、阿里云服务器、七牛云CDN  
 Python相关：百度统计的获取、Flask提供文本分析API  
 其他：MongoDB（目前只用来记录数据库启动）、RabbitMQ（目前只用来记录请求）、畅言  
+### 注意
+
+**本网站只是前台，还有个[博客管理系统](https://github.com/Zephery/newblogback)，由于是个人使用，没怎么整，有兴趣可以看看**
 
 **此项目涉及到的依赖（例如：百度统计账号、文本分析API等）实在太多，不能直接copy。自己折腾吧，加油，建站（特别是自己的网站）是个锻炼自己的好机会。如果有疑问，可以联系我哦**
 
-**BTW，希望给个star或者fork奖励**
+**BTW，如果可以，希望给个star或者fork奖励**
 
 ### 相关博客文章：<br/>
 1. [建站故事与网站架构](https://github.com/Zephery/newblog/blob/master/doc/1.%E5%8E%86%E5%8F%B2%E4%B8%8E%E6%9E%B6%E6%9E%84.md)<br/>

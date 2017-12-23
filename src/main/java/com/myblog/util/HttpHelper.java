@@ -40,7 +40,6 @@ public class HttpHelper {
 
     private static final HttpHelper instance = new HttpHelper();
     private static final String CONFIG_FILE = "load.properties";
-    private static Configuration configuration;
     private static Logger log = LoggerFactory.getLogger(HttpHelper.class);
     /**
      * 重定向标示位
@@ -79,7 +78,7 @@ public class HttpHelper {
      * 描述：创建httpClient连接池，并初始化httpclient
      */
     private void initHttpClient() throws ConfigurationException {
-        configuration = new PropertiesConfiguration(CONFIG_FILE);
+        Configuration configuration = new PropertiesConfiguration(CONFIG_FILE);
         //创建httpclient连接池
         PoolingHttpClientConnectionManager httpClientConnectionManager = new PoolingHttpClientConnectionManager();
         httpClientConnectionManager.setMaxTotal(configuration.getInt("http.max.total"));    //设置连接池线程最大数量

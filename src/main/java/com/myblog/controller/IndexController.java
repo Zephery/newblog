@@ -22,6 +22,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -305,7 +306,7 @@ public class IndexController {
      * @return
      * @throws Exception
      */
-    @RequestMapping("/login")
+    @RequestMapping("/qqLogin")
     public void login(HttpServletResponse response) throws Exception {
         try {
             String redirect_url = "https://graph.qq.com/oauth2.0/authorize?" +
@@ -416,5 +417,15 @@ public class IndexController {
                 "access_token=" + access_token +
                 "&openid=" + openid;
         return HttpHelper.getInstance().get(userInfoURL);
+    }
+
+    @RequestMapping(value = "/baidu/word", method = RequestMethod.GET)
+    @ResponseBody
+    public String baiduword(String url) {
+        try {
+            return WordRecognition.getInstance().recognizeWordByUrl(url);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

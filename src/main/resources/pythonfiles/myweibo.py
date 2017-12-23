@@ -15,7 +15,6 @@ import requests
 import rsa
 import sys
 import time
-from aip import AipOcr
 
 # 设置编码
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf8')
@@ -285,9 +284,11 @@ class WeiBoLogin(object):
 
         # get captcha code
         if json_data["showpin"] == 1:
-            baiduAI = BaiduAI()
             url = "http://login.sina.com.cn/cgi/pin.php?r=%d&s=0&p=%s" % (int(time.time()), json_data["pcid"])
-            code = baiduAI.recognition_word(url).replace(" ", "", 10)
+            code = requests.session().get(
+                "http://www.wenzhihuai.com/baidu/word.do?" + urllib.parse.urlencode(url)).content
+            if code is None:
+                return
             print(code)
             post_data["pcid"] = json_data["pcid"]
             post_data["door"] = code
@@ -375,25 +376,6 @@ class WeiBoLogin(object):
         password = rsa.encrypt(string, public_key)
         password = binascii.b2a_hex(password)
         return password.decode()
-
-
-class BaiduAI:
-    def get_file_content(self, filePath):
-        with open(filePath, 'rb') as fp:
-            return fp.read()
-
-    def recognition_word(self, url):
-        APP_ID = '10530811'
-        API_KEY = 'LwqnDLTHYIdH3H5pOIM5H3wB'
-        SECRET_KEY = 'EIa2DECI9udOOK3acNrg3mxsIGcT7nDK'
-        client = AipOcr(APP_ID, API_KEY, SECRET_KEY)
-        result = client.basicGeneral(requests.get(url).content)
-        print(result)
-        try:
-            return result['words_result'][0]['words']
-        except Exception as e:
-            print(e)
-            raise Exception("解析错误")
 
 
 if __name__ == '__main__':

@@ -23,7 +23,7 @@ import java.io.IOException;
 public class IPFilter implements Filter {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(IPFilter.class);
-    String[] forbidIps = null;
+    private String[] forbidIps = null;
     @Autowired
     @Qualifier("ipLogMapper")
     private IpLogMapper ipLogMapper;
