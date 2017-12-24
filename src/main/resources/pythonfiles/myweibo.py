@@ -153,7 +153,8 @@ class AppClient:
             if len(text) > 1000:
                 return
             print(text)
-            insert_sql = """insert into myblog.weibo(uid,`name`,location,url,text,created_at,`type`) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
+            insert_sql = """insert into myblog.weibo(uid,`name`,location,url,text,created_at,`type`)
+ VALUES (%s,%s,%s,%s,%s,%s,%s)"""
             cur.execute(insert_sql, (user_id, name, location, url, text, created_at, int(type)))
             connection.commit()
         except Exception as e:
@@ -286,7 +287,9 @@ class WeiBoLogin(object):
         if json_data["showpin"] == 1:
             url = "http://login.sina.com.cn/cgi/pin.php?r=%d&s=0&p=%s" % (int(time.time()), json_data["pcid"])
             code = requests.session().get(
-                "http://www.wenzhihuai.com/baidu/word.do?" + urllib.parse.urlencode(url)).content
+                "http://www.wenzhihuai.com/baidu/word.do?" + urllib.parse.quote(url)).content
+            code = str(code)
+            print(code)
             if code is None:
                 return
             print(code)

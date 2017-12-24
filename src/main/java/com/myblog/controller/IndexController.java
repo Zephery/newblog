@@ -423,7 +423,7 @@ public class IndexController {
     @ResponseBody
     public String baiduword(String url) {
         try {
-            return WordRecognition.getInstance().recognizeWordByUrl(url);
+            return WordRecognition.getInstance().recognizeImagePath(url);
         } catch (Exception e) {
             return null;
         }
