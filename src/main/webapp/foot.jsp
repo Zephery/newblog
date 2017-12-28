@@ -11,7 +11,7 @@
 <footer class="footer">
     <div class="footer-inner">
         <div class="copyright pull-left">
-            <a href="${pageContext.request.contextPath}" title="Zephery">Zephery</a> 版权所有丨采用<a
+            <a href="${pageContext.request.contextPath}" title="Zephery">Zephery</a> 版权所有丨改自<a
                 href="http://yusi123.com/"> 欲思 </a>主题丨基于 Spring SpringMVC Mybatis 构建 © 2016-<script>
                 var date = new Date();  //创建对象
                 var y = date.getFullYear();     //获取年份
