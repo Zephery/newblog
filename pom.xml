@@ -734,6 +734,18 @@
             <artifactId>java-sdk</artifactId>
             <version>4.0.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.integration/spring-integration-kafka -->
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-kafka</artifactId>
+            <version>3.0.0.RELEASE</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+            <version>2.1.0.RELEASE</version>
+        </dependency>
 
     </dependencies>
     <build>

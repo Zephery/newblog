@@ -428,4 +428,21 @@ public class IndexController {
             return null;
         }
     }
+
+    @RequestMapping("/zhoubao")
+    @SuppressWarnings("unchecked")
+    public ModelAndView zhoubao() {
+        ModelAndView mv = new ModelAndView();
+        if (redisTemplate.opsForValue().get("zhoubao") != null) {
+            mv.addObject("content", redisTemplate.opsForValue().get("zhoubao").toString());
+        }
+        mv.setViewName("/zhoubao");
+        return mv;
+    }
+
+    @RequestMapping("/savezhoubao")
+    @SuppressWarnings("unchecked")
+    public void savezhoubao(String content) {
+        redisTemplate.opsForValue().set("zhoubao", content);
+    }
 }
