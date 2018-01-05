@@ -7,6 +7,7 @@
        xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:task="http://www.springframework.org/schema/task"
        xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/beans
@@ -20,7 +21,9 @@
         http://www.springframework.org/schema/data/mongo
         http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
         http://www.springframework.org/schema/task
-        http://www.springframework.org/schema/task/spring-task.xsd">
+        http://www.springframework.org/schema/task/spring-task.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!-- 自动扫描包中的bean -->
     <context:component-scan base-package="com.myblog.*"/>
@@ -251,7 +254,15 @@
     <import resource="rabbitmq.xml"/>
     <!--websocket-->
     <import resource="websocket.xml"/>
+    <!--kafka-->
+    <!--<import resource="kafka-consumer.xml"/>-->
+
     <bean id="myStatLogger" class="com.myblog.druid.MyStatLogger"/>
+    <!--dubbo-->
+    <dubbo:application name="demo-consumer"/>
+    <dubbo:registry address="${zookeeper.url}" check="false"/>
+    <dubbo:reference id="demoService" interface="com.myblog.demo.DemoService" check="false"/>
+
 
     <!--数据源-->
     <beans profile="develop">
@@ -326,5 +337,4 @@
             <property name="statLogger" ref="myStatLogger"/>
         </bean>
     </beans>
-
 </beans>

@@ -443,6 +443,9 @@ public class IndexController {
     @RequestMapping("/savezhoubao")
     @SuppressWarnings("unchecked")
     public void savezhoubao(String content) {
+        if (StringUtils.isNotEmpty(content)) {
+            content = StringUtils.trimToNull(content);
+        }
         redisTemplate.opsForValue().set("zhoubao", content);
     }
 }

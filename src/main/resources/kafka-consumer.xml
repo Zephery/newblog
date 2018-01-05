@@ -7,7 +7,7 @@
     <bean id="consumerProperties" class="java.util.HashMap">
         <constructor-arg>
             <map>
-                <entry key="bootstrap.servers" value="127.0.0.1:7000"/>
+                <entry key="bootstrap.servers" value="${bootstrap.servers}"/>
                 <entry key="group.id" value="0"/>
                 <entry key="enable.auto.commit" value="false"/>
                 <entry key="auto.commit.interval.ms" value="1000"/>

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.myblog.demo.DemoService;
 import com.myblog.model.KeyAndValue;
 import com.myblog.model.Weibo;
 import com.myblog.service.IWeiboService;
@@ -12,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -31,6 +33,8 @@ public class InterestController {
     private static final Logger logger = LoggerFactory.getLogger(InterestController.class);
     @Resource
     private IWeiboService weiboService;
+    @Resource
+    private DemoService demoService;
 
     @RequestMapping("/interest")
     public ModelAndView interest() {
@@ -73,5 +77,14 @@ public class InterestController {
         }
         mv.setViewName("weibonlp");
         return mv;
+    }
+
+    @RequestMapping("/sayhello")
+    @ResponseBody
+    public String sayhello() {
+        String hello = demoService.sayHello("hello");
+        // show the result
+        System.out.println(hello);
+        return hello;
     }
 }

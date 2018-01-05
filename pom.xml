@@ -41,6 +41,7 @@
         <jedis.version>2.9.0</jedis.version>
         <mysql.version>5.1.34</mysql.version>
         <ehcache.version>2.10.4</ehcache.version>
+        <dubbo.version>2.5.8</dubbo.version>
         <netty.version>4.1.14.Final</netty.version>
     </properties>
     <dependencies>
@@ -746,7 +747,21 @@
             <artifactId>spring-kafka</artifactId>
             <version>2.1.0.RELEASE</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>${dubbo.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.10</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.sgroschupf</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>0.1</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>myblog</finalName>

@@ -389,11 +389,13 @@ if __name__ == '__main__':
                         filemode='a')
 
     weibo = WeiBoLogin()
-    for i in range(0, 100):
-        try:
-            print("=============" + str(i) + "================")
-            weibo.login("w1570631036@sina.com", "wenzhihuai2015.")
-            time.sleep(random.randint(10))
-            break
-        except Exception as e:
-            print(e)
+    weibo.login("w1570631036@sina.com", "wenzhihuai2015.")
+
+# for i in range(0, 100):
+#     try:
+#         print("=============" + str(i) + "================")
+#         weibo.login("w1570631036@sina.com", "wenzhihuai2015.")
+#         time.sleep(random.randint(10))
+#         break
+#     except Exception as e:
+#         print(e)

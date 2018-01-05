@@ -5,7 +5,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.errors.WakeupException;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -23,12 +23,12 @@ public class KafkaConsumerRunner implements Runnable {
     @Override
     public void run() {
         try {
-            consumer.subscribe(Arrays.asList(Config.getProperty("input_topic")));
+            consumer.subscribe(Collections.singletonList(Config.getProperty("input_topic")));
             while (!closed.get()) {
                 ConsumerRecords<String, String> records = consumer.poll(3000);
                 try {
                     consumer.commitSync(); // commit
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
                 if (records.count() > 0) {
                     handler.consume(records);
