@@ -38,4 +38,12 @@ public interface IAsyncService {
     public void insertMongo(HttpServletRequest request);
 
     public void insertMongo(String key, String value);
+
+    /**
+     * 统计耗时
+     *
+     * @param methodName
+     * @param time
+     */
+    public void insertMethodTime(String methodName, Long time);
 }

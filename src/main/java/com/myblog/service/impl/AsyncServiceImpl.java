@@ -11,6 +11,7 @@ import com.myblog.service.IMessageService;
 import com.myblog.util.LibraryUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,8 @@ public class AsyncServiceImpl implements IAsyncService {
     private MyreadingMapper myreadingMapper;
     @Resource
     private IMongoDao mongoDao;
+    @Resource
+    private RedisTemplate redisTemplate;
 
     @Async
     @Override
@@ -90,5 +93,12 @@ public class AsyncServiceImpl implements IAsyncService {
     @Override
     public void insertMongo(String key, String value) {
         mongoDao.insert(key, value);
+    }
+
+    @Async
+    @Override
+    @SuppressWarnings("unchecked")
+    public void insertMethodTime(String methodName, Long time) {
+        redisTemplate.opsForHash().put("method", methodName, time);
     }
 }

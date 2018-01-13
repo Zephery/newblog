@@ -10,22 +10,27 @@
 <%@ page isELIgnored="false" %>
 <footer class="footer">
     <div class="footer-inner">
-        <div class="copyright pull-left">
+        <div style="float: right;margin-top: 0;width: 100px;height: 50px">
+            <a href="https://www.upyun.com">
+                <img src="${pageContext.request.contextPath}/images/youpailogo6.png" style="float: left;width: auto"/>
+            </a>
+        </div>
+        <div class="copyright pull-left" style="float: left">
             <a href="${pageContext.request.contextPath}" title="Zephery">Zephery</a> 版权所有丨改自<a
-                href="http://yusi123.com/"> 欲思 </a>主题丨基于 Spring SpringMVC Mybatis 构建 © 2016-<script>
+                href="http://yusi123.com/"> 欲思 </a>主题丨基于 SSM 构建 © 2016-<script>
                 var date = new Date();  //创建对象
                 var y = date.getFullYear();     //获取年份
                 document.write(y);
             </script>
             丨托管于
-            <a rel="nofollow" target="_blank" href="https://www.aliyun.com">阿里云&七牛云</a>
+            <a rel="nofollow">云存储</a>
             |
             <a rel="nofollow" target="_blank" href="http://www.wenzhihuai.com:8081/admin/index.html">后台管理 </a>
             丨
             <a rel="nofollow" target="_blank"
                href="http://www.miitbeian.gov.cn">粤ICP备17092242号-1</a>
         </div>
-        <div class="copyright pull-left">
+        <div class="copyright pull-left" style="float: left;">
             本服务器IP地址：serverIp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 项目启动时间：projectStartTime
         </div>
         <div>
