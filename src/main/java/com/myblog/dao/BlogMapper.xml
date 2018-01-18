@@ -157,11 +157,11 @@
         order by blogid desc
         limit 5
     </select>
-    <cache eviction="LRU"
-           type="org.apache.ibatis.cache.impl.PerpetualCache"
-           flushInterval="120000"
-           size="1024"
-           readOnly="true"/>
+    <!--<cache eviction="LRU"-->
+           <!--type="org.apache.ibatis.cache.impl.PerpetualCache"-->
+           <!--flushInterval="120000"-->
+           <!--size="1024"-->
+           <!--readOnly="true"/>-->
     <select id="getHits" resultMap="BaseResultMap">
         SELECT blogid, title, create_at, hits, imageurl
         from blog

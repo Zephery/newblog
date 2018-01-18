@@ -5,6 +5,7 @@ import com.myblog.model.Myreading;
 import com.myblog.service.IMyReadingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,6 +27,7 @@ public class MyReadingServiceImpl implements IMyReadingService {
     private MyreadingMapper myreadingMapper;
 
     @Override
+    @Cacheable(value = "getAllReading", keyGenerator = "customKeyGenerator")
     public Set<Myreading> getAllReading() {
         List<Myreading> list = myreadingMapper.getAllReading();
         Set<Myreading> set = new HashSet<>(list);

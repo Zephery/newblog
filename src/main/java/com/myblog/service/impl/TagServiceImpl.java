@@ -8,6 +8,7 @@ import com.myblog.model.Blog;
 import com.myblog.model.KeyAndValue;
 import com.myblog.model.Tag;
 import com.myblog.service.ITagService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -56,6 +57,7 @@ public class TagServiceImpl implements ITagService {
     }
 
     @Override
+    @Cacheable(value = "getAllTags", keyGenerator = "customKeyGenerator")
     public List<Tag> getAllTags() {
         return tagMapper.getAllTags();
     }

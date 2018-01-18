@@ -17,6 +17,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -53,6 +54,7 @@ public class WeiboServiceImpl implements IWeiboService {
     private WeiboMapper weiboMapper;
 
     @Override
+    @Cacheable(value = "getAllWeiboToday", keyGenerator = "customKeyGenerator")
     public List<Weibo> getAllWeiboToday() {
         List<Weibo> weibos = weiboMapper.getAllWeiboToday();
         for (Weibo weibo : weibos) {

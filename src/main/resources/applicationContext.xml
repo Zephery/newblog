@@ -129,6 +129,7 @@
 
     <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
         <constructor-arg name="redisOperations" ref="redisTemplate" />
+        <property name="defaultExpiration" value="${redis.defaultExpiration}"/>
     </bean>
 
 
