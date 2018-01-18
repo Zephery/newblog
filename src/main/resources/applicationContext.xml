@@ -195,6 +195,7 @@
         <property name="hostName" value="${host}"/>
         <property name="port" value="${port}"/>
         <property name="password" value="${password}"/>
+        <property name="database" value="${redis.default.db}"/>
         <property name="timeout" value="${timeout}"/>
         <property name="poolConfig" ref="jedisPoolConfig"/>
         <property name="usePool" value="true"/>
