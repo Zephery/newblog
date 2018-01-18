@@ -5,6 +5,7 @@ import com.myblog.model.Links;
 import com.myblog.service.ILinksService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,6 +25,7 @@ public class LinksServiceImpl implements ILinksService {
     private LinksMapper linksMapper;
 
     @Override
+    @Cacheable(value = "getAllLinks", keyGenerator = "customKeyGenerator")
     public List<Links> getAllLinks() {
         return linksMapper.getAllLinks();
     }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
@@ -8,6 +7,7 @@
        xmlns:task="http://www.springframework.org/schema/task"
        xmlns:mongo="http://www.springframework.org/schema/data/mongo"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/beans
@@ -111,7 +111,7 @@
             </list>
         </property>
     </bean>
-    <aop:config>
+    <aop:config proxy-target-class="true">
         <!--pointcut-ref="druid-stat-pointcut"在idea中报Cannot resolve Spring Pointcut ‘druid-stat-pointcut‘  不用管它-->
         <aop:advisor advice-ref="druid-stat-interceptor"
                      pointcut-ref="druid-stat-pointcut"/>
@@ -128,7 +128,7 @@
     <!--</bean>-->
 
     <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
-        <constructor-arg name="redisOperations" ref="redisTemplate" />
+        <constructor-arg name="redisOperations" ref="redisTemplate"/>
     </bean>
 
 
@@ -250,19 +250,14 @@
         </tx:attributes>
     </tx:advice>
 
-    <!-- 配置事务切面 -->
-    <aop:config proxy-target-class="true">
-        <aop:pointcut id="pointCut" expression="execution(* com.myblog.service.*.*(..))"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="pointCut"/>
-    </aop:config>
     <!--httpclient配置-->
     <import resource="bean-httpclient.xml"/>
     <!--spring rabbitmq配置-->
     <import resource="rabbitmq.xml"/>
     <!--websocket-->
-    <import resource="websocket.xml"/>
+    <!--<import resource="websocket.xml"/>-->
     <!--kafka-->
-    <import resource="kafka-consumer.xml"/>
+    <!--<import resource="kafka-consumer.xml"/>-->
 
     <bean id="myStatLogger" class="com.myblog.druid.MyStatLogger"/>
     <!--dubbo-->
@@ -272,76 +267,39 @@
 
 
     <!--数据源-->
-    <beans profile="develop">
-        <!-- 配置数据源，使用阿里巴巴连接池Druid -->
-        <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-            <property name="url" value="${jdbc.url_dev}"/>
-            <property name="username" value="${jdbc.username_dev}"/>
-            <property name="password" value="${jdbc.password_dev}"/>
-            <!--配置这些才能使用druid监控-->
-            <!-- 配置初始化大小、最小、最大 -->
-            <property name="initialSize" value="1"/>
-            <property name="minIdle" value="1"/>
-            <property name="maxActive" value="20"/>
-            <!-- 配置获取连接等待超时的时间 -->
-            <property name="maxWait" value="60000"/>
+    <!-- 配置数据源，使用阿里巴巴连接池Druid -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${jdbc.url_dev}"/>
+        <property name="username" value="${jdbc.username_dev}"/>
+        <property name="password" value="${jdbc.password_dev}"/>
+        <!--配置这些才能使用druid监控-->
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="1"/>
+        <property name="minIdle" value="1"/>
+        <property name="maxActive" value="20"/>
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000"/>
 
-            <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-            <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
 
-            <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-            <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
 
-            <property name="validationQuery" value="SELECT 'x'"/>
-            <property name="testWhileIdle" value="true"/>
-            <property name="testOnBorrow" value="false"/>
-            <property name="testOnReturn" value="false"/>
+        <property name="validationQuery" value="SELECT 'x'"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
 
-            <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
-            <property name="poolPreparedStatements" value="true"/>
-            <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
 
-            <!--保存Druid的监控记录-->
-            <!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
-            <property name="filters" value="stat"/>
-            <property name="timeBetweenLogStatsMillis" value="1000"/>
-            <property name="statLogger" ref="myStatLogger"/>
-        </bean>
-    </beans>
-    <beans profile="product">
-        <!-- 配置数据源，使用阿里巴巴连接池Druid -->
-        <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-            <property name="url" value="${jdbc.url_pro}"/>
-            <property name="username" value="${jdbc.username_pro}"/>
-            <property name="password" value="${jdbc.password_pro}"/>
-            <!--配置这些才能使用druid监控-->
-            <!-- 配置初始化大小、最小、最大 -->
-            <property name="initialSize" value="1"/>
-            <property name="minIdle" value="1"/>
-            <property name="maxActive" value="20"/>
-            <!-- 配置获取连接等待超时的时间 -->
-            <property name="maxWait" value="60000"/>
+        <!--保存Druid的监控记录-->
+        <!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
+        <property name="filters" value="stat"/>
+        <property name="timeBetweenLogStatsMillis" value="1000"/>
+        <property name="statLogger" ref="myStatLogger"/>
+    </bean>
 
-            <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-            <property name="timeBetweenEvictionRunsMillis" value="60000"/>
-
-            <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-            <property name="minEvictableIdleTimeMillis" value="300000"/>
-
-            <property name="validationQuery" value="SELECT 'x'"/>
-            <property name="testWhileIdle" value="true"/>
-            <property name="testOnBorrow" value="false"/>
-            <property name="testOnReturn" value="false"/>
-
-            <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
-            <property name="poolPreparedStatements" value="true"/>
-            <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
-
-            <!--保存Druid的监控记录-->
-            <!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
-            <property name="filters" value="stat"/>
-            <property name="timeBetweenLogStatsMillis" value="1000"/>
-            <property name="statLogger" ref="myStatLogger"/>
-        </bean>
-    </beans>
 </beans>

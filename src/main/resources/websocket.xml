@@ -8,6 +8,7 @@
     <websocket:handlers allowed-origins="*">
         <websocket:mapping path="/websocket.ws" handler="demoWSHandler"/>
         <websocket:mapping path="/wscpu.ws" handler="chartWSHandler"/>
+        <websocket:mapping path="/kafkaws.ws" handler="kafkaWebSocket"/>
         <websocket:handshake-interceptors>
             <bean class="com.myblog.websocket.HandshakeInterceptor"/>
         </websocket:handshake-interceptors>
@@ -15,4 +16,5 @@
 
     <bean id="demoWSHandler" class="com.myblog.websocket.DemoWSHandler"/>
     <bean id="chartWSHandler" class="com.myblog.websocket.ChartWSHandler"/>
+    <bean id="kafkaWebSocket" class="com.myblog.websocket.KafkaWebSocket"/>
 </beans>

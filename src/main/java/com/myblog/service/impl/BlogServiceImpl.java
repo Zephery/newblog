@@ -22,6 +22,7 @@ import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.RAMDirectory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -102,6 +103,8 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
+//    不能在此处在缓存，跟pageHelper有冲突，会导致多次查询
+//    @Cacheable(value = "getAllBlog", keyGenerator = "customKeyGenerator")
     public List<Blog> getAllBlog() {
         List<Blog> blogs = blogMapper.getAllBlog();
         for (Blog blog : blogs) {
@@ -111,12 +114,14 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
+    @Cacheable(value = "getByCategoryId", key = "'categoryid'.concat(#categoryid)")
     public List<Blog> getByCategoryId(int categoryid) {
         List<Blog> blogs = blogMapper.getByCategoryId(categoryid);
         return blogs;
     }
 
     @Override
+    @Cacheable(value = "getBlogDetail", key = "'blogid'.concat(#blogid)")
     public Blog getBlogDetail(Integer blogid) {
         Blog blog = blogMapper.selectByPrimaryKey(blogid);
         if (blog == null) {
@@ -127,10 +132,12 @@ public class BlogServiceImpl implements IBlogService {
         List<Tag> tags = tagMapper.getTagByBlogId(blog.getBlogid());
         blog.setTags(tags.size() > 0 ? tags : null);
         asyncService.updatebloghits(blogid);//异步更新阅读次数
+        logger.info("没有走缓存");
         return blog;
     }
 
     @Override
+    @Cacheable(value = "getTagByTid", key = "'t_id'.concat(#t_id)")
     public Tag getTagByTid(Integer t_id) {
         return tagMapper.selectByPrimaryKey(t_id);
     }
@@ -145,12 +152,13 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
+    @Cacheable(value = "getBanner", keyGenerator = "customKeyGenerator")
     public List<Blog> getBanner() {
-        List<Blog> blogs = blogMapper.getBanner();
-        return blogs;
+        return blogMapper.getBanner();
     }
 
     @Override
+    @Cacheable(value = "getByHits", keyGenerator = "customKeyGenerator")
     public List<Blog> getByHits() {
         List<Blog> blogs = blogMapper.getHits();
         for (Blog blog : blogs) {

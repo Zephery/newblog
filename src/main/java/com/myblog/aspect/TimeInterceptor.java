@@ -1,9 +1,9 @@
 package com.myblog.aspect;
 
 import com.myblog.service.IAsyncService;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,13 +20,38 @@ import javax.annotation.Resource;
 public class TimeInterceptor {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(TimeInterceptor.class);
-    // 一分钟，即60000ms
-    private static final long ONE_MINUTE = 60000;
     @Resource
     private IAsyncService asyncService;
 
+    //切点
+    @Pointcut("execution(* com.myblog.service.impl.BlogServiceImpl.*(..))")
+    public void pointcut() {
+    }
+
     /**
-     * 统计方法执行耗时Around环绕通知
+     * 前置通知
+     *
+     * @param jp
+     */
+    @Before("pointcut()")
+    public void before(JoinPoint jp) {
+        logger.info(jp.getSignature().getName());
+        logger.info("----------前置通知----------");
+    }
+
+    /**
+     * 最终通知
+     *
+     * @param jp
+     */
+    @After("pointcut()")
+    public void after(JoinPoint jp) {
+        logger.info("----------最终通知----------");
+    }
+
+    /**
+     * 环绕通知
+     * 统计方法执行耗时Around
      *
      * @param joinPoint
      * @return
@@ -54,6 +79,32 @@ public class TimeInterceptor {
         this.printExecTime(methodName, startTime, endTime);
 
         return obj;
+    }
+
+    /**
+     * 返回结果通知
+     *
+     * @param jp
+     * @param result
+     */
+    @AfterReturning(pointcut = "execution(* com.myblog.service.impl.BlogServiceImpl.*(..))", returning = "result")
+    public void afterReturning(JoinPoint jp, Object result) {
+        logger.info(jp.getSignature().getName());
+        logger.info("结果是：" + result);
+        logger.info("----------返回结果----------");
+    }
+
+    /**
+     * 异常后通知
+     *
+     * @param jp
+     * @param exp
+     */
+    @AfterThrowing(pointcut = "execution(* com.myblog.service.impl.BlogServiceImpl.*(..))", throwing = "exp")
+    public void afterThrowing(JoinPoint jp, Exception exp) {
+        logger.info(jp.getSignature().getName());
+        logger.info("异常消息：" + exp.getMessage());
+        logger.info("----------异常通知----------");
     }
 
     /**

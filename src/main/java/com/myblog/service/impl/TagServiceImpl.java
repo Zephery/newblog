@@ -55,6 +55,7 @@ public class TagServiceImpl implements ITagService {
         return tId;
     }
 
+    @Override
     public List<Tag> getAllTags() {
         return tagMapper.getAllTags();
     }

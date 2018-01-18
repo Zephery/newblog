@@ -3,6 +3,7 @@ package com.myblog.service.impl;
 import com.myblog.dao.CategoryMapper;
 import com.myblog.model.Category;
 import com.myblog.service.ICategoryService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,6 +18,7 @@ public class CategoryServiceImpl implements ICategoryService {
     private CategoryMapper categoryMapper;
 
     @Override
+    @Cacheable(value = "getAllCategory", keyGenerator = "customKeyGenerator")
     public List<Category> getAllCategory() {
         return categoryMapper.getAllCategory();
     }

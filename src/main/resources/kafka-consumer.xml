@@ -17,37 +17,21 @@
             </map>
         </constructor-arg>
     </bean>
-
     <!-- 创建consumerFactory bean -->
     <bean id="consumerFactory" class="org.springframework.kafka.core.DefaultKafkaConsumerFactory">
-        <constructor-arg>
-            <ref bean="consumerProperties"/>
-        </constructor-arg>
+        <constructor-arg ref="consumerProperties"/>
     </bean>
-
-    <!-- 实际执行消息消费的类 -->
-    <!--<bean id="messageListernerConsumerService" class="com.git.kafka.consumer.KafkaConsumerServer"/>-->
 
     <!-- 消费者容器配置信息 -->
-    <bean id="containerProperties_trade" class="org.springframework.kafka.listener.config.ContainerProperties">
-        <constructor-arg value="order_test_topic"/>
-        <!--<property name="messageListener" ref="messageListernerConsumerService"/>-->
+    <bean id="containerProperties" class="org.springframework.kafka.listener.config.ContainerProperties">
+        <constructor-arg value="defaultTopic"/>
     </bean>
-    <bean id="containerProperties_other" class="org.springframework.kafka.listener.config.ContainerProperties">
-        <constructor-arg value="other_test_topic"/>
-        <!--<property name="messageListener" ref="messageListernerConsumerService"/>-->
-    </bean>
+
 
     <!-- 创建messageListenerContainer bean，使用的时候，只需要注入这个bean -->
-    <bean id="messageListenerContainer_trade" class="org.springframework.kafka.listener.KafkaMessageListenerContainer"
-          init-method="doStart">
-        <constructor-arg ref="consumerFactory"/>
-        <constructor-arg ref="containerProperties_trade"/>
-    </bean>
-
-    <bean id="messageListenerContainer_other" class="org.springframework.kafka.listener.KafkaMessageListenerContainer"
-          init-method="doStart">
-        <constructor-arg ref="consumerFactory"/>
-        <constructor-arg ref="containerProperties_other"/>
-    </bean>
+    <!--<bean id="messageListenerContainer" class="org.springframework.kafka.listener.KafkaMessageListenerContainer"-->
+          <!--init-method="doStart">-->
+        <!--<constructor-arg ref="consumerFactory"/>-->
+        <!--<constructor-arg ref="containerProperties"/>-->
+    <!--</bean>-->
 </beans>

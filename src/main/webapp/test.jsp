@@ -23,7 +23,7 @@
         }
 
         function send_echo() {
-            var wsUri = "ws://localhost:9090/wscpu.ws";
+            var wsUri = "ws://localhost:9090/kafkaws.ws";
             writeToScreen("Connecting to " + wsUri);
             ws = new WebSocket(wsUri);
             ws.onopen = function (evt) {
