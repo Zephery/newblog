@@ -24,6 +24,7 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
+    @Cacheable(value = "selectByPrimaryKey", key = "'getBlogCategoryid'.concat(#categoryid)")
     public Category selectByPrimaryKey(Integer categoryid) {   //TODO 做一下缓存处理
         return categoryMapper.selectByPrimaryKey(categoryid);
     }
@@ -32,5 +33,4 @@ public class CategoryServiceImpl implements ICategoryService {
     public List<Category> getAllCatWithoutLife() {
         return categoryMapper.getAllCatWithoutLife();
     }
-
 }

@@ -1,7 +1,3 @@
-
-
-
-
 # 一、概述
 在通常的开发过程中，我们调用的顺序通常是controller->service-dao，其中，service中包含着太多的业务逻辑，并且还要不断调用dao来实现自身的业务逻辑，经常会导致业务耗时过久，在aop出现之前，方式一般是在函数中开始写一个startTime，结尾再写一个endTime来查看执行该函数的耗时，过多的使用此类方式会导致代码的耦合性太高，不利于管理，于是，AOP（面向切面）出现了。AOP关注的是横向的，而OOP的是纵向。
 <div align="center">![](http://image.wenzhihuai.com/images/20180118085015.png)</div>
@@ -36,7 +32,7 @@ AspectJ支持5种类型的通知注解：
 
 
 
-
+[TimeInterceptor](https://github.com/Zephery/newblog/blob/master/src/main/java/com/myblog/aspect/TimeInterceptor.java)
 
 
 

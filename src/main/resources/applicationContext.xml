@@ -179,9 +179,9 @@
 
     <!-- redis -->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxTotal" value="10"/>
-        <property name="maxIdle" value="10"/>
-        <property name="minIdle" value="2"/>
+        <property name="maxTotal" value="${maxTotal}"/>
+        <property name="maxIdle" value="${maxIdle}"/>
+        <property name="minIdle" value="${minIdle}"/>
         <property name="maxWaitMillis" value="15000"/>
         <property name="minEvictableIdleTimeMillis" value="300000"/>
         <property name="numTestsPerEvictionRun" value="3"/>

@@ -3,7 +3,6 @@ package com.myblog.service.impl;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.myblog.dao.BlogMapper;
-import com.myblog.dao.CategoryMapper;
 import com.myblog.dao.TagMapper;
 import com.myblog.lucene.BlogIndex;
 import com.myblog.lucene.BlogIterator;
@@ -12,6 +11,7 @@ import com.myblog.model.Category;
 import com.myblog.model.Tag;
 import com.myblog.service.IAsyncService;
 import com.myblog.service.IBlogService;
+import com.myblog.service.ICategoryService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
@@ -41,7 +41,7 @@ public class BlogServiceImpl implements IBlogService {
     @Resource
     private BlogMapper blogMapper;
     @Resource
-    private CategoryMapper categoryMapper;
+    private ICategoryService categoryService;
     @Resource
     private TagMapper tagMapper;
     @Resource
@@ -108,13 +108,13 @@ public class BlogServiceImpl implements IBlogService {
     public List<Blog> getAllBlog() {
         List<Blog> blogs = blogMapper.getAllBlog();
         for (Blog blog : blogs) {
-            blog.setCategory(categoryMapper.selectByPrimaryKey(blog.getCategoryid()));
+            blog.setCategory(categoryService.selectByPrimaryKey(blog.getCategoryid()));
         }
         return blogs;
     }
 
     @Override
-    @Cacheable(value = "getByCategoryId", key = "'categoryid'.concat(#categoryid)")
+    @Cacheable(value = "getByCategoryId", key = "'getByCategoryId'.concat(#categoryid)")
     public List<Blog> getByCategoryId(int categoryid) {
         List<Blog> blogs = blogMapper.getByCategoryId(categoryid);
         return blogs;
@@ -127,7 +127,7 @@ public class BlogServiceImpl implements IBlogService {
         if (blog == null) {
             return null;
         }
-        Category category = categoryMapper.selectByPrimaryKey(blog.getCategoryid());
+        Category category = categoryService.selectByPrimaryKey(blog.getCategoryid());
         blog.setCategory(category);
         List<Tag> tags = tagMapper.getTagByBlogId(blog.getBlogid());
         blog.setTags(tags.size() > 0 ? tags : null);
@@ -137,7 +137,7 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    @Cacheable(value = "getTagByTid", key = "'t_id'.concat(#t_id)")
+    @Cacheable(value = "getTagByTid", key = "'getTagByTid_t_id'.concat(#t_id)")
     public Tag getTagByTid(Integer t_id) {
         return tagMapper.selectByPrimaryKey(t_id);
     }
@@ -146,7 +146,7 @@ public class BlogServiceImpl implements IBlogService {
     public List<Blog> getBlogByTagId(Integer tId) {
         List<Blog> blogs = blogMapper.getBlogByTagId(tId);
         for (Blog blog : blogs) {
-            blog.setCategory(categoryMapper.selectByPrimaryKey(blog.getCategoryid()));
+            blog.setCategory(categoryService.selectByPrimaryKey(blog.getCategoryid()));
         }
         return blogs;
     }
@@ -161,9 +161,6 @@ public class BlogServiceImpl implements IBlogService {
     @Cacheable(value = "getByHits", keyGenerator = "customKeyGenerator")
     public List<Blog> getByHits() {
         List<Blog> blogs = blogMapper.getHits();
-        for (Blog blog : blogs) {
-            blog.setCategory(categoryMapper.selectByPrimaryKey(blog.getCategoryid()));
-        }
         return blogs;
     }
 
@@ -171,7 +168,7 @@ public class BlogServiceImpl implements IBlogService {
     public List<Blog> getLife() {
         List<Blog> blogs = blogMapper.getLife();
         for (Blog blog : blogs) {
-            blog.setCategory(categoryMapper.selectByPrimaryKey(blog.getCategoryid()));
+            blog.setCategory(categoryService.selectByPrimaryKey(blog.getCategoryid()));
         }
         return blogs;
     }
@@ -180,7 +177,7 @@ public class BlogServiceImpl implements IBlogService {
     public List<Blog> getAllTechBlog() {
         List<Blog> blogs = blogMapper.getAllTechBlog();
         for (Blog blog : blogs) {
-            blog.setCategory(categoryMapper.selectByPrimaryKey(blog.getCategoryid()));
+            blog.setCategory(categoryService.selectByPrimaryKey(blog.getCategoryid()));
         }
         return blogs;
     }
@@ -199,7 +196,7 @@ public class BlogServiceImpl implements IBlogService {
         try {
             blogs = blogIndex.searchBlog(pageStart, keyword, pagehits);
             for (Blog blog : blogs) {
-                blog.setCategory(categoryMapper.selectByPrimaryKey(blog.getCategoryid()));
+                blog.setCategory(categoryService.selectByPrimaryKey(blog.getCategoryid()));
                 blog.setTags(tagMapper.getTagByBlogId(blog.getBlogid()));
             }
         } catch (Exception e) {
@@ -231,7 +228,7 @@ public class BlogServiceImpl implements IBlogService {
     public List<Blog> getAllBlogWithContent() {
         List<Blog> blogs = blogMapper.getAllBlogWithContent();
         for (Blog blog : blogs) {
-            blog.setCategory(categoryMapper.selectByPrimaryKey(blog.getCategoryid()));
+            blog.setCategory(categoryService.selectByPrimaryKey(blog.getCategoryid()));
         }
         return blogs;
     }
