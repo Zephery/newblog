@@ -6,12 +6,12 @@ import com.google.gson.Gson;
 import com.myblog.model.Blog;
 import com.myblog.model.Category;
 import com.myblog.model.Tag;
+import com.myblog.service.IAsyncService;
 import com.myblog.service.IBlogService;
 import com.myblog.service.ICategoryService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,7 +36,7 @@ public class BlogController {
     @Resource
     private ICategoryService categoryService;
     @Resource
-    private RedisTemplate<String, Blog> redisTemplate;
+    private IAsyncService asyncService;
 
 
     @RequestMapping("/tech")
@@ -110,6 +110,7 @@ public class BlogController {
         }
         modelAndView.addObject("blog", blog);
         modelAndView.setViewName("blogdetail");
+        asyncService.updatebloghits(blogid);//异步更新阅读次数
         return modelAndView;
     }
 

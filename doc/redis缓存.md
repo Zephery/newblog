@@ -1,48 +1,36 @@
-# 一、概述
-##　1.1 缓存介绍
+# 一、概述  
+## 1.1 缓存介绍
+
 系统的性能指标一般包括响应时间、延迟时间、吞吐量，并发用户数和资源利用率等。在应用运行过程中，我们有可能在一次数据库会话中，执行多次查询条件完全相同的SQL，MyBatis提供了一级缓存的方案优化这部分场景，如果是相同的SQL语句，会优先命中一级缓存，避免直接对数据库进行查询，提高性能。
 缓存常用语：
 数据不一致性、缓存更新机制、缓存可用性、缓存服务降级、缓存预热、缓存穿透
 可查看[Redis实战（一） 使用缓存合理性](http://blog.csdn.net/diyhzp/article/details/54892358)
+
 ## 1.2 本站缓存架构
 从没有使用缓存，到使用mybatis缓存，然后使用了ehcache，再然后是mybatis+redis缓存。
-<div align="center">
-
-![](http://image.wenzhihuai.com/images/20180121034503.png)
-
-</div>
+<div align="center">![](http://image.wenzhihuai.com/images/20180121034503.png)</div>
 步骤：
 （1）用户发送一个请求到nginx，nginx对请求进行分发。
 （2）请求进入controller，service，service中查询缓存，如果命中，则直接返回结果，否则去调用mybatis。
 （3）mybatis的缓存调用步骤：二级缓存->一级缓存->直接查询数据库。
 （4）查询数据库的时候，mysql作了主主备份。
 
+
 # 二、Mybatis缓存
+
 ## 2.1 mybatis一级缓存
 Mybatis的一级缓存是指Session回话级别的缓存，也称作本地缓存。一级缓存的作用域是一个SqlSession。Mybatis默认开启一级缓存。在同一个SqlSession中，执行相同的查询SQL，第一次会去查询数据库，并写到缓存中；第二次直接从缓存中取。当执行SQL时两次查询中间发生了增删改操作，则SqlSession的缓存清空。Mybatis 默认支持一级缓存，不需要在配置文件中配置。  
-<div align="center">
-
-![](http://image.wenzhihuai.com/images/20180120015614.png)
-
-</div>
+<div align="center">![](http://image.wenzhihuai.com/images/20180120015614.png)</div>
 
 我们来查看一下源码的类图，具体的源码分析简单概括一下：SqlSession实际上是使用PerpetualCache来维护的，PerpetualCache中定义了一个HashMap<k,v>来进行缓存。  
 （1）当会话开始时，会创建一个新的SqlSession对象，SqlSession对象中会有一个新的Executor对象，Executor对象中持有一个新的PerpetualCache对象；  
 （2）对于某个查询，根据statementId,params,rowBounds来构建一个key值，根据这个key值去缓存Cache中取出对应的key值存储的缓存结果。如果命中，则返回结果，如果没有命中，则去数据库中查询，再将结果存储到cache中，最后返回结果。如果执行增删改，则执行flushCacheIfRequired方法刷新缓存。
 （3）当会话结束时，SqlSession对象及其内部的Executor对象还有PerpetualCache对象也一并释放掉。
-<div align="center">
-
-![](http://image.wenzhihuai.com/images/20180120022427.png)
-
-</div>
+<div align="center">![](http://image.wenzhihuai.com/images/20180120022427.png)</div>
 
 ## 2.2 mybatis二级缓存
 Mybatis的二级缓存是指mapper映射文件，为Application应用级别的缓存，生命周期长。二级缓存的作用域是同一个namespace下的mapper映射文件内容，多个SqlSession共享。Mybatis需要手动设置启动二级缓存。在同一个namespace下的mapper文件中，执行相同的查询SQL。实现二级缓存，关键是要对Executor对象做文章，Mybatis给Executor对象加上了一个CachingExecutor，使用了设计模式中的装饰者模式，
-<div align="center">
-
-![](http://image.wenzhihuai.com/images/20180120030017.png)
-
-</div>
+<div align="center">![](http://image.wenzhihuai.com/images/20180120030017.png)</div>
 
 ### 2.2.1 MyBatis二级缓存的划分
 MyBatis并不是简单地对整个Application就只有一个Cache缓存对象，它将缓存划分的更细，即是Mapper级别的，即每一个Mapper都可以拥有一个Cache对象，具体如下：
@@ -73,11 +61,7 @@ b.多个Mapper共用一个Cache缓存对象（使用<cache-ref>节点配置）�
 具体的实现，可参照：[SpringMVC + MyBatis + Mysql + Redis(作为二级缓存) 配置](http://blog.csdn.net/xiadi934/article/details/50786293) 
 
 MyBatis中一级缓存和二级缓存的组织如下图所示（图片来自[深入理解mybatis原理](http://blog.csdn.net/luanlouis/article/details/41390801)）：
-<div align="center">
-
-![](http://image.wenzhihuai.com/images/20180120120015.png)
-
-</div>
+<div align="center">![](http://image.wenzhihuai.com/images/20180120120015.png)</div>
 
 ## 2.3 Mybatis在分布式环境下脏读问题
 （1）如果是一级缓存，在多个SqlSession或者分布式的环境下，数据库的写操作会引起脏数据，多数情况可以通过设置缓存级别为Statement来解决。  
@@ -89,8 +73,7 @@ MyBatis中一级缓存和二级缓存的组织如下图所示（图片来自[深
 
 
 # 三、Redis缓存
-Redis运行于独立的进程，通过网络协议和应用交互，将数据保存在内存中，并提供多种手段持久化内存的数据。同时具备服务器的水平拆分、复制等分布式特性，使得其成为缓存服务器的主流。为了与Spring更好的结合使用，我们使用的是Spring-Data-Redis。此处省略安装过程和Redis的命令讲解~~
-
+Redis运行于独立的进程，通过网络协议和应用交互，将数据保存在内存中，并提供多种手段持久化内存的数据。同时具备服务器的水平拆分、复制等分布式特性，使得其成为缓存服务器的主流。为了与Spring更好的结合使用，我们使用的是Spring-Data-Redis。此处省略安装过程和Redis的命令讲解。
 <div align="center">![](http://image.wenzhihuai.com/images/20180119110640.png)</div>
 
 ## 3.1 Spring Cache
@@ -253,11 +236,7 @@ public class SpringTest {
 
 
 部署进个人博客之后，redis已经缓存的数据：
-<div align="center">
-
-![](http://image.wenzhihuai.com/images/20180120052757.png)
-
-</div>
+<div align="center">![](http://image.wenzhihuai.com/images/20180120052757.png)</div>
 
 
 
@@ -269,7 +248,7 @@ public class SpringTest {
 
 
 # 四、如何解决脏读？
-对于文章来说，内容是不经常更新的，没有涉及到缓存一致性，但是对于文章的阅读量，用户每点击一次，就应该更新浏览量的。
+对于文章来说，内容是不经常更新的，没有涉及到缓存一致性，但是对于文章的阅读量，用户每点击一次，就应该更新浏览量的。对于文章的缓存，常规的设计是将文章存储进数据库中，然后读取的时候放入缓存中，然后将浏览量以文章ID+浏览量的结构实时的存入redis服务器中。本站当初设计不合理，直接将浏览量作为一个字段，用户每点击一次的时候就异步更新浏览量，但是此处没有更新缓存，如果手动更新缓存的话，基本上每点击一次都得执行更新操作，同样也不合理。所以，目前本站，你们在页面上看到的浏览量和数据库中的浏览量并不是一致的。有兴趣的可以点击[我的网站](http://www.wenzhihuai.com)玩玩~~
 
 
 # 五、题外话
@@ -277,11 +256,15 @@ public class SpringTest {
 <div align="center">![](http://image.wenzhihuai.com/images/20180119044345.png)</div>
 
 
+**个人网站**：[http://www.wenzhihuai.com](http://www.wenzhihuai.com)
+**个人网站源码，希望能给个star**：[https://github.com/Zephery/newblog](https://github.com/Zephery/newblog)
+
+
 
 参考：
-1. [《深入理解mybatis原理》 MyBatis的一级缓存实现详解](http://blog.csdn.net/luanlouis/article/details/41390801)
-2. [《深入理解mybatis原理》 MyBatis的二级缓存的设计原理](http://blog.csdn.net/luanlouis/article/details/41408341)
-3. [聊聊Mybatis缓存机制](https://mp.weixin.qq.com/s/Ju4d71VrL0omGkV3s3U_1Q)
-4. [Spring思维导图](https://www.jianshu.com/p/0b00cbba40f3)
-5. [SpringMVC + MyBatis + Mysql + Redis(作为二级缓存) 配置](http://blog.csdn.net/xiadi934/article/details/50786293)
-6. 《深入分布式缓存：从原理到实践》  
+1.[《深入理解mybatis原理》 MyBatis的一级缓存实现详解](http://blog.csdn.net/luanlouis/article/details/41390801)
+2.[《深入理解mybatis原理》 MyBatis的二级缓存的设计原理](http://blog.csdn.net/luanlouis/article/details/41408341)
+3.[聊聊Mybatis缓存机制](https://mp.weixin.qq.com/s/Ju4d71VrL0omGkV3s3U_1Q)
+4.[Spring思维导图](https://www.jianshu.com/p/0b00cbba40f3)
+5.[SpringMVC + MyBatis + Mysql + Redis(作为二级缓存) 配置](http://blog.csdn.net/xiadi934/article/details/50786293)
+6.《深入分布式缓存：从原理到实践》  

@@ -131,7 +131,6 @@ public class BlogServiceImpl implements IBlogService {
         blog.setCategory(category);
         List<Tag> tags = tagMapper.getTagByBlogId(blog.getBlogid());
         blog.setTags(tags.size() > 0 ? tags : null);
-        asyncService.updatebloghits(blogid);//异步更新阅读次数
         logger.info("没有走缓存");
         return blog;
     }
