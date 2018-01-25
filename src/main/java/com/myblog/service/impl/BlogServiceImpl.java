@@ -2,6 +2,7 @@ package com.myblog.service.impl;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.myblog.common.CustomCacheAnnotation;
 import com.myblog.dao.BlogMapper;
 import com.myblog.dao.TagMapper;
 import com.myblog.lucene.BlogIndex;
@@ -121,7 +122,7 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    @Cacheable(value = "getBlogDetail", key = "'blogid'.concat(#blogid)")
+    @CustomCacheAnnotation(value = "getBlogDetail", key = "'blogid'.concat(#blogid)")
     public Blog getBlogDetail(Integer blogid) {
         Blog blog = blogMapper.selectByPrimaryKey(blogid);
         if (blog == null) {

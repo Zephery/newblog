@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ehcache>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" updateCheck="false"
+         xsi:noNamespaceSchemaLocation="http://ehcache.sf.net/ehcache.xsd">
     <!-- 磁盘缓存位置 -->
     <diskStore path="java.io.tmpdir/ehcache"/>
 

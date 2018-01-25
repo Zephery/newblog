@@ -722,6 +722,7 @@
                 </div>
             </div>
         </div>
+        <iframe src="http://es.wenzhihuai.com/app/kibana#/visualize/edit/56d36a60-ff72-11e7-a694-c9092c6a2120?embed=true&_g=()" height="400px" width="100%"></iframe>
     </div>
 </section>
 <%@include file="foot.jsp" %>

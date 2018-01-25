@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cache="http://www.springframework.org/schema/cache" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--引入配置属性文件 -->
+    <context:property-placeholder
+            location="classpath:./load.properties"/>
+
+    <!-- redis数据源 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${maxTotal}"/>
+        <property name="maxIdle" value="${maxIdle}"/>
+        <property name="minIdle" value="${minIdle}"/>
+        <property name="maxWaitMillis" value="15000"/>
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <property name="numTestsPerEvictionRun" value="3"/>
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="testOnReturn" value="true"/>
+        <property name="testWhileIdle" value="true"/>
+    </bean>
+    <!-- Spring-redis连接池管理工厂 -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:host-name="${host}" p:port="${port}" p:password="${password}"
+          p:pool-config-ref="poolConfig"/>
+
+    <!-- redis template -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+    </bean>
+
+    <!-- 缓存配置 -->
+    <!-- 启用缓存注解功能(请将其配置在Spring主配置文件中) /开关 -->
+    <!-- <cache:annotation-driven cache-manager="ehCacheCacheManager" /> -->
+    <!-- Spring自己的基于java.util.concurrent.ConcurrentHashMap实现的缓存管理器(该功能是从Spring3.1开始提供的) -->
+    <!-- <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches"> <set> <bean name="myCache" class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"/>
+        </set> </property> </bean> -->
+    <!-- 若只想使用Spring自身提供的缓存器,则注释掉下面的两个关于Ehcache配置的bean,并启用上面的SimpleCacheManager即可 -->
+    <!-- Spring提供的基于的Ehcache实现的缓存管理器 -->
+    <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcache.xml"/>
+        <!--true:单例，一个cacheManager对象共享；false：多个对象独立 -->
+        <property name="shared" value="true"/>
+        <property name="cacheManagerName" value="cacheManagerFactory"/>
+    </bean>
+
+    <bean id="ehCacheCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="cacheManagerFactory"/>
+    </bean>
+
+    <!-- myCache 操作对象 -->
+    <bean id="myCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+        <!--         cacheName对应ehcache.xml中的cache name="myCache" -->
+        <property name="cacheName" value="myCache"/>
+        <property name="cacheManager" ref="cacheManagerFactory"/>
+    </bean>
+    <!-- <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"> -->
+    <!-- <property name="cacheManager" ref="cacheManagerFactory" /> -->
+    <!-- </bean> -->
+
+    <!-- 自定义ehcache+redis -->
+    <bean id="ehRedisCacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches">
+            <set>
+                <bean id="ehRedisCache" class="com.myblog.cache.EhRedisCache">
+                    <property name="redisTemplate" ref="redisTemplate"/>
+                    <property name="ehCache" ref="myCache"/>
+                    <property name="name" value="myCache"/>
+                    <!-- <property name="liveTime" value="3600"/> -->
+                </bean>
+            </set>
+        </property>
+    </bean>
+
+    <!-- 注解声明 -->
+    <cache:annotation-driven cache-manager="ehRedisCacheManager" proxy-target-class="true"/>
+</beans>

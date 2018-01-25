@@ -258,13 +258,13 @@
         <aop:advisor advice-ref="txAdvice" pointcut-ref="pointCut"/>
     </aop:config>
     <!--httpclient配置-->
-    <import resource="bean-httpclient.xml"/>
+    <import resource="spring/bean-httpclient.xml"/>
     <!--spring rabbitmq配置-->
-    <import resource="rabbitmq.xml"/>
+    <import resource="spring/rabbitmq.xml"/>
     <!--websocket-->
-    <import resource="websocket.xml"/>
+    <import resource="spring/websocket.xml"/>
     <!--kafka-->
-    <import resource="kafka-consumer.xml"/>
+    <import resource="spring/kafka-consumer.xml"/>
 
     <bean id="myStatLogger" class="com.myblog.druid.MyStatLogger"/>
     <!--dubbo-->
