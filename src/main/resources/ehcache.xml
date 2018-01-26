@@ -22,4 +22,13 @@
            overflowToDisk="false"
            memoryStoreEvictionPolicy="LRU"/>
 
+
+    <cache name="myCache"
+           eternal="false"
+           maxElementsInMemory="10000"
+           overflowToDisk="false"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="0"
+           memoryStoreEvictionPolicy="LFU"/>
+
 </ehcache>

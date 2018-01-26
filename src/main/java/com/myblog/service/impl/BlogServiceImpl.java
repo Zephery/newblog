@@ -2,7 +2,6 @@ package com.myblog.service.impl;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
-import com.myblog.common.CustomCacheAnnotation;
 import com.myblog.dao.BlogMapper;
 import com.myblog.dao.TagMapper;
 import com.myblog.lucene.BlogIndex;
@@ -115,14 +114,15 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    @Cacheable(value = "getByCategoryId", key = "'getByCategoryId'.concat(#categoryid)")
+//    @Cacheable(value = "getByCategoryId", key = "'getByCategoryId'.concat(#categoryid)")
     public List<Blog> getByCategoryId(int categoryid) {
         List<Blog> blogs = blogMapper.getByCategoryId(categoryid);
         return blogs;
     }
 
     @Override
-    @CustomCacheAnnotation(value = "getBlogDetail", key = "'blogid'.concat(#blogid)")
+//    @CustomCacheAnnotation(value = "getBlogDetail", key = "'blogid'.concat(#blogid)")
+    @Cacheable(value = "myCache", key = "'blogid'.concat(#blogid)")
     public Blog getBlogDetail(Integer blogid) {
         Blog blog = blogMapper.selectByPrimaryKey(blogid);
         if (blog == null) {
@@ -152,13 +152,13 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    @Cacheable(value = "getBanner", keyGenerator = "customKeyGenerator")
+//    @Cacheable(value = "getBanner", keyGenerator = "customKeyGenerator")
     public List<Blog> getBanner() {
         return blogMapper.getBanner();
     }
 
     @Override
-    @Cacheable(value = "getByHits", keyGenerator = "customKeyGenerator")
+//    @Cacheable(value = "getByHits", keyGenerator = "customKeyGenerator")
     public List<Blog> getByHits() {
         List<Blog> blogs = blogMapper.getHits();
         return blogs;

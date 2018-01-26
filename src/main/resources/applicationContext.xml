@@ -30,7 +30,7 @@
     <!-- enable autowire -->
 
     <!-- 启用缓存注解开关 -->
-    <cache:annotation-driven/>
+    <cache:annotation-driven cache-manager="ehRedisCacheManager"/>
 
     <context:annotation-config/>
 
@@ -119,21 +119,48 @@
     <!--druid end-->
 
     <!--ehcache start-->
-    <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    <!-- myCache 操作对象 -->
+    <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:ehcache.xml"/>
+        <!--true:单例，一个cacheManager对象共享；false：多个对象独立 -->
+        <property name="shared" value="true"/>
+        <property name="cacheManagerName" value="cacheManagerFactory"/>
     </bean>
 
-    <!--<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">-->
-    <!--<property name="cacheManager" ref="ehcache"/>-->
-    <!--</bean>-->
+    <bean id="ehCacheCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="cacheManagerFactory"/>
+    </bean>
+    <!-- myCache 操作对象 -->
+    <bean id="myCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+        <!-- cacheName对应ehcache.xml中的cache name="myCache" -->
+        <property name="cacheName" value="myCache"/>
+        <property name="cacheManager" ref="cacheManagerFactory"/>
+    </bean>
+    <!--ehcache end-->
 
-    <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
-        <constructor-arg name="redisOperations" ref="redisTemplate" />
+    <!--redis cache start-->
+    <bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+        <constructor-arg name="redisOperations" ref="redisTemplate"/>
         <property name="defaultExpiration" value="${redis.defaultExpiration}"/>
     </bean>
+    <!--redis cache end-->
 
+    <!-- 多缓存配置开始 -->
+    <!-- 自定义ehcache+redis -->
+    <bean id="ehRedisCacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches">
+            <set>
+                <bean id="ehRedisCache" class="com.myblog.cache.EhRedisCache">
+                    <property name="redisTemplate" ref="redisTemplate"/>
+                    <property name="ehCache" ref="myCache"/>
+                    <property name="name" value="myCache"/>
+                    <!-- <property name="liveTime" value="3600"/> -->
+                </bean>
+            </set>
+        </property>
+    </bean>
+    <!-- 多缓存配置结束 -->
 
-    <!--ehcache end-->
 
     <!-- 事务管理（transaction manager） -->
     <bean id="transactionManager"

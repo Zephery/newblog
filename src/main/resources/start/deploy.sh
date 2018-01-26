@@ -41,12 +41,16 @@ unzip -qo ${projectWar} -d ${project}
 
 echo "cp -f ${projectTmp}/WEB-INF/classes/*.properties ${project}/WEB-INF/classes/"
 
+sleep 10s
+
 cp -f ${projectTmp}"/WEB-INF/classes/*.properties" ${project}"/WEB-INF/classes/"
 cp -f ${projectTmp}"/WEB-INF/classes/*.xml" ${project}"/WEB-INF/classes/"
+
+sleep 2s
 
 zip -r ${project}${now}".zip" ${projectTmp}
 rm -rf ${projectTmp}
 rm -rf ${projectWar}
 
 echo "Restart tomcat..."
-exec ${basePath}/"bin"/startup.sh
+# exec ${basePath}/"bin"/startup.sh

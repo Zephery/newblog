@@ -25,7 +25,7 @@ public class EhRedisCache implements Cache {
     /*** 无容量限制key带时效性 */
     private RedisTemplate<String, Object> redisTemplate;
 
-    private long liveTime = 1; // 默认1h=1*60*60
+    private long liveTime = 60 * 60; //seconds
 
     private int activeCount = 10;
 
