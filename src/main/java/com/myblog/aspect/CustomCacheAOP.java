@@ -1,14 +1,16 @@
 package com.myblog.aspect;
 
 import com.myblog.common.CustomCacheAnnotation;
-import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import java.io.Serializable;
+import javax.annotation.Resource;
 import java.lang.reflect.Method;
 
 /**
@@ -17,9 +19,10 @@ import java.lang.reflect.Method;
  */
 @Aspect
 public class CustomCacheAOP {
-    ThreadLocal<Long> time = new ThreadLocal<>();
-    ThreadLocal<String> tag = new ThreadLocal<>();
-    private RedisTemplate<Serializable, Object> redisTemplate;
+    //logger
+    private static final Logger logger = LoggerFactory.getLogger(CustomCacheAOP.class);
+    @Resource
+    private RedisTemplate redisTemplate;
 
     @Pointcut("@annotation(com.myblog.common.CustomCacheAnnotation)")
     public void getCache() {
@@ -28,18 +31,23 @@ public class CustomCacheAOP {
     /**
      * 在所有标注@getCache的地方切入
      *
-     * @param joinPoint
      */
-    @Before("getCache()")
-    public void beforeExec(JoinPoint joinPoint) {
-        MethodSignature ms = (MethodSignature) joinPoint.getSignature();
+    @Around("getCache()")
+    public Object beforeExec(ProceedingJoinPoint pjp) {
+        MethodSignature ms = (MethodSignature) pjp.getSignature();
         Method method = ms.getMethod();
-        String ActionName = method.getAnnotation(CustomCacheAnnotation.class).key();
-        String fieldList = method.getAnnotation(CustomCacheAnnotation.class).condition();
-    }
-
-    public void setRedisTemplate(
-            RedisTemplate<Serializable, Object> redisTemplate) {
-        this.redisTemplate = redisTemplate;
+        CustomCacheAnnotation customCacheAnnotation = method.getAnnotation(CustomCacheAnnotation.class);
+        String[] value = customCacheAnnotation.value();
+        String[] cacheNames = customCacheAnnotation.cacheNames();
+        String key = customCacheAnnotation.key();
+        String keyGenerator = customCacheAnnotation.keyGenerator();
+        String cacheManager = customCacheAnnotation.cacheManager();
+        String cacheResolver = customCacheAnnotation.cacheResolver();
+        String condition = customCacheAnnotation.condition();
+        boolean allEntries = customCacheAnnotation.allEntries();
+        String unless = customCacheAnnotation.unless();
+        boolean sync = customCacheAnnotation.sync();
+        boolean beforeInvocation = customCacheAnnotation.beforeInvocation();
+        return "";
     }
 }

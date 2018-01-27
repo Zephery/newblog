@@ -27,7 +27,7 @@ public class MyReadingServiceImpl implements IMyReadingService {
     private MyreadingMapper myreadingMapper;
 
     @Override
-    @Cacheable(value = "getAllReading", keyGenerator = "customKeyGenerator")
+    @Cacheable(value = "myCache", keyGenerator = "customKeyGenerator")
     public Set<Myreading> getAllReading() {
         List<Myreading> list = myreadingMapper.getAllReading();
         Set<Myreading> set = new HashSet<>(list);

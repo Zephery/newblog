@@ -46,4 +46,8 @@ public interface IAsyncService {
      * @param time
      */
     public void insertMethodTime(String methodName, Long time);
+
+    public Object redisGet(String key, Long liveTime);
+
+    public void redisPut(String keyStr, Object valueStr, Long liveTime);
 }

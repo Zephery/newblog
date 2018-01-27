@@ -18,13 +18,13 @@ public class CategoryServiceImpl implements ICategoryService {
     private CategoryMapper categoryMapper;
 
     @Override
-    @Cacheable(value = "getAllCategory", keyGenerator = "customKeyGenerator")
+    @Cacheable(value = "myCache", keyGenerator = "customKeyGenerator")
     public List<Category> getAllCategory() {
         return categoryMapper.getAllCategory();
     }
 
     @Override
-//    @Cacheable(value = "selectByPrimaryKey", key = "'getBlogCategoryid'.concat(#categoryid)")
+    @Cacheable(value = "myCache", key = "'getBlogCategoryid'.concat(#categoryid)")
     public Category selectByPrimaryKey(Integer categoryid) {   //TODO 做一下缓存处理
         return categoryMapper.selectByPrimaryKey(categoryid);
     }

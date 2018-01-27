@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -100,5 +101,66 @@ public class AsyncServiceImpl implements IAsyncService {
     @SuppressWarnings("unchecked")
     public void insertMethodTime(String methodName, Long time) {
         redisTemplate.opsForHash().put("method", methodName, time);
+    }
+
+    @Async
+    @Override
+    public Object redisGet(String key,Long liveTime) {
+        byte[] key1 = key.getBytes();
+        return redisTemplate.execute(connection -> {
+            byte[] value1 = connection.get(key1);
+            if (value1 == null) {
+                return null;
+            }
+            // 每次获得延迟时间
+            if (liveTime > 0) {
+                connection.expire(key1, liveTime);
+            }
+            return toObject(value1);
+        }, true);
+    }
+
+    @Async
+    @Override
+    public void redisPut(String keyStr,Object valueStr,Long liveTime){
+        redisTemplate.execute(connection -> {
+            byte[] keyb = keyStr.getBytes();
+            byte[] valueb = toByteArray(valueStr);
+            connection.set(keyb, valueb);
+            if (liveTime > 0) {
+                connection.expire(keyb, liveTime);
+            }
+            return 1L;
+        }, true);
+    }
+
+
+    private Object toObject(byte[] bytes) {
+        Object obj = null;
+        try {
+            ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+            ObjectInputStream ois = new ObjectInputStream(bis);
+            obj = ois.readObject();
+            ois.close();
+            bis.close();
+        } catch (IOException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return obj;
+    }
+    private byte[] toByteArray(Object obj) {
+        byte[] bytes = null;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(bos);
+            oos.writeObject(obj);
+            oos.flush();
+            bytes = bos.toByteArray();
+            oos.close();
+            bos.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return bytes;
     }
 }

@@ -1,5 +1,6 @@
 package com.myblog.cache;
 
+import com.myblog.service.IAsyncService;
 import net.sf.ehcache.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,7 +8,10 @@ import org.springframework.cache.Cache;
 import org.springframework.cache.support.SimpleValueWrapper;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import java.io.*;
+import javax.annotation.Resource;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.concurrent.Callable;
 
 /**
@@ -20,10 +24,14 @@ public class EhRedisCache implements Cache {
     private String name;
 
     /*** 一定容量的LRU队列 */
+    @Resource
     private net.sf.ehcache.Cache ehCache;
 
     /*** 无容量限制key带时效性 */
+    @Resource
     private RedisTemplate<String, Object> redisTemplate;
+    @Resource
+    private IAsyncService asyncService;
 
     private long liveTime = 60 * 60; //seconds
 
@@ -52,7 +60,7 @@ public class EhRedisCache implements Cache {
     @Override
     public ValueWrapper get(Object key) {
         Element value = ehCache.get(key);
-        logger.info("Cache L1 (ehcache) :{" + name + "}{" + key + "}={" + value + "}");
+        logger.info("===========================Cache L1 (ehcache) :{" + name + "}{" + key + "}={" + value + "}");
         if (value != null) {
             // TODO 访问10次EhCache 强制访问一次redis 使得数据不失效
 //          if (value.getHitCount() < activeCount) {
@@ -64,7 +72,7 @@ public class EhRedisCache implements Cache {
         final String keyStr = name + "_" + key.toString();
         Object objectValue = redisTemplate.execute(connection -> {
             byte[] key1 = keyStr.getBytes();
-            byte[] value1 = connection.get(key1);
+            byte[] value1 = connection.get(key.toString().getBytes());
             if (value1 == null) {
                 return null;
             }
@@ -75,7 +83,7 @@ public class EhRedisCache implements Cache {
             return toObject(value1);
         }, true);
         ehCache.put(new Element(key, objectValue));// 取出来之后缓存到本地
-        logger.info("Cache L2 (redis) :{" + name + "}{" + key + "}={" + objectValue + "}");
+        logger.info("===================Cache L2 (redis) :{" + name + "}{" + key + "}={" + objectValue + "}");
         return (objectValue != null ? new SimpleValueWrapper(objectValue) : null);
 
     }
@@ -87,17 +95,16 @@ public class EhRedisCache implements Cache {
     public void put(Object key, Object value) {
         ehCache.put(new Element(key, value));
         final String keyStr = key.toString();
-        final Object valueStr = value;
-        redisTemplate.execute(connection -> {
-            byte[] keyb = keyStr.getBytes();
-            byte[] valueb = toByteArray(valueStr);
-            connection.set(keyb, valueb);
-            if (liveTime > 0) {
-                connection.expire(keyb, liveTime);
-            }
-            return 1L;
-        }, true);
-
+        //        redisTemplate.execute(connection -> {
+//            byte[] keyb = keyStr.getBytes();
+//            byte[] valueb = toByteArray(valueStr);
+//            connection.set(keyb, valueb);
+//            if (liveTime > 0) {
+//                connection.expire(keyb, liveTime);
+//            }
+//            return 1L;
+//        }, true);
+        asyncService.redisPut(keyStr, value, liveTime);
     }
 
     /**
@@ -120,54 +127,6 @@ public class EhRedisCache implements Cache {
             connection.flushDb();
             return "clear done.";
         }, true);
-    }
-
-    public net.sf.ehcache.Cache getEhCache() {
-        return ehCache;
-    }
-
-    public void setEhCache(net.sf.ehcache.Cache ehCache) {
-        this.ehCache = ehCache;
-    }
-
-    public RedisTemplate<String, Object> getRedisTemplate() {
-        return redisTemplate;
-    }
-
-    public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
-
-    public long getLiveTime() {
-        return liveTime;
-    }
-
-    public void setLiveTime(long liveTime) {
-        this.liveTime = liveTime;
-    }
-
-    public int getActiveCount() {
-        return activeCount;
-    }
-
-    public void setActiveCount(int activeCount) {
-        this.activeCount = activeCount;
-    }
-
-    private byte[] toByteArray(Object obj) {
-        byte[] bytes = null;
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(bos);
-            oos.writeObject(obj);
-            oos.flush();
-            bytes = bos.toByteArray();
-            oos.close();
-            bos.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return bytes;
     }
 
     private Object toObject(byte[] bytes) {

@@ -22,13 +22,16 @@
            overflowToDisk="false"
            memoryStoreEvictionPolicy="LRU"/>
 
+    <!--timeToIdleSeconds=120；-->
+    <!--timeToLiveSeconds=180；-->
+    <!--上面的表示此缓存最多可以存活3分钟，如果期间超过2分钟未访问 那么此缓存失效！-->
 
     <cache name="myCache"
            eternal="false"
            maxElementsInMemory="10000"
            overflowToDisk="false"
-           timeToIdleSeconds="0"
-           timeToLiveSeconds="0"
+           timeToIdleSeconds="600"
+           timeToLiveSeconds="1800"
            memoryStoreEvictionPolicy="LFU"/>
 
 </ehcache>

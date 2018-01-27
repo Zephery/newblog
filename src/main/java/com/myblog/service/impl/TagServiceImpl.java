@@ -57,7 +57,7 @@ public class TagServiceImpl implements ITagService {
     }
 
     @Override
-    @Cacheable(value = "getAllTags", keyGenerator = "customKeyGenerator")
+    @Cacheable(value = "myCache", keyGenerator = "customKeyGenerator")
     public List<Tag> getAllTags() {
         return tagMapper.getAllTags();
     }

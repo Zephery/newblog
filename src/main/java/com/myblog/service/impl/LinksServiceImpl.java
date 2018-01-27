@@ -25,7 +25,7 @@ public class LinksServiceImpl implements ILinksService {
     private LinksMapper linksMapper;
 
     @Override
-    @Cacheable(value = "getAllLinks", keyGenerator = "customKeyGenerator")
+    @Cacheable(value = "myCache", keyGenerator = "customKeyGenerator")
     public List<Links> getAllLinks() {
         return linksMapper.getAllLinks();
     }

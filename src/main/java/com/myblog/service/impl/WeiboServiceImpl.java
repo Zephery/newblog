@@ -54,7 +54,7 @@ public class WeiboServiceImpl implements IWeiboService {
     private WeiboMapper weiboMapper;
 
     @Override
-    @Cacheable(value = "getAllWeiboToday", keyGenerator = "customKeyGenerator")
+    @Cacheable(value = "myCache", keyGenerator = "customKeyGenerator")
     public List<Weibo> getAllWeiboToday() {
         List<Weibo> weibos = weiboMapper.getAllWeiboToday();
         for (Weibo weibo : weibos) {

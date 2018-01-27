@@ -104,7 +104,7 @@ public class BlogServiceImpl implements IBlogService {
 
     @Override
 //    不能在此处在缓存，跟pageHelper有冲突，会导致多次查询
-//    @Cacheable(value = "getAllBlog", keyGenerator = "customKeyGenerator")
+    @Cacheable(value = "myCache", keyGenerator = "customKeyGenerator")
     public List<Blog> getAllBlog() {
         List<Blog> blogs = blogMapper.getAllBlog();
         for (Blog blog : blogs) {
@@ -114,7 +114,7 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-//    @Cacheable(value = "getByCategoryId", key = "'getByCategoryId'.concat(#categoryid)")
+    @Cacheable(value = "myCache", key = "'getByCategoryId'.concat(#categoryid)")
     public List<Blog> getByCategoryId(int categoryid) {
         List<Blog> blogs = blogMapper.getByCategoryId(categoryid);
         return blogs;
@@ -137,7 +137,7 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    @Cacheable(value = "getTagByTid", key = "'getTagByTid_t_id'.concat(#t_id)")
+    @Cacheable(value = "myCache", key = "'getTagByTid_t_id'.concat(#t_id)")
     public Tag getTagByTid(Integer t_id) {
         return tagMapper.selectByPrimaryKey(t_id);
     }
@@ -152,13 +152,13 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-//    @Cacheable(value = "getBanner", keyGenerator = "customKeyGenerator")
+    @Cacheable(value = "myCache", keyGenerator = "customKeyGenerator")
     public List<Blog> getBanner() {
         return blogMapper.getBanner();
     }
 
     @Override
-//    @Cacheable(value = "getByHits", keyGenerator = "customKeyGenerator")
+    @Cacheable(value = "myCache", keyGenerator = "customKeyGenerator")
     public List<Blog> getByHits() {
         List<Blog> blogs = blogMapper.getHits();
         return blogs;
