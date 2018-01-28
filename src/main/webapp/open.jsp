@@ -18,20 +18,6 @@
 <head>
     <meta charset="utf-8"/>
     <title>ELK系统</title>
-    <script src="https://cdn.bootcss.com/highcharts/5.0.14/highcharts.js"></script>
-    <script src="https://cdn.bootcss.com/echarts/3.6.2/echarts.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/china.js"></script>
-    <script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.js"></script>
-    <!--不要导入jquery，扇形图有冲突-->
-    <style>
-        th {
-            text-align: center;
-        }
-
-        td {
-            text-align: center;
-        }
-    </style>
 </head>
 <body class="home blog hPC">
 <section class="container">
