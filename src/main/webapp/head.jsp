@@ -152,6 +152,8 @@
                            class="<%=request.getParameter("donateactive")%>">捐赠</a></li>
                     <li><a href="${pageContext.request.contextPath}/weibonlp.html"
                            class="<%=request.getParameter("interestactive")%>">有点意思</a></li>
+                    <li><a href="${pageContext.request.contextPath}/open.html"
+                           class="<%=request.getParameter("openactive")%>">开放平台</a></li>
                 </ul>
                 <div class="social-icons">
                     <div id="share-area" style="margin-top: -5px"></div>

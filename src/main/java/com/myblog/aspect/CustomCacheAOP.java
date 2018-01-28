@@ -1,6 +1,7 @@
 package com.myblog.aspect;
 
 import com.myblog.common.CustomCacheAnnotation;
+import net.sf.ehcache.Cache;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -23,6 +24,8 @@ public class CustomCacheAOP {
     private static final Logger logger = LoggerFactory.getLogger(CustomCacheAOP.class);
     @Resource
     private RedisTemplate redisTemplate;
+    @Resource
+    private Cache ehcache;
 
     @Pointcut("@annotation(com.myblog.common.CustomCacheAnnotation)")
     public void getCache() {
@@ -30,7 +33,6 @@ public class CustomCacheAOP {
 
     /**
      * 在所有标注@getCache的地方切入
-     *
      */
     @Around("getCache()")
     public Object beforeExec(ProceedingJoinPoint pjp) {
