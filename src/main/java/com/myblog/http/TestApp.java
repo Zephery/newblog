@@ -1,7 +1,5 @@
 package com.myblog.http;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -38,8 +36,5 @@ public class TestApp {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        HttpClient client = new DefaultHttpClient();
-
-
     }
 }

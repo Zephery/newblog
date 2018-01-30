@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.myblog.common.Config;
 import com.myblog.common.SSOCommon;
 import com.myblog.lucene.BlogIndex;
 import com.myblog.model.*;
@@ -273,10 +272,6 @@ public class IndexController {
         logger.info("刷新自动补全完成");
         asyncService.start();//广州图书馆借书记录
         logger.info("刷新广图借书记录完成");
-        HttpHelper.getInstance().get(Config.getProperty("360"));
-        logger.info("360SEO完成");
-        HttpHelper.getInstance().get(Config.getProperty("baidu"));
-        logger.info("baidu完成");
         List<Weibo> weibos = weiboService.getAllWeiboToday();
         if (weibos == null || weibos.size() > 0) {
             logger.info("微博已经更新过了");
@@ -290,6 +285,11 @@ public class IndexController {
         logger.info("标签云更新完成");
 //        logger.info("restart:项目开始重启");
 //        BashUtil.getInstance().executeRestartProject();
+    }
+
+    @Scheduled(cron = "0 0/5 1,3 * * ?")
+    public void baiduwenzhihuai() throws Exception {
+        HTTPStudy.baidu("温志怀");
     }
 
     @RequestMapping("/pythontest")

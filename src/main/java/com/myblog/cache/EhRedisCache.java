@@ -9,9 +9,7 @@ import org.springframework.cache.support.SimpleValueWrapper;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Resource;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.util.concurrent.Callable;
 
 /**
@@ -64,7 +62,7 @@ public class EhRedisCache implements Cache {
         if (value != null) {
             // TODO 访问10次EhCache 强制访问一次redis 使得数据不失效
 //          if (value.getHitCount() < activeCount) {
-            return (value != null ? new SimpleValueWrapper(value.getObjectValue()) : null);
+            return new SimpleValueWrapper(value.getObjectValue());
 //          } else {
 //              value.resetAccessStatistics();
 //          }
@@ -95,16 +93,15 @@ public class EhRedisCache implements Cache {
     public void put(Object key, Object value) {
         ehCache.put(new Element(key, value));
         final String keyStr = key.toString();
-        //        redisTemplate.execute(connection -> {
-//            byte[] keyb = keyStr.getBytes();
-//            byte[] valueb = toByteArray(valueStr);
-//            connection.set(keyb, valueb);
-//            if (liveTime > 0) {
-//                connection.expire(keyb, liveTime);
-//            }
-//            return 1L;
-//        }, true);
-        asyncService.redisPut(keyStr, value, liveTime);
+        redisTemplate.execute(connection -> {
+            byte[] keyb = keyStr.getBytes();
+            byte[] valueb = toByteArray(value);
+            connection.set(keyb, valueb);
+            if (liveTime > 0) {
+                connection.expire(keyb, liveTime);
+            }
+            return 1L;
+        }, true);
     }
 
     /**
@@ -127,6 +124,22 @@ public class EhRedisCache implements Cache {
             connection.flushDb();
             return "clear done.";
         }, true);
+    }
+
+    private byte[] toByteArray(Object obj) {
+        byte[] bytes = null;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(bos);
+            oos.writeObject(obj);
+            oos.flush();
+            bytes = bos.toByteArray();
+            oos.close();
+            bos.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return bytes;
     }
 
     private Object toObject(byte[] bytes) {
