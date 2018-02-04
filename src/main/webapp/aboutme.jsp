@@ -96,45 +96,45 @@ background-size: 100% 100%;background-attachment: fixed;">
             </div>
             <p><!--end personal --></p>
             <p><!-- tech tree --></p>
-            <h2 style="text-align: center;margin: 0;background: transparent;color: white">我的技能树</h2>
-            <section class="tech">
-                <div class="item">
-                    <div class="describe" style="color: white">
-                        Java
-                    </div>
-                    <div class="progress">
-                        <span class="blue" style="width: 85%;"><span>85%</span></span>
-                    </div>
-                    <p></p>
-                </div>
-                <div class="item">
-                    <div class="describe" style="color: white">
-                        Python
-                    </div>
-                    <div class="progress">
-                        <span class="green" style="width: 58%;"><span>58%</span></span>
-                    </div>
-                    <p></p>
-                </div>
-                <div class="item">
-                    <div class="describe" style="color: white">
-                        HTML/CSS/JS
-                    </div>
-                    <div class="progress">
-                        <span class="green" style="width: 74%;"><span>74%</span></span>
-                    </div>
-                    <p></p>
-                </div>
-                <div class="item">
-                    <div class="describe" style="color: white">
-                        MySql
-                    </div>
-                    <div class="progress">
-                        <span class="darkblue" style="width: 82%;"><span>82%</span></span>
-                    </div>
-                    <p></p>
-                </div>
-            </section>
+            <%--<h2 style="text-align: center;margin: 0;background: transparent;color: white">我的技能树</h2>--%>
+            <%--<section class="tech">--%>
+                <%--<div class="item">--%>
+                    <%--<div class="describe" style="color: white">--%>
+                        <%--Java--%>
+                    <%--</div>--%>
+                    <%--<div class="progress">--%>
+                        <%--<span class="blue" style="width: 85%;"><span>85%</span></span>--%>
+                    <%--</div>--%>
+                    <%--<p></p>--%>
+                <%--</div>--%>
+                <%--<div class="item">--%>
+                    <%--<div class="describe" style="color: white">--%>
+                        <%--Python--%>
+                    <%--</div>--%>
+                    <%--<div class="progress">--%>
+                        <%--<span class="green" style="width: 58%;"><span>58%</span></span>--%>
+                    <%--</div>--%>
+                    <%--<p></p>--%>
+                <%--</div>--%>
+                <%--<div class="item">--%>
+                    <%--<div class="describe" style="color: white">--%>
+                        <%--HTML/CSS/JS--%>
+                    <%--</div>--%>
+                    <%--<div class="progress">--%>
+                        <%--<span class="green" style="width: 74%;"><span>74%</span></span>--%>
+                    <%--</div>--%>
+                    <%--<p></p>--%>
+                <%--</div>--%>
+                <%--<div class="item">--%>
+                    <%--<div class="describe" style="color: white">--%>
+                        <%--MySql--%>
+                    <%--</div>--%>
+                    <%--<div class="progress">--%>
+                        <%--<span class="darkblue" style="width: 82%;"><span>82%</span></span>--%>
+                    <%--</div>--%>
+                    <%--<p></p>--%>
+                <%--</div>--%>
+            <%--</section>--%>
             <p><!-- end tech --></p>
         </div>
         <h2 style="text-align: center;margin: 0;background: transparent;color: white">我的读书记录</h2>

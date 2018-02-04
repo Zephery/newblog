@@ -1,6 +1,5 @@
 package com.myblog.cache;
 
-import com.myblog.service.IAsyncService;
 import net.sf.ehcache.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,15 +27,10 @@ public class EhRedisCache implements Cache {
     /*** 无容量限制key带时效性 */
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
-    @Resource
-    private IAsyncService asyncService;
 
     private long liveTime = 60 * 60; //seconds
 
     private int activeCount = 10;
-
-//  @Autowired
-//  private EhCacheService ehCacheService;
 
     @Override
     public String getName() {

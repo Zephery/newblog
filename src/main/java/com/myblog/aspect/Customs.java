@@ -9,8 +9,8 @@ import java.util.Stack;
  */
 public class Customs {
     private Stack<Integer> stack = new Stack<>();
-    private Stack<Integer> stacktwo = new Stack<>();
     private Integer count = 0;
+    private Integer first = 0;
 
     public static void main(String[] args) {
         Customs newCustoms = new Customs();
@@ -30,19 +30,13 @@ public class Customs {
 
     private void print(String operation, Integer number) {
         if ("join".equals(operation)) {
-            if (!stacktwo.isEmpty() && number > stacktwo.peek() || stack.size() == 0) {
-                stacktwo.push(number);
+            if (stack.isEmpty()) {
+                first = number;
             }
             stack.push(number);
-            System.out.println(stacktwo.size());
         } else {
             for (int i = 0; i < number; i++) {
-                Integer poll = stack.pop();
-                if (poll.equals(stacktwo.peek()) && !stacktwo.peek().equals(stack.peek()) || stacktwo.size() != 1) {
-                    stacktwo.pop();
-                }
             }
-            System.out.println(stacktwo.size());
         }
     }
 }
