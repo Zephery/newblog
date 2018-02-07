@@ -8,8 +8,7 @@ rm -rf /opt/tomcat/webapps/*
 cd /opt/tomcat/temp/newblog/src/main/webapp/WEB-INF
 sed -in-place -e 's/develop/product/g' web.xml
 cd /opt/tomcat/temp/newblog/
-mvn clean
-mvn install
+mvn clean install -Dmaven.test.skip=true
 rm -rf /opt/tomcat/webapps/myblog.war
 cp target/myblog.war /opt/tomcat/webapps/
 unzip /opt/tomcat/webapps/myblog.war -d /opt/tomcat/webapps/myblog
