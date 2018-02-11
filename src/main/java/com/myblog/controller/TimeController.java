@@ -1,5 +1,6 @@
 package com.myblog.controller;
 
+import com.myblog.common.Config;
 import com.myblog.lucene.BlogIndex;
 import com.myblog.model.Blog;
 import com.myblog.model.Weibo;
@@ -42,6 +43,7 @@ public class TimeController {
     @Resource
     private MongoTemplate mongoTemplate;
     private BlogIndex blogIndex = new BlogIndex();
+    private final static String REGULARIP= Config.getProperty("regulartime.server");
 //    /**
 //     * 重启本项目
 //     */
@@ -88,19 +90,21 @@ public class TimeController {
     @RequestMapping("/weibo")
     public void weibo() throws Exception {
         String ip = IPUtils.getServerIp().replaceAll("\n", "");
-        if ("119.29.188.224".equals(ip)) {
+        if (REGULARIP.equals(ip)) {
             PythonUtil.executeMyWeiBo();
             logger.info("微博更新完成");
         }
     }
 
-
     @Scheduled(cron = "0/20 * * * * ?")
     @SuppressWarnings("unchecked")
     public void refreshIndex() throws Exception {
-        String content = HttpHelper.getInstance().get("http://119.29.188.224:8080");
-        redisTemplate.opsForHash().put("log", "refreshIndex", content);
-        JedisUtil.getInstance().set("index", content);
-        logger.info("更新首页完成");
+        String ip = IPUtils.getServerIp().replaceAll("\n", "");
+        if (REGULARIP.equals(ip)) {
+            String content = HttpHelper.getInstance().get("http://119.29.188.224:8080");
+            redisTemplate.opsForHash().put("log", "refreshIndex", content);
+            JedisUtil.getInstance().set("index", content);
+            logger.info("更新首页完成");
+        }
     }
 }
