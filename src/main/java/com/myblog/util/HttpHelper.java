@@ -62,7 +62,7 @@ public class HttpHelper {
 
     public static void main(String[] args) throws Exception {
 //		HttpHelper.getInstance().doPost("http://192.168.11.248:8080/crawlers/crawler/send_urls", null, "");
-        System.out.println(HttpHelper.getInstance().get("http://icanhazip.com/"));
+        System.out.println(HttpHelper.getInstance().get("http://www.wenzhihuai.com/index.html?pagenum=2"));
     }
 
     public boolean isRediect() {

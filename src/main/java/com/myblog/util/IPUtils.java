@@ -152,6 +152,9 @@ public class IPUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(getServerIp());
+        String ip = IPUtils.getServerIp().replaceAll("\n", "");
+        if ("113.108.186.130".equals(ip)) {
+            System.out.println(ip);
+        }
     }
 }

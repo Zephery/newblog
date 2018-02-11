@@ -18,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -250,47 +249,7 @@ public class IndexController {
         return DateTime.now().toString("yyyy-MM-dd HH:mm:ss");
     }
 
-//    /**
-//     * 重启本项目
-//     */
-//    @RequestMapping("/restart")
-//    public void restart() {
-//        BashUtil.getInstance().executeRestartProject();
-//    }
 
-    /**
-     * 每天更新借书记录（由于隐私关系已停掉），刷新一遍Lucene索引记录
-     * 由于每次更新都要删除本地索引记录，所以时间必须在项目启动完之后再进行更新
-     */
-    @Scheduled(cron = "0 30 6 * * * ")
-    @RequestMapping("/update")
-    public void updateLuceneEverydate() throws Exception {
-        List<Blog> blogs = blogService.getAllBlogWithContent();
-        blogIndex.refreshlucene(blogs);//刷新博客
-        logger.info("刷新博客完成");
-        blogService.ajaxbuild();//刷新自动补全
-        logger.info("刷新自动补全完成");
-        asyncService.start();//广州图书馆借书记录
-        logger.info("刷新广图借书记录完成");
-        List<Weibo> weibos = weiboService.getAllWeiboToday();
-        if (weibos == null || weibos.size() > 0) {
-            logger.info("微博已经更新过了");
-        } else {
-            PythonUtil.executeMyWeiBo();
-            logger.info("微博更新完成");
-        }
-        PythonUtil.executeGetBaidu();
-        logger.info("百度统计更新完成");
-        tagService.updatetag(1);
-        logger.info("标签云更新完成");
-//        logger.info("restart:项目开始重启");
-//        BashUtil.getInstance().executeRestartProject();
-    }
-
-    @Scheduled(cron = "0 0/5 1,3 * * ?")
-    public void baiduwenzhihuai() throws Exception {
-        HTTPStudy.baidu("温志怀");
-    }
 
     @RequestMapping("/pythontest")
     @ResponseBody
@@ -454,7 +413,6 @@ public class IndexController {
     @SuppressWarnings("unchecked")
     public String cacheIndex() {
         String content = HttpHelper.getInstance().get("http://www.wenzhihuai.com");
-        redisTemplate.opsForValue().set("index", content);
         JedisUtil.getInstance().set("index",content);
         return "success";
     }
