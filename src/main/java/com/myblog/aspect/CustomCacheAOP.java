@@ -15,6 +15,8 @@ import javax.annotation.Resource;
 import java.lang.reflect.Method;
 
 /**
+ * 基于注解的缓存，有时间再写了
+ *
  * @author Zephery
  * @since 2018/1/25 12:26
  */
