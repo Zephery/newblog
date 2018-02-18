@@ -3,6 +3,7 @@ package com.myblog.util;
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.Session;
 import ch.ethz.ssh2.StreamGobbler;
+import com.myblog.common.Common;
 import com.myblog.common.Config;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -55,8 +56,7 @@ public class MysqlUtil {
         String s_password = Config.getProperty("server.password");
         try {
             StringBuffer sb = new StringBuffer();
-            sb.append("mysqldump -u " + username + " -p" + password + " -h " + host + " " +
-                    database + " >" + file);
+            sb.append(Common.MYSQL_DUMP).append(" -u ").append(username).append(" -p").append(password).append(" -h ").append(host).append(" ").append(database).append(" >").append(file);
             String sql = sb.toString();
             logger.info(sql);
             //connect to server
