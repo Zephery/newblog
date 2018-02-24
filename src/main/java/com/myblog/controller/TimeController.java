@@ -4,10 +4,7 @@ import com.myblog.common.Config;
 import com.myblog.lucene.BlogIndex;
 import com.myblog.model.Blog;
 import com.myblog.model.Weibo;
-import com.myblog.service.IAsyncService;
-import com.myblog.service.IBlogService;
-import com.myblog.service.ITagService;
-import com.myblog.service.IWeiboService;
+import com.myblog.service.*;
 import com.myblog.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +24,7 @@ import java.util.List;
  * @since 2018/2/10 16:30
  */
 @Controller
+@SuppressWarnings("unchecked")
 public class TimeController {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(TimeController.class);
@@ -42,8 +40,10 @@ public class TimeController {
     private RedisTemplate redisTemplate;
     @Resource
     private MongoTemplate mongoTemplate;
+    @Resource
+    private ILogService logService;
     private BlogIndex blogIndex = new BlogIndex();
-    private final static String REGULARIP= Config.getProperty("regulartime.server");
+    private final static String REGULARIP = Config.getProperty("regulartime.server");
 //    /**
 //     * 重启本项目
 //     */
@@ -61,9 +61,10 @@ public class TimeController {
     public void updateLuceneEverydate() throws Exception {
         List<Blog> blogs = blogService.getAllBlogWithContent();
         blogIndex.refreshlucene(blogs);//刷新博客
-        logger.info("刷新博客完成");
+        logService.record("blog", "刷新博客完成");
         blogService.ajaxbuild();//刷新自动补全
-        logger.info("刷新自动补全完成");
+        logService.record("autocomplete", "刷新自动补全完成");
+        logService.record("autocomplete", "刷新自动补全完成");
         asyncService.start();//广州图书馆借书记录
         logger.info("刷新广图借书记录完成");
         List<Weibo> weibos = weiboService.getAllWeiboToday();
@@ -92,7 +93,7 @@ public class TimeController {
         String ip = IPUtils.getServerIp().replaceAll("\n", "");
         if (REGULARIP.equals(ip)) {
             PythonUtil.executeMyWeiBo();
-            logger.info("微博更新完成");
+            logService.record("weibo", "微博更新完成");
         }
     }
 
@@ -102,9 +103,8 @@ public class TimeController {
         String ip = IPUtils.getServerIp().replaceAll("\n", "");
         if (REGULARIP.equals(ip)) {
             String content = HttpHelper.getInstance().get("http://119.29.188.224:8080");
-            redisTemplate.opsForHash().put("log", "refreshIndex", content);
+            logService.record("refreshIndex", "首页刷新完成");
             JedisUtil.getInstance().set("index", content);
-            logger.info("更新首页完成");
         }
     }
 }

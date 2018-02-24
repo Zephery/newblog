@@ -1,5 +1,6 @@
 package com.myblog.util;
 
+import com.myblog.common.Common;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,20 +18,22 @@ public class PythonUtil {
 
     public static void executeMyWeiBo() {
         try {
-            String pythonweiboPath = null;
+            String pythonweiboPath;
             if (WinOrLinux.isWin()) {
                 pythonweiboPath = BATH_PATH + "WEB-INF\\classes\\pythonfiles\\myweibo.py";
             } else {
                 pythonweiboPath = BATH_PATH + "WEB-INF/classes/pythonfiles/myweibo.py";
 
             }
-            logger.info(pythonweiboPath);
-            Process process = Runtime.getRuntime().exec("python " + pythonweiboPath);
+            String logPath = ">>" + BATH_PATH + "WEB-INF/classes/pythonfiles/myweibo.log";
+            String command = Common.PYTHON_PATH + " " + pythonweiboPath + logPath;
+            logger.info(command);
+            Process process = Runtime.getRuntime().exec(command);
             BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(), "utf-8"));
-            String line = null;
+            String line;
             StringBuilder sb = new StringBuilder();
             while ((line = br.readLine()) != null) {
-                sb.append(line + "\n");
+                sb.append(line).append("\n");
                 logger.info(line);
             }
             process.waitFor();
@@ -41,7 +44,7 @@ public class PythonUtil {
 
     public static void executeGetBaidu() {
         try {
-            String pythonweiboPath = null;
+            String pythonweiboPath;
             if (WinOrLinux.isWin()) {
                 pythonweiboPath = BATH_PATH + "WEB-INF\\classes\\pythonfiles\\getbaidu.py";
             } else {
@@ -49,7 +52,7 @@ public class PythonUtil {
 
             }
             logger.info(pythonweiboPath);
-            Process process = Runtime.getRuntime().exec("python " + pythonweiboPath);
+            Process process = Runtime.getRuntime().exec(Common.PYTHON_PATH + " " + pythonweiboPath);
             process.waitFor();
         } catch (Exception e) {
             logger.error("百度脚本执行失败", e);
