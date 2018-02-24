@@ -298,6 +298,7 @@
     <dubbo:application name="demo-consumer"/>
     <dubbo:registry address="${zookeeper.url}" check="false"/>
     <dubbo:reference id="demoService" interface="com.myblog.demo.DemoService" check="false"/>
+    <dubbo:reference id="dubboService" interface="com.myblog.dubbo.DubboService" check="false"/>
 
 
     <!--数据源-->
