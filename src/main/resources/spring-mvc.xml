@@ -9,7 +9,9 @@
         http://www.springframework.org/schema/mvc   
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 扫描所有ssm.blog.controller包下面的所有controller -->
     <context:component-scan base-package="com.myblog.controller"/>
