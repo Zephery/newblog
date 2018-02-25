@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.myblog.common.Config;
 import com.myblog.dao.WeiboMapper;
+import com.myblog.dubbo.DubboService;
 import com.myblog.model.Weibo;
 import com.myblog.service.IWeiboService;
 import org.apache.commons.lang3.StringUtils;
@@ -52,11 +53,19 @@ public class WeiboServiceImpl implements IWeiboService {
 
     @Resource
     private WeiboMapper weiboMapper;
+    @Resource
+    private DubboService dubboService;
 
     @Override
     @Cacheable(value = "myCache", keyGenerator = "customKeyGenerator")
     public List<Weibo> getAllWeiboToday() {
-        List<Weibo> weibos = weiboMapper.getAllWeiboToday();
+        List<Weibo> weibos;
+        try {
+            weibos = dubboService.getAllWeiboToday();
+        } catch (Exception e) {
+            logger.error("服务出错", e);
+            weibos = weiboMapper.getAllWeiboToday();
+        }
         for (Weibo weibo : weibos) {
             try {
                 weibo.setTypename(TYPE.get(weibo.getType()));
