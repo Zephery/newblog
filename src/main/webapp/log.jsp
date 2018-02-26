@@ -42,6 +42,7 @@
                             <th style="text-align: center">统计时间范围</th>
                             <th style="text-align: center">本时间段总PV</th>
                             <th style="text-align: center">本时间段总UV</th>
+                            <th style="text-align: center">ELK系统</th>
                         </tr>
                         <tbody>
                         <tr>
@@ -50,6 +51,7 @@
                             <td>${fn:replace(daterange.get(0),"\"","")}至${fn:replace(daterange.get(daterange.size()-1),"\"","")}</td>
                             <td>${pv_sum}</td>
                             <td>${uv_sum}</td>
+                            <td><a href="${pageContext.request.contextPath}/elk.html">进入(加载较慢)</a> </td>
                         </tr>
                         </tbody>
                     </table>

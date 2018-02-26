@@ -22,7 +22,17 @@ public class OpenController {
     @RequestMapping("/open")
     public ModelAndView open(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("open");
+        mv.setViewName("/open");
         return mv;
+    }
+
+    @RequestMapping("/elk")
+    public ModelAndView elk() {
+        return new ModelAndView("/elk");
+    }
+
+    @RequestMapping("/myresume")
+    public ModelAndView myresume() {
+        return new ModelAndView("/myresume");
     }
 }
