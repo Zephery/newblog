@@ -85,6 +85,7 @@ public class TimeController {
     @Scheduled(cron = "0 0/5 1,3 * * ?")
     public void baiduwenzhihuai() throws Exception {
         HTTPStudy.baidu("温志怀");
+        logService.record("baiduwenzhihuai", "baiduwenzhihuai完成");
     }
 
     @Scheduled(cron = "0 36 6 * * * ")
