@@ -11,6 +11,7 @@ import com.myblog.lucene.BlogIndex;
 import com.myblog.model.*;
 import com.myblog.service.*;
 import com.myblog.util.*;
+import net.sf.ehcache.Ehcache;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
@@ -62,7 +63,10 @@ public class IndexController {
     private RedisTemplate redisTemplate;
     @Resource
     private MongoTemplate mongoTemplate;
+    @Resource
+    private Ehcache ehcache;
     private BlogIndex blogIndex = new BlogIndex();
+
 
     /**
      * 首页
@@ -220,10 +224,30 @@ public class IndexController {
     public ModelAndView checkcookie(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("checkcookie");
         HttpSession session = request.getSession();
+        if (session.getAttribute("yourfirstvisit") == null) {
+            session.setAttribute("yourfirstvisit", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+        }
         Cookie[] cookies = request.getCookies();
         mv.addObject("cookies", cookies);
         mv.addObject("session", session);
         mv.addObject("request", request);
+        return mv;
+    }
+
+    @RequestMapping("/addsession")
+    public void session(String userName, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        session.setAttribute("userName", userName + DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+        response.getWriter().write("success");
+    }
+
+    @RequestMapping("/session")
+    public ModelAndView session(HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView("WEB-INF/views/session");
+        if (request.getSession().getAttribute("userName") != null) {
+            String userName = request.getSession().getAttribute("userName").toString();
+            mv.addObject("userName", userName);
+        }
         return mv;
     }
 
@@ -248,7 +272,6 @@ public class IndexController {
         SingleToMany.getInstance().test();
         return DateTime.now().toString("yyyy-MM-dd HH:mm:ss");
     }
-
 
 
     @RequestMapping("/pythontest")
@@ -413,7 +436,7 @@ public class IndexController {
     @SuppressWarnings("unchecked")
     public String cacheIndex() {
         String content = HttpHelper.getInstance().get("http://www.wenzhihuai.com");
-        JedisUtil.getInstance().set("index",content);
+        JedisUtil.getInstance().set("index", content);
         return "success";
     }
 

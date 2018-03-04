@@ -292,6 +292,9 @@
     <import resource="spring/websocket.xml"/>
     <!--kafka-->
     <import resource="spring/kafka-consumer.xml"/>
+    <!--redisson-->
+    <import resource="spring/redisson.xml"/>
+
 
     <bean id="myStatLogger" class="com.myblog.druid.MyStatLogger"/>
     <!--dubbo-->

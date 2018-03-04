@@ -8,7 +8,8 @@
 网站站点：[http://www.wenzhihuai.com/](http://www.wenzhihuai.com/)  
 
 Java后端框架：Spring、Spring MVC、Mybatis、WebSocket（实时推送）、Lucene（搜索系统）、JMX  
-前端框架：Bootstrap、Jquery、Highcharts、Echarts、WaterFall（瀑布流）、WowSlider（图片切换）  
+前端框架：Bootstrap、Jquery、Highcharts、Echarts、WaterFall（瀑布流）、WowSlider（图片切换）
+分布式相关：Redisson(分布式锁)、  
 缓存：Redis（日志系统等）  
 数据库：MySQL  
 部署：Tomcat、Nginx、阿里云服务器、七牛云CDN  
@@ -127,5 +128,6 @@ Python相关：百度统计的获取、Flask提供文本分析API
 **2018-1-13**：增加切面，对service.impl下的所有方法监测耗时  
 **2018-1-18**：唉，终于换成了Spring-Redis作为缓存    
 **2018-2-9**：感觉缓存还是不够快，nginx中加上openresty    
+**2018-3-4**：加入Redisson分布式锁，减去使用ip来判断的麻烦      
     
 #### 持续更新...
