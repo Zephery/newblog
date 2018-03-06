@@ -9,7 +9,7 @@
 
 Java后端框架：Spring、Spring MVC、Mybatis、WebSocket（实时推送）、Lucene（搜索系统）、JMX  
 前端框架：Bootstrap、Jquery、Highcharts、Echarts、WaterFall（瀑布流）、WowSlider（图片切换）
-分布式相关：Redisson(分布式锁)、  
+分布式相关：Redisson(分布式锁)、dubbo
 缓存：Redis（日志系统等）  
 数据库：MySQL  
 部署：Tomcat、Nginx、阿里云服务器、七牛云CDN  
