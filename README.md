@@ -1,9 +1,13 @@
+<center>
+
 # 个人博客技术选型
 
 [![GitHub stars](https://img.shields.io/github/stars/Zephery/newblog.svg)](https://github.com/Zephery/newblog/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/Zephery/newblog.svg)](https://github.com/Zephery/newblog/network)
 [![GitHub issues](https://img.shields.io/github/issues/Zephery/newblog.svg)](https://github.com/Zephery/newblog/issues)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/Zephery/newblog.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FZephery%2Fnewblog)
+
+</center>
 
 **网站站点**：[http://www.wenzhihuai.com/](http://www.wenzhihuai.com/)  
 
@@ -64,12 +68,14 @@
 
 ### 日志系统架构如下
 [日志系统](http://www.wenzhihuai.com/log.html)曾经尝试采用过ELK，实时监控实在是让人不能不称赞，本地也跑起来了，但是一到服务器，卡卡卡，毕竟（1Ghz CPU、1G内存），只能放弃ELK，采用百度统计。百度统计提供了Tongji API供开发者使用，只是有次数限制，2000/日，实时的话实在有点低，只能统计前几天的PV、UV等开放出来。其实这个存放在mysql也行，不过这些零碎的数据还是放在redis中，方便管理。
-除了日志系统，自己对服务器的一些使用率也是挺关心的，毕竟服务器配置太低，于是利用了使用了tomcat的JMX来对CPU和jvm使用情况进行监控，这两个都是实时的。出了这两个，对内存的分配做了监控，Eden、Survivor、Tenured的使用情况
+除了日志系统，自己对服务器的一些使用率也是挺关心的，毕竟服务器配置太低，于是利用了使用了tomcat的JMX来对CPU和jvm使用情况进行监控，这两个都是实时的。出了这两个，对内存的分配做了监控，Eden、Survivor、Tenured的使用情况。
 <div align="center">
 
-![](http://image.wenzhihuai.com/awfawefwefawefwef.png)
+![](https://upyuncdn.wenzhihuai.com/201803170304371892629314.png)
 
 </div>
+
+
 
 ### 文本分类 
 本人大学里的毕业设计就是基于AdaBoost算法的情感分类，学到的东西还是要经常拿出来看看，要不然真的浪费了我这么久努力做的毕业设计啊。构建了一个基本的情感分类小系统，每天抓取微博进行分类存储在MySql上，并使用flask提供Restful API给java调用，可以点击[这里](http://www.wenzhihuai.com/weibonlp.html)尝试（请忽略Google的图片）。目前分类效果不是很明显，准确率大概只有百分之70%，因为训练样本只有500条（找不到训练样本），机器学习真的太依赖样本的标注。这个，只能请教各位路人大神指导指导了。
