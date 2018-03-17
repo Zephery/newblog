@@ -1,13 +1,9 @@
-<center>
-
 # 个人博客技术选型
 
 [![GitHub stars](https://img.shields.io/github/stars/Zephery/newblog.svg)](https://github.com/Zephery/newblog/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/Zephery/newblog.svg)](https://github.com/Zephery/newblog/network)
 [![GitHub issues](https://img.shields.io/github/issues/Zephery/newblog.svg)](https://github.com/Zephery/newblog/issues)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/Zephery/newblog.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FZephery%2Fnewblog)
-
-</center>
 
 **网站站点**：[http://www.wenzhihuai.com/](http://www.wenzhihuai.com/)  
 
