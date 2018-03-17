@@ -8,7 +8,7 @@
 网站站点：[http://www.wenzhihuai.com/](http://www.wenzhihuai.com/)  
 
 Java后端框架：Spring、Spring MVC、Mybatis、WebSocket（实时推送）、Lucene（搜索系统）、JMX  
-前端框架：Bootstrap、Jquery、Highcharts、Echarts、WaterFall（瀑布流）、WowSlider（图片切换）
+前端框架：Bootstrap、Jquery、Highcharts、Echarts、WaterFall（瀑布流）、WowSlider（图片切换）  
 分布式相关：Redisson(分布式锁)、dubbo
 缓存：Redis（日志系统等）  
 数据库：MySQL  
@@ -43,13 +43,23 @@ Python相关：百度统计的获取、Flask提供文本分析API
 
 </div>
 
-### 技术架构图如下  
+### 技术架构图如下(已过时，暂未更新)  
 一直想在选型上采用点新技术，有些用上确实是完美，但是有些却不知用来干什么好，比如RabbitMQ和MongoDB，毕竟个人网站没有这些业务，有网友说没必要用，毕竟没必要为了业务而业务，等以后有需求了再优化这些技术在博客中的嵌入吧。↖(^ω^)↗
 <div align="center">
 
 ![](http://image.wenzhihuai.com/awfawefwefwef.png)
 
 </div>
+
+### 缓存架构如下
+起先访问速度实在是太慢了，即使开启了Mybatis的一二级缓存，后来慢慢的加入Ehcache，速度好多了，不过为了模仿大型网站中的多级缓存的概念，还是继续引入Redis作为二级缓存，很好很开心，哈哈哈，不过偶尔网速不好，服务器有点卡的时候，首页的访问还是不能达到满意，后来看开涛的《亿级流量》，感觉把首页每个一段时间抓取，存成静态页面，写到redis，然后每次访问的时候，直接在nginx使用lua访问redis读取然后返回给客户端，奇思妙想还真成了。
+<div align="center">
+
+![](https://upyuncdn.wenzhihuai.com/201803170219421253122648.png)
+
+</div>
+
+
 
 ### 日志系统架构如下
 [日志系统](http://www.wenzhihuai.com/log.html)曾经尝试采用过ELK，实时监控实在是让人不能不称赞，本地也跑起来了，但是一到服务器，卡卡卡，毕竟（1Ghz CPU、1G内存），只能放弃ELK，采用百度统计。百度统计提供了Tongji API供开发者使用，只是有次数限制，2000/日，实时的话实在有点低，只能统计前几天的PV、UV等开放出来。其实这个存放在mysql也行，不过这些零碎的数据还是放在redis中，方便管理。
