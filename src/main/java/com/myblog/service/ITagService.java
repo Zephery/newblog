@@ -13,4 +13,6 @@ public interface ITagService {
     public List<Tag> getAllTags();
 
     public void deleteTag(Integer tId) throws RuntimeException;
+
+    public String getBiaoqian() throws Exception;
 }

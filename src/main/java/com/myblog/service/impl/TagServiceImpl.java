@@ -1,21 +1,22 @@
 package com.myblog.service.impl;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.myblog.dao.CategoryMapper;
 import com.myblog.dao.TagMapper;
 import com.myblog.model.Blog;
 import com.myblog.model.KeyAndValue;
 import com.myblog.model.Tag;
 import com.myblog.service.ITagService;
+import com.myblog.util.StringUtil;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -27,9 +28,7 @@ public class TagServiceImpl implements ITagService {
     @Resource
     private TagMapper tagMapper;
     @Resource
-    private CategoryMapper categoryMapper;
-    @Resource
-    private RedisTemplate<String, ?> redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
 
     @Override
     @SuppressWarnings({"rawtypes", "unchecked"})
@@ -48,11 +47,21 @@ public class TagServiceImpl implements ITagService {
             jsonObject.addProperty("value", str);
             jsonArray.add(jsonObject);
         }
-        boolean result = redisTemplate.execute((RedisCallback<Boolean>) connection -> {
-            RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
-            connection.set(serializer.serialize("biaoqian"), serializer.serialize(jsonArray.toString()));
-            return true;
+        Iterator iterator = jsonArray.iterator();
+        List<KeyAndValue> biaoqian = new ArrayList<>();
+        while (iterator.hasNext()) {
+            Gson gson = new Gson();
+            KeyAndValue keyAndValue = gson.fromJson((JsonObject) iterator.next(), KeyAndValue.class);
+            biaoqian.add(keyAndValue);
+        }
+        biaoqian.sort((o1, o2) -> {
+            Integer a = StringUtil.stringgetint(o1.getValue());
+            Integer b = StringUtil.stringgetint(o2.getValue());
+            return b.compareTo(a);
         });
+        Gson gson = new Gson();
+        String temp = gson.toJson(biaoqian.size() > 16 ? biaoqian.subList(0, 16) : biaoqian);
+        redisTemplate.opsForValue().set("biaoqian", temp);
         return tId;
     }
 
@@ -66,4 +75,14 @@ public class TagServiceImpl implements ITagService {
     public void deleteTag(Integer tId) throws RuntimeException {
         tagMapper.deleteByPrimaryKey(tId);
     }
+
+    @Override
+    public String getBiaoqian() throws Exception {
+        if (redisTemplate.opsForValue().get("biaoqian") == null) {
+            updatetag(1);
+        }
+        return redisTemplate.opsForValue().get("biaoqian");
+    }
+
+
 }

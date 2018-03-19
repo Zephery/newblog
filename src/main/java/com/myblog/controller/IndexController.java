@@ -3,12 +3,14 @@ package com.myblog.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.myblog.common.SSOCommon;
 import com.myblog.lucene.BlogIndex;
-import com.myblog.model.*;
+import com.myblog.model.Blog;
+import com.myblog.model.Category;
+import com.myblog.model.Links;
+import com.myblog.model.Myreading;
 import com.myblog.service.*;
 import com.myblog.util.*;
 import net.sf.ehcache.Ehcache;
@@ -32,8 +34,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -144,25 +144,8 @@ public class IndexController {
     @ResponseBody
     public void biaoqianyun(HttpServletResponse response) throws Exception {
         try {
-            JedisUtil jedis = JedisUtil.getInstance();
-            JsonParser parser = new JsonParser();
-            String str = jedis.get("biaoqian");
-            JsonArray jsonArray = (JsonArray) parser.parse(str);
-            Iterator iterator = jsonArray.iterator();
-            List<KeyAndValue> biaoqian = new ArrayList<>();
-            while (iterator.hasNext()) {
-                Gson gson = new Gson();
-                KeyAndValue keyAndValue = gson.fromJson((JsonObject) iterator.next(), KeyAndValue.class);
-                biaoqian.add(keyAndValue);
-            }
-            biaoqian.sort((o1, o2) -> {
-                Integer a = StringUtil.stringgetint(o1.getValue());
-                Integer b = StringUtil.stringgetint(o2.getValue());
-                return b.compareTo(a);
-            });
-            Gson gson = new Gson();
-            String temp = gson.toJson(biaoqian.size() > 16 ? biaoqian.subList(0, 16) : biaoqian);
-            response.getWriter().write(temp);
+            String str = tagService.getBiaoqian();
+            response.getWriter().write(str);
         } catch (Exception e) {
             response.getWriter().write(e.toString());
         }

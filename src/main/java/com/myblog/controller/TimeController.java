@@ -136,7 +136,7 @@ public class TimeController {
 
     }
 
-    @Scheduled(cron = "0/20 * * * * ?")
+    @Scheduled(cron = "0/50 * * * * ?")
     @SuppressWarnings("unchecked")
     public void refreshIndex() throws Exception {
         String ip = IPUtils.getServerIp().replaceAll("\n", "");
