@@ -42,16 +42,8 @@
                     </header>
                     <div class="focus">
                         <a href="getblogdetail.html?blogid=${blog.blogid}">
-                            <c:choose>
-                                <c:when test="${fn:contains(blog.imageurl,'upyuncdn')}">
-                                    <img class="thumb" src="${blog.imageurl}!imageView2"
-                                         alt="${blog.title}">
-                                </c:when>
-                                <c:otherwise>
-                                    <img class="thumb" src="${blog.imageurl}?imageView2/1/w/200/h/123"
-                                         alt="${blog.title}">
-                                </c:otherwise>
-                            </c:choose>
+                            <img class="thumb" src="${blog.imageurl}!/both/200x123?imageView2/1/w/200/h/123"
+                                 alt="${blog.title}">
                         </a>
                     </div>
                     <span class="note">${blog.summary}...</span>

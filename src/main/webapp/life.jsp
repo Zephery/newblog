@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page isELIgnored="false" %>
 <jsp:include page="head.jsp">
     <jsp:param name="lifeactive" value="active"/>
@@ -41,8 +42,11 @@
                                title="${blog.title}">${blog.title}</a>
                         </h2>
                     </header>
-                    <div class="focus"><a href="getblogdetail.html?blogid=${blog.blogid}">
-                        <img class="thumb" src="${blog.imageurl}?imageView2/1/w/200/h/123" alt="${blog.title}"></a>
+                    <div class="focus">
+                        <a href="getblogdetail.html?blogid=${blog.blogid}">
+                            <img class="thumb" src="${blog.imageurl}!/both/200x123?imageView2/1/w/200/h/123"
+                                 alt="${blog.title}">
+                        </a>
                     </div>
                     <span class="note">${blog.summary}...</span>
                     <p class="auth-span">
@@ -96,6 +100,6 @@
     </div>
     <%@include file="sidebar.jsp" %>
 </section>
-<%@include file="foot.jsp"%>
+<%@include file="foot.jsp" %>
 </body>
 </html>
