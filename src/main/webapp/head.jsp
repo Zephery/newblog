@@ -116,6 +116,16 @@
     <meta name="sogou_site_verification" content="Lzg0yrcxwy"/>
     <!--bing-->
     <meta name="msvalidate.01" content="68A11010C9AEE3FD3F5BD421EACC7499"/>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117168799-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-117168799-1');
+    </script>
+
 </head>
 <body>
 <!--navigation-->
