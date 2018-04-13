@@ -104,7 +104,7 @@ public class BlogServiceImpl implements IBlogService {
 
     @Override
 //    不能在此处在缓存，跟pageHelper有冲突，会导致多次查询
-//    @Cacheable(value = "myCache", keyGenerator = "customKeyGenerator")
+    @Cacheable(value = "myCache", keyGenerator = "customKeyGenerator")
     public List<Blog> getAllBlog() {
         List<Blog> blogs = blogMapper.getAllBlog();
         for (Blog blog : blogs) {
