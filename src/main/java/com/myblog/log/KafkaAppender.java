@@ -35,7 +35,6 @@ public class KafkaAppender extends AppenderBase<ILoggingEvent> {
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         properties.put("value.serializer", "org.apache.kafka.common.serialization.ByteArraySerializer");
         this.producer = getKafkaProducer(properties);
-        System.out.println("aaa");
     }
 
     @Override

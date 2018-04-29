@@ -63,7 +63,6 @@ public class CustomListener implements ServletContextListener {
 //            FileOutputStream out = new FileOutputStream(abPath);
 //            out.write(newStr.getBytes("utf-8"));
 //            out.close();
-            System.out.println();
         } catch (Exception e) {
             logger.error("record ip error", e);
         }
