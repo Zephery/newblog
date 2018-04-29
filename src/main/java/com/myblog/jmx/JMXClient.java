@@ -22,6 +22,7 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryPoolMXBean;
 import java.lang.management.MemoryUsage;
+import java.net.MalformedURLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,28 +51,32 @@ public class JMXClient {
     private static JMXClient jmxUtil = null;
 
     static {
-        mbsconnector = initMBeanServerConnection();
+        try {
+            mbsconnector = initMBeanServerConnection();
+        } catch (IOException e) {
+            logger.error("报错", e);
+        }
     }
 
-    public JMXClient() {
+    public JMXClient() throws IOException {
         initMBeanServerConnection();
     }
 
-    public static JMXClient getInstance() {
+    public static JMXClient getInstance() throws IOException {
         if (jmxUtil == null) {
             jmxUtil = createInstance();
         }
         return jmxUtil;
     }
 
-    private synchronized static JMXClient createInstance() {
+    private synchronized static JMXClient createInstance() throws IOException {
         if (jmxUtil == null) {
             jmxUtil = new JMXClient();
         }
         return jmxUtil;
     }
 
-    private static MBeanServerConnection initMBeanServerConnection() {
+    private static MBeanServerConnection initMBeanServerConnection() throws IOException {
         try {
             String ip = Config.getProperty("jmx_ip");
             String port = Config.getProperty("jmx_port");
@@ -83,6 +88,14 @@ public class JMXClient {
             JMXConnector connector = JMXConnectorFactory.connect(serviceURL, map);
             mbsconnector = connector.getMBeanServerConnection();
         } catch (IOException e) {
+            String port = Config.getProperty("jmx_port");
+            String jmxURL = "service:jmx:rmi:///jndi/rmi://127.0.0.1:" + port + "/jmxrmi";
+            JMXServiceURL serviceURL = new JMXServiceURL(jmxURL);
+            Map map = new HashMap();
+            String[] credentials = Config.getProperty("credentials").split(",");
+            map.put("jmx.remote.credentials", credentials);
+            JMXConnector connector = JMXConnectorFactory.connect(serviceURL, map);
+            mbsconnector = connector.getMBeanServerConnection();
             logger.error("get connector error" + e);
         }
         return mbsconnector;

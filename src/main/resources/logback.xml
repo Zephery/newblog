@@ -45,7 +45,7 @@
     </appender>
 
     <appender name="kafkaAppender" class="com.myblog.log.KafkaAppender">
-        <topic>logs</topic>
+        <topic>newbloglogs</topic>
         <brokerList>119.29.188.224:9092</brokerList>
     </appender>
 

@@ -30,7 +30,7 @@ public class LogController {
     private final static Logger logger = LoggerFactory.getLogger(LogController.class);
 
     @RequestMapping("/log")
-    public ModelAndView log(HttpServletRequest request) {
+    public ModelAndView log(HttpServletRequest request) throws IOException {
         JedisUtil jedis = JedisUtil.getInstance();    //remember not to close
         String temp = jedis.get("daterange");
         String pv_count = jedis.get("pv_count");
