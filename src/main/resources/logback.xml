@@ -43,6 +43,12 @@
             <level>WARN</level>
         </filter>
     </appender>
+
+    <appender name="kafkaAppender" class="com.myblog.log.KafkaAppender">
+        <topic>logs</topic>
+        <brokerList>119.29.188.224:9092</brokerList>
+    </appender>
+
     <!-- project default level -->
     <logger name="com.myblog.dao" level="debug"/>
     <!--log4jdbc -->
@@ -60,6 +66,7 @@
         <level value="INFO"/>
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
+        <appender-ref ref="kafkaAppender"/>
         <appender-ref ref="ERROR_FILE"/>
     </root>
 </configuration>

@@ -24,11 +24,11 @@ public class MessageServiceImpl implements IMessageService {
 
     public void pushToMessageQueue(String routingKey, String message) {
         amqpTemplate.convertAndSend(routingKey, message);
-        System.out.println("成功插入消息 " + message);
+        logger.info("成功插入消息 " + message);
     }
 
     public void popMessage(String destinationQueueName) {
         Message message = amqpTemplate.receive(destinationQueueName);
-        System.out.println("成功取出消息 " + new String(message.getBody()));
+        logger.info("成功取出消息 " + new String(message.getBody()));
     }
 }
