@@ -87,14 +87,14 @@ public class JMXClient {
             JMXConnector connector = JMXConnectorFactory.connect(serviceURL, map);
             mbsconnector = connector.getMBeanServerConnection();
         } catch (IOException e) {
-            String port = Config.getProperty("jmx_port");
-            String jmxURL = "service:jmx:rmi:///jndi/rmi://127.0.0.1:" + port + "/jmxrmi";
-            JMXServiceURL serviceURL = new JMXServiceURL(jmxURL);
-            Map map = new HashMap();
-            String[] credentials = Config.getProperty("credentials").split(",");
-            map.put("jmx.remote.credentials", credentials);
-            JMXConnector connector = JMXConnectorFactory.connect(serviceURL, map);
-            mbsconnector = connector.getMBeanServerConnection();
+//            String port = Config.getProperty("jmx_port");
+//            String jmxURL = "service:jmx:rmi:///jndi/rmi://127.0.0.1:" + port + "/jmxrmi";
+//            JMXServiceURL serviceURL = new JMXServiceURL(jmxURL);
+//            Map map = new HashMap();
+//            String[] credentials = Config.getProperty("credentials").split(",");
+//            map.put("jmx.remote.credentials", credentials);
+//            JMXConnector connector = JMXConnectorFactory.connect(serviceURL, map);
+//            mbsconnector = connector.getMBeanServerConnection();
             logger.error("get connector error" + e);
         }
         return mbsconnector;
