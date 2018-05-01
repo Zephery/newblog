@@ -1,6 +1,7 @@
 package com.myblog.log;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
+import com.myblog.util.IPUtils;
 
 /**
  * @author wenzhihuai
@@ -10,6 +11,7 @@ public class JsonFormatter implements Formatter {
     private static final String QUOTE = "\"";
     private static final String COLON = ":";
     private static final String COMMA = ",";
+    private static final String ip = IPUtils.getServerIp();
 
     private boolean expectJson = false;
 
@@ -39,6 +41,10 @@ public class JsonFormatter implements Formatter {
 
         fieldName("timestamp", sb);
         sb.append(event.getTimeStamp());
+        sb.append(COMMA);
+
+        fieldName("ip", sb);
+        sb.append(ip);
         sb.append(COMMA);
 
         fieldName("message", sb);

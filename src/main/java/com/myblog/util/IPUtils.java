@@ -144,7 +144,7 @@ public class IPUtils {
         String ip = "";
         String url = "http://icanhazip.com/";
         try {
-            ip = HttpHelper.getInstance().get(url);
+            ip = HttpHelper.getInstance().get(url).replaceAll("\n", "");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -152,7 +152,7 @@ public class IPUtils {
     }
 
     public static void main(String[] args) {
-        String ip = IPUtils.getServerIp().replaceAll("\n", "");
+        String ip = IPUtils.getServerIp();
         if ("113.108.186.130".equals(ip)) {
             System.out.println(ip);
         }
