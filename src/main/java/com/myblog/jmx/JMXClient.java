@@ -5,8 +5,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.myblog.common.Config;
 import com.myblog.util.JedisUtil;
+import com.myblog.util.JmxPortCheck;
 import com.sun.management.GarbageCollectorMXBean;
 import com.sun.management.OperatingSystemMXBean;
+import joptsimple.internal.Strings;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,34 +54,36 @@ public class JMXClient {
     static {
         try {
             mbsconnector = initMBeanServerConnection();
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("报错", e);
         }
     }
 
-    public JMXClient() throws IOException {
+    public JMXClient() {
         initMBeanServerConnection();
     }
 
-    public static JMXClient getInstance() throws IOException {
+    public static JMXClient getInstance() {
         if (jmxUtil == null) {
             jmxUtil = createInstance();
         }
         return jmxUtil;
     }
 
-    private synchronized static JMXClient createInstance() throws IOException {
+    private synchronized static JMXClient createInstance() {
         if (jmxUtil == null) {
             jmxUtil = new JMXClient();
         }
         return jmxUtil;
     }
 
-    private static MBeanServerConnection initMBeanServerConnection() throws IOException {
+    private static MBeanServerConnection initMBeanServerConnection() {
         try {
-            String ip = Config.getProperty("jmx_ip");
-            String port = Config.getProperty("jmx_port");
-            String jmxURL = "service:jmx:rmi:///jndi/rmi://" + ip + ":" + port + "/jmxrmi";
+            String ipAndPort = JmxPortCheck.check();
+            if (Strings.isNullOrEmpty(ipAndPort)) {
+                return null;
+            }
+            String jmxURL = "service:jmx:rmi:///jndi/rmi://" + ipAndPort + "/jmxrmi";
             JMXServiceURL serviceURL = new JMXServiceURL(jmxURL);
             Map map = new HashMap();
             String[] credentials = Config.getProperty("credentials").split(",");
@@ -87,20 +91,12 @@ public class JMXClient {
             JMXConnector connector = JMXConnectorFactory.connect(serviceURL, map);
             mbsconnector = connector.getMBeanServerConnection();
         } catch (IOException e) {
-//            String port = Config.getProperty("jmx_port");
-//            String jmxURL = "service:jmx:rmi:///jndi/rmi://127.0.0.1:" + port + "/jmxrmi";
-//            JMXServiceURL serviceURL = new JMXServiceURL(jmxURL);
-//            Map map = new HashMap();
-//            String[] credentials = Config.getProperty("credentials").split(",");
-//            map.put("jmx.remote.credentials", credentials);
-//            JMXConnector connector = JMXConnectorFactory.connect(serviceURL, map);
-//            mbsconnector = connector.getMBeanServerConnection();
             logger.error("get connector error" + e);
         }
         return mbsconnector;
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
     }
 
     public Long getJVMUsage() {
@@ -126,6 +122,9 @@ public class JMXClient {
             double ratio = 0;
             OperatingSystemMXBean opMXbean = ManagementFactory.newPlatformMXBeanProxy(mbsconnector,
                     ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME, OperatingSystemMXBean.class);
+            if (opMXbean == null) {
+                return;
+            }
             Long start = System.currentTimeMillis();
             long startT = opMXbean.getProcessCpuTime();
             try {
