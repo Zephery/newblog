@@ -44,7 +44,7 @@ public class JsonFormatter implements Formatter {
         sb.append(COMMA);
 
         fieldName("ip", sb);
-        sb.append(ip);
+        quoto(ip, sb);
         sb.append(COMMA);
 
         fieldName("message", sb);
