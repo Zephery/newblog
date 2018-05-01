@@ -6,6 +6,7 @@ import com.myblog.model.Blog;
 import com.myblog.model.Weibo;
 import com.myblog.service.*;
 import com.myblog.util.*;
+import joptsimple.internal.Strings;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
@@ -143,7 +144,9 @@ public class TimeController {
         if (REGULARIP.equals(ip)) {
             String content = HttpHelper.getInstance().get("http://119.29.188.224:8080");
             logService.record("refreshIndex", "首页刷新完成");
-            JedisUtil.getInstance().set("index", content);
+            if (!Strings.isNullOrEmpty(content)) {
+                JedisUtil.getInstance().set("index", content);
+            }
         }
     }
 
