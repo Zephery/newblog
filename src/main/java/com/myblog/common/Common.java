@@ -31,4 +31,73 @@ public class Common {
     public final static String PYTHON_PATH = "/root/anaconda3/bin/python3.6";
 
     public final static String MYSQL_DUMP = "/usr/bin/mysqldump";
+
+    public static final String TEMPLATE = "{\n" +
+            "    \"order\": 0,\n" +
+            "    \"index_patterns\": \"" + "newbloglogs-20*\",\n" +
+            "    \"settings\": {\n" +
+            "        \"refresh_interval\":\"1s\"" +
+            "    },\n" +
+            "    \"mappings\": {\n" +
+            "        \"blog\": {\n" +
+            "            \"properties\": {\n" +
+            "                \"conditions\": {\n" +
+            "                    \"properties\": {\n" +
+            "                        \"max_age\": {\n" +
+            "                            \"type\": \"text\",\n" +
+            "                            \"fields\": {\n" +
+            "                                \"keyword\": {\n" +
+            "                                    \"type\": \"keyword\",\n" +
+            "                                    \"ignore_above\": 256\n" +
+            "                                }\n" +
+            "                            }\n" +
+            "                        },\n" +
+            "                        \"max_docs\": {\n" +
+            "                            \"type\": \"long\"\n" +
+            "                        }\n" +
+            "                    }\n" +
+            "                },\n" +
+            "                \"ip\": {\n" +
+            "                    \"type\": \"text\",\n" +
+            "                    \"fields\": {\n" +
+            "                        \"keyword\": {\n" +
+            "                            \"type\": \"keyword\",\n" +
+            "                            \"ignore_above\": 256\n" +
+            "                        }\n" +
+            "                    }\n" +
+            "                },\n" +
+            "                \"level\": {\n" +
+            "                    \"type\": \"keyword\"\n" +
+            "                },\n" +
+            "                \"logger\": {\n" +
+            "                    \"type\": \"keyword\"\n" +
+            "                },\n" +
+            "                \"message\": {\n" +
+            "                    \"type\": \"keyword\"\n" +
+            "                },\n" +
+            "                \"timestamp\": {\n" +
+            "                    \"type\": \"date\"\n" +
+            "                }\n" +
+            "            }" +
+            "        }\n" +
+            "    },\n" +
+            "    \"aliases\": {" +
+            "   \"newbloglogs\": {}\n" +
+            "  }\n" +
+            "}";
+
+    public static final String ALIASES = "{\n" +
+            "  \"aliases\": {\n" +
+            "    \"newbloglogs_write\": {}\n" +
+            "  }\n" +
+            "}";
+    public static final String TYPE = "newblog";
+
+    public static final String ROLLOVER="{\n" +
+            "  \"conditions\": {\n" +
+            "    \"max_age\":   \"1d\",\n" +
+            "    \"max_docs\":  1000,\n" +
+            "  }\n" +
+            "}";
+
 }

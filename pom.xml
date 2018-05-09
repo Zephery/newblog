@@ -456,6 +456,25 @@
             <artifactId>lucene-highlighter</artifactId>
             <version>${lucene.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>6.1.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.elasticsearch.client/rest -->
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>rest</artifactId>
+            <version>5.5.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-client -->
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-client</artifactId>
+            <version>6.1.1</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.janeluo/ikanalyzer -->
         <dependency>
             <groupId>com.janeluo</groupId>

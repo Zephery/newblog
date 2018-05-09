@@ -173,6 +173,11 @@ public class TimeController {
         } finally {
             lock.unlock();
         }
+    }
 
+    @Scheduled(cron = "30 1 * * * ?")
+    public void index() throws IOException {
+        IndexUtil.createTemplateRestClient();
+        IndexUtil.rollover();
     }
 }
