@@ -3,7 +3,6 @@ package com.myblog.util;
 import com.myblog.client.ESClient;
 import com.myblog.common.Common;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.StatusLine;
 import org.apache.http.entity.ContentType;
@@ -54,16 +53,16 @@ public class IndexUtil {
 
     public static void rollover() throws IOException {
         HttpEntity entity = new StringEntity(Common.ROLLOVER, ContentType.APPLICATION_JSON);
-        StatusLine rollover = ESClient.getClient().performRequest("POST", "/newbloglogs_write", Collections.emptyMap(), entity).getStatusLine();
-        if(!"OK".equals(rollover.getReasonPhrase())){
+        StatusLine rollover = ESClient.getClient().performRequest("POST", "/newbloglogs_write/_rollover", Collections.emptyMap(), entity).getStatusLine();
+        if (!"OK".equals(rollover.getReasonPhrase())) {
             log.error("rollover error");
-        }else{
+        } else {
             log.info("rollover success");
         }
 
     }
 
-    public static void main(String[] args) {
-        System.out.println(RandomStringUtils.randomAlphanumeric(10));
+    public static void main(String[] args) throws IOException {
+        rollover();
     }
 }

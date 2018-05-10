@@ -96,7 +96,7 @@ public class Common {
     public static final String ROLLOVER="{\n" +
             "  \"conditions\": {\n" +
             "    \"max_age\":   \"1d\",\n" +
-            "    \"max_docs\":  1000,\n" +
+            "    \"max_docs\":  1000\n" +
             "  }\n" +
             "}";
 

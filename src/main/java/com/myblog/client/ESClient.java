@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 
+import java.io.IOException;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Zephery
@@ -24,6 +26,14 @@ public class ESClient {
             }
         }
         return restClient;
+    }
+
+    public static void close() {
+        try {
+            restClient.close();
+        } catch (IOException e) {
+            log.error("流关闭错误", e);
+        }
     }
 
     private static RestClient createRestClient() {

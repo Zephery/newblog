@@ -175,9 +175,22 @@ public class TimeController {
         }
     }
 
-    @Scheduled(cron = "30 1 * * * ?")
-    public void index() throws IOException {
-        IndexUtil.createTemplateRestClient();
-        IndexUtil.rollover();
+    @Scheduled(cron = "30 56 1 * * ?")
+    public void index() {
+        String rollover = "rollover" + DateTime.now().toString("yyyyMMdd");
+        RLock lock = redissonClient.getLock("rolloverTempLock");
+        try {
+            lock.lock();
+            Object o = redisTemplate.opsForValue().get(rollover);
+            if (o == null) {
+                redisTemplate.opsForValue().set(rollover, "true");
+                IndexUtil.createTemplateRestClient();
+                IndexUtil.rollover();
+            }
+        } catch (Exception e) {
+            logger.error("", e);
+        } finally {
+            lock.unlock();
+        }
     }
 }
