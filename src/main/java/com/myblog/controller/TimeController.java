@@ -176,6 +176,7 @@ public class TimeController {
     }
 
     @Scheduled(cron = "30 56 1 * * ?")
+    @RequestMapping("/rollover")
     public void index() {
         String rollover = "rollover" + DateTime.now().toString("yyyyMMdd");
         RLock lock = redissonClient.getLock("rolloverTempLock");
