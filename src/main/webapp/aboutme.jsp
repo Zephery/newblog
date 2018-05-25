@@ -72,9 +72,12 @@ background-size: 100% 100%;background-attachment: fixed;">
                        data-original-title="腾讯微博"><i class="fa fa-tencent-weibo"></i></a>
                 </div>
                 <div class="col" id="icon">
-                    <a title="QQ" href="http://wpa.qq.com/msgrd?v=3&uin=1570631036&site=qq&menu=yes"
+                    <%--<a title="QQ" href="http://wpa.qq.com/msgrd?v=3&uin=1570631036&site=qq&menu=yes"--%>
+                    <%--class="social-icon tool-tip qq" data-placement="top"--%>
+                    <%--data-original-title="1570631036"><i class="fa fa-qq"></i></a>--%>
+                    <a title="QQ"
                        class="social-icon tool-tip qq" data-placement="top"
-                       data-original-title="1570631036"><i class="fa fa-qq"></i></a>
+                       data-original-title=""><i class="fa fa-qq"></i></a>
                 </div>
                 <div class="col" id="icon">
                     <a href="https://github.com/Zephery" class="social-icon tool-tip github" title=""
@@ -88,7 +91,8 @@ background-size: 100% 100%;background-attachment: fixed;">
                 </div>
                 <div class="col colleft" id="icon">
                     <%--弹出层效果链接：http://www.jq22.com/jquery-info109--%>
-                    <a href="http://image.wenzhihuai.com/mywechat.png"
+                    <%--<a href="http://image.wenzhihuai.com/mywechat.png"--%>
+                    <a
                        class="social-icon tool-tip wechat big-link" title=""
                        data-placement="top" data-original-title="WeChat" data-reveal-id="myModal" data-animation="fade"><i
                             class="fa fa-wechat"></i></a>
@@ -145,7 +149,8 @@ background-size: 100% 100%;background-attachment: fixed;">
 <br>
 <div id="myModal" class="reveal-modal">
     <a class="close-reveal-modal">&#215;</a>
-    <img src="http://image.wenzhihuai.com/mywechat.png" width="100%" height="100%"/>
+    <%--<img src="http://image.wenzhihuai.com/mywechat.png" width="100%" height="100%"/>--%>
+    <img src="" width="100%" height="100%"/>
 </div>
 <%@include file="foot.jsp" %>
 </body>
