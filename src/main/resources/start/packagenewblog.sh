@@ -32,3 +32,7 @@ if [ $? -eq 0 ];then
 else
   echo ${time}"-->del $DATA log fail.." >> /tmp/es-index-clear.log
 fi
+
+
+aDATA=`date -d "1 week ago" +%Y%m%d`
+curl -XDELETE http://119.29.188.224:9200/*-${aDATA}-*
