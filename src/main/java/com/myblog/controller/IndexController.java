@@ -25,7 +25,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -34,7 +40,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -427,5 +435,21 @@ public class IndexController {
     public void readIndex(HttpServletResponse response) throws Exception {
         String content = redisTemplate.opsForValue().get("index").toString();
         response.getWriter().write(content);
+    }
+
+    @RequestMapping("getAllUrl")
+    @ResponseBody
+    public Set<String> getAllUrl(HttpServletRequest request) {
+        Set<String> result = new HashSet<>();
+        WebApplicationContext wc = (WebApplicationContext) request.getAttribute(DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+        RequestMappingHandlerMapping bean = wc.getBean(RequestMappingHandlerMapping.class);
+        Map<RequestMappingInfo, HandlerMethod> handlerMethods = bean.getHandlerMethods();
+        for (RequestMappingInfo rmi : handlerMethods.keySet()) {
+            PatternsRequestCondition pc = rmi.getPatternsCondition();
+            Set<String> pSet = pc.getPatterns();
+            result.addAll(pSet);
+        }
+        String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+        return result;
     }
 }

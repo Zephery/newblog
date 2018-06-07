@@ -222,7 +222,7 @@
         source: [
             {
                 minChars: 1,
-                url: "${pageContext.request.contextPath}/ajaxsearch.html?keyword=%QUERY%",
+                url: "${pageContext.request.contextPath}/ajaxsearch.do?keyword=%QUERY%",
                 type: 'remote'
             }
         ]
