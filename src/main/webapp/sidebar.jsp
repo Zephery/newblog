@@ -11,7 +11,7 @@
 <link href="http://image.wenzhihuai.com/newlypublished.css?ver=20171017" rel="stylesheet">
 <script>
     $.ajax({
-        url: "${pageContext.request.contextPath}/blogbyhits.do",
+        url: "${pageContext.request.contextPath}/blogbyhits.html",
         type: "get",
         dataType: 'json',
         success: function (data) {
@@ -30,7 +30,7 @@
         }
     });
     $.ajax({
-        url: "${pageContext.request.contextPath}/getjsonbycategories.do",
+        url: "${pageContext.request.contextPath}/getjsonbycategories.html",
         type: "get",
         dataType: 'json',
         success: function (data) {
@@ -49,7 +49,7 @@
     //    style="font-size: 13px;"> Java </a>
 
     $.ajax({
-        url: "${pageContext.request.contextPath}/biaoqianyun.do",
+        url: "${pageContext.request.contextPath}/biaoqianyun.html",
         type: "get",
         dataType: 'json',
         success: function (data) {
@@ -67,7 +67,7 @@
 
     //link
     $.ajax({
-        url: "${pageContext.request.contextPath}/links.do",
+        url: "${pageContext.request.contextPath}/links.html",
         type: "get",
         dataType: 'json',
         success: function (data) {
