@@ -668,8 +668,10 @@
             var settings = this.settings;
             var editor = this.editor;
 
-            if (settings.editorTheme !== "default") {
+            if (settings.editorTheme !== "default" && settings.editorTheme !== "monokai") {
                 editormd.loadCSS(settings.path + "codemirror/theme/" + settings.editorTheme);
+            }else{
+                editormd.loadCSS("http://image.wenzhihuai.com/monokai");
             }
 
             var codeMirrorConfig = {

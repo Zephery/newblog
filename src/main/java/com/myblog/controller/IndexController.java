@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -415,11 +416,13 @@ public class IndexController {
 
     @RequestMapping("/savezhoubao")
     @SuppressWarnings("unchecked")
-    public void savezhoubao(String content) {
+    @ResponseBody
+    public String savezhoubao(String content) {
         if (StringUtils.isNotEmpty(content)) {
             content = StringUtils.trimToNull(content);
         }
         redisTemplate.opsForValue().set("zhoubao", content);
+        return "success";
     }
 
     @RequestMapping("/cacheIndex")
@@ -451,5 +454,40 @@ public class IndexController {
         }
         String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
         return result;
+    }
+
+
+    @RequestMapping("/uploadImage")
+    @ResponseBody
+    public String uploadImage(String base64Data, String tempFileName, String domain, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            String data;
+            if (base64Data == null || "".equals(base64Data)) {
+                throw new Exception("上传失败，上传图片数据为空");
+            } else {
+                String[] d = base64Data.split("base64,");
+                if (d.length == 2) {
+                    data = d[1];
+                } else {
+                    throw new Exception("上传失败，数据不合法");
+                }
+            }
+            byte[] bs = Base64Utils.decodeFromString(data);
+            try {
+                if ("1".equals(domain)) {
+                    QiniuUtil.putFileBytes("images", "images/" + tempFileName, bs);
+                } else {
+                    UpYunUtil.uploadFileBytes(bs, tempFileName);
+
+                }
+                logger.info("success");
+            } catch (Exception ee) {
+                throw new Exception("上传失败，写入文件失败，" + ee.getMessage());
+            }
+            return "success";
+        } catch (Exception e) {
+            logger.error("", e);
+            return "error";
+        }
     }
 }
