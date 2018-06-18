@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="http://image.wenzhihuai.com/css/monokai.css"/>
     <link rel="stylesheet" href="http://image.wenzhihuai.com/css/pastel-on-dark.css"/>
     <link type="image/x-icon" rel="shortcut icon" href="http://image.wenzhihuai.com/66.jpg"/>
+    <style type="text/css">
+        .editormd img {display: block;margin: 0 auto;}
+    </style>
 </head>
 <body>
 <div id="layout">
