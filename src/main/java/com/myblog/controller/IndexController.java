@@ -475,10 +475,11 @@ public class IndexController {
             byte[] bs = Base64Utils.decodeFromString(data);
             try {
                 if ("1".equals(domain)) {
+                    logger.warn("qiniuyun");
                     QiniuUtil.putFileBytes("images", "images/" + tempFileName, bs);
                 } else {
+                    logger.warn("upyun");
                     UpYunUtil.uploadFileBytes(bs, tempFileName);
-
                 }
                 logger.info("success");
             } catch (Exception ee) {
