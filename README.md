@@ -1,3 +1,12 @@
+放下面这张图。。。是因为最近比较穷。。。。大佬们如果能施舍点，感激不尽
+<div align="center">
+
+![](https://upyuncdn.wenzhihuai.com/201806241238551645009308.png)
+
+</div>
+
+
+
 # 个人博客技术选型
 
 [![GitHub stars](https://img.shields.io/github/stars/Zephery/newblog.svg)](https://github.com/Zephery/newblog/stargazers)
