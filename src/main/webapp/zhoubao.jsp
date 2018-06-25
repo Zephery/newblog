@@ -13,7 +13,10 @@
     <link rel="stylesheet" href="http://image.wenzhihuai.com/css/pastel-on-dark.css"/>
     <link type="image/x-icon" rel="shortcut icon" href="http://image.wenzhihuai.com/66.jpg"/>
     <style type="text/css">
-        .editormd img {display: block;margin: 0 auto;}
+        .editormd img {
+            display: block;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
@@ -104,11 +107,25 @@ ${content}</textarea>
         }
     }
 
+    function uploadContent() {
+        var content = $("#content").text();
+        $.ajax({
+            type: "POST",
+            url: "/savezhoubao.do",
+            data: {content: content},
+            dataType: "json",
+            success: function (data) {
+            }
+        })
+    }
+
     document.addEventListener('paste', function (event) {
         paste(event);
     });
 
     $(function () {
+        setInterval(uploadContent, 60 * 1000);
+
         testEditor = editormd("test-editormd", {
             theme: (localStorage.theme) ? localStorage.theme : "dark",
 
@@ -129,15 +146,7 @@ ${content}</textarea>
     });
 
     window.onbeforeunload = function (event) {
-        var content = $("#content").text();
-        $.ajax({
-            type: "POST",
-            url: "/savezhoubao.do",
-            data: {content: content},
-            dataType: "json",
-            success: function (data) {
-            }
-        })
+        uploadContent();
     }
 </script>
 </body>
