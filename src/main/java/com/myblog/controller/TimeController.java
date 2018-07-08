@@ -5,8 +5,9 @@ import com.myblog.lucene.BlogIndex;
 import com.myblog.model.Blog;
 import com.myblog.model.Weibo;
 import com.myblog.service.*;
-import com.myblog.util.*;
-import joptsimple.internal.Strings;
+import com.myblog.util.HTTPStudy;
+import com.myblog.util.IndexUtil;
+import com.myblog.util.PythonUtil;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
@@ -15,7 +16,6 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
@@ -48,8 +48,6 @@ public class TimeController {
     private IWeiboService weiboService;
     @Resource
     private RedisTemplate redisTemplate;
-    @Resource
-    private MongoTemplate mongoTemplate;
     @Resource
     private ILogService logService;
     private static final CuratorFramework CURATORCLIENT = CuratorFrameworkFactory.builder().connectString("119.23.46.71:2181")

@@ -22,8 +22,8 @@ import java.util.Properties;
 public class MyStatLogger extends DruidDataSourceStatLoggerAdapter implements DruidDataSourceStatLogger {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(MyStatLogger.class);
-    @Resource
-    private IMongoDao mongoDao;
+//    @Resource
+//    private IMongoDao mongoDao;
 
     @Override
     public void log(DruidDataSourceStatValue var1) {

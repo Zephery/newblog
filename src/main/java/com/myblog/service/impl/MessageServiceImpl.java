@@ -3,11 +3,7 @@ package com.myblog.service.impl;
 import com.myblog.service.IMessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.core.Message;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,16 +15,16 @@ import javax.annotation.Resource;
 public class MessageServiceImpl implements IMessageService {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(MessageServiceImpl.class);
-    @Resource
-    private AmqpTemplate amqpTemplate;
+//    @Resource
+//    private AmqpTemplate amqpTemplate;
 
     public void pushToMessageQueue(String routingKey, String message) {
-        amqpTemplate.convertAndSend(routingKey, message);
-        logger.info("成功插入消息 " + message);
+//        amqpTemplate.convertAndSend(routingKey, message);
+//        logger.info("成功插入消息 " + message);
     }
 
     public void popMessage(String destinationQueueName) {
-        Message message = amqpTemplate.receive(destinationQueueName);
-        logger.info("成功取出消息 " + new String(message.getBody()));
+//        Message message = amqpTemplate.receive(destinationQueueName);
+//        logger.info("成功取出消息 " + new String(message.getBody()));
     }
 }

@@ -19,7 +19,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Base64Utils;
@@ -70,8 +69,8 @@ public class IndexController {
     private IWeiboService weiboService;
     @Resource
     private RedisTemplate redisTemplate;
-    @Resource
-    private MongoTemplate mongoTemplate;
+//    @Resource
+//    private MongoTemplate mongoTemplate;
     @Resource
     private Ehcache ehcache;
     private BlogIndex blogIndex = new BlogIndex();
@@ -340,7 +339,7 @@ public class IndexController {
         logger.info("qqlogin end");
         redisTemplate.opsForList().leftPush("qqmessage", parser.parse(content).toString());
         String sss = parser.parse(content).toString();
-        mongoTemplate.insert(sss, "qqMessage");
+//        mongoTemplate.insert(sss, "qqMessage");
         return parser.parse(content).toString();
     }
 

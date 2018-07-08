@@ -1,13 +1,11 @@
 package com.myblog.service.impl;
 
 import com.myblog.dao.BlogMapper;
-import com.myblog.dao.IMongoDao;
 import com.myblog.dao.IpLogMapper;
 import com.myblog.dao.MyreadingMapper;
 import com.myblog.model.IpLog;
 import com.myblog.model.Myreading;
 import com.myblog.service.IAsyncService;
-import com.myblog.service.IMessageService;
 import com.myblog.util.LibraryUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,11 +33,9 @@ public class AsyncServiceImpl implements IAsyncService {
     @Resource
     private BlogMapper blogMapper;
     @Resource
-    private IMessageService messageService;
-    @Resource
     private MyreadingMapper myreadingMapper;
-    @Resource
-    private IMongoDao mongoDao;
+    //    @Resource
+//    private IMongoDao mongoDao;
     @Resource
     private RedisTemplate redisTemplate;
 
@@ -47,7 +43,7 @@ public class AsyncServiceImpl implements IAsyncService {
     @Override
     public void insertIpLog(IpLog ipLog) {
         try {
-            messageService.pushToMessageQueue("rabbit_queue_one", ipLog.toString());
+//            messageService.pushToMessageQueue("rabbit_queue_one", ipLog.toString());
             ipLogMapper.insertSelective(ipLog);      //记录每一条日志
         } catch (Exception e) {
             logger.error("ip插入错误", e);
@@ -87,13 +83,13 @@ public class AsyncServiceImpl implements IAsyncService {
     @Async
     @Override
     public void insertMongo(HttpServletRequest request) {
-        mongoDao.insert("{\"name\":\"菜鸟教程\"}", "requestlog");
+//        mongoDao.insert("{\"name\":\"菜鸟教程\"}", "requestlog");
     }
 
     @Async
     @Override
     public void insertMongo(String key, String value) {
-        mongoDao.insert(key, value);
+//        mongoDao.insert(key, value);
     }
 
     @Async
@@ -105,7 +101,7 @@ public class AsyncServiceImpl implements IAsyncService {
 
     @Async
     @Override
-    public Object redisGet(String key,Long liveTime) {
+    public Object redisGet(String key, Long liveTime) {
         byte[] key1 = key.getBytes();
         return redisTemplate.execute(connection -> {
             byte[] value1 = connection.get(key1);
@@ -122,7 +118,7 @@ public class AsyncServiceImpl implements IAsyncService {
 
     @Async
     @Override
-    public void redisPut(String keyStr,Object valueStr,Long liveTime){
+    public void redisPut(String keyStr, Object valueStr, Long liveTime) {
         redisTemplate.execute(connection -> {
             byte[] keyb = keyStr.getBytes();
             byte[] valueb = toByteArray(valueStr);
@@ -148,6 +144,7 @@ public class AsyncServiceImpl implements IAsyncService {
         }
         return obj;
     }
+
     private byte[] toByteArray(Object obj) {
         byte[] bytes = null;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();

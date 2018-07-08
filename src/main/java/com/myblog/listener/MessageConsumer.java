@@ -2,12 +2,9 @@ package com.myblog.listener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageListener;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,8 +16,8 @@ import javax.annotation.Resource;
 public class MessageConsumer implements MessageListener {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(MessageConsumer.class);
-    @Resource
-    private AmqpTemplate amqpTemplate;
+//    @Resource
+//    private AmqpTemplate amqpTemplate;
 
 
     public void onMessage(Message message) {
