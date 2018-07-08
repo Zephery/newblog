@@ -137,18 +137,18 @@ public class TimeController {
 
     }
 
-    @Scheduled(cron = "0/50 * * * * ?")
-    @SuppressWarnings("unchecked")
-    public void refreshIndex() {
-        String ip = IPUtils.getServerIp();
-        if (REGULARIP.equals(ip)) {
-            String content = HttpHelper.getInstance().get("http://119.29.188.224:8080");
-            logService.record("refreshIndex", "首页刷新完成");
-            if (!Strings.isNullOrEmpty(content)) {
-                JedisUtil.getInstance().set("index", content);
-            }
-        }
-    }
+//    @Scheduled(cron = "0/50 * * * * ?")
+//    @SuppressWarnings("unchecked")
+//    public void refreshIndex() {
+//        String ip = IPUtils.getServerIp();
+//        if (REGULARIP.equals(ip)) {
+//            String content = HttpHelper.getInstance().get("http://119.29.188.224:8080");
+//            logService.record("refreshIndex", "首页刷新完成");
+//            if (!Strings.isNullOrEmpty(content)) {
+//                JedisUtil.getInstance().set("index", content);
+//            }
+//        }
+//    }
 
 
     @RequestMapping("/testRedisson")
