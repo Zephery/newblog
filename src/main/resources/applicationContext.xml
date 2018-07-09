@@ -70,33 +70,33 @@
 
     <!-- 数据库定时备份服务  start-->
     <!-- 定义调用对象和调用对象的方法 -->
-    <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <property name="targetObject" ref="mysqlService"/>
-        <property name="targetMethod" value="exportDataBase"/>
-    </bean>
-    <bean id="quartzjob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <property name="targetObject" ref="jmxclient"/>
-        <property name="targetMethod" value="quartzjob"/>
-    </bean>
-    <!--定义触发时间  -->
-    <bean id="myTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="jobDetail"/>
-        <!-- cron表达式 -->
-        <property name="cronExpression" value="0 59 2 ? * FRI"/>
-    </bean>
-    <bean id="quartz_trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="quartzjob"/>
-        <property name="cronExpression" value="* * * * * ?"/>
-    </bean>
-    <!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
-    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="triggers">
-            <list>
-                <ref bean="myTrigger"/>
-                <ref bean="quartz_trigger"/>
-            </list>
-        </property>
-    </bean>
+    <!--<bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="mysqlService"/>-->
+        <!--<property name="targetMethod" value="exportDataBase"/>-->
+    <!--</bean>-->
+    <!--<bean id="quartzjob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject" ref="jmxclient"/>-->
+        <!--<property name="targetMethod" value="quartzjob"/>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash;定义触发时间  &ndash;&gt;-->
+    <!--<bean id="myTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="jobDetail"/>-->
+        <!--&lt;!&ndash; cron表达式 &ndash;&gt;-->
+        <!--<property name="cronExpression" value="0 59 2 ? * FRI"/>-->
+    <!--</bean>-->
+    <!--<bean id="quartz_trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<property name="jobDetail" ref="quartzjob"/>-->
+        <!--<property name="cronExpression" value="* * * * * ?"/>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 &ndash;&gt;-->
+    <!--<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">-->
+        <!--<property name="triggers">-->
+            <!--<list>-->
+                <!--<ref bean="myTrigger"/>-->
+                <!--<ref bean="quartz_trigger"/>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
     <!-- 数据库定时备份服务  end -->
     <!--druid-->
     <bean id="druid-stat-interceptor"
