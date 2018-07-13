@@ -123,9 +123,9 @@ public class IPUtils {
 
     public static String getAddressByIP(String strIP) {
         try {
-            URL url = new URL("http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=" + strIP);
+            URL url = new URL("http://ip.taobao.com/service/getIpInfo.php?ip=" + strIP);
             URLConnection conn = url.openConnection();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "GBK"));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
             String line = null;
             StringBuffer result = new StringBuffer();
             while ((line = reader.readLine()) != null) {
@@ -134,7 +134,7 @@ public class IPUtils {
             reader.close();
             JsonParser parser = new JsonParser();
             JsonObject object = parser.parse(result.toString()).getAsJsonObject();
-            return object.get("city").toString().replaceAll("\"", "");
+            return object.get("data").getAsJsonObject().get("city").getAsString();
         } catch (Exception e) {
             return "Address Error";
         }
@@ -152,9 +152,6 @@ public class IPUtils {
     }
 
     public static void main(String[] args) {
-        String ip = IPUtils.getServerIp();
-        if ("113.108.186.130".equals(ip)) {
-            System.out.println(ip);
-        }
+        System.out.println(getAddressByIP("119.23.46.71"));
     }
 }

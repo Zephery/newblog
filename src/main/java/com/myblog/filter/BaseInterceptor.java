@@ -65,38 +65,38 @@ public class BaseInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request,
                            HttpServletResponse response,
                            Object o, ModelAndView modelAndView) throws Exception {
-        try {
-            asyncService.insertMongo(request);
-            long endTime = System.currentTimeMillis();//2、结束时间
-            long beginTime = startTimeThreadLocal.get();//得到线程绑定的局部变量（开始时间）
-            long consumeTime = endTime - beginTime;//3、消耗的时间
-            String uri = request.getRequestURI();
-            if (StringUtils.isEmpty(uri) || !judegeuri(uri)) {
-                return;
-            }
-            String real_ip = IPUtils.getIpAddr(request);
-            IpLog ipLog = new IpLog();
-            ipLog.setSid(request.getSession().getId());
-            ipLog.setIp(real_ip);
-            if (request.getHeader("referer") != null) {
-                ipLog.setReferer(request.getHeader("referer"));
-            }
-            ipLog.setIpTime(DateTime.now().toDate());
-            ipLog.setArea(IPUtils.getAddressByIP(real_ip));
-            ipLog.setUri(uri);
-            ipLog.setResponseTime(consumeTime);
-            if (request.getSession().isNew()) {     //判断是不是新的一个session
-                ipLog.setVisitNum(1);
-                visitNum.set(1);
-            } else {
-                ipLog.setVisitNum(visitNum.get() == null ? 0 : visitNum.get() + 1);
-            }
-            if (!uri.contains("ajaxsearch.html")) {
-                asyncService.insertIpLog(ipLog);
-            }
-        } catch (Exception e) {
-            logger.error("Handle error", e);
-        }
+//        try {
+//            asyncService.insertMongo(request);
+//            long endTime = System.currentTimeMillis();//2、结束时间
+//            long beginTime = startTimeThreadLocal.get();//得到线程绑定的局部变量（开始时间）
+//            long consumeTime = endTime - beginTime;//3、消耗的时间
+//            String uri = request.getRequestURI();
+//            if (StringUtils.isEmpty(uri) || !judegeuri(uri)) {
+//                return;
+//            }
+//            String real_ip = IPUtils.getIpAddr(request);
+//            IpLog ipLog = new IpLog();
+//            ipLog.setSid(request.getSession().getId());
+//            ipLog.setIp(real_ip);
+//            if (request.getHeader("referer") != null) {
+//                ipLog.setReferer(request.getHeader("referer"));
+//            }
+//            ipLog.setIpTime(DateTime.now().toDate());
+//            ipLog.setArea(IPUtils.getAddressByIP(real_ip));
+//            ipLog.setUri(uri);
+//            ipLog.setResponseTime(consumeTime);
+//            if (request.getSession().isNew()) {     //判断是不是新的一个session
+//                ipLog.setVisitNum(1);
+//                visitNum.set(1);
+//            } else {
+//                ipLog.setVisitNum(visitNum.get() == null ? 0 : visitNum.get() + 1);
+//            }
+//            if (!uri.contains("ajaxsearch.html")) {
+//                asyncService.insertIpLog(ipLog);
+//            }
+//        } catch (Exception e) {
+//            logger.error("Handle error", e);
+//        }
     }
 
     @Override
