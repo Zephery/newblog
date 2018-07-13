@@ -158,7 +158,6 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    @Cacheable(value = "myCache", keyGenerator = "customKeyGenerator")
     public List<Blog> getByHits() {
         List<Blog> blogs = blogMapper.getHits();
         return blogs;
