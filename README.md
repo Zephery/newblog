@@ -1,7 +1,7 @@
 麻烦支付宝扫一扫:
 <div align="center">
 
-![](http://image.wenzhihuai.com/images/201808131112331916088526.png)
+![](http://image.wenzhihuai.com/images/201808131112331916088526.png?imageView2/2/w/400)
 
 </div>
 
