@@ -12,7 +12,7 @@
     <div class="footer-inner">
         <div style="float: right;margin-top: 0;width: 100px;height: 50px">
             <a href="https://www.upyun.com">
-                <img src="${pageContext.request.contextPath}/images/youpailogo6.png" style="float: left;width: auto"/>
+                <img src="http://image.wenzhihuai.com/youpailogo6.png" style="float: left;width: auto"/>
             </a>
         </div>
         <div class="copyright pull-left" style="float: left">
