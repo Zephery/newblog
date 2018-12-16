@@ -3,7 +3,6 @@ package com.myblog.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
-import com.myblog.dubbo.DubboService;
 import com.myblog.model.Blog;
 import com.myblog.model.Category;
 import com.myblog.model.Tag;
@@ -38,8 +37,6 @@ public class BlogController {
     private ICategoryService categoryService;
     @Resource
     private IAsyncService asyncService;
-    @Resource
-    private DubboService dubboService;
 
 
     @RequestMapping("/tech")
@@ -200,11 +197,5 @@ public class BlogController {
         Set<String> set = blogService.ajaxsearch(keyword);
         Gson gson = new Gson();
         response.getWriter().write(gson.toJson(set));
-    }
-
-    @RequestMapping("/getDubboBlog")
-    public void getDubboBlog(Integer blogid, HttpServletResponse response) throws Exception {
-        Blog blog = dubboService.get(blogid);
-        response.getWriter().write(new Gson().toJson(blog));
     }
 }

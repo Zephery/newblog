@@ -4,8 +4,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.myblog.common.Config;
 import com.myblog.dao.WeiboMapper;
-import com.myblog.dubbo.DubboService;
-import com.myblog.model.Weibo;
 import com.myblog.service.IWeiboService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
@@ -18,13 +16,11 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -53,28 +49,7 @@ public class WeiboServiceImpl implements IWeiboService {
 
     @Resource
     private WeiboMapper weiboMapper;
-    @Resource
-    private DubboService dubboService;
 
-    @Override
-    @Cacheable(value = "myCache", keyGenerator = "customKeyGenerator")
-    public List<Weibo> getAllWeiboToday() {
-        List<Weibo> weibos;
-        try {
-            weibos = dubboService.getAllWeiboToday();
-        } catch (Exception e) {
-            logger.error("服务出错", e);
-            weibos = weiboMapper.getAllWeiboToday();
-        }
-        for (Weibo weibo : weibos) {
-            try {
-                weibo.setTypename(TYPE.get(weibo.getType()));
-            } catch (Exception e) {
-                logger.error("分类类型错误", e);
-            }
-        }
-        return weibos;
-    }
 
     @Override
     public JsonObject getWeiboDetail(String sentence) {

@@ -44,10 +44,10 @@
         </filter>
     </appender>
 
-    <appender name="kafkaAppender" class="com.myblog.log.KafkaAppender">
-        <topic>newbloglogs</topic>
-        <brokerList>119.29.188.224:9092</brokerList>
-    </appender>
+    <!--<appender name="kafkaAppender" class="com.myblog.log.KafkaAppender">-->
+        <!--<topic>newbloglogs</topic>-->
+        <!--<brokerList>119.29.188.224:9092</brokerList>-->
+    <!--</appender>-->
 
     <!-- project default level -->
     <logger name="com.myblog.dao" level="WARN"/>
@@ -63,7 +63,7 @@
     <logger name="java.sql.PreparedStatement" level="WARN"/>
     <logger name="java.sql.ResultSet" level="WARN"/>
     <root>
-        <level value="INFO"/>
+        <level value="WARN"/>
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
         <appender-ref ref="kafkaAppender"/>

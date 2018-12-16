@@ -1,9 +1,6 @@
 package com.myblog.service;
 
 import com.google.gson.JsonObject;
-import com.myblog.model.Weibo;
-
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,8 +9,6 @@ import java.util.List;
  * Description:
  */
 public interface IWeiboService {
-    public List<Weibo> getAllWeiboToday();
-
     /**
      * 需要先启动本地的python脚本
      *

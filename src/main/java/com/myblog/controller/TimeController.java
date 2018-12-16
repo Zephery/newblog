@@ -2,12 +2,9 @@ package com.myblog.controller;
 
 import com.myblog.common.Config;
 import com.myblog.lucene.BlogIndex;
-import com.myblog.model.Blog;
-import com.myblog.model.Weibo;
 import com.myblog.service.*;
 import com.myblog.util.HTTPStudy;
 import com.myblog.util.IndexUtil;
-import com.myblog.util.PythonUtil;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
@@ -24,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -70,83 +66,12 @@ public class TimeController {
 //        BashUtil.getInstance().executeRestartProject();
 //    }
 
-    /**
-     * 每天更新借书记录（由于隐私关系已停掉），刷新一遍Lucene索引记录
-     * 由于每次更新都要删除本地索引记录，所以时间必须在项目启动完之后再进行更新
-     */
-    @Scheduled(cron = "0 30 6 * * * ")
-    @RequestMapping("/update")
-    public void updateLuceneEverydate() throws Exception {
-        List<Blog> blogs = blogService.getAllBlogWithContent();
-        blogIndex.refreshlucene(blogs);//刷新博客
-        logService.record("blog", "刷新博客完成");
-        blogService.ajaxbuild();//刷新自动补全
-        logService.record("autocomplete", "刷新自动补全完成");
-        logService.record("autocomplete", "刷新自动补全完成");
-        asyncService.start();//广州图书馆借书记录
-        logger.info("刷新广图借书记录完成");
-        List<Weibo> weibos = weiboService.getAllWeiboToday();
-        if (weibos == null || weibos.size() > 0) {
-            logger.info("微博已经更新过了");
-        } else {
-            PythonUtil.executeMyWeiBo();
-            logger.info("微博更新完成");
-        }
-        PythonUtil.executeGetBaidu();
-        logger.info("百度统计更新完成");
-        tagService.updatetag(1);
-        logger.info("标签云更新完成");
-//        logger.info("restart:项目开始重启");
-//        BashUtil.getInstance().executeRestartProject();
-    }
 
     @Scheduled(cron = "0 0/5 1,3 * * ?")
     public void baiduwenzhihuai() throws Exception {
         HTTPStudy.baidu("温志怀");
         logService.record("baiduwenzhihuai", "baiduwenzhihuai完成");
     }
-
-    /**
-     * 修改为使用分布式锁
-     */
-    @Scheduled(cron = "0 36 6 * * * ")
-    @RequestMapping("/weibo")
-    public void weibo() {
-//        String ip = IPUtils.getServerIp().replaceAll("\n", "");
-//        if (REGULARIP.equals(ip)) {
-//            PythonUtil.executeMyWeiBo();
-//            logService.record("weibo", "微博更新完成");
-//        }
-        RLock lock = redissonClient.getLock("anyLock");
-        try {
-            lock.lock();
-            List<Weibo> weibos = weiboService.getAllWeiboToday();
-            if (weibos == null || weibos.size() > 0) {
-                logger.info("微博已经更新过了");
-            } else {
-                PythonUtil.executeMyWeiBo();
-                logger.info("微博更新完成");
-            }
-        } catch (Exception e) {
-            logger.error("", e);
-        } finally {
-            lock.unlock();
-        }
-
-    }
-
-//    @Scheduled(cron = "0/50 * * * * ?")
-//    @SuppressWarnings("unchecked")
-//    public void refreshIndex() {
-//        String ip = IPUtils.getServerIp();
-//        if (REGULARIP.equals(ip)) {
-//            String content = HttpHelper.getInstance().get("http://119.29.188.224:8080");
-//            logService.record("refreshIndex", "首页刷新完成");
-//            if (!Strings.isNullOrEmpty(content)) {
-//                JedisUtil.getInstance().set("index", content);
-//            }
-//        }
-//    }
 
 
     @RequestMapping("/testRedisson")
