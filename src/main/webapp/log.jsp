@@ -685,7 +685,7 @@
                             }
 
                             function send_echo() {
-                                var wsUri = "ws://119.29.188.224:8080/wscpu.ws";
+                                var wsUri = "ws://47.75.138.73:8080/wscpu.ws";
                                 ws = new WebSocket(wsUri);
                                 ws.onopen = function (evt) {
                                     writeToScreen("Connected !");
