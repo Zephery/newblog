@@ -150,18 +150,18 @@
                            class="<%=request.getParameter("techactive")%>">技术杂谈</a></li>
                     <li><a href="${pageContext.request.contextPath}/life.html?pagenum=1"
                            class="<%=request.getParameter("lifeactive")%>">生活笔记</a></li>
-                    <li><a href="${pageContext.request.contextPath}/trip.html"
-                           class="<%=request.getParameter("tripactive")%>">旅行</a></li>
                     <li><a href="${pageContext.request.contextPath}/log.html"
                            class="<%=request.getParameter("logactive")%>">日志系统</a></li>
                     <li><a href="${pageContext.request.contextPath}/board.html"
                            class="<%=request.getParameter("boardactive")%>">留言板</a></li>
                     <li><a href="${pageContext.request.contextPath}/aboutme.html"
                            class="<%=request.getParameter("aboutmeactive")%>">关于我</a></li>
+                    <li><a href="${pageContext.request.contextPath}/trip.html"
+                           class="<%=request.getParameter("tripactive")%>">旅行</a></li>
                     <li><a href="${pageContext.request.contextPath}/donate.html"
                            class="<%=request.getParameter("donateactive")%>">捐赠</a></li>
-                    <li><a href="${pageContext.request.contextPath}/weibonlp.html"
-                           class="<%=request.getParameter("interestactive")%>">有点意思</a></li>
+                    <%--<li><a href="${pageContext.request.contextPath}/weibonlp.html"--%>
+                           <%--class="<%=request.getParameter("interestactive")%>">有点意思</a></li>--%>
                     <%--<li><a href="${pageContext.request.contextPath}/myresume.html"--%>
                            <%--class="<%=request.getParameter("myresumeactive")%>">我的简历</a></li>--%>
                     <%--<li><a href="${pageContext.request.contextPath}/open.html"--%>
