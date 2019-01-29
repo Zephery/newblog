@@ -68,12 +68,12 @@ class Baidu(object):
         uv_sum = sum(ip_count)
         r.set("pv_sum", pv_sum)
         r.set("uv_sum", uv_sum)
-        r.set("daterange", daterange)
-        r.set("pv_count", pv_count)
-        r.set("visitor_count", visitor_count)
-        r.set("ip_count", ip_count)
-        r.set("bounce_ratio", bounce_ratio)
-        r.set("avg_visit_time", avg_visit_time)
+        r.set("daterange", str(daterange))
+        r.set("pv_count", str(pv_count))
+        r.set("visitor_count", str(visitor_count))
+        r.set("ip_count", str(ip_count))
+        r.set("bounce_ratio", str(bounce_ratio))
+        r.set("avg_visit_time", str(avg_visit_time))
         logging.info("PV，UV，AvgTime")
 
     def getRukouYeMian(self):  # 前十入口页面
