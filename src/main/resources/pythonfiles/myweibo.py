@@ -1,20 +1,20 @@
 import base64
+import binascii
 import io
 import json
 import logging
 import random
 import re
+import sys
+import time
 import urllib
 import urllib.parse
 from urllib.parse import urlencode
 
-import binascii
 import httplib2
 import pymysql
 import requests
 import rsa
-import sys
-import time
 
 # 设置编码
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf8')
@@ -209,30 +209,6 @@ class AppClient:
         mid_list.append(third_weibo['mid'])
         time.sleep(random.randint(5, 20))
         logging.info(mid_list)
-        # 抓取公共微博
-        count_temp = 1
-        while (True):
-            json_str = client.get('statuses/public_timeline', uid=uuid, separators=(',', ':'), count=200)
-            time.sleep(5)
-            count_temp = count_temp + 1
-            if count_temp > 2:
-                break
-            d = json.dumps(json_str)
-            s = json.loads(d)
-            length = len(s['statuses'])
-            for i in range(0, length):
-                try:
-                    data = s['statuses'][i]
-                    # 链接中带有链接，无法处理，强制去掉url中的“/“
-                    weibonlp = "http://119.23.46.71:5000/hello/" + urllib.parse.quote_plus(
-                        data['text'].replace("/", ""))
-                    logging.info(weibonlp)
-                    type = requests.get(weibonlp).content
-                    self.insert(data['id'], data['user']['name'], data['user']['location'], data['user']['url'],
-                                data['text'], data['created_at'], type)
-                except Exception as e:
-                    print(e)
-
         return mid_list
 
 
@@ -390,12 +366,3 @@ if __name__ == '__main__':
 
     weibo = WeiBoLogin()
     weibo.login("w1570631036@sina.com", "wenzhihuai2015.")
-
-# for i in range(0, 100):
-#     try:
-#         print("=============" + str(i) + "================")
-#         weibo.login("w1570631036@sina.com", "wenzhihuai2015.")
-#         time.sleep(random.randint(10))
-#         break
-#     except Exception as e:
-#         print(e)
