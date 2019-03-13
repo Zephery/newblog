@@ -160,6 +160,8 @@
                            class="<%=request.getParameter("tripactive")%>">旅行</a></li>
                     <li><a href="${pageContext.request.contextPath}/donate.html"
                            class="<%=request.getParameter("donateactive")%>">捐赠</a></li>
+                    <li><a href="${pageContext.request.contextPath}/live.html"
+                           class="<%=request.getParameter("liveactive")%>">直播</a></li>
                     <%--<li><a href="${pageContext.request.contextPath}/weibonlp.html"--%>
                            <%--class="<%=request.getParameter("interestactive")%>">有点意思</a></li>--%>
                     <%--<li><a href="${pageContext.request.contextPath}/myresume.html"--%>
