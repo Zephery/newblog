@@ -24,7 +24,7 @@
 </head>
 <body class="home blog hPC">
 <section class="contentcontainer">
-    <embed width="100%" height="full" allownetworking="all" allowscriptaccess="always" src="https://staticlive.douyucdn.cn/common/share/play.swf?room_id=288016" quality="high" bgcolor="#000" wmode="window" allowfullscreen="true"  allowFullScreenInteractive="true" type="application/x-shockwave-flash">
+    <embed width="100%" height="720" allownetworking="all" allowscriptaccess="always" src="https://staticlive.douyucdn.cn/common/share/play.swf?room_id=3144478" quality="high" bgcolor="#000" wmode="window" allowfullscreen="true"  allowFullScreenInteractive="true" type="application/x-shockwave-flash">
 </section>
 <%@include file="foot.jsp" %>
 </body>
