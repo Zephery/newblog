@@ -116,51 +116,51 @@ public class JMXClient {
      * 定时任务
      */
     public void quartzjob() {
-        try {
-            DecimalFormat df = new java.text.DecimalFormat("#.00");
-            //cpu usage
-            double ratio = 0;
-            OperatingSystemMXBean opMXbean = ManagementFactory.newPlatformMXBeanProxy(mbsconnector,
-                    ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME, OperatingSystemMXBean.class);
-            if (opMXbean == null) {
-                return;
-            }
-            Long start = System.currentTimeMillis();
-            long startT = opMXbean.getProcessCpuTime();
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                logger.error("InterruptedException occurred while MemoryCollector sleeping...");
-            }
-            Long end = System.currentTimeMillis();
-            long endT = opMXbean.getProcessCpuTime();
-            ratio = (endT - startT) / 1000000.0 / (end - start) / opMXbean.getAvailableProcessors();
-            ReentrantLock lock = new ReentrantLock();
-            lock.lock();
-            Long cpu_length = JedisUtil.getInstance().llen("cpu_usage");
-            JedisUtil.getInstance().lpush("cpu_usage", df.format(ratio * 100));
-            if (cpu_length > 50) {
-                JedisUtil.getInstance().rpop("cpu_usage");
-            }
-            lock.unlock();
-            //jvm usage
-            MemoryMXBean memBean = ManagementFactory.newPlatformMXBeanProxy
-                    (mbsconnector, ManagementFactory.MEMORY_MXBEAN_NAME, MemoryMXBean.class);
-            MemoryUsage heap = memBean.getHeapMemoryUsage();
-            ReentrantLock lock2 = new ReentrantLock();
-            lock2.lock();
-            Long jmx_memory_use_length = JedisUtil.getInstance().llen("jmx_memory_use");
-            JedisUtil.getInstance().lpush("jmx_memory_use", String.valueOf(heap.getUsed() / 1048576));
-            JedisUtil.getInstance().lpush("jmx_memory_time", DateTime.now().toString("HH:mm:ss"));
-            if (jmx_memory_use_length > 50) {
-                JedisUtil.getInstance().rpop("jmx_memory_use");
-                JedisUtil.getInstance().rpop("jmx_memory_time");
-            }
-            JedisUtil.getInstance().set("jmx_memory_committed", String.valueOf(heap.getCommitted() / 1048576));
-            lock2.unlock();
-        } catch (Exception e) {
-            logger.error("quartzjob error", e);
-        }
+//        try {
+//            DecimalFormat df = new java.text.DecimalFormat("#.00");
+//            //cpu usage
+//            double ratio = 0;
+//            OperatingSystemMXBean opMXbean = ManagementFactory.newPlatformMXBeanProxy(mbsconnector,
+//                    ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME, OperatingSystemMXBean.class);
+//            if (opMXbean == null) {
+//                return;
+//            }
+//            Long start = System.currentTimeMillis();
+//            long startT = opMXbean.getProcessCpuTime();
+//            try {
+//                TimeUnit.SECONDS.sleep(1);
+//            } catch (InterruptedException e) {
+//                logger.error("InterruptedException occurred while MemoryCollector sleeping...");
+//            }
+//            Long end = System.currentTimeMillis();
+//            long endT = opMXbean.getProcessCpuTime();
+//            ratio = (endT - startT) / 1000000.0 / (end - start) / opMXbean.getAvailableProcessors();
+//            ReentrantLock lock = new ReentrantLock();
+//            lock.lock();
+//            Long cpu_length = JedisUtil.getInstance().llen("cpu_usage");
+//            JedisUtil.getInstance().lpush("cpu_usage", df.format(ratio * 100));
+//            if (cpu_length > 50) {
+//                JedisUtil.getInstance().rpop("cpu_usage");
+//            }
+//            lock.unlock();
+//            //jvm usage
+//            MemoryMXBean memBean = ManagementFactory.newPlatformMXBeanProxy
+//                    (mbsconnector, ManagementFactory.MEMORY_MXBEAN_NAME, MemoryMXBean.class);
+//            MemoryUsage heap = memBean.getHeapMemoryUsage();
+//            ReentrantLock lock2 = new ReentrantLock();
+//            lock2.lock();
+//            Long jmx_memory_use_length = JedisUtil.getInstance().llen("jmx_memory_use");
+//            JedisUtil.getInstance().lpush("jmx_memory_use", String.valueOf(heap.getUsed() / 1048576));
+//            JedisUtil.getInstance().lpush("jmx_memory_time", DateTime.now().toString("HH:mm:ss"));
+//            if (jmx_memory_use_length > 50) {
+//                JedisUtil.getInstance().rpop("jmx_memory_use");
+//                JedisUtil.getInstance().rpop("jmx_memory_time");
+//            }
+//            JedisUtil.getInstance().set("jmx_memory_committed", String.valueOf(heap.getCommitted() / 1048576));
+//            lock2.unlock();
+//        } catch (Exception e) {
+//            logger.error("quartzjob error", e);
+//        }
     }
 
     public float gc() {
