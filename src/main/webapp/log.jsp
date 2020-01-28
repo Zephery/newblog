@@ -700,7 +700,7 @@
                                     clearInterval(interval);
                                     $("#cputext").text("CPU使用率（基于WebSocket）连接已断开");
                                     $("#jvmtetxt").text("JVM使用（基于Ajax）连接已断开");
-                                    alert("为节省资源，服务器已主动断开websocketh和ajax连接\r\n" +
+                                    alert("为节省资源，服务器已主动断开websocket和ajax连接\r\n" +
                                         "当前连接状态：" + this.readyState);
 
                                 };
