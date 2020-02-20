@@ -16,7 +16,7 @@ print(str(yesterday).replace("-", ""), str(fifteenago).replace("-", ""))
 end, start = str(yesterday).replace("-", ""), str(fifteenago).replace("-", "")
 # 日期结束
 base_url = "https://api.baidu.com/json/tongji/v1/ReportService/getData"
-pool = redis.ConnectionPool(host='47.75.138.83', port=6340, password='root')  # TODO redis地址
+pool = redis.ConnectionPool(host='47.115.44.242', port=6340, password='root')  # TODO redis地址
 r = redis.Redis(connection_pool=pool)
 # logging
 logging.basicConfig(level=logging.DEBUG,
