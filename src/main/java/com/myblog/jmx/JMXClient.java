@@ -44,7 +44,6 @@ import java.util.concurrent.locks.ReentrantLock;
  * -Dcom.sun.management.jmxremote.ssl=false
  * -Dcom.sun.management.jmxremote.authenticate=false"
  */
-@Service("jmxclient")
 public class JMXClient {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(JMXClient.class);

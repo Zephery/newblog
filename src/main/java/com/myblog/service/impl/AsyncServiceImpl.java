@@ -34,8 +34,6 @@ public class AsyncServiceImpl implements IAsyncService {
     private BlogMapper blogMapper;
     @Resource
     private MyreadingMapper myreadingMapper;
-    //    @Resource
-//    private IMongoDao mongoDao;
     @Resource
     private RedisTemplate redisTemplate;
 

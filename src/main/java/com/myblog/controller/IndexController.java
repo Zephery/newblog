@@ -13,7 +13,6 @@ import com.myblog.model.Links;
 import com.myblog.model.Myreading;
 import com.myblog.service.*;
 import com.myblog.util.*;
-import net.sf.ehcache.Ehcache;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
@@ -64,17 +63,54 @@ public class IndexController {
     @Resource
     private ITagService tagService;
     @Resource
-    private IAsyncService asyncService;
-    @Resource
-    private IWeiboService weiboService;
-    @Resource
     private RedisTemplate redisTemplate;
-//    @Resource
-//    private MongoTemplate mongoTemplate;
-    @Resource
-    private Ehcache ehcache;
     private BlogIndex blogIndex = new BlogIndex();
 
+    /**
+     * 首页
+     *
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/")
+    public ModelAndView first(HttpServletRequest request) throws Exception {
+        String page = request.getParameter("pagenum");
+        Integer pagenum;
+        if (StringUtils.isEmpty(page)) {
+            pagenum = 1;
+        } else {
+            pagenum = Integer.parseInt(page);
+        }
+        PageHelper.startPage(pagenum, 15);
+        ModelAndView mav = new ModelAndView();
+        List<Blog> lists = blogService.getAllBlog();
+        List<Blog> banners = blogService.getBanner();
+        PageInfo<Blog> blogs = new PageInfo<>(lists);
+        Integer startpage, endpage;
+        if (blogs.getPages() < 6) {
+            startpage = 1;
+            endpage = blogs.getPages();
+        } else {
+            if (pagenum > 3) {
+                startpage = blogs.getPageNum() - 3;
+                endpage = blogs.getPageNum() + 3 > blogs.getPages() ? blogs.getPages() : blogs.getPageNum() + 3;
+            } else {
+                startpage = 1;
+                endpage = blogs.getPageNum() + 4;
+            }
+        }
+        List<Blog> hotblogs = blogService.getByHits();
+        mav.addObject("startpage", startpage);
+        mav.addObject("endpage", endpage);
+        mav.addObject("hotblogs", hotblogs);
+        mav.addObject("blogs", blogs.getList());
+        mav.addObject("totalpages", blogs.getPages());
+        mav.addObject("pageNum", blogs.getPageNum());
+        mav.addObject("banners", banners);
+        mav.setViewName("index");
+        return mav;
+    }
 
     /**
      * 首页
@@ -135,7 +171,7 @@ public class IndexController {
         }
     }
 
-    @RequestMapping("/getjsonbycategories")
+    @RequestMapping(value = "/getjsonbycategories", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public void getbycategoryid(HttpServletResponse response) throws Exception {
         try {

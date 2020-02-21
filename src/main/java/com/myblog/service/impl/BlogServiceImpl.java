@@ -104,7 +104,6 @@ public class BlogServiceImpl implements IBlogService {
 
     @Override
 //    不能在此处在缓存，跟pageHelper有冲突，会导致多次查询
-//    @Cacheable(value = "myCache", keyGenerator = "customKeyGenerator")
     public List<Blog> getAllBlog() {
         List<Blog> blogs = blogMapper.getAllBlog();
         for (Blog blog : blogs) {
@@ -114,15 +113,12 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    @Cacheable(value = "myCache", key = "'getByCategoryId'.concat(#categoryid)")
     public List<Blog> getByCategoryId(int categoryid) {
         List<Blog> blogs = blogMapper.getByCategoryId(categoryid);
         return blogs;
     }
 
     @Override
-//    @CustomCacheAnnotation(value = "getBlogDetail", key = "'blogid'.concat(#blogid)")
-    @Cacheable(value = "myCache", key = "'blogid'.concat(#blogid)")
     public Blog getBlogDetail(Integer blogid) {
         Blog blog = blogMapper.selectByPrimaryKey(blogid);
         if (blog == null) {
@@ -137,7 +133,6 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    @Cacheable(value = "myCache", key = "'getTagByTid_t_id'.concat(#t_id)")
     public Tag getTagByTid(Integer t_id) {
         return tagMapper.selectByPrimaryKey(t_id);
     }
@@ -152,7 +147,6 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    @Cacheable(value = "myCache", keyGenerator = "customKeyGenerator")
     public List<Blog> getBanner() {
         return blogMapper.getBanner();
     }
