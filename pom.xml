@@ -28,7 +28,7 @@
     </repositories>
     <properties>
         <!-- Generic properties -->
-        <java.version>1.9</java.version>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <tomcat7-maven-plugin-version>2.1</tomcat7-maven-plugin-version>
