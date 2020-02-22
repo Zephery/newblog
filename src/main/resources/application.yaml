@@ -40,3 +40,5 @@ mybatis:
 logging:
   level:
     root: info
+  file:
+    path: /data/logs
