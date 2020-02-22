@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>newblog</groupId>
     <artifactId>newblog</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <version>1.0</version>
     <name>myblog</name>
     <url>http://maven.apache.org</url>
@@ -556,7 +556,7 @@
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
-                    <include>**/*.yaml</include>
+                    <include>**/*.*</include>
                 </includes>
             </resource>
 
