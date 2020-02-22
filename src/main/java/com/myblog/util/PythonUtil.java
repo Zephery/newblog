@@ -1,9 +1,6 @@
 package com.myblog.util;
 
 import com.myblog.common.Common;
-import org.apache.curator.framework.CuratorFramework;
-import org.apache.curator.framework.CuratorFrameworkFactory;
-import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,13 +15,7 @@ public class PythonUtil {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(PythonUtil.class);
     private static final String BATH_PATH = System.getProperty("myblog.path");
-    private static final CuratorFramework CURATORCLIENT = CuratorFrameworkFactory.builder().connectString("119.23.46.71:2181")
-            .sessionTimeoutMs(1000)
-            .connectionTimeoutMs(1000)
-            .canBeReadOnly(false)
-            .retryPolicy(new ExponentialBackoffRetry(1000, Integer.MAX_VALUE))
-            .defaultData(null)
-            .build();
+
 
     public static void executeMyWeiBo() {
         try {

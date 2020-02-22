@@ -42,7 +42,6 @@
         <!-- Test -->
         <junit.version>4.12</junit.version>
         <lucene.version>7.1.0</lucene.version>
-        <shiro.version>1.5.0</shiro.version>
         <jedis.version>2.9.0</jedis.version>
         <mysql.version>8.0.19</mysql.version>
         <netty.version>4.1.42.Final</netty.version>
@@ -69,17 +68,7 @@
             <scope>provided</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.curator/curator-framework -->
-        <dependency>
-            <groupId>org.apache.curator</groupId>
-            <artifactId>curator-framework</artifactId>
-            <version>${curator.veresion}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.curator/curator-recipes -->
-        <dependency>
-            <groupId>org.apache.curator</groupId>
-            <artifactId>curator-recipes</artifactId>
-            <version>${curator.veresion}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
@@ -172,35 +161,6 @@
             <version>${logback.version}</version>
         </dependency>
         <!-- log end -->
-
-        <!-- 添加shiro支持 -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <version>${shiro.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>commons-beanutils</artifactId>
-                    <groupId>commons-beanutils</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>slf4j-api</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-web</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
 
         <!-- 添加百度编辑器ueditor支持 -->
         <dependency>
@@ -596,7 +556,7 @@
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
-                    <include>**/*.xml</include>
+                    <include>**/*.yaml</include>
                 </includes>
             </resource>
 

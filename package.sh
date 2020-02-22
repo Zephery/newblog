@@ -5,4 +5,4 @@ then
    exit
 fi
 
-mvn clean package install -Dmaven.test.skip=true -P$1
+mvn clean package install -Dmaven.test.skip=true
