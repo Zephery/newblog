@@ -8,7 +8,7 @@ git pull origin master
 
 mvn clean install -Dmaven.test.skip=true
 
-nohup java -jar target/newblog-1.0.jar
+nohup java -jar target/newblog-1.0.jar &
 
 curl http://www.wenzhihuai.com
 
