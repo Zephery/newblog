@@ -87,9 +87,9 @@ public class LogController {
                 return 1;
             }
         });
-        List<String> jmx_memory_use = JedisUtil.getInstance().lrange("jmx_memory_use");
-        List<String> cpu_usage = JedisUtil.getInstance().lrange("cpu_usage");
-        Integer jmx_memory_committed = Integer.parseInt(JedisUtil.getInstance().get("jmx_memory_committed"));
+        List<String> jmx_memory_use = new ArrayList<>();
+        List<String> cpu_usage = new ArrayList<>();
+        Integer jmx_memory_committed = 0;
         JsonArray memoryPoolJson = JMXClient.getInstance().getMemoryPoolDetail();
         ModelAndView mv = new ModelAndView();
         String ip = IPUtils.getIpAddr(request);
