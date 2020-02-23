@@ -39,6 +39,6 @@ mybatis:
   mapper-locations: ["/com/myblog/dao/*.xml"]
 logging:
   level:
-    root: info
+    root: error
   file:
     path: /data/logs
