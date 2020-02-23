@@ -42,7 +42,7 @@ public class WeiboUtil {
             .setUserAgent(USER_AGENT)
             .setDefaultRequestConfig(
                     RequestConfig.custom()
-                            .setCookieSpec(CookieSpecs.BROWSER_COMPATIBILITY)
+                            .setCookieSpec(CookieSpecs.IGNORE_COOKIES)
                             .build()).build();
     private WeiboClient client;
     private BufferedReader in;
