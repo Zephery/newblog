@@ -1,3 +1,6 @@
+<%@ page import="com.myblog.util.IPUtils" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%--
   Created by IntelliJ IDEA.
   User: Zephery
@@ -17,7 +20,8 @@
         </div>
         <div class="copyright pull-left" style="float: left">
             <a href="${pageContext.request.contextPath}" title="Zephery">Zephery</a> 版权所有丨改自<a
-                href="http://yusi123.com/"> 欲思 </a>主题丨基于 SSM 构建 © 2016-<script>
+                href="http://yusi123.com/"> 欲思 </a>主题丨基于 SSM 构建 © 2016-
+            <script>
                 var date = new Date();  //创建对象
                 var y = date.getFullYear();     //获取年份
                 document.write(y);
@@ -30,8 +34,14 @@
             <a rel="nofollow" target="_blank"
                href="http://www.beian.miit.gov.cn/">粤ICP备17092242号-1</a>
         </div>
+        <%
+            Date d = new Date();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String now = df.format(d);
+            String ip = IPUtils.getServerIp();
+        %>
         <div class="copyright pull-left" style="float: left;">
-            本服务器IP地址：serverIp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 项目启动时间：projectStartTime
+            本服务器IP地址：<%=ip%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 项目启动时间：<%=now %>
         </div>
         <div>
             <!-- cnzz stats -->
