@@ -28,7 +28,7 @@
             <a rel="nofollow" target="_blank" href="http://www.wenzhihuai.com:8081/admin/index.html">后台管理 </a>
             丨
             <a rel="nofollow" target="_blank"
-               href="http://www.miitbeian.gov.cn">粤ICP备17092242号-1</a>
+               href="http://www.beian.miit.gov.cn/">粤ICP备17092242号-1</a>
         </div>
         <div class="copyright pull-left" style="float: left;">
             本服务器IP地址：serverIp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 项目启动时间：projectStartTime
