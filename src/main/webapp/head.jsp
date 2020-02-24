@@ -23,11 +23,11 @@
     <link href="http://image.wenzhihuai.com/lanrenzhijia.css?ver=20171017" type="text/css"
           rel="stylesheet"/>
     <%--font-awesome cdn--%>
-    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet"
           href="http://image.wenzhihuai.com/social-share-1.0.2/dist/social-share.min.css?ver=20171017">
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
     <script src="http://image.wenzhihuai.com/social-share-1.0.2/dist/social-share.min.js?ver=20171017"></script>
     <%--下面这段代码会回到顶部--%>
     <%--<script type="application/x-javascript">--%>
