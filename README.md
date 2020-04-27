@@ -1,9 +1,12 @@
-麻烦支付宝扫一扫:
+微信捐赠:
+
+
 <div align="center">
 
-![](http://image.wenzhihuai.com/images/201808131112331916088526.png?imageView2/2/w/400)
+![](http://image.wenzhihuai.com/images/202004271142001592625207.png?imageView2/2/w/300)
 
 </div>
+
 
 
 
