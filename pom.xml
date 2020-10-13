@@ -40,7 +40,7 @@
         <log4j.version>2.13.2</log4j.version>
         <logback.version>1.2.3</logback.version>
         <!-- Test -->
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <lucene.version>7.1.0</lucene.version>
         <jedis.version>2.9.0</jedis.version>
         <mysql.version>8.0.19</mysql.version>
