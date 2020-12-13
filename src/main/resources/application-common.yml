@@ -1,0 +1,24 @@
+server:
+  port: 8081
+  http2:
+    enabled: true
+  address: 0.0.0.0
+
+spring:
+  redis:
+    host: 106.52.188.206
+    password: root
+    port: 6340
+  cache:
+    cache-names: redisCache
+    type: redis
+    redis:
+      time-to-live: 5s
+  aop:
+    auto: true
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+mybatis:
+  mapper-locations: [ "/com/myblog/dao/*.xml" ]

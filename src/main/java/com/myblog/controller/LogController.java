@@ -8,14 +8,14 @@ import com.myblog.jmx.JMXClient;
 import com.myblog.model.FanPie;
 import com.myblog.model.TopTen;
 import com.myblog.util.IPUtils;
-import com.myblog.util.JedisUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -25,24 +25,25 @@ import java.util.List;
 /**
  * Created by Zephery on 2017/6/23.
  */
+@Slf4j
 @Controller
 public class LogController {
-    private final static Logger logger = LoggerFactory.getLogger(LogController.class);
+    @Resource
+    private RedisTemplate<String, String> redisTemplate;
 
     @RequestMapping("/log")
     public ModelAndView log(HttpServletRequest request) throws IOException {
-        JedisUtil jedis = JedisUtil.getInstance();    //remember not to close
-        String temp = jedis.get("daterange");
-        String pv_count = jedis.get("pv_count");
-        String visitor_count = jedis.get("visitor_count");
-        String bounce_ratio = jedis.get("bounce_ratio");
-        String avg_visit_time = jedis.get("avg_visit_time");
-        String top_ten = jedis.get("top_ten");
-        String source = jedis.get("source");
-        String rukou_str = jedis.get("rukouyemian");
-        String diyu_str = jedis.get("diyu");
-        String pv_sum = jedis.get("pv_sum");
-        String uv_sum = jedis.get("uv_sum");
+        String temp = redisTemplate.opsForValue().get("daterange");
+        String pv_count = redisTemplate.opsForValue().get("pv_count");
+        String visitor_count = redisTemplate.opsForValue().get("visitor_count");
+        String bounce_ratio = redisTemplate.opsForValue().get("bounce_ratio");
+        String avg_visit_time = redisTemplate.opsForValue().get("avg_visit_time");
+        String top_ten = redisTemplate.opsForValue().get("top_ten");
+        String source = redisTemplate.opsForValue().get("source");
+        String rukou_str = redisTemplate.opsForValue().get("rukouyemian");
+        String diyu_str = redisTemplate.opsForValue().get("diyu");
+        String pv_sum = redisTemplate.opsForValue().get("pv_sum");
+        String uv_sum = redisTemplate.opsForValue().get("uv_sum");
         Gson gson = new Gson();
         JsonParser parser = new JsonParser();
         //前十访问页面

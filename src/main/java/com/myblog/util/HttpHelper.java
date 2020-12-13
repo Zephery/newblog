@@ -18,7 +18,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.nio.entity.NStringEntity;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
@@ -189,35 +188,6 @@ public class HttpHelper {
         return null;
     }
 
-    public String doPost(String url, String data, String charset) {
-        if (StringUtils.isBlank(url)) {
-            return null;
-        }
-        log.info(" post url=" + url);
-        try {
-            HttpPost httpPost = new HttpPost(url);
-            httpPost.setEntity(new NStringEntity(data, charset));
-            CloseableHttpResponse response = httpClient.execute(httpPost);
-            int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode != 200) {
-                httpPost.abort();
-                throw new RuntimeException("HttpClient,error status code :" + statusCode);
-            }
-            HttpEntity entity = response.getEntity();
-            String result = null;
-            if (entity != null) {
-                result = EntityUtils.toString(entity, charset);
-            }
-            EntityUtils.consume(entity);
-            response.close();
-            return result;
-        } catch (Exception e) {
-            log.error("to request addr=" + url + ", " + e.getMessage());
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public String doPostLongWait(String url, List<NameValuePair> pairs, String charset) {
         if (StringUtils.isBlank(url)) {
             return null;
@@ -361,7 +331,7 @@ public class HttpHelper {
 
         HttpContext httpContext = new BasicHttpContext();
         HttpGet httpGet = new HttpGet(url);
-        httpGet.setHeader("User-Agent","Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36");
+        httpGet.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36");
         CloseableHttpResponse response = null;
         try {
             response = httpClient.execute(httpGet, httpContext);

@@ -1,7 +1,7 @@
 package com.myblog.util;
 
+import com.google.common.base.Strings;
 import com.myblog.common.Config;
-import joptsimple.internal.Strings;
 
 import java.net.Socket;
 

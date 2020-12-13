@@ -13,11 +13,10 @@ import com.myblog.model.Links;
 import com.myblog.model.Myreading;
 import com.myblog.service.*;
 import com.myblog.util.*;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Base64Utils;
@@ -47,11 +46,9 @@ import java.util.Set;
 /**
  * Created by Zephery on 2016/8/5.
  */
-
+@Slf4j
 @Controller
 public class IndexController {
-    //logger
-    private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
     @Resource
     private IBlogService blogService;
     @Resource
@@ -203,7 +200,7 @@ public class IndexController {
             Gson gson = new Gson();
             response.getWriter().write(gson.toJson(list));
         } catch (IOException e) {
-            logger.error("友情链接出错", e);
+            log.error("友情链接出错", e);
         }
     }
 
@@ -214,7 +211,7 @@ public class IndexController {
             Gson gson = new Gson();
             response.getWriter().write(gson.toJson(set));
         } catch (IOException e) {
-            logger.error("我的阅读出错", e);
+            log.error("我的阅读出错", e);
         }
     }
 
@@ -326,7 +323,7 @@ public class IndexController {
                     "&scope=get_user_info";
             response.sendRedirect(redirect_url);
         } catch (Exception e) {
-            logger.error("调用QQ接口异常！", e);
+            log.error("调用QQ接口异常！", e);
         }
     }
 
@@ -341,10 +338,10 @@ public class IndexController {
                 "&client_id=" + SSOCommon.qqAppKey +
                 "&client_secret=" + SSOCommon.qqAppSecret +
                 "&redirect_uri=" + SSOCommon.qqRedirectUri;
-        logger.info(toGetToken);
+        log.info(toGetToken);
         //access token
         String tokeContent = HttpHelper.getInstance().get(toGetToken);
-        logger.info(tokeContent);
+        log.info(tokeContent);
         String token = tokeContent.split("&")[0].split("=")[1];
         if (redisTemplate.opsForValue().get("savedToken") == null) {
             redisTemplate.opsForValue().set("savedToken", token);
@@ -358,7 +355,7 @@ public class IndexController {
         String openUrl = "https://graph.qq.com/oauth2.0/me?access_token=" + token;
         String openContent = HttpHelper.getInstance().get(openUrl);
         String json = openContent.replaceAll("callback\\( ", "").replace(" );", "");
-        logger.info(json);
+        log.info(json);
         JsonParser parser = new JsonParser();
         JsonObject object = parser.parse(json).getAsJsonObject();
         String openid = object.get("openid").toString().replaceAll("\"", "");
@@ -368,11 +365,11 @@ public class IndexController {
                 "&oauth_consumer_key=101323012" +
                 "&openid=" + openid +
                 "&format=json";
-        logger.info(url);
+        log.info(url);
         String content = HttpHelper.getInstance().get(url);
-        logger.info("qqlogin message");
-        logger.info(content);
-        logger.info("qqlogin end");
+        log.info("qqlogin message");
+        log.info(content);
+        log.info("qqlogin end");
         redisTemplate.opsForList().leftPush("qqmessage", parser.parse(content).toString());
         String sss = parser.parse(content).toString();
 //        mongoTemplate.insert(sss, "qqMessage");
@@ -396,10 +393,10 @@ public class IndexController {
                     "&scope=" + SSOCommon.weixinScope +
                     "&state=" + RandomStringUtils.randomAlphanumeric(10) +      //设置为简单的随机数
                     "#wechat_redirect";
-            logger.info(redirect_url);
+            log.info(redirect_url);
             response.sendRedirect(redirect_url);
         } catch (Exception e) {
-            logger.error("调用QQ接口异常！", e);
+            log.error("调用QQ接口异常！", e);
         }
     }
 
@@ -465,7 +462,7 @@ public class IndexController {
     @SuppressWarnings("unchecked")
     public String cacheIndex() {
         String content = HttpHelper.getInstance().get("http://www.wenzhihuai.com");
-        JedisUtil.getInstance().set("index", content);
+        redisTemplate.opsForValue().set("index", content);
         return "success";
     }
 
@@ -510,19 +507,19 @@ public class IndexController {
             byte[] bs = Base64Utils.decodeFromString(data);
             try {
                 if ("1".equals(domain)) {
-                    logger.warn("qiniuyun");
+                    log.warn("qiniuyun");
                     QiniuUtil.putFileBytes("images", "images/" + tempFileName, bs);
                 } else {
-                    logger.warn("upyun");
+                    log.warn("upyun");
                     UpYunUtil.uploadFileBytes(bs, tempFileName);
                 }
-                logger.info("success");
+                log.info("success");
             } catch (Exception ee) {
                 throw new Exception("上传失败，写入文件失败，" + ee.getMessage());
             }
             return "success";
         } catch (Exception e) {
-            logger.error("", e);
+            log.error("", e);
             return "error";
         }
     }
