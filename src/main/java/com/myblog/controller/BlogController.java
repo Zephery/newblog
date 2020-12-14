@@ -9,9 +9,8 @@ import com.myblog.model.Tag;
 import com.myblog.service.IAsyncService;
 import com.myblog.service.IBlogService;
 import com.myblog.service.ICategoryService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,9 +27,9 @@ import java.util.Set;
 /**
  * Created by Zephery on 2016/8/5.
  */
+@Slf4j
 @Controller
 public class BlogController {
-    private final static Logger logger = LoggerFactory.getLogger(BlogController.class);
     @Resource
     private IBlogService blogService;
     @Resource
@@ -45,7 +44,7 @@ public class BlogController {
         String page = request.getParameter("pagenum");
         String categoryid = request.getParameter("categoryid");
         String t_id = request.getParameter("tid");
-        Integer pagenum;
+        int pagenum;
         if (StringUtils.isEmpty(page)) {
             pagenum = 1;
         } else {
@@ -69,7 +68,7 @@ public class BlogController {
                 int category_id = list.getCategoryid();//bug fix 2017-11-13
                 list.setCategory(categoryService.selectByPrimaryKey(category_id));
             } catch (Exception e) {
-                logger.error("分类设置" + e);
+                log.error("分类设置" + e);
             }
         }
         PageInfo<Blog> blogs = new PageInfo<>(lists);
@@ -156,7 +155,7 @@ public class BlogController {
             modelAndView.setViewName("searchresult");
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error("search" + e);
+            log.error("search" + e);
         }
         return modelAndView;
     }
@@ -167,7 +166,7 @@ public class BlogController {
         try {
             modelAndView.setViewName("board");
         } catch (Exception e) {
-            logger.error("getboard" + e);
+            log.error("getboard" + e);
         }
         return modelAndView;
     }

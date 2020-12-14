@@ -1,9 +1,12 @@
+server:
+  tomcat:
+    basedir: ./logs/newblog
+
 spring:
   profiles:
     include: common
   datasource:
-    druid:
-      url: jdbc:mysql://106.52.188.206:3306/myblog?useUnicode=true&characterEncoding=UTF-8
-      username: root
-      password: helloroot
-      driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://106.52.188.206:3306/myblog?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: helloroot
+    driver-class-name: com.mysql.cj.jdbc.Driver

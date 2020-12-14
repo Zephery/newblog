@@ -6,7 +6,6 @@ import com.myblog.dao.MyreadingMapper;
 import com.myblog.model.IpLog;
 import com.myblog.model.Myreading;
 import com.myblog.service.IAsyncService;
-import com.myblog.util.LibraryUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -61,11 +60,6 @@ public class AsyncServiceImpl implements IAsyncService {
     @Async
     @Override
     public void start() {
-        List<Myreading> list = LibraryUtil.htmltoJavaBean();
-        for (Myreading myreading : list) {
-            myreadingMapper.insertSelective(myreading);
-        }
-        logger.info("start");
     }
 
     @Async
