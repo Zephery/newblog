@@ -1,5 +1,6 @@
 package com.myblog.util;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.slf4j.Logger;
@@ -142,9 +143,10 @@ public class IPUtils {
 
     public static String getServerIp() {
         String ip = "";
-        String url = "http://icanhazip.com/";
+        String url = "http://myipip.net/";
         try {
-            ip = HttpHelper.getInstance().get(url).replaceAll("\n", "");
+            String resp = HttpHelper.getInstance().get(url).replaceAll("\n", "");
+            ip = JsonParser.parseString(resp).getAsJsonObject().get("ip").getAsString();
         } catch (Exception e) {
             e.printStackTrace();
         }

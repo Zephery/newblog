@@ -28,5 +28,7 @@ spring:
     view:
       prefix: /
       suffix: .jsp
+    pathmatch:
+      use-suffix-pattern: true
 mybatis:
   mapper-locations: [ "/com/myblog/dao/*.xml" ]
