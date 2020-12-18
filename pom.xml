@@ -15,15 +15,16 @@
     </parent>
     <repositories>
         <repository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snapshots</name>
+            <id>nexus-aliyun</id>
+            <name>Nexus aliyun</name>
+            <layout>default</layout>
             <url>http://maven.aliyun.com/nexus/content/groups/public</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
             <snapshots>
-                <enabled>true</enabled>
+                <enabled>false</enabled>
             </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
         </repository>
     </repositories>
     <properties>
