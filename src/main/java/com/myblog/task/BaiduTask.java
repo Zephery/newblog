@@ -2,17 +2,12 @@ package com.myblog.task;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.python.util.PythonInterpreter;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author zepherywen
@@ -22,7 +17,7 @@ import java.util.Map;
 @Component
 public class BaiduTask {
 
-    @Scheduled(fixedDelay = 1000)
+    @Scheduled(cron = "0 15 5 * * ?")
     private void reaew() throws IOException {
         log.info("aaa");
         aaaa();
