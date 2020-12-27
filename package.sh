@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 kill -9 $(netstat -nlp | grep :8080 | awk '{print $7}' | awk -F"/" '{ print $1 }')
-cd /data/newblog/
+cd /usr/local/app/newblog/
 git fetch --all
 git reset --hard origin/master
 git pull origin master
 
 mvn clean install -Dmaven.test.skip=true
 
-nohup java -jar target/newblog-1.0.jar &
+nohup java -Dspring.profiles.active=prod,common -jar target/newblog-1.0.jar >/dev/null 2>&1 &
 
 curl http://www.wenzhihuai.com
 
