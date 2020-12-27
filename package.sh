@@ -12,5 +12,5 @@ nohup java -Dspring.profiles.active=prod,common -jar target/newblog-1.0.jar >/de
 
 curl http://www.wenzhihuai.com
 
-python3 /data/newblog/src/main/resources/pythonfiles/getbaidu.py
+python3 /usr/local/app/newblog/src/main/resources/pythonfiles/getbaidu.py
 

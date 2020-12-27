@@ -321,12 +321,6 @@
             <artifactId>weiboclient4j</artifactId>
             <version>0.4.16</version>
         </dependency>
-        <!--java执行python-->
-        <dependency>
-            <groupId>org.python</groupId>
-            <artifactId>jython-standalone</artifactId>
-            <version>2.7.1</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/cn.easyproject/easyocr -->
         <dependency>
             <groupId>cn.easyproject</groupId>
