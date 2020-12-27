@@ -2,9 +2,8 @@ package com.myblog.controller;
 
 import com.myblog.model.User;
 import com.myblog.model.UserInfo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.redis.core.RedisTemplate;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,13 +17,12 @@ import javax.servlet.http.HttpServletResponse;
  * @author Zephery
  * @since 2018/1/30 18:51
  */
+@Slf4j
 @Controller
 @RequestMapping("/cy")
 public class CYController {
-    //logger
-    private static final Logger logger = LoggerFactory.getLogger(CYController.class);
     @Resource
-    private RedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     //该接口只有当畅言已登录，getUserInfo返回未登录时，才会被调用用来登录自身网站
     @RequestMapping("/login")
@@ -64,7 +62,7 @@ public class CYController {
 //            user.setProfile_url(getCookieValue("profile_url", cookies));//该值具体根据自己用户系统设定，可以为空
 //            user.setSign(getCookieValue("sign", cookies)); //签名已弃用，任意赋值即可
 //            userinfo.setUser(user);
-            new Thread(() -> redisTemplate.opsForList().leftPush("cyuser", user.toString()));
+            new Thread(() -> stringRedisTemplate.opsForList().leftPush("cyuser", user.toString()));
         }
 //        resp.setContentType("application/x-javascript");//指定传输格式为js
 //        resp.getWriter().write(callback + "(" + JSONArray.toJSONString(userinfo) + ")");//拼接成jsonp格式

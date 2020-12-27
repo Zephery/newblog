@@ -8,10 +8,8 @@ import com.myblog.common.Config;
 import com.myblog.util.JmxPortCheck;
 import com.sun.management.GarbageCollectorMXBean;
 import com.sun.management.OperatingSystemMXBean;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
@@ -29,7 +27,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created with IntelliJ IDEA.

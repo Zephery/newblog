@@ -8,8 +8,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import java.util.Properties;
-
 /**
  * @author wenzhihuai
  * @since 2020/2/21 17:44

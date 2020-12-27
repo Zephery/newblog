@@ -13,10 +13,6 @@ server:
     basedir: ./logs/newblog
 
 spring:
-  redis:
-    host: 106.52.188.206
-    password: root
-    port: 6340
   cache:
     cache-names: redisCache
     type: redis

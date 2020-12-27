@@ -10,3 +10,7 @@ spring:
     username: root
     password: helloroot
     driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 127.0.0.1
+    password: root
+    port: 6340

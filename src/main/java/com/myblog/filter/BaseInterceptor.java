@@ -1,10 +1,6 @@
 package com.myblog.filter;
 
-import com.myblog.model.IpLog;
 import com.myblog.service.IAsyncService;
-import com.myblog.util.IPUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.NamedThreadLocal;
