@@ -9,7 +9,9 @@ import com.myblog.model.FanPie;
 import com.myblog.model.TopTen;
 import com.myblog.util.IPUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.types.RedisClientInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,46 +31,56 @@ import java.util.List;
 @Controller
 public class LogController {
     @Resource
-    private RedisTemplate<String, String> redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     @RequestMapping("/log")
     public ModelAndView log(HttpServletRequest request) throws IOException {
-        String temp = redisTemplate.opsForValue().get("daterange");
-        String pv_count = redisTemplate.opsForValue().get("pv_count");
-        String visitor_count = redisTemplate.opsForValue().get("visitor_count");
-        String bounce_ratio = redisTemplate.opsForValue().get("bounce_ratio");
-        String avg_visit_time = redisTemplate.opsForValue().get("avg_visit_time");
-        String top_ten = redisTemplate.opsForValue().get("top_ten");
-        String source = redisTemplate.opsForValue().get("source");
-        String rukou_str = redisTemplate.opsForValue().get("rukouyemian");
-        String diyu_str = redisTemplate.opsForValue().get("diyu");
-        String pv_sum = redisTemplate.opsForValue().get("pv_sum");
-        String uv_sum = redisTemplate.opsForValue().get("uv_sum");
+        try {
+            RedisConnectionFactory connectionFactory = stringRedisTemplate.getConnectionFactory();
+            stringRedisTemplate.opsForValue().set("baewgewg", "bbb");
+            List<RedisClientInfo> clientList = stringRedisTemplate.getClientList();
+            log.info("");
+            String aaaa = stringRedisTemplate.opsForValue().get("aaaa");
+            log.info("");
+
+        } catch (Exception e) {
+            log.error("", e);
+        }
+        String temp = stringRedisTemplate.opsForValue().get("daterange");
+        String pv_count = stringRedisTemplate.opsForValue().get("pv_count");
+        String visitor_count = stringRedisTemplate.opsForValue().get("visitor_count");
+        String bounce_ratio = stringRedisTemplate.opsForValue().get("bounce_ratio");
+        String avg_visit_time = stringRedisTemplate.opsForValue().get("avg_visit_time");
+        String top_ten = stringRedisTemplate.opsForValue().get("top_ten");
+        String source = stringRedisTemplate.opsForValue().get("source");
+        String rukou_str = stringRedisTemplate.opsForValue().get("rukouyemian");
+        String diyu_str = stringRedisTemplate.opsForValue().get("diyu");
+        String pv_sum = stringRedisTemplate.opsForValue().get("pv_sum");
+        String uv_sum = stringRedisTemplate.opsForValue().get("uv_sum");
         Gson gson = new Gson();
-        JsonParser parser = new JsonParser();
         //前十访问页面
-        JsonArray array = parser.parse(top_ten).getAsJsonArray();
+        JsonArray array = JsonParser.parseString(top_ten).getAsJsonArray();
         List<TopTen> topTens = new ArrayList<>();
         for (JsonElement element : array) {
             TopTen topTen = gson.fromJson(element, TopTen.class);
             topTens.add(topTen);
         }
         //来源统计
-        JsonArray sourcearray = parser.parse(source).getAsJsonArray();
+        JsonArray sourcearray = JsonParser.parseString(source).getAsJsonArray();
         List<FanPie> sourcelist = new ArrayList<>();
         for (JsonElement element : sourcearray) {
             FanPie fanPie = gson.fromJson(element, FanPie.class);
             sourcelist.add(fanPie);
         }
         //前十入口页面
-        JsonArray rukouarray = parser.parse(rukou_str).getAsJsonArray();
+        JsonArray rukouarray = JsonParser.parseString(rukou_str).getAsJsonArray();
         List<TopTen> rukou = new ArrayList<>();
         for (JsonElement element : rukouarray) {
             TopTen topTen = gson.fromJson(element, TopTen.class);
             rukou.add(topTen);
         }
         //地域地图
-        JsonArray diyuarray = parser.parse(diyu_str).getAsJsonArray();
+        JsonArray diyuarray = JsonParser.parseString(diyu_str).getAsJsonArray();
         List<TopTen> diyu = new ArrayList<>();
         for (JsonElement element : diyuarray) {
             TopTen topTen = gson.fromJson(element, TopTen.class);
@@ -97,7 +109,7 @@ public class LogController {
         String yourcity = IPUtils.getAddressByIP(ip);
         mv.addObject("ip", ip);
         mv.addObject("yourcity", yourcity);
-        mv.addObject("daterange", parser.parse(temp).getAsJsonArray());
+        mv.addObject("daterange", JsonParser.parseString(temp).getAsJsonArray());
         mv.addObject("topTens", topTens);
         mv.addObject("pv_count", pv_count);
         mv.addObject("visitor_count", visitor_count);

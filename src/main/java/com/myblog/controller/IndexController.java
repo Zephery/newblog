@@ -400,30 +400,6 @@ public class IndexController {
         }
     }
 
-    /**
-     * 微信回调
-     *
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping("/weixinReturn")
-    @ResponseBody
-    @SuppressWarnings("unchecked")
-    public String wechatReturn(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String code = request.getParameter("code");               // 注意失效
-        JsonObject object = SSOUtil.getWeiXinMessage(code);
-//        JsonObject object = parser.parse(mecontent).getAsJsonObject();
-        String access_token = object.get("access_token").getAsString();
-        String refresh_token = object.get("refresh_token").getAsString();
-        String openid = object.get("openid").getAsString();
-//        SSOUtil.refreshWeixinToken(refresh_token);            //刷新，可不要
-        String userInfoURL = "https://api.weixin.qq.com/sns/userinfo?" +
-                "access_token=" + access_token +
-                "&openid=" + openid;
-        return HttpHelper.getInstance().get(userInfoURL);
-    }
 
     @RequestMapping(value = "/baidu/word", method = RequestMethod.GET)
     @ResponseBody
