@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-kill -9 $(netstat -nlp | grep :8080 | awk '{print $7}' | awk -F"/" '{ print $1 }')
+kill -9 $(netstat -nlp | grep :8081 | awk '{print $7}' | awk -F"/" '{ print $1 }')
 cd /usr/local/app/newblog/
 git fetch --all
 git reset --hard origin/master
