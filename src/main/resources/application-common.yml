@@ -11,6 +11,9 @@ server:
       suffix: .log
       max-days: 10
     basedir: ./logs/newblog
+  servlet:
+    encoding:
+      charset: UTF-8
 
 spring:
   cache:
@@ -26,5 +29,6 @@ spring:
       suffix: .jsp
     pathmatch:
       use-suffix-pattern: true
+
 mybatis:
   mapper-locations: [ "/com/myblog/dao/*.xml" ]

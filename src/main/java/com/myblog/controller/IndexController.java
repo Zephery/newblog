@@ -20,6 +20,7 @@ import org.joda.time.DateTime;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Base64Utils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -168,51 +169,35 @@ public class IndexController {
         }
     }
 
-    @RequestMapping(value = "/getjsonbycategories", produces = "application/json;charset=UTF-8")
+    @GetMapping(value = "/getjsonbycategories", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public void getbycategoryid(HttpServletResponse response) throws Exception {
-        try {
-            List<Category> categories = categoryService.getAllCatWithoutLife();
-            Gson gson = new Gson();
-            String temp = gson.toJson(categories);
-            response.getWriter().write(temp);
-        } catch (Exception e) {
-            response.getWriter().write(e.toString());
-        }
+    public String getbycategoryid() {
+        List<Category> categories = categoryService.getAllCatWithoutLife();
+        Gson gson = new Gson();
+        return gson.toJson(categories);
     }
 
-    @RequestMapping("/biaoqianyun")
+    @GetMapping(value = "/biaoqianyun", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public void biaoqianyun(HttpServletResponse response) throws Exception {
-        try {
-            String str = tagService.getBiaoqian();
-            response.getWriter().write(str);
-        } catch (Exception e) {
-            response.getWriter().write(e.toString());
-        }
+    public String biaoqianyun() throws Exception {
+        return tagService.getBiaoqian();
+
     }
 
-    @RequestMapping("/links")
+    @GetMapping(value = "/links", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public void links(HttpServletResponse response) {
-        try {
-            List<Links> list = linksService.getAllLinks();
-            Gson gson = new Gson();
-            response.getWriter().write(gson.toJson(list));
-        } catch (IOException e) {
-            log.error("友情链接出错", e);
-        }
+    public String links(HttpServletResponse response) {
+        List<Links> list = linksService.getAllLinks();
+        Gson gson = new Gson();
+        return gson.toJson(list);
     }
 
-    @RequestMapping("/myreading")
-    public void myreading(HttpServletResponse response) {
-        try {
-            Set<Myreading> set = myReadingService.getAllReading();
-            Gson gson = new Gson();
-            response.getWriter().write(gson.toJson(set));
-        } catch (IOException e) {
-            log.error("我的阅读出错", e);
-        }
+    @RequestMapping(value = "/myreading", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String myreading() {
+        Set<Myreading> set = myReadingService.getAllReading();
+        Gson gson = new Gson();
+        return gson.toJson(set);
     }
 
 
