@@ -13,5 +13,5 @@ public interface IMessageService {
      * @param routingKey
      * @param message
      */
-    public void pushToMessageQueue(String routingKey, String message);
+    void pushToMessageQueue(String routingKey, String message);
 }

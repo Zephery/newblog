@@ -2,6 +2,7 @@ package com.myblog.service.impl;
 
 import com.myblog.service.ILogService;
 import com.myblog.util.IPUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +17,10 @@ import javax.annotation.Resource;
  * Time: 2018/2/13 16:33
  * Description:
  */
+@Slf4j
 @Service("logService")
 @SuppressWarnings("unchecked")
 public class LogServiceImpl implements ILogService {
-    //logger
-    private static final Logger logger = LoggerFactory.getLogger(LogServiceImpl.class);
     @Resource
     private RedisTemplate redisTemplate;
     private static final String IP = IPUtils.getServerIp();

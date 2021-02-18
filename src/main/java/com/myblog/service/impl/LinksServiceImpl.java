@@ -3,8 +3,6 @@ package com.myblog.service.impl;
 import com.myblog.dao.LinksMapper;
 import com.myblog.model.Links;
 import com.myblog.service.ILinksService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,8 +16,6 @@ import java.util.List;
  */
 @Service("linksService")
 public class LinksServiceImpl implements ILinksService {
-    //logger
-    private static final Logger logger = LoggerFactory.getLogger(LinksServiceImpl.class);
     @Resource
     private LinksMapper linksMapper;
 

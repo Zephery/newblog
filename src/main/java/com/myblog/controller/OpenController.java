@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 public class OpenController {
-    //logger
-    private static final Logger logger = LoggerFactory.getLogger(OpenController.class);
 
 
     @RequestMapping("/open")

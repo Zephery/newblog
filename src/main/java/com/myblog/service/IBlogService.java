@@ -10,33 +10,33 @@ import java.util.Set;
  * Created by Zephery on 2017/6/18.
  */
 public interface IBlogService {
-    public List<Blog> getAllBlog();
+    List<Blog> getAllBlog();
 
-    public List<Blog> getByCategoryId(int categoryid);
+    List<Blog> getByCategoryId(int categoryid);
 
-    public Blog getBlogDetail(Integer blogid);
+    Blog getBlogDetail(Integer blogid);
 
-    public Tag getTagByTid(Integer t_id);
+    Tag getTagByTid(Integer t_id);
 
-    public List<Blog> getBlogByTagId(Integer tId);
+    List<Blog> getBlogByTagId(Integer tId);
 
-    public List<Blog> getBanner();
+    List<Blog> getBanner();
 
-    public List<Blog> getByHits();
+    List<Blog> getByHits();
 
-    public List<Blog> getLife();
+    List<Blog> getLife();
 
-    public List<Blog> getAllTechBlog();
+    List<Blog> getAllTechBlog();
 
-    public List<Blog> getLuceneBlog(Integer pageStart, String keyword, Integer pagehits);
+    List<Blog> getLuceneBlog(Integer pageStart, String keyword, Integer pagehits);
 
-    public void ajaxbuild();
+    void ajaxbuild();
 
-    public Set<String> ajaxsearch(String keyword);
+    Set<String> ajaxsearch(String keyword);
 
-    public List<Blog> getAllBlogWithContent();
+    List<Blog> getAllBlogWithContent();
 
-    public Blog preBlog(Integer blogId);
+    Blog preBlog(Integer blogId);
 
-    public Blog nextBlog(Integer blogId);
+    Blog nextBlog(Integer blogId);
 }

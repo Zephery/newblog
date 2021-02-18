@@ -12,6 +12,7 @@ import com.myblog.model.Tag;
 import com.myblog.service.IAsyncService;
 import com.myblog.service.IBlogService;
 import com.myblog.service.ICategoryService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
@@ -20,8 +21,6 @@ import org.apache.lucene.search.suggest.analyzing.AnalyzingInfixSuggester;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.RAMDirectory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -33,9 +32,9 @@ import java.util.*;
 /**
  * Created by Zephery on 2017/1/18.
  */
+@Slf4j
 @Service("blogService")
 public class BlogServiceImpl implements IBlogService {
-    private static final Logger logger = LoggerFactory.getLogger(BlogServiceImpl.class);
     private static final String AUTOCOMPLETEPATH = System.getProperty("myblog.path") + "autocomplete";
     @Resource
     private BlogMapper blogMapper;
@@ -127,7 +126,7 @@ public class BlogServiceImpl implements IBlogService {
         blog.setCategory(category);
         List<Tag> tags = tagMapper.getTagByBlogId(blog.getBlogid());
         blog.setTags(tags.size() > 0 ? tags : null);
-        logger.info("没有走缓存");
+        log.info("没有走缓存");
         return blog;
     }
 
@@ -192,7 +191,7 @@ public class BlogServiceImpl implements IBlogService {
                 blog.setTags(tagMapper.getTagByBlogId(blog.getBlogid()));
             }
         } catch (Exception e) {
-            logger.error("搜索错误", e);
+            log.error("搜索错误", e);
         }
         return blogs;
     }
@@ -204,7 +203,7 @@ public class BlogServiceImpl implements IBlogService {
     public void ajaxbuild() {
         try {
             FileUtils.deleteDirectory(new File(AUTOCOMPLETEPATH));
-            logger.info("delete autocomplete file success");
+            log.info("delete autocomplete file success");
             Directory dir = FSDirectory.open(Paths.get(AUTOCOMPLETEPATH));
             SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
             AnalyzingInfixSuggester suggester = new AnalyzingInfixSuggester(dir, analyzer);

@@ -3,8 +3,7 @@ package com.myblog.service.impl;
 import com.myblog.dao.MyreadingMapper;
 import com.myblog.model.Myreading;
 import com.myblog.service.IMyReadingService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,10 +17,9 @@ import java.util.Set;
  * Time: 2017/10/9 16:05
  * Description:
  */
+@Slf4j
 @Service("myReadingService")
 public class MyReadingServiceImpl implements IMyReadingService {
-    //logger
-    private static final Logger logger = LoggerFactory.getLogger(MyReadingServiceImpl.class);
     @Resource
     private MyreadingMapper myreadingMapper;
 
@@ -35,7 +33,7 @@ public class MyReadingServiceImpl implements IMyReadingService {
                 myreading.setReturndate(myreading.getReturndate() != null ? myreading.getReturndate() : "");
             }
         } catch (Exception e) {
-            logger.error("阅读记录", e);
+            log.error("阅读记录", e);
         }
         return set;
     }

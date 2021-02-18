@@ -1,6 +1,7 @@
 package com.myblog.service.impl;
 
 import com.myblog.service.IMessageService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -11,10 +12,9 @@ import org.springframework.stereotype.Service;
  * Time: 2017/10/3 11:56
  * Description:消息队列
  */
+@Slf4j
 @Service("messageService")
 public class MessageServiceImpl implements IMessageService {
-    //logger
-    private static final Logger logger = LoggerFactory.getLogger(MessageServiceImpl.class);
 //    @Resource
 //    private AmqpTemplate amqpTemplate;
 

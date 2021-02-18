@@ -16,5 +16,5 @@ public interface ILinksService {
      *
      * @return
      */
-    public List<Links> getAllLinks();
+    List<Links> getAllLinks();
 }

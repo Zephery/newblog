@@ -15,5 +15,5 @@ public interface IWeiboService {
      * @param sentence
      * @return
      */
-    public JsonObject getWeiboDetail(String sentence);
+    JsonObject getWeiboDetail(String sentence);
 }

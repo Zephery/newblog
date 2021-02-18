@@ -8,11 +8,11 @@ import java.util.List;
  * Created by Zephery on 2017/6/20.
  */
 public interface ITagService {
-    public Integer updatetag(Integer tId);
+     Integer updatetag(Integer tId);
 
-    public List<Tag> getAllTags();
+     List<Tag> getAllTags();
 
-    public void deleteTag(Integer tId) throws RuntimeException;
+     void deleteTag(Integer tId) throws RuntimeException;
 
-    public String getBiaoqian() throws Exception;
+     String getBiaoqian() throws Exception;
 }

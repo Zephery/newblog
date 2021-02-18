@@ -12,5 +12,5 @@ import java.util.Set;
  */
 public interface IMyReadingService {
 
-    public Set<Myreading> getAllReading();
+    Set<Myreading> getAllReading();
 }

@@ -3,6 +3,7 @@ package com.myblog.service.impl;
 import com.myblog.dao.CategoryMapper;
 import com.myblog.model.Category;
 import com.myblog.service.ICategoryService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Created by Zephery on 2017/6/19.
  */
+@Slf4j
 @Service("categoryService")
 public class CategoryServiceImpl implements ICategoryService {
     @Resource
