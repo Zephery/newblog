@@ -11,9 +11,7 @@ import com.myblog.util.IPUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.actuate.metrics.MetricsEndpoint;
 import org.springframework.core.env.Environment;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.types.RedisClientInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,17 +40,7 @@ public class LogController {
 
     @RequestMapping("/log")
     public ModelAndView log(HttpServletRequest request) throws IOException {
-        try {
-            RedisConnectionFactory connectionFactory = stringRedisTemplate.getConnectionFactory();
-            stringRedisTemplate.opsForValue().set("baewgewg", "bbb");
-            List<RedisClientInfo> clientList = stringRedisTemplate.getClientList();
-            log.info("");
-            String aaaa = stringRedisTemplate.opsForValue().get("aaaa");
-            log.info("");
-
-        } catch (Exception e) {
-            log.error("", e);
-        }
+        log.info("log");
         String temp = stringRedisTemplate.opsForValue().get("daterange");
         String pv_count = stringRedisTemplate.opsForValue().get("pv_count");
         String visitor_count = stringRedisTemplate.opsForValue().get("visitor_count");
@@ -72,6 +60,7 @@ public class LogController {
             TopTen topTen = gson.fromJson(element, TopTen.class);
             topTens.add(topTen);
         }
+        log.info("前十访问页面");
         //来源统计
         JsonArray sourcearray = JsonParser.parseString(source).getAsJsonArray();
         List<FanPie> sourcelist = new ArrayList<>();
@@ -79,6 +68,7 @@ public class LogController {
             FanPie fanPie = gson.fromJson(element, FanPie.class);
             sourcelist.add(fanPie);
         }
+        log.info("来源统计");
         //前十入口页面
         JsonArray rukouarray = JsonParser.parseString(rukou_str).getAsJsonArray();
         List<TopTen> rukou = new ArrayList<>();
@@ -86,6 +76,7 @@ public class LogController {
             TopTen topTen = gson.fromJson(element, TopTen.class);
             rukou.add(topTen);
         }
+        log.info("前十入口页面");
         //地域地图
         JsonArray diyuarray = JsonParser.parseString(diyu_str).getAsJsonArray();
         List<TopTen> diyu = new ArrayList<>();
@@ -114,6 +105,7 @@ public class LogController {
         ModelAndView mv = new ModelAndView();
         String ip = IPUtils.getIpAddr(request);
         String yourcity = IPUtils.getAddressByIP(ip);
+        log.info("yourcity is {}", yourcity);
         mv.addObject("ip", ip);
         mv.addObject("yourcity", yourcity);
         mv.addObject("daterange", JsonParser.parseString(temp).getAsJsonArray());
@@ -135,7 +127,7 @@ public class LogController {
         mv.addObject("cpu_usage", cpu_usage);
         mv.addObject("jmx_memory_committed", jmx_memory_committed);
         mv.addObject("memoryPoolJson", memoryPoolJson);
-
+        log.info("host");
         //host
         Set<String> profiles = new HashSet<>(Arrays.asList(environment.getActiveProfiles()));
         if (profiles.contains("dev")) {
