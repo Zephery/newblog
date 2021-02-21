@@ -13,7 +13,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(chartWSHandler, "/wscpu");
+        registry.addHandler(chartWSHandler, "/wscpu").setAllowedOrigins("*");
     }
 
 }
