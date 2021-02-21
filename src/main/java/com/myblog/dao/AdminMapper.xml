@@ -7,7 +7,8 @@
         <result column="adminpasswd" property="adminpasswd" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, adminname, adminpasswd
+        id
+        , adminname, adminpasswd
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -16,7 +17,8 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from admin
+        delete
+        from admin
         where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.myblog.model.Admin">
@@ -62,8 +64,8 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.myblog.model.Admin">
         update admin
-        set adminname = #{adminname,jdbcType=VARCHAR},
-        adminpasswd = #{adminpasswd,jdbcType=VARCHAR}
+        set adminname   = #{adminname,jdbcType=VARCHAR},
+            adminpasswd = #{adminpasswd,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

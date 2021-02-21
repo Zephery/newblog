@@ -51,7 +51,7 @@
                             <td>${fn:replace(daterange.get(0),"\"","")}至${fn:replace(daterange.get(daterange.size()-1),"\"","")}</td>
                             <td>${pv_sum}</td>
                             <td>${uv_sum}</td>
-                            <td><a href="${pageContext.request.contextPath}/elk.html">进入(加载较慢)</a> </td>
+                            <td><a href="${pageContext.request.contextPath}/elk.html">进入(加载较慢)</a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -543,7 +543,7 @@
                                     tooltip: {
                                         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                                         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                                        '<td style="padding:0"><b>{point.y:.1f} MB</b></td></tr>',
+                                            '<td style="padding:0"><b>{point.y:.1f} MB</b></td></tr>',
                                         footerFormat: '</table>',
                                         shared: true,
                                         useHTML: true
@@ -596,12 +596,15 @@
                                             // set up the updating of the chart each second
                                             var series = this.series[0],
                                                 chart = this;
+                                            activeLastPointToolip(chart);
+
                                             setInterval(function () {
                                                 var x = (new Date()).getTime(); // current time
                                                 var yyy = parseFloat(result);
                                                 series.addPoint([x, yyy], true, true);
+                                                doSend();
                                                 activeLastPointToolip(chart);
-                                            }, 1000);
+                                            }, 2000);
                                         }
                                     }
                                 },
@@ -610,7 +613,7 @@
                                 },
                                 xAxis: {
                                     type: 'datetime',
-                                    tickPixelInterval: 150
+                                    tickPixelInterval: 10
                                 },
                                 credits: {
                                     enabled: false
@@ -685,7 +688,7 @@
                             }
 
                             function send_echo() {
-                                var wsUri = "ws://47.115.44.242:8080/wscpu.ws";
+                                var wsUri = "ws://${host}:8081/wscpu";
                                 ws = new WebSocket(wsUri);
                                 ws.onopen = function (evt) {
                                     writeToScreen("Connected !");

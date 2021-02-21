@@ -14,7 +14,8 @@
         <result column="text" jdbcType="LONGVARCHAR" property="text"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, uid, name, location, url, created_at, type
+        id
+        , uid, name, location, url, created_at, type
     </sql>
     <sql id="Blob_Column_List">
         text
@@ -33,16 +34,17 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from weibo
+        delete
+        from weibo
         where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.myblog.model.Weibo">
         insert into weibo (id, uid, name,
-        location, url, created_at,
-        type, text)
+                           location, url, created_at,
+                           type, text)
         values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-        #{location,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{createdAt,jdbcType=VARCHAR},
-        #{type,jdbcType=INTEGER}, #{text,jdbcType=LONGVARCHAR})
+                #{location,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{createdAt,jdbcType=VARCHAR},
+                #{type,jdbcType=INTEGER}, #{text,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.Weibo">
         insert into weibo
@@ -128,23 +130,23 @@
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myblog.model.Weibo">
         update weibo
-        set uid = #{uid,jdbcType=VARCHAR},
-        name = #{name,jdbcType=VARCHAR},
-        location = #{location,jdbcType=VARCHAR},
-        url = #{url,jdbcType=VARCHAR},
-        created_at = #{createdAt,jdbcType=VARCHAR},
-        type = #{type,jdbcType=INTEGER},
-        text = #{text,jdbcType=LONGVARCHAR}
+        set uid        = #{uid,jdbcType=VARCHAR},
+            name       = #{name,jdbcType=VARCHAR},
+            location   = #{location,jdbcType=VARCHAR},
+            url        = #{url,jdbcType=VARCHAR},
+            created_at = #{createdAt,jdbcType=VARCHAR},
+            type       = #{type,jdbcType=INTEGER},
+            text       = #{text,jdbcType=LONGVARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.myblog.model.Weibo">
         update weibo
-        set uid = #{uid,jdbcType=VARCHAR},
-        name = #{name,jdbcType=VARCHAR},
-        location = #{location,jdbcType=VARCHAR},
-        url = #{url,jdbcType=VARCHAR},
-        created_at = #{createdAt,jdbcType=VARCHAR},
-        type = #{type,jdbcType=INTEGER}
+        set uid        = #{uid,jdbcType=VARCHAR},
+            name       = #{name,jdbcType=VARCHAR},
+            location   = #{location,jdbcType=VARCHAR},
+            url        = #{url,jdbcType=VARCHAR},
+            created_at = #{createdAt,jdbcType=VARCHAR},
+            type       = #{type,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
     <select id="getAllWeiboToday" resultMap="ResultMapWithBLOBs">

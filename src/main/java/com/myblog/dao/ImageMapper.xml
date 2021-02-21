@@ -12,7 +12,8 @@
         <result column="iht" property="iht" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-        imageid, imagename, imagepath, banner, content, datetime, love, iht
+        imageid
+        , imagename, imagepath, banner, content, datetime, love, iht
     </sql>
     <cache eviction="LRU"
            type="org.apache.ibatis.cache.impl.PerpetualCache"
@@ -26,16 +27,17 @@
         where imageid = #{imageid,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from image
+        delete
+        from image
         where imageid = #{imageid,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.myblog.model.Image">
         insert into image (imageid, imagename, imagepath,
-        banner, content, datetime,
-        love, iht)
+                           banner, content, datetime,
+                           love, iht)
         values (#{imageid,jdbcType=INTEGER}, #{imagename,jdbcType=VARCHAR}, #{imagepath,jdbcType=VARCHAR},
-        #{banner,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{datetime,jdbcType=VARCHAR},
-        #{love,jdbcType=INTEGER}, #{iht,jdbcType=INTEGER})
+                #{banner,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{datetime,jdbcType=VARCHAR},
+                #{love,jdbcType=INTEGER}, #{iht,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.Image">
         insert into image
@@ -122,12 +124,12 @@
     <update id="updateByPrimaryKey" parameterType="com.myblog.model.Image">
         update image
         set imagename = #{imagename,jdbcType=VARCHAR},
-        imagepath = #{imagepath,jdbcType=VARCHAR},
-        banner = #{banner,jdbcType=INTEGER},
-        content = #{content,jdbcType=VARCHAR},
-        datetime = #{datetime,jdbcType=VARCHAR},
-        love = #{love,jdbcType=INTEGER},
-        iht = #{iht,jdbcType=INTEGER}
+            imagepath = #{imagepath,jdbcType=VARCHAR},
+            banner    = #{banner,jdbcType=INTEGER},
+            content   = #{content,jdbcType=VARCHAR},
+            datetime  = #{datetime,jdbcType=VARCHAR},
+            love      = #{love,jdbcType=INTEGER},
+            iht       = #{iht,jdbcType=INTEGER}
         where imageid = #{imageid,jdbcType=INTEGER}
     </update>
     <select id="getAllImage" resultMap="BaseResultMap">

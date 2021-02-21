@@ -32,3 +32,12 @@ spring:
 
 mybatis:
   mapper-locations: [ "/com/myblog/dao/*.xml" ]
+
+management:
+  endpoint:
+    health:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"

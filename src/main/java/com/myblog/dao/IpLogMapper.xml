@@ -13,7 +13,8 @@
         <result column="referer" jdbcType="VARCHAR" property="referer"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, sid, ip, ip_time, area, uri, response_time, visit_num, referer
+        id
+        , sid, ip, ip_time, area, uri, response_time, visit_num, referer
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -22,16 +23,17 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from ip_log
+        delete
+        from ip_log
         where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.myblog.model.IpLog">
         insert into ip_log (id, sid, ip,
-        ip_time, area, uri,
-        response_time, visit_num, referer)
+                            ip_time, area, uri,
+                            response_time, visit_num, referer)
         values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR},
-        #{ipTime,jdbcType=TIMESTAMP}, #{area,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR},
-        #{responseTime,jdbcType=BIGINT}, #{visitNum,jdbcType=INTEGER}, #{referer,jdbcType=VARCHAR})
+                #{ipTime,jdbcType=TIMESTAMP}, #{area,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR},
+                #{responseTime,jdbcType=BIGINT}, #{visitNum,jdbcType=INTEGER}, #{referer,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.IpLog">
         insert into ip_log
@@ -126,14 +128,14 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.myblog.model.IpLog">
         update ip_log
-        set sid = #{sid,jdbcType=VARCHAR},
-        ip = #{ip,jdbcType=VARCHAR},
-        ip_time = #{ipTime,jdbcType=TIMESTAMP},
-        area = #{area,jdbcType=VARCHAR},
-        uri = #{uri,jdbcType=VARCHAR},
-        response_time = #{responseTime,jdbcType=BIGINT},
-        visit_num = #{visitNum,jdbcType=INTEGER},
-        referer = #{referer,jdbcType=VARCHAR}
+        set sid           = #{sid,jdbcType=VARCHAR},
+            ip            = #{ip,jdbcType=VARCHAR},
+            ip_time       = #{ipTime,jdbcType=TIMESTAMP},
+            area          = #{area,jdbcType=VARCHAR},
+            uri           = #{uri,jdbcType=VARCHAR},
+            response_time = #{responseTime,jdbcType=BIGINT},
+            visit_num     = #{visitNum,jdbcType=INTEGER},
+            referer       = #{referer,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

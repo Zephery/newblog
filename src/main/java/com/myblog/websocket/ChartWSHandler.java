@@ -1,50 +1,67 @@
 package com.myblog.websocket;
 
-import com.myblog.jmx.JMXClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.socket.*;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.metrics.MetricsEndpoint;
+import org.springframework.stereotype.Component;
+import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import javax.annotation.PostConstruct;
+import java.util.Objects;
 
 /**
  * @author Zephery
  * @since 2017/11/23 17:16
  */
-public class ChartWSHandler implements WebSocketHandler {
-    //logger
-    private static final Logger logger = LoggerFactory.getLogger(ChartWSHandler.class);
+@Slf4j
+@Component
+public class ChartWSHandler extends TextWebSocketHandler {
+    private static final String METRIC_NAME = "system.cpu.usage";
 
-    @Override
-    public void afterConnectionEstablished(WebSocketSession webSocketSession) throws Exception {
-        String aa = JMXClient.getInstance().getCpuUsage();
-        TextMessage message = new TextMessage(aa);
-        webSocketSession.sendMessage(message);
+    @Autowired
+    private MetricsEndpoint metricsEndpoint;
+
+    @PostConstruct
+    public void aa() {
+        Double systemCpuUsage = metricsEndpoint.metric(METRIC_NAME, null)
+                .getMeasurements()
+                .stream()
+                .filter(Objects::nonNull)
+                .findFirst()
+                .map(MetricsEndpoint.Sample::getValue)
+                .filter(Double::isFinite)
+                .orElse(0.0D);
+        log.info("");
     }
 
     @Override
-    public void handleMessage(WebSocketSession wss, WebSocketMessage<?> wsm) throws Exception {
-        int i = 0;
-        while (i < 1000) {
-            String aa = JMXClient.getInstance().getCpuUsage();
-            TextMessage message = new TextMessage(aa);
-            wss.sendMessage(message);
-            i++;
-        }
-        logger.info("关闭websocket" + wss.getRemoteAddress());
-        wss.close();
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        log.info("");
+        // The WebSocket has been closed
     }
 
     @Override
-    public void handleTransportError(WebSocketSession webSocketSession, Throwable throwable) throws Exception {
-
+    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        // The WebSocket has been opened
+        // I might save this session object so that I can send messages to it outside of this method
+        log.info("");
+        // Let's send the first message
     }
 
     @Override
-    public void afterConnectionClosed(WebSocketSession webSocketSession, CloseStatus closeStatus) throws Exception {
-
-    }
-
-    @Override
-    public boolean supportsPartialMessages() {
-        return false;
+    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+        Double systemCpuUsage = metricsEndpoint.metric(METRIC_NAME, null)
+                .getMeasurements()
+                .stream()
+                .filter(Objects::nonNull)
+                .findFirst()
+                .map(MetricsEndpoint.Sample::getValue)
+                .filter(Double::isFinite)
+                .orElse(0.0D);
+        log.info("systemCpuUsage:{}", systemCpuUsage);
+        session.sendMessage(new TextMessage(String.valueOf(systemCpuUsage * 100)));
     }
 }

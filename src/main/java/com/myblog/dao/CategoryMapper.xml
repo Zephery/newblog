@@ -8,10 +8,12 @@
         <result column="c_num" property="cNum" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-        c_id, c_name, c_descrip, c_num
+        c_id
+        , c_name, c_descrip, c_num
     </sql>
     <sql id="NoDescrip">
-        c_id, c_name, c_num
+        c_id
+        , c_name, c_num
     </sql>
     <cache eviction="LRU"
            type="org.apache.ibatis.cache.impl.PerpetualCache"
@@ -25,14 +27,15 @@
         where c_id = #{cId,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from category
+        delete
+        from category
         where c_id = #{cId,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.myblog.model.Category">
         insert into category (c_id, c_name, c_descrip,
-        c_num)
+                              c_num)
         values (#{cId,jdbcType=INTEGER}, #{cName,jdbcType=VARCHAR}, #{cDescrip,jdbcType=VARCHAR},
-        #{cNum,jdbcType=INTEGER})
+                #{cNum,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.Category">
         insert into category
@@ -82,9 +85,9 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.myblog.model.Category">
         update category
-        set c_name = #{cName,jdbcType=VARCHAR},
-        c_descrip = #{cDescrip,jdbcType=VARCHAR},
-        c_num = #{cNum,jdbcType=INTEGER}
+        set c_name    = #{cName,jdbcType=VARCHAR},
+            c_descrip = #{cDescrip,jdbcType=VARCHAR},
+            c_num     = #{cNum,jdbcType=INTEGER}
         where c_id = #{cId,jdbcType=INTEGER}
     </update>
     <select id="getAllCategory" resultMap="BaseResultMap">

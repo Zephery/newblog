@@ -10,7 +10,8 @@
         <result column="returndate" jdbcType="VARCHAR" property="returndate"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, title, author, bookindex, rentdate, returndate
+        id
+        , title, author, bookindex, rentdate, returndate
     </sql>
     <cache eviction="LRU"
            type="org.apache.ibatis.cache.impl.PerpetualCache"
@@ -24,16 +25,15 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from myreading
+        delete
+        from myreading
         where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.myblog.model.Myreading">
         insert into myreading (id, title, author,
-        bookindex, rentdate, returndate
-        )
+                               bookindex, rentdate, returndate)
         values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
-        #{bookindex,jdbcType=VARCHAR}, #{rentdate,jdbcType=VARCHAR}, #{returndate,jdbcType=VARCHAR}
-        )
+                #{bookindex,jdbcType=VARCHAR}, #{rentdate,jdbcType=VARCHAR}, #{returndate,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.Myreading">
         insert into myreading
@@ -101,11 +101,11 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.myblog.model.Myreading">
         update myreading
-        set title = #{title,jdbcType=VARCHAR},
-        author = #{author,jdbcType=VARCHAR},
-        bookindex = #{bookindex,jdbcType=VARCHAR},
-        rentdate = #{rentdate,jdbcType=VARCHAR},
-        returndate = #{returndate,jdbcType=VARCHAR}
+        set title      = #{title,jdbcType=VARCHAR},
+            author     = #{author,jdbcType=VARCHAR},
+            bookindex  = #{bookindex,jdbcType=VARCHAR},
+            rentdate   = #{rentdate,jdbcType=VARCHAR},
+            returndate = #{returndate,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
     <select id="getAllReading" resultMap="BaseResultMap">

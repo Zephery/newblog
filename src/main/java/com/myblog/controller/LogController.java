@@ -9,6 +9,8 @@ import com.myblog.model.FanPie;
 import com.myblog.model.TopTen;
 import com.myblog.util.IPUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.actuate.metrics.MetricsEndpoint;
+import org.springframework.core.env.Environment;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.types.RedisClientInfo;
@@ -21,8 +23,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Zephery on 2017/6/23.
@@ -32,6 +33,12 @@ import java.util.List;
 public class LogController {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
+    @Resource
+    private MetricsEndpoint metricsEndpoint;
+    @Resource
+    private Environment environment;
+    private static final String METRIC_NAME = "system.cpu.usage";
+
 
     @RequestMapping("/log")
     public ModelAndView log(HttpServletRequest request) throws IOException {
@@ -122,9 +129,21 @@ public class LogController {
         mv.addObject("pv_sum", pv_sum);
         mv.addObject("uv_sum", uv_sum);
         mv.addObject("jmx_memory_use", jmx_memory_use);
+        cpu_usage.add("0.2");
+        cpu_usage.add("0.2");
+        cpu_usage.add("0.3");
         mv.addObject("cpu_usage", cpu_usage);
         mv.addObject("jmx_memory_committed", jmx_memory_committed);
         mv.addObject("memoryPoolJson", memoryPoolJson);
+
+        //host
+        Set<String> profiles = new HashSet<>(Arrays.asList(environment.getActiveProfiles()));
+        if (profiles.contains("dev")) {
+            mv.addObject("host", "localhost");
+        } else {
+            mv.addObject("host", IPUtils.getServerIp());
+        }
+
         mv.setViewName("log");
         return mv;
     }
@@ -143,8 +162,16 @@ public class LogController {
     @ResponseBody
     public void cpu(HttpServletResponse response) throws IOException {
         String aa = JMXClient.getInstance().getCpuUsage();
+        Double systemCpuUsage = metricsEndpoint.metric(METRIC_NAME, null)
+                .getMeasurements()
+                .stream()
+                .filter(Objects::nonNull)
+                .findFirst()
+                .map(MetricsEndpoint.Sample::getValue)
+                .filter(Double::isFinite)
+                .orElse(0.0D);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        response.getWriter().write(aa);
+        response.getWriter().write(systemCpuUsage.toString());
     }
 }

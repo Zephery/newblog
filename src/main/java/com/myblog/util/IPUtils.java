@@ -142,7 +142,7 @@ public class IPUtils {
 
     public static String getServerIp() {
         String ip = "";
-        String url = "http://myipip.net/";
+        String url = "https://myipip.net/";
         try {
             String resp = HttpHelper.getInstance().get(url).replaceAll("\n", "");
             ip = JsonParser.parseString(resp).getAsJsonObject().get("ip").getAsString();

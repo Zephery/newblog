@@ -10,7 +10,8 @@
         <result column="t_name" property="tName" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-        t_id, t_name
+        t_id
+        , t_name
     </sql>
     <cache eviction="LRU"
            type="org.apache.ibatis.cache.impl.PerpetualCache"
@@ -24,7 +25,8 @@
         where t_id = #{tId,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from tag
+        delete
+        from tag
         where t_id = #{tId,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.myblog.model.Tag">
@@ -65,16 +67,20 @@
         where t_id = #{tId,jdbcType=INTEGER}
     </update>
     <select id="getTagByBlogId" resultMap="GetTag">
-        select tag.t_id,t_name from tag
-        where t_id in (select t_id from relation
-        where relation.blogid= #{blogid,jdbcType=INTEGER});
+        select tag.t_id, t_name
+        from tag
+        where t_id in (select t_id
+                       from relation
+                       where relation.blogid = #{blogid,jdbcType=INTEGER});
     </select>
     <select id="getblogbytagid" resultMap="com.myblog.dao.BlogMapper.BaseResultMap">
-        SELECT * from blog
-        where blogid IN (select blogid from relation where t_id=#{t_id})
+        SELECT *
+        from blog
+        where blogid IN (select blogid from relation where t_id = #{t_id})
     </select>
     <select id="getAllTags" resultMap="BaseResultMap">
-        select * from tag
+        select *
+        from tag
     </select>
     <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String">
         select

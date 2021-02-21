@@ -7,12 +7,14 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
 
 /**
  * @author wenzhihuai
  * @since 2020/2/21 17:44
  */
 @EnableCaching
+@EnableWebSocket
 @EnableScheduling
 @SpringBootApplication
 @MapperScan({"com.myblog.dao"})
