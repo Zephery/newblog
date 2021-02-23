@@ -99,8 +99,36 @@ public class LogController {
             }
         });
         List<String> jmx_memory_use = new ArrayList<>();
+        Integer used = metricsEndpoint.metric("jvm.memory.used", null)
+                .getMeasurements()
+                .stream()
+                .filter(Objects::nonNull)
+                .findFirst()
+                .map(MetricsEndpoint.Sample::getValue)
+                .filter(Double::isFinite)
+                .orElse(0.0D).intValue() / (1024 * 1024);
+        jmx_memory_use.add(used.toString());
+        jmx_memory_use.add(used.toString());
+        jmx_memory_use.add(used.toString());
+        jmx_memory_use.add(used.toString());
+        jmx_memory_use.add(used.toString());
+        jmx_memory_use.add(used.toString());
+        jmx_memory_use.add(used.toString());
+        jmx_memory_use.add(used.toString());
+        jmx_memory_use.add(used.toString());
+        jmx_memory_use.add(used.toString());
+        jmx_memory_use.add(used.toString());
+        jmx_memory_use.add(used.toString());
+        jmx_memory_use.add(used.toString());
         List<String> cpu_usage = new ArrayList<>();
-        Integer jmx_memory_committed = 0;
+        Integer jmx_memory_committed = metricsEndpoint.metric("jvm.memory.committed", null)
+                .getMeasurements()
+                .stream()
+                .filter(Objects::nonNull)
+                .findFirst()
+                .map(MetricsEndpoint.Sample::getValue)
+                .filter(Double::isFinite)
+                .orElse(0.0D).intValue() / (1024 * 1024);
         JsonArray memoryPoolJson = JMXClient.getInstance().getMemoryPoolDetail();
         ModelAndView mv = new ModelAndView();
         String ip = IPUtils.getIpAddr(request);
@@ -143,11 +171,18 @@ public class LogController {
     @RequestMapping("/jmx")
     @ResponseBody
     public void jmx(HttpServletResponse response) throws IOException {
-        int aa = Integer.parseInt(JMXClient.getInstance().getJVMUsage().toString());
-        Integer bb = aa / 1048576;
+        Double jvmMemUsed = metricsEndpoint.metric("jvm.memory.used", null)
+                .getMeasurements()
+                .stream()
+                .filter(Objects::nonNull)
+                .findFirst()
+                .map(MetricsEndpoint.Sample::getValue)
+                .filter(Double::isFinite)
+                .orElse(0.0D);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        response.getWriter().write(bb.toString());
+        log.info("jvmMemUsed is {}", jvmMemUsed.intValue());
+        response.getWriter().write(String.valueOf(jvmMemUsed.intValue() / (1024 * 1024)));
     }
 
     @RequestMapping("/cpu")

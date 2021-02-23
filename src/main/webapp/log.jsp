@@ -376,8 +376,8 @@
                             });
 
                             function activeLastPointToolip(chart) {
-                                var points = chart.series[0].points;
-                                chart.tooltip.refresh(points[points.length - 1]);
+                                // var points = chart.series[0].points;
+                                // chart.tooltip.refresh(points[points.length - 1]);
                             }
 
                             $('#jvm').highcharts({
@@ -393,16 +393,14 @@
                                             interval = setInterval(function () {
                                                 $.ajax({
                                                     type: "GET",  //提交方式
-                                                    url: "${pageContext.request.contextPath}/jmx.do?" + (new Date).getTime(),//路径
+                                                    url: "http://${host}:8081/jmx.do?" + (new Date()).getTime(),//路径
                                                     success: function (result) {//返回数据根据结果进行相应的处理
                                                         var x = (new Date()).getTime(); // current time
-                                                        var y = result;
-                                                        series.addPoint([x, y], true, true);
+                                                        series.addPoint([x, result], true, true);
                                                         activeLastPointToolip(chart)
                                                     },
                                                     dataType: 'json'
                                                 });
-
                                             }, 1000);
                                             var series1 = this.series[1],
                                                 chart1 = this;
@@ -582,8 +580,8 @@
                             });
 
                             function activeLastPointToolip(chart) {
-                                var points = chart.series[0].points;
-                                chart.tooltip.refresh(points[points.length - 1]);
+                                // var points = chart.series[0].points;
+                                // chart.tooltip.refresh(points[points.length - 1]);
                             }
 
                             $('#cpu').highcharts({
