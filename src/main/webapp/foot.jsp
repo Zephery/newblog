@@ -13,6 +13,12 @@
 <%@ page isELIgnored="false" %>
 <footer class="footer">
     <div class="footer-inner">
+        <div style="float: left;margin-top: 0;width: 100px;height: 50px">
+            <a href="https://www.ej-technologies.com/products/jprofiler/overview.html">
+                Java profiler
+                <img src="http://image.wenzhihuai.com/jprofiler.png" style="float: left;width: auto"/>
+            </a>
+        </div>
         <div style="float: right;margin-top: 0;width: 100px;height: 50px">
             <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral">
                 <img src="http://image.wenzhihuai.com/youpailogo6.png" style="float: left;width: auto"/>
