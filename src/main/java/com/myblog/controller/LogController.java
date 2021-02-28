@@ -132,7 +132,8 @@ public class LogController {
         JsonArray memoryPoolJson = JMXClient.getInstance().getMemoryPoolDetail();
         ModelAndView mv = new ModelAndView();
         String ip = IPUtils.getIpAddr(request);
-        String yourcity = IPUtils.getAddressByIP(ip);
+//        String yourcity = IPUtils.getAddressByIP(ip);
+        String yourcity = "功能已注释";
         log.info("yourcity is {}", yourcity);
         mv.addObject("ip", ip);
         mv.addObject("yourcity", yourcity);
