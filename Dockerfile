@@ -2,7 +2,7 @@ FROM openjdk:11
 
 MAINTAINER 1570631036@qq.com
 
-COPY *.jar /app/newblog.jar
+COPY target/*.jar /app/newblog.jar
 
 WORKDIR /app
 
