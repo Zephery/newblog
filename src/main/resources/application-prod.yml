@@ -6,11 +6,11 @@ spring:
   profiles:
     include: common
   datasource:
-    url: jdbc:mysql://106.52.188.206:3306/myblog?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://172.16.0.17:3306/myblog?useUnicode=true&characterEncoding=UTF-8
     username: root
     password: helloroot
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
-    host: 127.0.0.1
+    host: 172.16.0.17
     password: root
     port: 6340
