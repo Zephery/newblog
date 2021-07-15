@@ -25,7 +25,7 @@ spring:
     auto: true
   mvc:
     view:
-      prefix: /
+      prefix: /WEB-INF/
       suffix: .jsp
     pathmatch:
       use-suffix-pattern: true
