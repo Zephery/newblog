@@ -2,6 +2,8 @@ FROM openjdk:11
 
 MAINTAINER 1570631036@qq.com
 
+ENV TZ=Asia/Shanghai
+
 RUN apt-get update && apt-get install python -y && apt-get install python3-pip -y && apt-get clean \
     && pip3 install redis
 
