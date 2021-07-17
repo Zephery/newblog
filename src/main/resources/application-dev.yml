@@ -3,8 +3,8 @@ server:
     basedir: ./logs/newblog
 
 spring:
-  profiles:
-    include: common
+  config:
+    import: classpath:application-common.yml
   datasource:
     url: jdbc:mysql://106.52.188.206:31044/myblog?useUnicode=true&characterEncoding=UTF-8
     username: root
