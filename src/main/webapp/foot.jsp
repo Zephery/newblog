@@ -38,7 +38,7 @@
             <a rel="nofollow" target="_blank" href="http://www.wenzhihuai.com:8081/admin/index.html">后台管理 </a>
             丨
             <a rel="nofollow" target="_blank"
-               href="http://www.beian.miit.gov.cn/">粤ICP备17092242号-1</a>
+               href="http://www.beian.miit.gov.cn/">粤ICP备17092242号</a>
         </div>
         <%
             Date d = new Date();
