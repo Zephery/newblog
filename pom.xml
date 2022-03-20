@@ -13,20 +13,6 @@
         <version>2.6.4</version>
         <relativePath/>
     </parent>
-    <repositories>
-        <repository>
-            <id>nexus-aliyun</id>
-            <name>Nexus aliyun</name>
-            <layout>default</layout>
-            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-    </repositories>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
