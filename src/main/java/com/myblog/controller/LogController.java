@@ -98,38 +98,6 @@ public class LogController {
                 return 1;
             }
         });
-        List<String> jmx_memory_use = new ArrayList<>();
-        Integer used = metricsEndpoint.metric("jvm.memory.used", null)
-                .getMeasurements()
-                .stream()
-                .filter(Objects::nonNull)
-                .findFirst()
-                .map(MetricsEndpoint.Sample::getValue)
-                .filter(Double::isFinite)
-                .orElse(0.0D).intValue() / (1024 * 1024);
-        jmx_memory_use.add(used.toString());
-        jmx_memory_use.add(used.toString());
-        jmx_memory_use.add(used.toString());
-        jmx_memory_use.add(used.toString());
-        jmx_memory_use.add(used.toString());
-        jmx_memory_use.add(used.toString());
-        jmx_memory_use.add(used.toString());
-        jmx_memory_use.add(used.toString());
-        jmx_memory_use.add(used.toString());
-        jmx_memory_use.add(used.toString());
-        jmx_memory_use.add(used.toString());
-        jmx_memory_use.add(used.toString());
-        jmx_memory_use.add(used.toString());
-        List<String> cpu_usage = new ArrayList<>();
-        Integer jmx_memory_committed = metricsEndpoint.metric("jvm.memory.committed", null)
-                .getMeasurements()
-                .stream()
-                .filter(Objects::nonNull)
-                .findFirst()
-                .map(MetricsEndpoint.Sample::getValue)
-                .filter(Double::isFinite)
-                .orElse(0.0D).intValue() / (1024 * 1024);
-        JsonArray memoryPoolJson = JMXClient.getInstance().getMemoryPoolDetail();
         ModelAndView mv = new ModelAndView();
         String ip = IPUtils.getIpAddr(request);
 //        String yourcity = IPUtils.getAddressByIP(ip);
@@ -149,13 +117,6 @@ public class LogController {
         mv.addObject("diyumax", diyu.get(0).getPv_count());
         mv.addObject("pv_sum", pv_sum);
         mv.addObject("uv_sum", uv_sum);
-        mv.addObject("jmx_memory_use", jmx_memory_use);
-        cpu_usage.add("0.2");
-        cpu_usage.add("0.2");
-        cpu_usage.add("0.3");
-        mv.addObject("cpu_usage", cpu_usage);
-        mv.addObject("jmx_memory_committed", jmx_memory_committed);
-        mv.addObject("memoryPoolJson", memoryPoolJson);
         log.info("host");
         //host
         Set<String> profiles = new HashSet<>(Arrays.asList(environment.getActiveProfiles()));
