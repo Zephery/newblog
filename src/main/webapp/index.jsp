@@ -50,10 +50,10 @@
                             <c:forEach var="banner" items="${banners}">
                                 <a href="${pageContext.request.contextPath}/getblogdetail.html?blogid=${banner.blogid}"
                                    title="${banner.title}">
-                                    <span>
-                                        <img src="${banner.imageurl}"
-                                             alt="${banner.title}"  height="500" width="830"/>${banner.title}
-                                    </span>
+<%--                                    <span>--%>
+<%--                                        <img src="${banner.imageurl}"--%>
+<%--                                             alt="${banner.title}"  height="500" width="830"/>${banner.title}--%>
+<%--                                    </span>--%>
                                 </a>
                             </c:forEach>
                         </div>

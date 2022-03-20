@@ -11,6 +11,6 @@ ADD src/main/resources/pythonfiles/getbaidu.py /app/getbaidu.py
 
 COPY target/*.war /app/newblog.war
 
-WORKDIR /app
+WORKDIR /data/logs/newblog
 
 CMD ["java","-Dspring.profiles.active=prod,common","-jar","/app/newblog.war"]
