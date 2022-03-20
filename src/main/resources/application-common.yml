@@ -16,6 +16,8 @@ server:
       charset: UTF-8
 
 spring:
+  main:
+    allow-circular-references: true
   cache:
     cache-names: redisCache
     type: redis
@@ -29,6 +31,7 @@ spring:
       suffix: .jsp
     pathmatch:
       use-suffix-pattern: true
+      matching-strategy: ant_path_matcher
 
 mybatis:
   mapper-locations: [ "/com/myblog/dao/*.xml" ]
