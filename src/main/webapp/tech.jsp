@@ -42,7 +42,8 @@
                     </header>
                     <div class="focus">
                         <a href="getblogdetail.html?blogid=${blog.blogid}">
-                            <img class="thumb" src="${blog.imageurl}!/both/200x123?imageView2/1/w/200/h/123"
+                            <img class="thumb" src="${blog.imageurl}"
+                                 width="200" height="123"
                                  alt="${blog.title}">
                         </a>
                     </div>

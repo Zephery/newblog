@@ -11,8 +11,17 @@ import com.myblog.model.Blog;
 import com.myblog.model.Category;
 import com.myblog.model.Links;
 import com.myblog.model.Myreading;
-import com.myblog.service.*;
-import com.myblog.util.*;
+import com.myblog.service.IBlogService;
+import com.myblog.service.ICategoryService;
+import com.myblog.service.ILinksService;
+import com.myblog.service.IMyReadingService;
+import com.myblog.service.ITagService;
+import com.myblog.util.HttpHelper;
+import com.myblog.util.PythonUtil;
+import com.myblog.util.QiniuUtil;
+import com.myblog.util.SingleToMany;
+import com.myblog.util.UpYunUtil;
+import com.myblog.util.WordRecognition;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -39,6 +48,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -158,14 +168,12 @@ public class IndexController {
 
     @RequestMapping("/blogbyhits")
     @ResponseBody
-    public void blogbyhits(HttpServletResponse response) throws Exception {
+    public List<Blog> blogbyhits(HttpServletResponse response) throws Exception {
         try {
-            List<Blog> blogbyhits = blogService.getByHits();
-            Gson gson = new Gson();
-            String temp = gson.toJson(blogbyhits);
-            response.getWriter().write(temp);
+            return blogService.getByHits();
         } catch (Exception e) {
-            response.getWriter().write(e.toString());
+            log.error("", e);
+            return new ArrayList<>();
         }
     }
 

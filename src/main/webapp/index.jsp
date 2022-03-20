@@ -37,8 +37,8 @@
                             <c:forEach var="banner" items="${banners}">
                                 <li>
                                     <a href="getblogdetail.html?blogid=${banner.blogid}" target="_self">
-                                        <img src="${banner.imageurl}!/both/830x500?imageView2/1/w/830/h/500"
-                                             alt="${banner.title}" title="${banner.title}"
+                                        <img src="${banner.imageurl}"
+                                             alt="${banner.title}" title="${banner.title}" height="500" width="830"
                                              id="wows1_0"/>
                                     </a>
                                 </li>
@@ -51,8 +51,8 @@
                                 <a href="${pageContext.request.contextPath}/getblogdetail.html?blogid=${banner.blogid}"
                                    title="${banner.title}">
                                     <span>
-                                        <img src="${banner.imageurl}!/both/120x90?imageView2/1/w/120/h/90"
-                                             alt="${banner.title}"/>${banner.title}
+                                        <img src="${banner.imageurl}"
+                                             alt="${banner.title}"  height="500" width="830"/>${banner.title}
                                     </span>
                                 </a>
                             </c:forEach>
@@ -103,8 +103,8 @@
                     </header>
                     <div class="focus">
                         <a href="getblogdetail.html?blogid=${blog.blogid}">
-                            <img class="thumb" src="${blog.imageurl}!/both/200x123?imageView2/1/w/200/h/123"
-                                 alt="${blog.title}">
+                            <img class="thumb" src="${blog.imageurl}"
+                                 alt="${blog.title}" height="123" width="200">
                         </a>
                     </div>
                     <span class="note">${blog.summary}...</span>
