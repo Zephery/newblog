@@ -1,11 +1,13 @@
 package com.myblog.service.impl;
 
+import com.google.common.base.Strings;
+import com.google.gson.JsonParser;
 import com.myblog.service.ILogService;
-import com.myblog.util.IPUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 
@@ -21,10 +23,24 @@ import javax.annotation.Resource;
 public class LogServiceImpl implements ILogService {
     @Resource
     private RedisTemplate redisTemplate;
-    private static final String IP = IPUtils.getServerIp();
+    @Resource
+    private RestTemplate restTemplate;
 
     @Override
     public void record(String key, String value) {
-        redisTemplate.opsForHash().put("log", key + IP, value + DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+        String ip = "";
+        String url = "https://myipip.net/";
+        try {
+            String response = restTemplate.getForObject(url, String.class);
+            if (Strings.isNullOrEmpty(response)) {
+                return;
+            }
+            String resp = response.replaceAll("\n", "");
+            ip = JsonParser.parseString(resp).getAsJsonObject().get("ip").getAsString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        redisTemplate.opsForHash().put("log", key + ip, value + DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
     }
 }

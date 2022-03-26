@@ -1,10 +1,11 @@
 package com.myblog.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.myblog.model.IpLog;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IpLogMapper {
+public interface IpLogMapper extends BaseMapper<IpLog> {
     int deleteByPrimaryKey(Integer id);
 
     int insert(IpLog record);

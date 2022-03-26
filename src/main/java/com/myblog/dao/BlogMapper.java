@@ -1,5 +1,6 @@
 package com.myblog.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.myblog.model.Blog;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BlogMapper {
+public interface BlogMapper extends BaseMapper<Blog> {
     int deleteByPrimaryKey(Integer blogid);
 
     int insert(Blog record);

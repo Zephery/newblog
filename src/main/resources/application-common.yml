@@ -33,8 +33,6 @@ spring:
       use-suffix-pattern: true
       matching-strategy: ant_path_matcher
 
-mybatis:
-  mapper-locations: [ "/com/myblog/dao/*.xml" ]
 
 management:
   endpoint:

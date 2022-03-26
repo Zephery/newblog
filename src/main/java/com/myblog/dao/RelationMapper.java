@@ -1,13 +1,11 @@
 package com.myblog.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.myblog.model.Relation;
-import com.myblog.model.Tag;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface RelationMapper {
+public interface RelationMapper extends BaseMapper<Relation> {
     int deleteByPrimaryKey(Integer id);
 
     int insert(Relation record);
@@ -19,10 +17,4 @@ public interface RelationMapper {
     int updateByPrimaryKeySelective(Relation record);
 
     int updateByPrimaryKey(Relation record);
-
-    List<Relation> getBlogByTagId(Integer tag_id);
-
-    Relation gettagidbyblogid(Integer blogid);
-
-    Tag getTagByBlogId(Integer blogid);
 }
