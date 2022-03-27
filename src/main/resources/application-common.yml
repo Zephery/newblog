@@ -3,14 +3,6 @@ server:
   http2:
     enabled: true
   address: 0.0.0.0
-  tomcat:
-    accesslog:
-      directory: access
-      enabled: true
-      prefix: access_log
-      suffix: .log
-      max-days: 10
-    basedir: ./logs/newblog
   servlet:
     encoding:
       charset: UTF-8

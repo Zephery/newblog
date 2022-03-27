@@ -1,6 +1,12 @@
 server:
   tomcat:
-    basedir: /data/logs/newblog
+    accesslog:
+      directory: access
+      enabled: true
+      prefix: access_log
+      suffix: .log
+      max-days: 10
+    basedir: ./tomcat
 
 spring:
   config:
