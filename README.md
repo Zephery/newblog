@@ -163,6 +163,7 @@ API给java调用，可以点击[这里](http://www.wenzhihuai.com/weibonlp.html)
 **2020-2-23**：由spring改为springboot        
 **2021-1-1**：去掉了一些脏代码，只做博客，迁回腾讯云重新上线        
 **2021-2-28**：优化了日志模块，增加了jprofiler        
-**2021-7-17**：迁移至tke，并改成war包运行
+**2021-7-17**：迁移至tke，并改成war包运行  
+**2022-4-2**：升级spring boot版本，切换成mybatis plus，切换cdn  
 
 #### 持续更新...

@@ -14,10 +14,10 @@
 <head>
     <meta charset="utf-8"/>
     <title>日志系统</title>
-    <script src="https://cdn.bootcss.com/highcharts/5.0.14/highcharts.js"></script>
-    <script src="https://cdn.bootcss.com/echarts/3.6.2/echarts.min.js"></script>
+    <script src="https://cdn.bootcdn.net/highcharts/5.0.14/highcharts.js"></script>
+    <script src="https://cdn.bootcdn.net/echarts/3.6.2/echarts.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/china.js"></script>
-    <script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.js"></script>
+    <script src="https://cdn.bootcdn.net/sockjs-client/1.1.4/sockjs.js"></script>
     <!--不要导入jquery，扇形图有冲突-->
     <style>
         th {

@@ -13,7 +13,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Web Socket JavaScript Echo Client</title>
-    <script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.js"></script>
+    <script src="https://cdn.bootcdn.net/sockjs-client/1.1.4/sockjs.js"></script>
     <script language="javascript" type="text/javascript">
         var ws;
         var result;

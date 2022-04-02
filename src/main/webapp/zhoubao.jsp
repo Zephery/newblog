@@ -29,7 +29,7 @@ ${content}</textarea>
         <textarea class="editormd-html-textarea" name="htmlcontent"></textarea>
     </div>
 </div>
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://image.wenzhihuai.com/modifyeditormd.js?var=20180618"></script>
 <%--<script src="${pageContext.request.contextPath}/js/modifyeditormd.js"></script>--%>
 <%--<script src="${pageContext.request.contextPath}/js/lrz.bundle.js"></script>--%>

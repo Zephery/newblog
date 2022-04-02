@@ -22,7 +22,7 @@
     <script type="text/javascript"
             src="http://assets.changyan.sohu.com/upload/plugins/plugins.count.js">
     </script>
-    <script src="https://cdn.bootcss.com/highcharts/5.0.14/highcharts.js"></script>
+    <script src="https://cdn.bootcdn.net/highcharts/5.0.14/highcharts.js"></script>
     <style>
         .article-content h1 {
             margin: 20px -20px 20px -20px;

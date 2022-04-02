@@ -1,5 +1,6 @@
 package com.myblog.util;
 
+import com.google.common.base.Strings;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import java.util.regex.Pattern;
 public class IPUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(IPUtils.class);
+    public static String realIp;
 
     public static String ipRegix = "((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
     public static Pattern ipPattern = Pattern.compile(ipRegix);
@@ -141,15 +143,11 @@ public class IPUtils {
     }
 
     public static String getServerIp() {
-        String ip = "";
-        String url = "https://myipip.net/";
-        try {
-            String resp = HttpHelper.getInstance().get(url).replaceAll("\n", "");
-            ip = JsonParser.parseString(resp).getAsJsonObject().get("ip").getAsString();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (Strings.isNullOrEmpty(realIp)) {
+            String url = "https://ipinfo.io/ip";
+            realIp = HttpHelper.getInstance().get(url).replaceAll("\n", "");
         }
-        return ip;
+        return realIp;
     }
 
     public static void main(String[] args) {

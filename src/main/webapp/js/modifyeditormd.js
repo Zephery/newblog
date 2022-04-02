@@ -457,8 +457,8 @@
                 }
 
                 if (settings.searchReplace && !settings.readOnly) {
-                    editormd.loadCSS("https://cdn.bootcss.com/codemirror/5.33.0/addon/dialog/dialog");
-                    editormd.loadCSS("https://cdn.bootcss.com/codemirror/5.33.0/addon/search/matchesonscrollbar");
+                    editormd.loadCSS("https://cdn.bootcdn.net/codemirror/5.33.0/addon/dialog/dialog");
+                    editormd.loadCSS("https://cdn.bootcdn.net/codemirror/5.33.0/addon/search/matchesonscrollbar");
                 }
             }
 
@@ -535,18 +535,18 @@
                 }
             };
 
-            editormd.loadCSS("https://cdn.bootcss.com/codemirror/5.33.0/codemirror.min");
+            editormd.loadCSS("https://cdn.bootcdn.net/codemirror/5.33.0/codemirror.min");
 
             if (settings.searchReplace && !settings.readOnly) {
-                editormd.loadCSS("https://cdn.bootcss.com/codemirror/5.33.0/addon/dialog/dialog");
-                editormd.loadCSS("https://cdn.bootcss.com/codemirror/5.33.0/addon/search/matchesonscrollbar");
+                editormd.loadCSS("https://cdn.bootcdn.net/codemirror/5.33.0/addon/dialog/dialog");
+                editormd.loadCSS("https://cdn.bootcdn.net/codemirror/5.33.0/addon/search/matchesonscrollbar");
             }
 
             if (settings.codeFold) {
-                editormd.loadCSS("https://cdn.bootcss.com/codemirror/5.33.0/addon/fold/foldgutter");
+                editormd.loadCSS("https://cdn.bootcdn.net/codemirror/5.33.0/addon/fold/foldgutter");
             }
 
-            editormd.loadScript("https://cdn.bootcss.com/codemirror/5.33.0/codemirror.min", function () {
+            editormd.loadScript("https://cdn.bootcdn.net/codemirror/5.33.0/codemirror.min", function () {
                 editormd.$CodeMirror = CodeMirror;
 
                 editormd.loadScript("http://image.wenzhihuai.com/modes.min", function () {
@@ -563,12 +563,12 @@
 
                         _this.setToolbar();
 
-                        editormd.loadScript("https://cdn.bootcss.com/marked/0.3.9/marked.min", function () {
+                        editormd.loadScript("https://cdn.bootcdn.net/marked/0.3.9/marked.min", function () {
 
                             editormd.$marked = marked;
 
                             if (settings.previewCodeHighlight) {
-                                editormd.loadScript("https://cdn.bootcss.com/prettify/r298/prettify.min", function () {
+                                editormd.loadScript("https://cdn.bootcdn.net/prettify/r298/prettify.min", function () {
                                     loadFlowChartOrSequenceDiagram();
                                 });
                             }
@@ -3992,8 +3992,8 @@
     // 使用国外的CDN，加载速度有时会很慢，或者自定义URL
     // You can custom KaTeX load url.
     editormd.katexURL = {
-        css: "//cdn.bootcss.com/KaTeX/0.9.0-beta1/katex.min",
-        js: "//cdn.bootcss.com/KaTeX/0.9.0-beta1/katex.min"
+        css: "//cdn.bootcdn.net/KaTeX/0.9.0-beta1/katex.min",
+        js: "//cdn.bootcdn.net/KaTeX/0.9.0-beta1/katex.min"
     };
 
     editormd.kaTeXLoaded = false;

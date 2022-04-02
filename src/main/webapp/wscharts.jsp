@@ -18,9 +18,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Web Socket JavaScript Echo Client</title>
-    <script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.js"></script>
-    <script src="https://cdn.bootcss.com/highcharts/5.0.14/highcharts.js"></script>
-    <script src="https://cdn.bootcss.com/echarts/3.6.2/echarts.min.js"></script>
+    <script src="https://cdn.bootcdn.net/sockjs-client/1.1.4/sockjs.js"></script>
+    <script src="https://cdn.bootcdn.net/highcharts/5.0.14/highcharts.js"></script>
+    <script src="https://cdn.bootcdn.net/echarts/3.6.2/echarts.min.js"></script>
 </head>
 <body>
 <div class="panel-heading" style="background-color: rgba(187,255,255,0.7)">

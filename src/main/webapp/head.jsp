@@ -183,7 +183,7 @@
     });
 </script>
 <a href="#" id="toTop"></a>
-<script src="https://cdn.bootcss.com/bootstrap/4.0.0-beta/js/bootstrap.js" type="text/javascript"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.1/js/bootstrap.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     function checkData() {
         var q = $("#remote_input").val();
