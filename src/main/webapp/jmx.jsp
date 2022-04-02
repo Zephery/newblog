@@ -7,7 +7,7 @@
 --%>
 <html>
 <head>
-    <script src="https://cdn.bootcdn.net/echarts/3.6.2/echarts.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.3.2/echarts.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 </head>
 <body>
