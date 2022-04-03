@@ -1,6 +1,5 @@
 package com.myblog.controller;
 
-import com.myblog.service.IWeiboService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,8 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 public class InterestController {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(InterestController.class);
-    @Resource
-    private IWeiboService weiboService;
 
     @RequestMapping("/interest")
     public ModelAndView interest() {

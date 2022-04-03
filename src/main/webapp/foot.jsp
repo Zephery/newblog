@@ -1,4 +1,3 @@
-<%@ page import="com.myblog.util.IPUtils" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%--
@@ -44,7 +43,7 @@
             Date d = new Date();
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String now = df.format(d);
-            String ip = IPUtils.getServerIp();
+            String ip = "127.0.0.1";
         %>
         <div class="copyright pull-left" style="float: left;">
             本服务器IP地址：<%=ip%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 项目启动时间：<%=now %>

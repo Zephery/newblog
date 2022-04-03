@@ -3,9 +3,12 @@ package com.myblog.util;
 import com.google.common.base.Strings;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,10 +17,13 @@ import java.net.URLConnection;
 import java.util.regex.Pattern;
 
 
+@Slf4j
+@Component
 public class IPUtils {
+    @Resource
+    private RestTemplate restTemplate;
 
-    private static final Logger logger = LoggerFactory.getLogger(IPUtils.class);
-    public static String realIp;
+    public String realIp = "";
 
     public static String ipRegix = "((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
     public static Pattern ipPattern = Pattern.compile(ipRegix);
@@ -87,7 +93,7 @@ public class IPUtils {
                 ip |= Integer.parseInt(addressBytes[3]);
             }
         } catch (Exception e) {
-            logger.warn("Warn ipToInt addr is wrong: addr=" + addr, e);
+            log.warn("Warn ipToInt addr is wrong: addr=" + addr, e);
         }
 
         return ip;
@@ -142,10 +148,16 @@ public class IPUtils {
         }
     }
 
-    public static String getServerIp() {
+    @PostConstruct
+    public String getServerIp() {
         if (Strings.isNullOrEmpty(realIp)) {
             String url = "https://ipinfo.io/ip";
-            realIp = HttpHelper.getInstance().get(url).replaceAll("\n", "");
+            try {
+                String response = restTemplate.getForObject(url, String.class);
+                realIp = response.replaceAll("\n", "");
+            } catch (Exception e) {
+                log.error("", e);
+            }
         }
         return realIp;
     }

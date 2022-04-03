@@ -21,7 +21,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * Created by Zephery on 2017/6/23.
@@ -35,6 +40,8 @@ public class LogController {
     private MetricsEndpoint metricsEndpoint;
     @Resource
     private Environment environment;
+    @Resource
+    private IPUtils ipUtils;
     private static final String METRIC_NAME = "system.cpu.usage";
 
 
@@ -123,7 +130,7 @@ public class LogController {
         if (profiles.contains("dev")) {
             mv.addObject("host", "localhost");
         } else {
-            mv.addObject("host", IPUtils.getServerIp());
+            mv.addObject("host", ipUtils.getServerIp());
         }
 
         mv.setViewName("log");

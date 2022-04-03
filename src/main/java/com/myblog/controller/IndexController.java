@@ -3,8 +3,6 @@ package com.myblog.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.myblog.common.SSOCommon;
 import com.myblog.lucene.BlogIndex;
 import com.myblog.model.Blog;
@@ -16,7 +14,6 @@ import com.myblog.service.ICategoryService;
 import com.myblog.service.ILinksService;
 import com.myblog.service.IMyReadingService;
 import com.myblog.service.ITagService;
-import com.myblog.util.HttpHelper;
 import com.myblog.util.PythonUtil;
 import com.myblog.util.QiniuUtil;
 import com.myblog.util.SingleToMany;
@@ -320,55 +317,6 @@ public class IndexController {
         }
     }
 
-    @RequestMapping("/qqCallback")
-    @ResponseBody
-    @SuppressWarnings("unchecked")
-    public String qqCallback(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String code = request.getParameter("code");
-        String toGetToken = "https://graph.qq.com/oauth2.0/token?" +
-                "code=" + code +
-                "&grant_type=authorization_code" +
-                "&client_id=" + SSOCommon.qqAppKey +
-                "&client_secret=" + SSOCommon.qqAppSecret +
-                "&redirect_uri=" + SSOCommon.qqRedirectUri;
-        log.info(toGetToken);
-        //access token
-        String tokeContent = HttpHelper.getInstance().get(toGetToken);
-        log.info(tokeContent);
-        String token = tokeContent.split("&")[0].split("=")[1];
-        if (redisTemplate.opsForValue().get("savedToken") == null) {
-            redisTemplate.opsForValue().set("savedToken", token);
-        } else {
-            String savedToken = redisTemplate.opsForValue().get("savedToken").toString();
-            savedToken += "\n" + token;
-            redisTemplate.opsForValue().set("savedToken", savedToken);
-        }
-        //openid
-        //callback( {"client_id":"YOUR_APPID","openid":"YOUR_OPENID"} ); 搜索
-        String openUrl = "https://graph.qq.com/oauth2.0/me?access_token=" + token;
-        String openContent = HttpHelper.getInstance().get(openUrl);
-        String json = openContent.replaceAll("callback\\( ", "").replace(" );", "");
-        log.info(json);
-        JsonParser parser = new JsonParser();
-        JsonObject object = parser.parse(json).getAsJsonObject();
-        String openid = object.get("openid").toString().replaceAll("\"", "");
-        //userInfo
-        String url = "https://graph.qq.com/user/get_user_info?" +
-                "access_token=" + token +
-                "&oauth_consumer_key=101323012" +
-                "&openid=" + openid +
-                "&format=json";
-        log.info(url);
-        String content = HttpHelper.getInstance().get(url);
-        log.info("qqlogin message");
-        log.info(content);
-        log.info("qqlogin end");
-        redisTemplate.opsForList().leftPush("qqmessage", parser.parse(content).toString());
-        String sss = parser.parse(content).toString();
-//        mongoTemplate.insert(sss, "qqMessage");
-        return parser.parse(content).toString();
-    }
-
     /**
      * 跳转到微信登陆页面
      *
@@ -423,15 +371,6 @@ public class IndexController {
             content = StringUtils.trimToNull(content);
         }
         redisTemplate.opsForValue().set("zhoubao", content);
-        return "success";
-    }
-
-    @RequestMapping("/cacheIndex")
-    @ResponseBody
-    @SuppressWarnings("unchecked")
-    public String cacheIndex() {
-        String content = HttpHelper.getInstance().get("http://www.wenzhihuai.com");
-        redisTemplate.opsForValue().set("index", content);
         return "success";
     }
 

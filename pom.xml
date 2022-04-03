@@ -6,11 +6,11 @@
     <packaging>war</packaging>
     <version>1.0</version>
     <name>myblog</name>
-    <url>http://maven.apache.org</url>
+    <url>https://maven.apache.org</url>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.5</version>
+        <version>2.6.6</version>
         <relativePath/>
     </parent>
     <properties>
@@ -235,11 +235,6 @@
             <version>1.14.3</version>
         </dependency>
         <dependency>
-            <groupId>com.github.jsqlparser</groupId>
-            <artifactId>jsqlparser</artifactId>
-            <version>3.1</version>
-        </dependency>
-        <dependency>
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
             <version>1.10</version>
@@ -255,18 +250,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient-cache</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.hoverruan</groupId>
-            <artifactId>weiboclient4j</artifactId>
-            <version>0.4.16</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/cn.easyproject/easyocr -->
-        <dependency>
-            <groupId>cn.easyproject</groupId>
-            <artifactId>easyocr</artifactId>
-            <version>3.0.4-RELEASE</version>
+            <artifactId>httpclient</artifactId>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.baidu.aip/java-sdk -->
         <dependency>
