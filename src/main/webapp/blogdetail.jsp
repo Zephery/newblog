@@ -170,7 +170,7 @@
             <article class="article-content">
                 <div id="test-editormd-view2">
                 <textarea id="append-test" style="display:none;">
-                    ${blog.content}
+${blog.content}
                 </textarea>
                 </div>
             </article>
