@@ -26,11 +26,11 @@
             src="http://assets.changyan.sohu.com/upload/plugins/plugins.count.js">
     </script>
     <link rel="stylesheet" href="http://image.wenzhihuai.com/editormd.preview.css?ver=20171221"/>
-    <script src="https://cdn.bootcdn.net/marked/0.3.6/marked.js"></script>
-    <script src="https://cdn.bootcdn.net/prettify/r224/prettify.min.js"></script>
-    <script src="https://cdn.bootcdn.net/raphael/2.2.7/raphael.min.js"></script>
+    <script src="//lib.baomitu.com/marked/0.3.6/marked.min.js"></script>
+    <script src="//lib.baomitu.com/prettify/r298/prettify.min.js"></script>
+    <script src="//lib.baomitu.com/raphael/2.3.0/raphael.min.js"></script>
     <script src="http://image.wenzhihuai.com/editormd.js"></script>
-    <script src="https://cdn.bootcdn.net/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="//lib.baomitu.com/highlight.js/9.18.5/highlight.min.js"></script>
     <script type="text/javascript">
         $(function () {
             editormd.markdownToHTML("test-editormd-view2", {
@@ -170,7 +170,7 @@
             <article class="article-content">
                 <div id="test-editormd-view2">
                 <textarea id="append-test" style="display:none;">
-${blog.content}
+                    ${blog.content}
                 </textarea>
                 </div>
             </article>
