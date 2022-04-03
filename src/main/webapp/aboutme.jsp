@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="http://image.wenzhihuai.com/editormd.preview.css?ver=20171017"/>
     <link rel="stylesheet" href="http://image.wenzhihuai.com/reveal.css?ver=20171023">
     <%--<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reveal.css"/>--%>
-    <script src="https://cdn.bootcdn.net/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//lib.baomitu.com/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="http://image.wenzhihuai.com/jquery.reveal.js?ver=20171021"></script>
     <style>
         p {
