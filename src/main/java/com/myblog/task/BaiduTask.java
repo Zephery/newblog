@@ -22,6 +22,12 @@ public class BaiduTask {
         run();
     }
 
+    @Scheduled(cron = "0 0 5 * * ?")
+    private void ling() {
+        log.info("refreshData");
+        run();
+    }
+
     private void run() {
         String path = "/data/logs/newblog/getbaidu.py";
 
