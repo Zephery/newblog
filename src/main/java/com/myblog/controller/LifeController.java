@@ -7,6 +7,7 @@ import com.myblog.model.Category;
 import com.myblog.model.Tag;
 import com.myblog.service.IBlogService;
 import com.myblog.service.ICategoryService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +22,9 @@ import java.util.List;
 /**
  * Created by Zephery on 2017/6/24.
  */
+@Slf4j
 @Controller
 public class LifeController {
-    private final static Logger logger = LoggerFactory.getLogger(LifeController.class);
     @Resource
     private IBlogService blogService;
     @Resource
@@ -55,7 +56,7 @@ public class LifeController {
                 int category_id = lists.get(0).getCategoryid();
                 list.setCategory(categoryService.selectByPrimaryKey(category_id));
             } catch (Exception e) {
-                logger.error("datetimeparse error" + e);
+                log.error("datetimeparse error" + e);
             }
         }
         if (categoryid != null && !categoryid.equals("")) {
