@@ -27,10 +27,11 @@ spring:
 
 
 management:
-  endpoint:
-    health:
-      enabled: true
   endpoints:
+    enabled-by-default: false
     web:
       exposure:
         include: "*"
+  metrics:
+    tags:
+      application: ${spring.application.name}

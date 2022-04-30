@@ -14,3 +14,11 @@ spring:
     host: 106.52.188.206
     password: 0CVF5Dsh79
     port: 31857
+
+management:
+  metrics:
+    export:
+      elastic:
+        host: http://es.wenzhihuai.com
+        user-name: elastic
+        password: elastic-admin

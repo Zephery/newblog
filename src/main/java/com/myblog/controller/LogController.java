@@ -4,28 +4,23 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.myblog.jmx.JMXClient;
 import com.myblog.model.FanPie;
 import com.myblog.model.TopTen;
 import com.myblog.util.IPUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.actuate.metrics.MetricsEndpoint;
 import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -36,8 +31,6 @@ import java.util.Set;
 public class LogController {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
-    @Resource
-    private MetricsEndpoint metricsEndpoint;
     @Resource
     private Environment environment;
     @Resource
@@ -135,39 +128,5 @@ public class LogController {
 
         mv.setViewName("log");
         return mv;
-    }
-
-    @RequestMapping("/jmx")
-    @ResponseBody
-    public void jmx(HttpServletResponse response) throws IOException {
-        Double jvmMemUsed = metricsEndpoint.metric("jvm.memory.used", null)
-                .getMeasurements()
-                .stream()
-                .filter(Objects::nonNull)
-                .findFirst()
-                .map(MetricsEndpoint.Sample::getValue)
-                .filter(Double::isFinite)
-                .orElse(0.0D);
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        log.info("jvmMemUsed is {}", jvmMemUsed.intValue());
-        response.getWriter().write(String.valueOf(jvmMemUsed.intValue() / (1024 * 1024)));
-    }
-
-    @RequestMapping("/cpu")
-    @ResponseBody
-    public void cpu(HttpServletResponse response) throws IOException {
-        String aa = JMXClient.getInstance().getCpuUsage();
-        Double systemCpuUsage = metricsEndpoint.metric(METRIC_NAME, null)
-                .getMeasurements()
-                .stream()
-                .filter(Objects::nonNull)
-                .findFirst()
-                .map(MetricsEndpoint.Sample::getValue)
-                .filter(Double::isFinite)
-                .orElse(0.0D);
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        response.getWriter().write(systemCpuUsage.toString());
     }
 }
