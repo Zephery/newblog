@@ -8,6 +8,8 @@ server:
       charset: UTF-8
 
 spring:
+  application:
+    name: blog
   main:
     allow-circular-references: true
   cache:
