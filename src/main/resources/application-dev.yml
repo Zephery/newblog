@@ -22,3 +22,4 @@ management:
         host: http://es.wenzhihuai.com
         user-name: elastic
         password: elastic-admin
+        index-date-format: yyyy-MM-dd
