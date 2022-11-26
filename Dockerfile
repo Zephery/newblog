@@ -1,4 +1,4 @@
-FROM openjdk:11
+FROM openjdk:17
 
 MAINTAINER 1570631036@qq.com
 
