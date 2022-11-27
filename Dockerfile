@@ -1,4 +1,4 @@
-FROM openjdk:17
+FROM openjdk:19-buster
 
 MAINTAINER 1570631036@qq.com
 
