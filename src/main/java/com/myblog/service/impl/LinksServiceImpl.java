@@ -3,9 +3,9 @@ package com.myblog.service.impl;
 import com.myblog.dao.LinksMapper;
 import com.myblog.model.Links;
 import com.myblog.service.ILinksService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**

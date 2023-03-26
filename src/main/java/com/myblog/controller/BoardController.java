@@ -1,6 +1,7 @@
 package com.myblog.controller;
 
 import com.myblog.util.SingleToMany;
+import jakarta.servlet.http.HttpServletResponse;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by Zephery on 2017/6/23.

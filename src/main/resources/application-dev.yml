@@ -10,15 +10,8 @@ spring:
     username: root
     password: 6on5&as.O/#U
     driver-class-name: com.mysql.cj.jdbc.Driver
-  redis:
-    host: 43.153.15.174
-    password: 0CVF5Dsh79
+  data:
+    redis:
+      host: 43.153.15.174
+      password: 0CVF5Dsh79
 
-management:
-  metrics:
-    export:
-      elastic:
-        host: http://es.wenzhihuai.com
-        user-name: elastic
-        password: elastic-admin
-        index-date-format: yyyy-MM-dd

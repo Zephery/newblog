@@ -3,13 +3,13 @@ package com.myblog.service.impl;
 import com.google.common.base.Strings;
 import com.google.gson.JsonParser;
 import com.myblog.service.ILogService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
 
 /**
  * Created with IntelliJ IDEA.

@@ -6,13 +6,13 @@ import com.myblog.dao.MyreadingMapper;
 import com.myblog.model.IpLog;
 import com.myblog.model.Myreading;
 import com.myblog.service.IAsyncService;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 
 /**

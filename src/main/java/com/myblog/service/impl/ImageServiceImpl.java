@@ -3,9 +3,9 @@ package com.myblog.service.impl;
 import com.myblog.dao.ImageMapper;
 import com.myblog.model.Image;
 import com.myblog.service.IImageService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**

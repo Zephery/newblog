@@ -3,10 +3,10 @@ package com.myblog.service.impl;
 import com.myblog.dao.MyreadingMapper;
 import com.myblog.model.Myreading;
 import com.myblog.service.IMyReadingService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

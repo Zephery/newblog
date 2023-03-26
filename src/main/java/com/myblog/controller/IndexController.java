@@ -15,17 +15,19 @@ import com.myblog.service.ILinksService;
 import com.myblog.service.IMyReadingService;
 import com.myblog.service.ITagService;
 import com.myblog.util.PythonUtil;
-import com.myblog.util.QiniuUtil;
 import com.myblog.util.SingleToMany;
-import com.myblog.util.UpYunUtil;
 import com.myblog.util.WordRecognition;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,11 +40,6 @@ import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -396,39 +393,4 @@ public class IndexController {
         return result;
     }
 
-
-    @RequestMapping("/uploadImage")
-    @ResponseBody
-    public String uploadImage(String base64Data, String tempFileName, String domain, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        try {
-            String data;
-            if (base64Data == null || "".equals(base64Data)) {
-                throw new Exception("上传失败，上传图片数据为空");
-            } else {
-                String[] d = base64Data.split("base64,");
-                if (d.length == 2) {
-                    data = d[1];
-                } else {
-                    throw new Exception("上传失败，数据不合法");
-                }
-            }
-            byte[] bs = Base64Utils.decodeFromString(data);
-            try {
-                if ("1".equals(domain)) {
-                    log.warn("qiniuyun");
-                    QiniuUtil.putFileBytes("images", "images/" + tempFileName, bs);
-                } else {
-                    log.warn("upyun");
-                    UpYunUtil.uploadFileBytes(bs, tempFileName);
-                }
-                log.info("success");
-            } catch (Exception ee) {
-                throw new Exception("上传失败，写入文件失败，" + ee.getMessage());
-            }
-            return "success";
-        } catch (Exception e) {
-            log.error("", e);
-            return "error";
-        }
-    }
 }

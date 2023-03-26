@@ -2,8 +2,8 @@ package com.myblog.service;
 
 import com.myblog.model.IpLog;
 import com.myblog.model.Myreading;
+import jakarta.servlet.http.HttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created with IntelliJ IDEA.

@@ -3,10 +3,10 @@ package com.myblog.service.impl;
 import com.myblog.dao.CategoryMapper;
 import com.myblog.model.Category;
 import com.myblog.service.ICategoryService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
