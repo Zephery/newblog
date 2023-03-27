@@ -165,5 +165,6 @@ API给java调用，可以点击[这里](http://www.wenzhihuai.com/weibonlp.html)
 **2021-2-28**：优化了日志模块，增加了jprofiler        
 **2021-7-17**：迁移至tke，并改成war包运行  
 **2022-4-2**：升级spring boot版本，切换成mybatis plus，切换cdn  
+**2023-3-26**：升级spring boot 3，考虑要不要改掉jsp
 
 #### 持续更新...
