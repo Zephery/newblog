@@ -96,6 +96,10 @@ API给java调用，可以点击[这里](http://www.wenzhihuai.com/weibonlp.html)
 
 </div>
 
+
+### 切换至spring boot 3.0
+https://stackoverflow.com/questions/4928271/how-to-install-jstl-the-absolute-uri-http-java-sun-com-jstl-core-cannot-be-r
+
 ### 更新日志
 
 **2016-3-21**：学完ssh，感觉不扎实，心想要整个自己的博客网站  

@@ -2,8 +2,8 @@
 由于不断采用新技术，此页面2017-11-24采用了websocket，之后应该没啥时间整理代码了，此外，网页加载时才连接websocket，所以会导致初始值result为空，此处在js中定义变量时声明为0.0。
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <%@ page isELIgnored="false" %>
 <jsp:include page="head.jsp">
     <jsp:param name="logactive" value="active"/>
