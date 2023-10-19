@@ -73,7 +73,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <!--SEO-->
-    <meta name="title" content="Zephery | Zephery的个人日志">
+    <meta name="title" content="技术文档">
     <meta name="keywords" content="java,机器学习,python,日志"/>
     <meta name="description" content="Zephery的个人日志"/>
     <meta name="author" content="Zephery"/>
@@ -152,16 +152,6 @@
                            class="<%=request.getParameter("lifeactive")%>">生活笔记</a></li>
                     <li><a href="${pageContext.request.contextPath}/log.html"
                            class="<%=request.getParameter("logactive")%>">日志系统</a></li>
-                    <li><a href="${pageContext.request.contextPath}/board.html"
-                           class="<%=request.getParameter("boardactive")%>">留言板</a></li>
-                    <li><a href="${pageContext.request.contextPath}/aboutme.html"
-                           class="<%=request.getParameter("aboutmeactive")%>">关于我</a></li>
-                    <li><a href="${pageContext.request.contextPath}/trip.html"
-                           class="<%=request.getParameter("tripactive")%>">旅行</a></li>
-                    <li><a href="${pageContext.request.contextPath}/donate.html"
-                           class="<%=request.getParameter("donateactive")%>">捐赠</a></li>
-                    <li><a href="${pageContext.request.contextPath}/live.html"
-                           class="<%=request.getParameter("liveactive")%>">直播</a></li>
                     <%--<li><a href="${pageContext.request.contextPath}/weibonlp.html"--%>
                            <%--class="<%=request.getParameter("interestactive")%>">有点意思</a></li>--%>
                     <%--<li><a href="${pageContext.request.contextPath}/myresume.html"--%>

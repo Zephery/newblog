@@ -12,11 +12,11 @@ spring:
   config:
     import: classpath:application-common.yml
   datasource:
-    url: jdbc:mysql://10.3.254.101:3306/myblog?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/myblog?useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: ZtO1tkJMVV
+    password: 6on5&as.O/#U
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
-    host: 10.3.255.90
+    host: 127.0.0.1
     password: 0CVF5Dsh79
     port: 6379
