@@ -4,7 +4,7 @@
 <%@ page isELIgnored="false" %>
 <jsp:include page="head.jsp">
     <jsp:param name="indexactive" value="active"/>
-    <jsp:param name="title" value="Zephery | Zephery的个人博客"/>
+    <jsp:param name="title" value="技术文档"/>
 </jsp:include>
 <!DOCTYPE html>
 <html>
